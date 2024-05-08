@@ -446,6 +446,10 @@ video {
   display: none;
 }
 
+html {
+  font-family: "Inter", sans-serif;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -552,4 +556,44 @@ video {
   --tw-contain-layout:  ;
   --tw-contain-paint:  ;
   --tw-contain-style:  ;
+}
+
+#root :is(.grid) {
+  display: grid;
+}
+
+#root :is(.grid-cols-6) {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+#root :is(.border-2) {
+  border-width: 2px;
+}
+
+#root :is(.border-solid) {
+  border-style: solid;
+}
+
+#root :is(.border-sky-500) {
+  --tw-border-opacity: 1;
+  border-color: rgb(14 165 233 / var(--tw-border-opacity));
+}
+
+#root :is(.bg-black) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+/* remove scroll bar */
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scrollbar-width: none;
+}
+
+html::-moz-scrollbar {
+  display: none;
 }

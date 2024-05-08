@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: "Inter", sans-serif;
+    }
+}
+
+/* remove scroll bar */
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    scrollbar-width: none;
+}
+
+html::-moz-scrollbar {
+    display: none;
+}
