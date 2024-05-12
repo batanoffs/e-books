@@ -14,7 +14,7 @@ export default {
       xl: '1440px',
     },
     fontFamily: {
-      sans: ['Inter', 'sans-serif'],
+      sans: ['Montserrat Alternates', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
     },
     listStyleImage: {

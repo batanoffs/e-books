@@ -1,0 +1,102 @@
+{
+    "featured": [
+        {
+            "id": 1,
+            "title": "The Alchemist",
+            "author": "Paulo Coelho",
+            "price": 10.99,
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1654371463i/18144590.jpg",
+            "rating": 4.5
+        },
+        {
+            "id": 2,
+            "title": "The 7 Habits of Highly Effective People",
+            "author": "Stephen Covey",
+            "price": 14.99,
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1421842784i/36072.jpg",
+            "rating": 3.5
+        },
+        {
+            "id": 3,
+            "title": "The Power of Now",
+            "author": "Eckhart Tolle",
+            "price": 12.99,
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1689947880i/6708.jpg",
+            "rating": 4.5
+        },
+        {
+            "id": 4,
+            "title": "The 4-Hour Work Week",
+            "author": "Timothy Ferriss",
+            "price": 14.99,
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1348972089i/9278897.jpg",
+            "rating": 4.5
+        },
+        {
+            "id": 5,
+            "title": "The Lean Startup",
+            "author": "Eric Ries",
+            "price": 14.99,
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1629999184i/10127019.jpg",
+            "rating": 3.5
+        },
+        {
+            "id": 6,
+            "title": "The 5 AM Club",
+            "author": "Robin Sharma",
+            "price": 12.99,
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/81C3FJ9G-oL._SX342_BO1,204,203,200_.jpg",
+            "rating": 3
+        },
+        {
+            "id": 7,
+            "title": "The Hard Thing About Hard Things",
+            "author": "Ben Horowitz",
+            "price": 12.99,
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/81mW2lDXD-L._SX342_BO1,204,203,200_.jpg",
+            "rating": 4.5
+        }
+    ],
+    "all": [
+        {
+            "id": 8,
+            "title": "The Art of Possibility",
+            "author": "Julianne Holtz Jones",
+            "price": 12.99,
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/81cK4m3R-HL._SX342_BO1,204,203,200_.jpg",
+            "rating": 4.5
+        },
+        {
+            "id": 9,
+            "title": "The One Thing",
+            "author": "Gray David",
+            "price": 12.99,
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/81Xt0tjT9IL._SX342_BO1,204,203,200_.jpg",
+            "rating": 4.5
+        },
+        {
+            "id": 10,
+            "title": "The Obstacle Is The Way",
+            "author": "Ryan Holiday",
+            "price": 12.99,
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/81BNW3P-XaL._SX342_BO1,204,203,200_.jpg",
+            "rating": 4.5
+        },
+        {
+            "id": 11,
+            "title": "The 7 Day Weekend",
+            "author": "Michael J. Gelb",
+            "price": 12.99,
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/816Q-1Zq-sL._SX342_BO1,204,203,200_.jpg",
+            "rating": 4.5
+        },
+        {
+            "id": 12,
+            "title": "The 10X Rule",
+            "author": "Grant Cardone",
+            "price": 12.99,
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/81vJ-KcPvLL._SX342_BO1,204,203,200_.jpg",
+            "rating": 4.5
+        }
+    ]
+}
