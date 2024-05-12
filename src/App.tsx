@@ -21,7 +21,7 @@ function App() {
             <Navbar />
             <main className="xl:mx-60 lg:mx-40 md:mx-20">
                 <section className="border-solid border border-gray-500"> 01 </section>
-                <section className="border-solid border border-gray-500 py-8 ">
+                <section className="border-solid border border-gray-500 py-8">
                     <BooksCarousel featured={books.featured} />
                 </section>
                 <section className="border-solid border border-gray-500"> 03 </section>

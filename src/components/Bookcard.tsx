@@ -23,15 +23,15 @@ export const Bookcard: React.FC<Props> = ({ book }) => {
     const [elevation, setElevation] = useState(0)
     return (
         <Card
-            sx={{ maxWidth: 100 }}
+            sx={{ maxWidth: 130 }}
             elevation={elevation}
             onMouseOver={() => setElevation(10)}
             onMouseOut={() => setElevation(0)}
             key={id}
         >
             <CardMedia className="aspect-[2/3]" component="img" alt={title} image={imageUrl} />
-            <CardContent className="px-1 pb-1">
-                <Typography className="h-[2rem]" gutterBottom variant="h1" component="div">
+            <CardContent className="px-1 pb-2">
+                <Typography className="h-[3rem]" gutterBottom variant="h1" component="div">
                     {title}
                 </Typography>
                 <Typography gutterBottom variant="h6" component="div">

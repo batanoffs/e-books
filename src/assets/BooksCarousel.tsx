@@ -53,7 +53,7 @@ export const BooksCarousel: React.FC<{ featured: BookProps['book'][] }> = ({ fea
         ],
     }
     return (
-        <div className="mx-10 ">
+        <div className="">
             <Slider {...settings}>
                 {featured.map(({ id, title, author, price, rating, imageUrl }) => (
                     <Bookcard book={{ title, id, author, price, rating, imageUrl }} />
