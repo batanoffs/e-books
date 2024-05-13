@@ -1,4 +1,5 @@
 import { Bookcard } from '../components/Bookcard'
+import Skeleton from '@mui/material/Skeleton';
 
 import React from 'react'
 import Slider from 'react-slick'
@@ -17,7 +18,7 @@ interface BookProps {
     }
 }
 
-export const BooksCarousel: React.FC<{ featured: BookProps['book'][] }> = ({ featured }) => {
+export const MultyCarousel: React.FC<{ featured: BookProps['book'][] }> = ({ featured }) => {
     const settings = {
         dots: true,
         infinite: true,

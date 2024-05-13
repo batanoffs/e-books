@@ -4,44 +4,58 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import Rating from '@mui/material/Rating'
+import Skeleton from '@mui/material/Skeleton'
 
-interface Book {
-    title: string
-    id: number
-    author: string
-    price: number
-    rating: number
-    imageUrl: string
+interface BookProps {
+    book: {
+        title: string
+        id: number
+        author: string
+        price: number
+        rating: number
+        imageUrl: string
+    }
+    loading?: boolean
 }
 
-interface Props {
-    book: Book
-}
-
-export const Bookcard: React.FC<Props> = ({ book }) => {
-    const { title, id, author, price, imageUrl, rating } = book
+export const Bookcard: React.FC<BookProps> = ({ book, loading = false }) => {
     const [elevation, setElevation] = useState(0)
+
     return (
         <Card
             sx={{ maxWidth: 130 }}
             elevation={elevation}
             onMouseOver={() => setElevation(10)}
             onMouseOut={() => setElevation(0)}
-            key={id}
+            key={book.id}
         >
-            <CardMedia className="aspect-[2/3]" component="img" alt={title} image={imageUrl} />
+            {loading ? (
+                <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
+            ) : (
+                <CardMedia className="aspect-[2/3]" component="img" alt={book.title} image={book.imageUrl} />
+            )}
             <CardContent className="px-1 pb-2">
-                <Typography className="h-[3rem]" gutterBottom variant="h1" component="div">
-                    {title}
-                </Typography>
-                <Typography gutterBottom variant="h6" component="div">
-                    {author}
-                </Typography>
-                <Rating name="read-only" value={rating} precision={0.5} readOnly />
-                <Typography variant="body2" color="text.secondary">
-                    {price} лв.
-                </Typography>
+                {loading ? (
+                    <>
+                        <Skeleton animation="wave" variant="text" height={10} />
+                        <Skeleton animation="wave" variant="text" height={10} width="80%" />
+                    </>
+                ) : (
+                    <>
+                        <Typography gutterBottom variant="h6" component="div">
+                            {book.title}
+                        </Typography>
+                        <Typography gutterBottom variant="body2" component="div">
+                            {book.author}
+                        </Typography>
+                        <Rating name="read-only" value={book.rating} precision={0.5} readOnly />
+                        <Typography variant="body2" color="text.secondary">
+                            {book.price} лв.
+                        </Typography>
+                    </>
+                )}
             </CardContent>
         </Card>
     )
 }
+

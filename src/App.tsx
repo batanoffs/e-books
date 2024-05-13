@@ -1,6 +1,7 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-import { BooksCarousel } from './assets/BooksCarousel'
-import { Navbar } from './components/Navbar'
+import { SingleCarousel } from './assets/SingleCarousel'
+import { MultyCarousel } from './assets/MultyCarousel'
+import { Header } from './components/Header'
 
 import books from './books.json'
 import './index.css'
@@ -18,11 +19,14 @@ const theme = createTheme({
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <Navbar />
+            <Header />
             <main className="xl:mx-60 lg:mx-40 md:mx-20">
-                <section className="border-solid border border-gray-500"> 01 </section>
+                <section className="px-10 bg-gradient-to-r from-indigo-500 to-gray-900">
+                    <SingleCarousel featured={books.featured} />
+                </section>
                 <section className="border-solid border border-gray-500 py-8">
-                    <BooksCarousel featured={books.featured} />
+                    <h1 className="text-3xl text-center pb-6"> Новодошли </h1>
+                    <MultyCarousel featured={books.featured} />
                 </section>
                 <section className="border-solid border border-gray-500"> 03 </section>
                 <section className="border-solid border border-gray-500"> 04 </section>

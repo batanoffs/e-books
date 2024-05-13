@@ -6,7 +6,8 @@
             "author": "Paulo Coelho",
             "price": 10.99,
             "imageUrl": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1654371463i/18144590.jpg",
-            "rating": 4.5
+            "rating": 4.5,
+            "description": "A shepherd boy named Santiago sets out on a journey to fulfill his childhood dream of finding his treasure. Along the way, he discovers the secrets of the mysterious Pyramid of the Sun, and learns the true meaning of courage, wisdom, and the power of belief."
         },
         {
             "id": 2,
@@ -14,7 +15,8 @@
             "author": "Stephen Covey",
             "price": 14.99,
             "imageUrl": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1421842784i/36072.jpg",
-            "rating": 3.5
+            "rating": 3.5,
+            "description": "Stephen Covey's classic manual for personal effectiveness, now in a modern paperback edition. The 7 Habits of Highly Effective People is a guide to becoming the person you want to be. The book is a practical, step-by-step approach to personal transformation, and is filled with real-life examples and exercises that will help you apply the habits to your life. This is the best-selling personal development book of all time."
         },
         {
             "id": 3,
@@ -22,7 +24,8 @@
             "author": "Eckhart Tolle",
             "price": 12.99,
             "imageUrl": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1689947880i/6708.jpg",
-            "rating": 4.5
+            "rating": 4.5,
+            "description": "The #1 bestselling spiritual self-help book of all time, now in a new edition. The Power of Now is a profound exploration of the present moment by one of the world's most beloved spiritual teachers. Eckhart Tolle shows you how to live in the power of the present, and how to let go of your worries about the past and your fears about the future. This book is a guided meditation on the path of spiritual growth, and will help you to awaken to the fullness of your being."
         },
         {
             "id": 4,
@@ -30,15 +33,17 @@
             "author": "Timothy Ferriss",
             "price": 14.99,
             "imageUrl": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1348972089i/9278897.jpg",
-            "rating": 4.5
+            "rating": 4.5,
+            "description": "The #1 New York Times bestseller that shows you how to live the high-paying, high-freedom lifestyle you've always wanted. The 4-Hour Work Week is a game-changing guide to creating wealth and living richly, all in just a few short hours each week. Timothy Ferriss shows you how to get paid to do what you love, and teaches you how to automate your finances so you can live without a boss or a 9-to-5 job. With his trademark wit and insight, Ferriss delivers a revolutionary blueprint for creating wealth and living a fulfilling life."
         },
         {
             "id": 5,
             "title": "The Lean Startup",
             "author": "Eric Ries",
             "price": 14.99,
-            "imageUrl": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1629999184i/10127019.jpg",
-            "rating": 3.5
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/81C3FJ9G-oL._SX342_BO1,204,203,200_.jpg",
+            "rating": 3.5,
+            "description": "The #1 New York Times bestselling book that will help you build products that customers love. The lean startup is a methodology for building a product with customers, and helps you create a successful business through experimentation and customer feedback. Eric Ries shows you how to build a product fast, without wasting time or money. The lean startup is a must-read for anyone who wants to build a product that customers will love."
         },
         {
             "id": 6,
@@ -46,7 +51,8 @@
             "author": "Robin Sharma",
             "price": 12.99,
             "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/81C3FJ9G-oL._SX342_BO1,204,203,200_.jpg",
-            "rating": 3
+            "rating": 3,
+            "description": "The #1 New York Times bestselling book that will help you achieve your wildest dreams. The 5 AM Club is a revolutionary new way of thinking about success. Robin Sharma shows you how to take control of your life and achieve anything you want by waking up at 5 AM every day. The 5 AM Club is a must-read for anyone who wants to live a more fulfilling life."
         },
         {
             "id": 7,
@@ -54,7 +60,8 @@
             "author": "Ben Horowitz",
             "price": 12.99,
             "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/81mW2lDXD-L._SX342_BO1,204,203,200_.jpg",
-            "rating": 4.5
+            "rating": 4.5,
+            "description": "The #1 New York Times bestselling book that will help you build a successful tech company. The Hard Thing About Hard Things is a must-read for anyone who wants to build a successful business. Ben Horowitz, the co-founder of Andreessen Horowitz, shares his insights and lessons learned from building some of the world's most successful tech companies. The book is a collection of stories about the hard things he's learned, and the lessons he's learned from them. The Hard Thing About Hard Things is a must-read for anyone who wants to build a successful business."
         }
     ],
     "all": [
