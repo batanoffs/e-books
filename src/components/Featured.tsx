@@ -1,7 +1,8 @@
 import { Button } from '@mui/material'
+
 import Rating from '@mui/material/Rating'
 
-interface Book {
+interface book {
     title: string
     id: number
     author: string
@@ -11,11 +12,7 @@ interface Book {
     description: string
 }
 
-interface Props {
-    book: Book
-}
-
-export const Featured: React.FC<Props> = ({ book }) => {
+export const Featured = (book: book) => {
     const { title, id, author, price, imageUrl, rating, description } = book
     return (
         <div key={id} className="flex gap-60 justify-between">
@@ -25,9 +22,11 @@ export const Featured: React.FC<Props> = ({ book }) => {
                 <Rating name="read-only" value={rating} precision={0.5} readOnly />
                 <p>{price} лв.</p>
                 <span>{description}</span>
-                <Button variant="contained" sx={{ mt: 2, width: 200 }}>КУПИ</Button>
+                <Button variant="contained" sx={{ mt: 2, width: 200 }}>
+                    КУПИ
+                </Button>
             </div>
-            <div className='flex-shrink-0'>
+            <div className="flex-shrink-0">
                 <img className="w-[300px] h-[400px]" src={imageUrl} alt={title} />
             </div>
         </div>

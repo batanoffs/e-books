@@ -1,28 +1,30 @@
-import React from 'react'
 import Slider from 'react-slick'
+import { Featured } from '../components/Featured'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import { Featured } from '../components/Featured'
 
 interface BookProps {
-    book: {
-        id: number
-        title: string
-        author: string
-        price: number
-        rating: number
-        imageUrl: string
-        description: string
+    books: {
+        featured: {
+            book: {
+                id: number
+                title: string
+                author: string
+                price: number
+                rating: number
+                imageUrl: string
+                description: string
+            }
+        }
     }
 }
-export const SingleCarousel: React.FC<{ featured: BookProps['book'][] }> = ({ featured }) => {
+
+export const SingleCarousel = (featured: BookProps[`books`][`featured`][`book`][]) => {
     const settings = {
         dots: true,
         infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
+        speed: 3000,
         responsive: [
             {
                 breakpoint: 1024,

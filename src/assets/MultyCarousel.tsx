@@ -1,7 +1,5 @@
 import { Bookcard } from '../components/Bookcard'
-import Skeleton from '@mui/material/Skeleton';
 
-import React from 'react'
 import Slider from 'react-slick'
 
 import 'slick-carousel/slick/slick.css'
@@ -18,7 +16,7 @@ interface BookProps {
     }
 }
 
-export const MultyCarousel: React.FC<{ featured: BookProps['book'][] }> = ({ featured }) => {
+export const MultyCarousel = (featured: BookProps['book'][]) => {
     const settings = {
         dots: true,
         infinite: true,
@@ -57,7 +55,7 @@ export const MultyCarousel: React.FC<{ featured: BookProps['book'][] }> = ({ fea
         <div className="">
             <Slider {...settings}>
                 {featured.map(({ id, title, author, price, rating, imageUrl }) => (
-                    <Bookcard book={{ title, id, author, price, rating, imageUrl }} />
+                    <Bookcard book={{ id, title, author, price, rating, imageUrl }} />
                 ))}
             </Slider>
         </div>

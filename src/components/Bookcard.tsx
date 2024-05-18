@@ -18,7 +18,7 @@ interface BookProps {
     loading?: boolean
 }
 
-export const Bookcard: React.FC<BookProps> = ({ book, loading = false }) => {
+export const Bookcard = (book: BookProps[`book`], { loading = false }) => {
     const [elevation, setElevation] = useState(0)
 
     return (
@@ -32,7 +32,12 @@ export const Bookcard: React.FC<BookProps> = ({ book, loading = false }) => {
             {loading ? (
                 <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
             ) : (
-                <CardMedia className="aspect-[2/3]" component="img" alt={book.title} image={book.imageUrl} />
+                <CardMedia
+                    className="aspect-[2/3]"
+                    component="img"
+                    alt={book.title}
+                    image={book.imageUrl}
+                />
             )}
             <CardContent className="px-1 pb-2">
                 {loading ? (
@@ -58,4 +63,3 @@ export const Bookcard: React.FC<BookProps> = ({ book, loading = false }) => {
         </Card>
     )
 }
-
