@@ -1,4 +1,4 @@
-const { Data } = require("../models/Data");
+const { Data } = require('../models/Data');
 
 // TODO replace with real data service
 
@@ -29,7 +29,7 @@ async function update(id, data, userId) {
     }
 
     if (record.author.toString() != userId) {
-        throw new Error("Access denied");
+        throw new Error('Access denied');
     }
 
     //TODO replace with real props
@@ -46,7 +46,7 @@ async function deleteById(id, userId) {
     }
 
     if (record.author.toString() != userId) {
-        throw new Error("Access denied");
+        throw new Error('Access denied');
     }
 
     await Data.findByIdAndDelete(id);

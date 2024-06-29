@@ -1,8 +1,9 @@
-const { identityName } = require("../constants/identity");
-const { User } = require("../models/User");
-const bcrypt = require("bcrypt");
+const { identityName } = require('../constants/identity');
+const { User } = require('../models/User');
+const bcrypt = require('bcrypt');
 
-async function register(identity, password) {  //TODO add props if needed (username)
+async function register(identity, password) {
+    //TODO add props if needed (username)
     const existing = await User.findOne({ [identityName]: identity });
 
     if (existing) {
@@ -17,7 +18,8 @@ async function register(identity, password) {  //TODO add props if needed (usern
     try {
         await user.save();
     } catch (error) {
-        if (error.code === 11000) { // error duplicate name
+        if (error.code === 11000) {
+            // error duplicate name
             throw new Error(`This username is already in use`); //TODO check for username and email if needed
         } else {
             throw new Error(`Exceptional error occured`, error);

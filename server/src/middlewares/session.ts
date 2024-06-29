@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { verifyToken } from "../services/jwt";
+import { Request, Response, NextFunction } from 'express';
+import { verifyToken } from '../services/jwt';
 
 declare global {
     namespace Express {
@@ -25,7 +25,7 @@ function session(): (req: Request, res: Response, next: NextFunction) => void {
                 };
                 res.locals.hasUser = true;
             } catch (err) {
-                res.clearCookie("token");
+                res.clearCookie('token');
             }
         }
 
@@ -34,4 +34,3 @@ function session(): (req: Request, res: Response, next: NextFunction) => void {
 }
 
 export { session };
-

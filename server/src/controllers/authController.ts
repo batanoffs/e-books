@@ -5,7 +5,7 @@ import { createToken } from "../services/jwt";
 
 const bcrypt = require("bcrypt");
 
-export const register = async (req: Request, res: Response) => {
+const register = async (req: Request, res: Response) => {
     const { username, password, role } = req.body;
 
     try {
@@ -18,7 +18,7 @@ export const register = async (req: Request, res: Response) => {
     }
 };
 
-export const login = async (req: Request, res: Response) => {
+const login = async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
     try {
@@ -35,3 +35,11 @@ export const login = async (req: Request, res: Response) => {
         res.status(500).json({ message: "Login failed", error });
     }
 };
+
+const logout = (req: Request, res: Response) => {
+    res.clearCookie("token");
+    res.status(200).json({ message: "Logout successful" });
+    res.redirect("/"); // TODO check redirect according to documentation
+};
+
+export { register, login, logout };

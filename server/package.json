@@ -1,11 +1,11 @@
 {
   "name": "bookstore-backend",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "src/server.ts",
   "license": "MIT",
   "scripts": {
     "start-server": "nodemon --exec ts-node server.ts",
-    "start-client": "cd ./client && npm start",
+    "start": "",
     "build": "tsc"
   },
   "dependencies": {
