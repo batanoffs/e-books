@@ -1,0 +1,58 @@
+e=books/
+├── server/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── middlewares/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── utils/
+│   │   ├── app.ts
+│   │   ├── server.ts
+│   ├── package.json
+│   ├── tsconfig.json
+├── client/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── App.tsx
+│   │   ├── index.tsx
+│   ├── package.json
+│   ├── tsconfig.json
+├── .gitignore
+├── README.md
+
+
+
+e-commerce-project/
+├── server/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   ├── utils/
+│   │   ├── app.ts
+│   │   └── server.ts
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── docker-compose.yml
+├── client/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── styles/
+│   │   ├── types/
+│   │   ├── utils/
+│   │   ├── App.tsx
+│   │   ├── index.tsx
+│   │   └── routes.tsx
+│   ├── public/
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── webpack.config.js
+├── .gitignore
+├── Dockerfile
+└── README.md

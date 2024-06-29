@@ -1,0 +1,22 @@
+{
+  "name": "bookstore-frontend",
+  "version": "1.0.0",
+  "main": "src/index.tsx",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "axios": "^0.24.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-router-dom": "^6.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  }
+}
