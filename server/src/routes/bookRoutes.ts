@@ -14,7 +14,7 @@ router.post(
     body('description').notEmpty().isLength({ min: 10 }).withMessage('Description min 10 characters'),
     body("imageUrl").trim().isURL({ require_tld: false }).withMessage("image must start with http:// or https://"),
     body('stock').isInt({ gt: 0 }).withMessage('Stock must be a positive integer'),
-    body('category').isInt({ gt: 0 }).withMessage('Category must be a positive integer'),
+    body('category').notEmpty().isLength({ min: 3 }).withMessage('Category is required'),
     validateRequest
   ],
   createBook

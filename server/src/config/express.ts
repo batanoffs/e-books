@@ -10,7 +10,6 @@ function configExpress(app: Express): void {
     app.use(cookieParser({ secret }));
     app.use(session());
     app.use(cors());
-    app.use('/client/static', express.static('static'));
 
     //TODO check usage ?
     // app.use(express.urlencoded({ extended: true }));

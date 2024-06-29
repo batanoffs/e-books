@@ -4,20 +4,43 @@ import Rating from '@mui/material/Rating';
 
 export const Featured = ({ book }) => {
     const { imageUrl, title, author, rating, price, description } = book;
+    const styles = {
+        container: {
+            display: 'flex',
+            gap: '60px',
+            justifyContent: 'space-between',
+            margin: '40px',
+        },
+        textContainer: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            maxWidth: '40%',
+        },
+        image: {
+            width: '400px',
+            height: 'auto',
+        },
+        button: {
+            marginTop: '2px',
+            width: '200px',
+        },
+    };
     return (
-        <div className="flex gap-60 justify-between">
-            <div className="flex flex-col self-center">
-                <h1 className="text-3xl"> {title} </h1>
+        <div style={styles.container}>
+            <div style={styles.textContainer}>
+                <h1 style={{ fontSize: '3rem' }}>{title}</h1>
                 <p>{author}</p>
                 <Rating name="read-only" value={rating} precision={0.5} readOnly />
                 <p>{price} лв.</p>
                 <span>{description}</span>
-                <Button variant="contained" sx={{ mt: 2, width: 200 }}>
+                <Button variant="contained" style={styles.button}>
                     КУПИ
                 </Button>
             </div>
-            <div className="flex-shrink-0">
-                <img className="w-[300px] h-[400px]" src={imageUrl} alt={title} />
+            <div>
+                <img style={styles.image} src={imageUrl} alt={title} />
             </div>
         </div>
     );

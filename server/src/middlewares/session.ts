@@ -5,8 +5,8 @@ declare global {
     namespace Express {
         interface Request {
             user?: {
-                username: string;
-                _id: string;
+                email: string;
+                id: string;
             };
         }
     }
@@ -20,8 +20,8 @@ function session(): (req: Request, res: Response, next: NextFunction) => void {
             try {
                 const sessionData = verifyToken(token);
                 req.user = {
-                    username: sessionData.username,
-                    _id: sessionData._id,
+                    email: sessionData.email,
+                    id: sessionData.id,
                 };
                 res.locals.hasUser = true;
             } catch (err) {

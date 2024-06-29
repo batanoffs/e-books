@@ -1,28 +1,25 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-interface IBook extends Document {
+interface IFeatured extends Document {
     title: string;
     author: string;
     price: number;
     description: string;
     imageUrl: string;
     stock: number;
-    category: Array<string>;
+    category: string;
 }
 
-const BookSchema: Schema = new Schema({
+const FeaturedSchema: Schema = new Schema({
     title: { type: String, required: true },
     author: { type: String, required: true },
     price: { type: Number, required: true },
     description: { type: String, required: true },
     imageUrl: { type: String, required: true },
+    category: { type: String, required: true },
     stock: { type: Number, required: true },
-    category: {
-        type: ['Self-Help', 'Business', 'Fiction', 'Spirituality', 'Poetry'],
-        required: true,
-    },
 });
 
-const Book = mongoose.model<IBook>('Book', BookSchema);
+const Featured = mongoose.model<IFeatured>('Item', FeaturedSchema);
 
-export default Book;
+export default Featured;

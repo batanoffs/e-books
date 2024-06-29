@@ -1,25 +1,34 @@
-import { Bookcard } from '../components/Bookcard';
-
 import Slider from 'react-slick';
+import { Featured } from '../components/Featured';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export const MultyCarousel = (books) => {
-    console.log(books);
+interface BookProps {
+    books: {
+        _id: string;
+        title: string;
+        author: string;
+        imageUrl: string;
+        description: string;
+        price: number;
+        category: string;
+        stock: number;
+    }[];
+    style: string;
+}
+
+export const SingleCarousel = ({ books, style }: BookProps) => {
     const settings = {
         dots: true,
         infinite: true,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 5,
-        initialSlide: 0,
+        speed: 3000,
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
                     infinite: true,
                     dots: true,
                 },
@@ -27,9 +36,9 @@ export const MultyCarousel = (books) => {
             {
                 breakpoint: 600,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    initialSlide: 2,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 1,
                 },
             },
             {
@@ -42,10 +51,11 @@ export const MultyCarousel = (books) => {
         ],
     };
     return (
-        <div className="">
+        <div className={style}>
             <Slider {...settings}>
-                {books.books.map((book) => 
-                <Bookcard key={book.id} book={book} />)}
+                {books.map((book) => (
+                    <Featured key={book._id} book={book} />
+                ))}
             </Slider>
         </div>
     );
