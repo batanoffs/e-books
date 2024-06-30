@@ -1,7 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
 
-import { configCors } from './src/config/cors';
 import { configDatabase } from './src/config/database';
 import { configExpress } from './src/config/express';
 import { configRoutes } from './src/config/routes';
@@ -13,7 +12,6 @@ const app = express();
 
 try {
     configExpress(app);
-    configCors(app);
     configDatabase();
     configRoutes(app);
     app.listen(PORT, () => {

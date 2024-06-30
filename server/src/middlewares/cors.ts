@@ -2,7 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 
 function cors() {
     return function (req: Request, res: Response, next: NextFunction) {
-        res.header('Access-Control-Allow-Origin', '*');
+        //TODO edit allowed adress in production
+        res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
 
         if (req.method === 'OPTIONS') {
             res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
