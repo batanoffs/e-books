@@ -1,7 +1,7 @@
 import { Request, Response } from "express-serve-static-core";
+import { createToken } from "../services/jwt";
 
 import User from "../models/User";
-import { createToken } from "../services/jwt";
 
 const bcrypt = require("bcrypt");
 
@@ -19,13 +19,16 @@ const register = async (req: Request, res: Response) => {
 };
 
 const login = async (req: Request, res: Response) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     try {
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ email });
         if (!user || !(await bcrypt.compare(password, user.password))) {
             return res.status(401).json({ message: "Invalid credentials" });
+            
         }
+
+        console.log(user);
 
         const token = createToken(user);
 

@@ -1,4 +1,5 @@
 import mongoose, { Mongoose } from 'mongoose';
+import { connectionString } from '../constants/serverSetup';
 
 require('../models/Book');
 require('../models/User');
@@ -8,11 +9,11 @@ require('../models/Order'); //TODO import specific model and change name
 mongoose.set('strictQuery', false);
 
 async function configDatabase(mongooseInstance: Mongoose = mongoose): Promise<void> {
-    const connectionString = process.env.MONGO_URI || 'mongodb://localhost:27017/bookstore';
-
-    await mongooseInstance.connect(connectionString);
-
-    console.log('Database connected');
+    try {
+        await mongooseInstance.connect(connectionString);
+    } catch (error) {
+        console.error('Database connection error:', error);
+    }
 }
 
 export { configDatabase };

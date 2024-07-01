@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    gap: 60px;
+    justify-content: space-between;
+    margin: 40px;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 40%;
+}
+
+.image {
+    width: 400px;
+    height: auto;
+}
+
+.button {
+    margin-top: 2px;
+    width: 200px;
+}
+
+.carousel {
+    padding-left: 10px;
+    padding-right: 10px;
+    background: linear-gradient(to right, #6f42c1, #121212);
+}

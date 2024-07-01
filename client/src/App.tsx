@@ -7,6 +7,8 @@ import ManageBooksPage from './pages/ManageBooksPage';
 import ManageOrdersPage from './pages/ManageOrdersPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import AdminDashboardPage from './pages/AdminDashboardPage';
+import ManageUsersPage from './pages/ManageUsersPage';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
@@ -32,8 +34,10 @@ const App: React.FC = () => {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/books/:id" element={<BookDetailsPage />} />
                     <Route path="/admin" element={<AdminPage />} />
+                    <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
                     <Route path="/admin/books" element={<ManageBooksPage />} />
                     <Route path="/admin/orders" element={<ManageOrdersPage />} />
+                    <Route path="/admin/users" element={<ManageUsersPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                 </Routes>

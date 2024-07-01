@@ -1,9 +1,9 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 interface IUser extends Document {
-    username: string;
+    email: string;
     password: string;
-    role: string;
+    role: "user" | "admin";
 }
 
 const UserSchema: Schema = new Schema(

@@ -1,8 +1,11 @@
 import Slider from 'react-slick';
-import { Featured } from '../components/Featured';
+
+import { Featured } from '../components/Featured.tsx';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+
+import styles from './single-carousel.module.css';
 
 interface BookProps {
     books: {
@@ -15,10 +18,9 @@ interface BookProps {
         category: string;
         stock: number;
     }[];
-    style: string;
 }
 
-export const SingleCarousel = ({ books, style }: BookProps) => {
+export const SingleCarousel = ({ books }: BookProps) => {
     const settings = {
         dots: true,
         infinite: true,
@@ -51,10 +53,10 @@ export const SingleCarousel = ({ books, style }: BookProps) => {
         ],
     };
     return (
-        <div className={style}>
+        <div className={styles.carousel}>
             <Slider {...settings}>
                 {books.map((book) => (
-                    <Featured key={book._id} book={book} />
+                    <Featured key={book._id} book={book} styles={styles} />
                 ))}
             </Slider>
         </div>

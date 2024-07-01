@@ -4,9 +4,9 @@ import { JwtPayload, SignOptions, verify } from 'jsonwebtoken';
 
 import { secret } from '../constants/identity';
 
-function createToken(userData: { username: string; _id: string }): string {
+function createToken(userData: { email: string; _id: string }): string {
     const payload: JwtPayload = {
-        username: userData.username,
+        username: userData.email,
         _id: userData._id,
     };
 

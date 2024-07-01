@@ -1,4 +1,6 @@
 import { RequestHandler, Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+import User from '../models/User';
 
 const isUser = (): RequestHandler => {
     return (req: Request, res: Response, next: NextFunction) => {
@@ -20,4 +22,23 @@ const isGuest = (): RequestHandler => {
     };
 };
 
-export { isUser, isGuest };
+const isAdmin = async (req: Request, res: Response, next: NextFunction) => {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+  
+    try {
+      const decoded: any = jwt.verify(token, process.env.JWT_SECRET || 'secret');
+      const user = await User.findById(decoded.userId);
+      if (user && user.role === 'admin') {
+        next();
+      } else {
+        res.status(403).json({ message: 'Forbidden' });
+      }
+    } catch (error) {
+      res.status(401).json({ message: 'Unauthorized', error });
+    }
+  };
+  
+export { isUser, isGuest, isAdmin};

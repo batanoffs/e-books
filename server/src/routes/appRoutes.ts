@@ -5,6 +5,7 @@ import { register, login } from '../controllers/authController';
 import bookRoutes from './bookRoutes';
 import orderRoutes from './orderRoutes';
 import userRoutes from './userRoutes';
+import adminRoutes from './adminRoutes';
 import { isGuest } from '../middlewares/guards';
 
 const router = express.Router();
@@ -29,6 +30,7 @@ router.post('/login', isGuest(),
 router.use('/books', bookRoutes);
 router.use('/orders', orderRoutes);
 router.use('/users', userRoutes);
+router.use('/admin', adminRoutes);
 
 export default router;
 
