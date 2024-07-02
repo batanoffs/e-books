@@ -1,19 +1,18 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/home/HomePage';
-import BookDetailsPage from './pages/BookDetailsPage';
-import AdminPage from './pages/AdminPage';
-import ManageBooksPage from './pages/ManageBooksPage';
-import ManageOrdersPage from './pages/ManageOrdersPage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import AdminDashboardPage from './pages/AdminDashboardPage';
-import ManageUsersPage from './pages/ManageUsersPage';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-import './index.css';
 import { Header } from './components/Header';
+
+import HomePage from './pages/home/HomePage';
+import BookDetailsPage from './pages/BookDetailsPage';
+import { AdminPage } from './pages/ReactAdmin/Admin';
+import ManageBooksPage from './pages/MyAdmin/ManageBooksPage';
+import ManageOrdersPage from './pages/MyAdmin/ManageOrdersPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import AdminDashboardPage from './pages/MyAdmin/AdminDashboardPage';
+import ManageUsersPage from './pages/MyAdmin/ManageUsersPage';
+import './index.css';
 
 const theme = createTheme({
     typography: {
@@ -25,22 +24,27 @@ const theme = createTheme({
     },
 });
 
-const App: React.FC = () => {
+const routes = {
+    '/': <HomePage />,
+    '/books/:id': <BookDetailsPage />,
+    '/login': <LoginPage />,
+    '/register': <RegisterPage />,
+    '/admin/*': <AdminPage />,
+    // '/admin/dashboard': <AdminDashboardPage />,
+    // '/admin/books': <ManageBooksPage />,
+    // '/admin/orders': <ManageOrdersPage />,
+    // '/admin/users': <ManageUsersPage />,
+};
+
+const App = () => {
     return (
         <ThemeProvider theme={theme}>
             <Router>
-                <Header />
-
+                {!window.location.pathname.includes('admin') && <Header />}
                 <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/books/:id" element={<BookDetailsPage />} />
-                    <Route path="/admin" element={<AdminPage />} />
-                    <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-                    <Route path="/admin/books" element={<ManageBooksPage />} />
-                    <Route path="/admin/orders" element={<ManageOrdersPage />} />
-                    <Route path="/admin/users" element={<ManageUsersPage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
+                    {Object.entries(routes).map(([path, element]) => (
+                        <Route key={path} path={path} element={element} />
+                    ))}
                 </Routes>
             </Router>
         </ThemeProvider>
