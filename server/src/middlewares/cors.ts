@@ -3,21 +3,17 @@ import { ALLOWED_ADDRESS } from '../constants/serverSetup';
 
 function cors() {
     return function (req: Request, res: Response, next: NextFunction) {
-        //TODO edit allowed address in production
-        res.header('Access-Control-Allow-Origin', ALLOWED_ADDRESS);
+        res.setHeader('Access-Control-Allow-Origin', ALLOWED_ADDRESS);
 
         if (req.method === 'OPTIONS') {
-            res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-            return res.status(200).json({});
+            res.setHeader('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+            res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+            return res.sendStatus(204);
         }
-
-        res.header(
-            'Access-Control-Allow-Headers',
-            'Origin, X-Requested-With, Content-Type, Accept, X-Authorization'
-        );
 
         next();
     };
 }
 
 export { cors };
+
