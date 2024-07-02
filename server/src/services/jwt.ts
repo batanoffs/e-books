@@ -1,12 +1,11 @@
 const jwt = require('jsonwebtoken');
 
 import { JwtPayload, SignOptions, verify } from 'jsonwebtoken';
-
 import { secret } from '../constants/identity';
 
-function createToken(userData: { email: string; _id: string }): string {
+function createToken(userData: { email: string; _id?: string;  }): string {
     const payload: JwtPayload = {
-        username: userData.email,
+        email: userData.email,
         _id: userData._id,
     };
 
