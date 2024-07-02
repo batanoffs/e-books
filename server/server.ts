@@ -5,6 +5,9 @@ import { configDatabase } from './src/config/database';
 import { configExpress } from './src/config/express';
 import { configRoutes } from './src/config/routes';
 import { PORT } from './src/constants/serverSetup';
+import { registerUser } from './src/services/user';
+
+import { createToken } from './src/services/jwt';
 
 dotenv.config();
 const app = express();
@@ -16,6 +19,22 @@ try {
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
     });
+
+    // test();
 } catch (error) {
     console.error('Server connection error:', error);
 }
+
+// async function test() {
+//     try {
+//         const result = await registerUser('admin@email.com', 'password', 'admin');
+//         // const result = await login("daniel@gmail.com", "123456");
+
+//         console.log(result);
+
+//         const token = createToken(result);
+//         console.log(token);
+//     } catch (error: any) {
+//         console.error(`Caught Error: ${error.message}`);
+//     }
+// }
