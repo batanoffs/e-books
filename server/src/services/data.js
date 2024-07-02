@@ -14,7 +14,7 @@ async function create(data) {
     //TODO extract properties from view model
     const record = new Data({
         prop: data.prop,
-        author: aithorId,
+        author: authorId,
     });
 
     await record.save();
@@ -25,7 +25,7 @@ async function update(id, data, userId) {
     //TODO extract properties from view model
     const record = await Data.findById(id);
     if (!record) {
-        throw new ReferenceError(`Reacord not found ${id}`);
+        throw new ReferenceError(`Record not found ${id}`);
     }
 
     if (record.author.toString() != userId) {
@@ -42,7 +42,7 @@ async function update(id, data, userId) {
 async function deleteById(id, userId) {
     const record = await Data.findById(id);
     if (!record) {
-        throw new ReferenceError(`Reacord not found ${id}`);
+        throw new ReferenceError(`Record not found ${id}`);
     }
 
     if (record.author.toString() != userId) {
