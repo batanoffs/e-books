@@ -1,3 +1,4 @@
+import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -15,8 +16,10 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SearchIcon from '@mui/icons-material/Search';
 
-import { useState } from 'react';
-const pages = ['Книги', 'Най-продавани', 'Контакти'];
+import { isAuth } from '../utils/auth';
+import { useNavigate, Link } from 'react-router-dom';
+
+const pages = ['Книги', 'Най-продавани', 'Всички', 'Контакти'];
 const settings = ['Профил', 'Акаунт', 'Начало', 'Изход'];
 
 const Search = styled('div')(({ theme }) => ({
@@ -63,13 +66,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export const Header = () => {
-    const [anchorElNav, setAnchorElNav] = useState(null);
-    const [anchorElUser, setAnchorElUser] = useState(null);
+    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const [searchQuery, setSearchQuery] = React.useState('');
+    const navigate = useNavigate();
 
-    const handleOpenNavMenu = (event) => {
+    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event) => {
+    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
 
@@ -81,6 +86,32 @@ export const Header = () => {
         setAnchorElUser(null);
     };
 
+    const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const search = event.target.value;
+        setSearchQuery(search);
+    };
+
+    const navigationHandler = (event: React.MouseEvent<HTMLElement>) => {
+        const page = event.currentTarget.textContent;
+        switch (page) {
+            case 'Книги':
+                navigate('/books');
+                break;
+            case 'Най-продавани':
+                navigate('/popular');
+                break;
+            case 'Контакти':
+                navigate('/contacts');
+                break;
+            case 'Всички':
+                navigate('/items');
+                break;
+            default:
+                navigate('/');
+                break;
+        }
+    };
+
     return (
         <AppBar position="static">
             <Container maxWidth="lg">
@@ -90,7 +121,7 @@ export const Header = () => {
                         variant="h6"
                         noWrap
                         component="a"
-                        href="#dashbaord"
+                        onClick={() => navigate('/')}
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -134,7 +165,7 @@ export const Header = () => {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                <MenuItem key={page} onClick={navigationHandler}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
@@ -159,20 +190,12 @@ export const Header = () => {
                     >
                         LOGO
                     </Typography>
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </Search>
+
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
                                 key={page}
-                                onClick={handleCloseNavMenu}
+                                onClick={navigationHandler}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 {page}
@@ -180,35 +203,62 @@ export const Header = () => {
                         ))}
                     </Box>
 
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
+                    <Search>
+                        <SearchIconWrapper>
+                            <SearchIcon />
+                        </SearchIconWrapper>
+                        <StyledInputBase
+                            placeholder="Search…"
+                            inputProps={{ 'aria-label': 'search' }}
+                            onChange={handleSearchInputChange}
+                        />
+                    </Search>
+
+                    {isAuth() ? (
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                {settings.map((setting) => (
+                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                        <Typography textAlign="center">{setting}</Typography>
+                                    </MenuItem>
+                                ))}
+                            </Menu>
+                        </Box>
+                    ) : (
+                        <Box sx={{ flexGrow: 0, display: 'flex', gap: 1 }}>
+                            <Button variant="contained" color="info" component={Link} to="/login">
+                                Вход
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                component={Link}
+                                to="/register"
+                            >
+                                Регистрация
+                            </Button>
+                        </Box>
+                    )}
                 </Toolbar>
             </Container>
         </AppBar>

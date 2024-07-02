@@ -28,8 +28,9 @@ const theme = createTheme({
 const App: React.FC = () => {
     return (
         <ThemeProvider theme={theme}>
-            <Header />
             <Router>
+                <Header />
+
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/books/:id" element={<BookDetailsPage />} />
