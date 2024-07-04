@@ -65,7 +65,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export const Header = () => {
+const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
     const [searchQuery, setSearchQuery] = React.useState('');
@@ -264,3 +264,5 @@ export const Header = () => {
         </AppBar>
     );
 };
+
+export default Header;
