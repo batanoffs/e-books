@@ -1,11 +1,8 @@
-import { Request, Response } from 'express-serve-static-core';
-import { createToken } from '../services/jwt';
 const { validationResult } = require('express-validator');
 
-import User from '../models/User';
-import { registerUser } from '../services/user';
-
-const bcrypt = require('bcrypt');
+import { Request, Response } from 'express-serve-static-core';
+import { createToken } from '../services/jwt';
+import { loginUser, registerUser } from '../services/user';
 
 const register = async (req: Request, res: Response) => {
     const { email, password, role } = req.body;
@@ -16,19 +13,20 @@ const register = async (req: Request, res: Response) => {
         if (validation.errors.length) {
             throw validation.errors;
         }
-        const user = await registerUser(email, password, role);
-        console.log(user);
 
+        const user = await registerUser(email, password, role);
         const token = createToken(user);
 
-        res.status(201).json({ message: 'User registered successfully' });
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+            path: '/', // restrict cookie to specific path
+        });
 
-        res.cookie('token', token, { httpOnly: true });
-        if (role === 'admin') {
-            res.redirect('/admin/dashboard');
-        } else {
-            res.redirect('/');
-        }
+        const redirectUrl = user.role === 'admin' ? '/admin/dashboard' : '/';
+        res.status(200).json({ message: 'User registered successfully', token, redirectUrl });
     } catch (error) {
         res.status(500).json({ message: 'Registration failed', error });
     }
@@ -38,26 +36,42 @@ const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     try {
-        const user = await User.findOne({ email });
-        if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(401).json({ message: 'Invalid credentials' });
+        const validation = validationResult(req);
+
+        if (validation.errors.length) {
+            throw validation.errors;
         }
 
-        console.log(user);
-
+        const user = await loginUser(email, password);
         const token = createToken(user);
 
-        res.cookie('token', token, { httpOnly: true });
-        res.status(200).json({ message: 'Login successful', token });
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+            path: '/' || '/admin/dashboard', // restrict cookie to specific path
+        });
+
+        const redirectUrl = user.role === 'admin' ? '/admin/dashboard' : '/';
+
+        res.status(200).json({ message: 'Login successful', token, redirectUrl });
     } catch (error) {
         res.status(500).json({ message: 'Login failed', error });
     }
 };
 
 const logout = (req: Request, res: Response) => {
-    res.clearCookie('token');
-    res.status(200).json({ message: 'Logout successful' });
-    res.redirect('/'); // TODO check redirect according to documentation
+    const redirectUrl = '/';
+
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        path: '/', // restrict cookie to specific path
+    });
+
+    res.status(200).json({ message: 'Logout successful', redirectUrl });
 };
 
 export { register, login, logout };

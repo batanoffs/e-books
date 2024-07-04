@@ -1,11 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
-
-interface IOrder extends Document {
-    userId: string;
-    books: { bookId: string; quantity: number }[];
-    total: number;
-    status: string;
-}
+import { model, Schema } from 'mongoose';
+import { IOrder } from '../interfaces/order.interface';
 
 const OrderSchema: Schema = new Schema({
     userId: { type: String, required: true },
@@ -24,6 +18,6 @@ const OrderSchema: Schema = new Schema({
     },
 });
 
-const Order = mongoose.model<IOrder>('Order', OrderSchema);
+const Order = model<IOrder>('Order', OrderSchema);
 
 export default Order;

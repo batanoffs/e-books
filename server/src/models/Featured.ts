@@ -1,14 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
-
-interface IFeatured extends Document {
-    title: string;
-    author: string;
-    price: number;
-    description: string;
-    imageUrl: string;
-    stock: number;
-    category: string;
-}
+import { model, Schema } from 'mongoose';
+import { IFeatured } from '../interfaces/featured.interface';
 
 const FeaturedSchema: Schema = new Schema({
     title: { type: String, required: true },
@@ -20,6 +11,6 @@ const FeaturedSchema: Schema = new Schema({
     stock: { type: Number, required: true },
 });
 
-const Featured = mongoose.model<IFeatured>('Item', FeaturedSchema);
+const Featured = model<IFeatured>('Featured', FeaturedSchema);
 
 export default Featured;

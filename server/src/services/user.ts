@@ -1,19 +1,18 @@
 import { identityName } from '../constants/identity';
-import { IUser } from '../models/User';
+import { IUser } from '../interfaces/user.interface';
 import User from '../models/User';
 import bcrypt from 'bcrypt';
 
-async function registerUser(email: string, password: string, role: string): Promise<IUser> {
+async function registerUser(identity: string, password: string, role: string): Promise<IUser> {
     //TODO add props if needed (username)
-    const existing = await User.findOne({ email });
-    console.log(existing);
+    const existing = await User.findOne({ [identityName]: identity });
 
     if (existing) {
         throw new Error(`This email is already in use`);
     }
 
     const user = new User({
-        email,
+        [identityName]: identity,
         password: await bcrypt.hash(password, 10), //TODO add props if needed (username)
         role,
     });

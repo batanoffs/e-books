@@ -3,8 +3,10 @@ import { connectionString } from '../constants/serverSetup';
 
 require('../models/Book');
 require('../models/User');
-require('../models/Order'); //TODO import specific model and change name
-//TODO import models
+require('../models/Order'); 
+require('../models/Featured');
+require('../models/Item');
+
 
 mongoose.set('strictQuery', false);
 

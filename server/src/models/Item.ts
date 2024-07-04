@@ -1,13 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
-
-interface IItem extends Document {
-    title: string;
-    price: number;
-    description: string;
-    imageUrl: string;
-    stock: number;
-    category: string;
-}
+import { model, Schema } from 'mongoose';
+import { IItem } from '../interfaces/item.interface';
 
 const ItemSchema: Schema = new Schema({
     title: { type: String, required: true },
@@ -18,6 +10,6 @@ const ItemSchema: Schema = new Schema({
     stock: { type: Number, required: true },
 });
 
-const Item = mongoose.model<IItem>('Item', ItemSchema);
+const Item = model<IItem>('Item', ItemSchema);
 
 export default Item;

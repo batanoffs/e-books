@@ -1,15 +1,13 @@
-const jwt = require('jsonwebtoken');
-
-import { JwtPayload, SignOptions, verify } from 'jsonwebtoken';
+import { JwtPayload, SignOptions, verify, sign } from 'jsonwebtoken';
 import { secret } from '../constants/identity';
 
-function createToken(userData: { email: string; _id?: string;  }): string {
+function createToken(userData: { email: string; _id?: string }): string {
     const payload: JwtPayload = {
         email: userData.email,
         _id: userData._id,
     };
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET || secret, {
+    const token = sign(payload, process.env.JWT_SECRET || secret, {
         expiresIn: '1h',
     } as SignOptions);
 

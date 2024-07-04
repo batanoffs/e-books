@@ -5,9 +5,9 @@ import { configDatabase } from './src/config/database';
 import { configExpress } from './src/config/express';
 import { configRoutes } from './src/config/routes';
 import { PORT } from './src/constants/serverSetup';
-import { registerUser } from './src/services/user';
 
-import { createToken } from './src/services/jwt';
+// import { registerUser } from './src/services/user';
+// import { createToken } from './src/services/jwt';
 
 dotenv.config();
 const app = express();
