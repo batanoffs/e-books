@@ -1,37 +1,42 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styles from './login-page.module.css';
+
 import { API } from '../constants/api';
+
+import styles from './login-page.module.css';
+
+const cookieOptions: Record<string, boolean | number | string> = {
+    // Set the "SameSite=None" and "Secure" attributes
+    sameSite: 'None',
+    secure: true,
+    maxAge: 60 * 60 * 24 * 7, // 1 week
+    path: '/', // default path
+};
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
 
         try {
-            console.log('email and password', email, password);
-
             const response = await axios.post(API.LOGIN, { email, password });
 
-            console.log(response.data);
+            document.cookie = `token=${response.data.token}; ${Object.entries(cookieOptions)
+                .map(([key, value]) => `${key}=${value}`)
+                .join('; ')}`; // Set the cookie with the options
 
-            document.cookie = `token=${response.data.token}`;
-            if (response.data.role === 'admin') {
-                navigate('/admin/dashboard');
-            } else {
-                navigate('/');
-            }
+            navigate(response.data.redirectUrl);
         } catch (error) {
             console.error('Login failed', error);
         }
     };
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleLogin}>
             <div>
                 <label>Имейл</label>
                 <input
