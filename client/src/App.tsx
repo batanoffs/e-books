@@ -1,17 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-import { Header } from './components/Header';
-
+import Header from './components/Header';
 import HomePage from './pages/home/HomePage';
 import BookDetailsPage from './pages/BookDetailsPage';
-import { AdminPage } from './pages/ReactAdmin/Admin';
-import ManageBooksPage from './pages/MyAdmin/ManageBooksPage';
-import ManageOrdersPage from './pages/MyAdmin/ManageOrdersPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import AdminDashboardPage from './pages/MyAdmin/AdminDashboardPage';
-import ManageUsersPage from './pages/MyAdmin/ManageUsersPage';
+import AdminPage from './pages/ReactAdmin/Admin';
+// import AdminGuard from './middlewares/guards';
+
 import './index.css';
 
 const theme = createTheme({
@@ -29,11 +26,7 @@ const routes = {
     '/books/:id': <BookDetailsPage />,
     '/login': <LoginPage />,
     '/register': <RegisterPage />,
-    '/admin/*': <AdminPage />,
-    // '/admin/dashboard': <AdminDashboardPage />,
-    // '/admin/books': <ManageBooksPage />,
-    // '/admin/orders': <ManageOrdersPage />,
-    // '/admin/users': <ManageUsersPage />,
+    '/admin/*': <AdminPage />, //TODO add admin Guard
 };
 
 const App = () => {
