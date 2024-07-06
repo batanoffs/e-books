@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { checkIfUserIsAdmin } from '../utils/auth';
-import AdminDashboardPage from '../pages/MyAdmin/AdminDashboardPage';
+import AdminPage from '../pages/ReactAdmin/Admin';
 
 const AdminGuard = () => {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1');
@@ -11,7 +11,7 @@ const AdminGuard = () => {
         return <Navigate to="/login" />;
     }
 
-    return <AdminDashboardPage />;
+    return <AdminPage />;
 };
 
 export default AdminGuard;
