@@ -1,37 +1,27 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
-import Header from './components/Header';
 import HomePage from './pages/home/HomePage';
-import BookDetailsPage from './pages/BookDetailsPage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
+import BookDetailsPage from './pages/details/BookDetailsPage';
+import LoginPage from './pages/login/LoginPage';
+import RegisterPage from './pages/register/RegisterPage';
 import AdminPage from './pages/ReactAdmin/Admin';
+import Header from './components/appBar/AppBar';
 // import AdminGuard from './middlewares/guards';
-
+import themeOptions from './utils/theme';
 import './index.css';
-
-const theme = createTheme({
-    typography: {
-        allVariants: {
-            fontFamily: 'Montserrat Alternates',
-            textTransform: 'none',
-            fontSize: 14,
-        },
-    },
-});
 
 const routes = {
     '/': <HomePage />,
     '/books/:id': <BookDetailsPage />,
     '/login': <LoginPage />,
     '/register': <RegisterPage />,
-    '/admin/*': <AdminPage />, //TODO add admin Guard
+    '/admin/*': <AdminPage /> /*TODO add admin Guard */,
 };
 
 const App = () => {
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={themeOptions.theme}>
             <Router>
                 {!window.location.pathname.includes('admin') && <Header />}
                 <Routes>
