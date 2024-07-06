@@ -1,7 +1,7 @@
 // frontend/src/pages/AdminDashboardPage.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { API } from '../../constants/api';
+import { API } from '../../../constants/api';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
