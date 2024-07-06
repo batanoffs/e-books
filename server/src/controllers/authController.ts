@@ -25,7 +25,7 @@ const register = async (req: Request, res: Response) => {
             path: '/', // restrict cookie to specific path
         });
 
-        const redirectUrl = user.role === 'admin' ? '/admin/dashboard' : '/';
+        const redirectUrl = user.role === 'admin' ? '/admin' : '/';
         res.status(200).json({ message: 'User registered successfully', token, redirectUrl });
     } catch (error) {
         res.status(500).json({ message: 'Registration failed', error });
