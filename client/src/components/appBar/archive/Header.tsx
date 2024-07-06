@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios';
 import AppBar from '@mui/material/AppBar';
 import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -18,9 +19,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 import { isAuth } from '../utils/auth';
 import { useNavigate, Link } from 'react-router-dom';
-
-const pages = ['Книги', 'Най-продавани', 'Всички', 'Контакти'];
-const settings = ['Профил', 'Акаунт', 'Начало', 'Изход'];
+import { API } from '../constants/api';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -65,6 +64,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
+const pages = ['Книги', 'Най-продавани', 'Всички', 'Контакти'];
+const settings = [
+    { name: 'Начало', path: '/' },
+    { name: 'Профил', path: '/profile' },
+    { name: 'Акаунт', path: '/account' },
+];
+
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -89,6 +95,18 @@ const Header = () => {
     const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const search = event.target.value;
         setSearchQuery(search);
+    };
+
+    const handleLogout = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const response = await axios.get(API.LOGOUT);
+            console.log('Cookies:', response.headers['set-cookie']);
+            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            navigate('/');
+        } catch (error) {
+            console.error('Logout failed', error);
+        }
     };
 
     const navigationHandler = (event: React.MouseEvent<HTMLElement>) => {
@@ -126,13 +144,13 @@ const Header = () => {
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
                             fontFamily: 'Montserrat Alternates',
-                            fontWeight: 700,
+                            fontWeight: 900,
                             letterSpacing: '.3rem',
-                            color: 'inherit',
+                            color: 'blueviolet',
                             textDecoration: 'none',
                         }}
                     >
-                        КНИЖАРНИЦА
+                        нов човек
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -238,10 +256,13 @@ const Header = () => {
                                 onClose={handleCloseUserMenu}
                             >
                                 {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting}</Typography>
+                                    <MenuItem key={setting.name} component={Link} to={setting.path}>
+                                        <Typography textAlign="center">{setting.name}</Typography>
                                     </MenuItem>
                                 ))}
+                                <MenuItem key="logout" onClick={handleLogout}>
+                                    <Typography textAlign="center">Изход</Typography>
+                                </MenuItem>
                             </Menu>
                         </Box>
                     ) : (
