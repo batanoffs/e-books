@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 // import { MultyCarousel } from '../../assets/MultyCarousel';
-import { SingleCarousel } from '../../assets/SingleCarousel';
+import { SingleCarousel } from '../../components/assets/SingleCarousel';
 
 import style from './home.module.css';
 import { API } from '../../constants/api';
@@ -17,7 +17,7 @@ interface Book {
     category: string;
 }
 
-const HomePage: React.FC = () => {
+const HomePage = () => {
     const [books, setBooks] = useState<Book[]>([]);
 
     useEffect(() => {
@@ -29,18 +29,18 @@ const HomePage: React.FC = () => {
     }, []);
 
     return (
-            <main className="mainWrapper">
-                {books && <SingleCarousel books={books} />}
+        <main className="mainWrapper">
+            {books && <SingleCarousel books={books} />}
 
-                <section className="border-solid border border-gray-500 py-8">
-                    <h1 className="text-3xl text-center pb-6"> Новодошли </h1>
-                    {/* <MultyCarousel books={books} /> */}
-                </section>
-                <section className={style.contentWrapper}> 03 </section>
-                <section className={style.contentWrapper}> 04 </section>
-                <section className={style.contentWrapper}> 05 </section>
-                <section className={style.contentWrapper}> 06 </section>
-            </main>
+            <section className="border-solid border border-gray-500 py-8">
+                <h1 className="text-3xl text-center pb-6"> Новодошли </h1>
+                {/* <MultyCarousel books={books} /> */}
+            </section>
+            <section className={style.contentWrapper}> 03 </section>
+            <section className={style.contentWrapper}> 04 </section>
+            <section className={style.contentWrapper}> 05 </section>
+            <section className={style.contentWrapper}> 06 </section>
+        </main>
     );
 };
 

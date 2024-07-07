@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ const cookieOptions: Record<string, boolean | number | string> = {
     path: '/', // default path
 };
 
-const LoginPage: React.FC = () => {
+const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -23,7 +23,16 @@ const LoginPage: React.FC = () => {
         e.preventDefault();
 
         try {
+            if (!email || !password) {
+                //TODO improve alert messages
+                throw new Error('Имейл и парола са задъжителни');
+            }
+
             const response = await axios.post(API.LOGIN, { email, password });
+
+            if (response.data.redirectUrl.includes('admin')) {
+                return navigate('/admin/dashboard');
+            }
 
             document.cookie = `token=${response.data.token}; ${Object.entries(cookieOptions)
                 .map(([key, value]) => `${key}=${value}`)
@@ -58,7 +67,7 @@ const LoginPage: React.FC = () => {
                 />
             </div>
             <button className={styles.button} type="submit">
-                Login
+                Вход
             </button>
         </form>
     );

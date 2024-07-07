@@ -1,6 +1,6 @@
 import Slider from 'react-slick';
 
-import { Featured } from '../components/Featured.tsx';
+import { Featured } from '../Featured.tsx';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ interface Book {
     stock: number;
 }
 
-const BookDetailsPage: React.FC = () => {
+const BookDetailsPage = () => {
     const { id } = useParams<{ id: string }>();
     const [book, setBook] = useState<Book | null>(null);
 

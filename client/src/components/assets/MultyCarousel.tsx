@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { Bookcard } from '../components/Bookcard';
+import { Bookcard } from '../Bookcard';
 
 interface Props {
     books: {
