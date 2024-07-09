@@ -9,7 +9,8 @@ import AdminPage from './pages/ReactAdmin/Admin';
 import Header from './components/appBar/AppBar';
 // import AdminGuard from './middlewares/guards';
 import themeOptions from './utils/theme';
-import './index.css';
+import Footer from './components/Footer/Footer'
+import './index.scss';
 
 const routes = {
     '/': <HomePage />,
@@ -30,6 +31,7 @@ const App = () => {
                     ))}
                 </Routes>
             </Router>
+            {!window.location.pathname.includes('admin') && <Footer />}
         </ThemeProvider>
     );
 };
