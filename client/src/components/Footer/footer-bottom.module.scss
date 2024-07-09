@@ -1,0 +1,64 @@
+.pageFooterBot {
+    background-color: #f9f9f9; // Light background color for the footer
+    padding: 0 0; // Padding for top and bottom
+    font-family: inherit; // Use a clean sans-serif font
+    font-weight: 500;
+    color: #666; // Dark grey color for text
+    border-top: 1px solid #e1e1e1; // Border on top
+}
+
+.wrapper {
+    max-width: 1140px; // Max width for the wrapper
+    margin: 0 auto; // Center the wrapper
+    padding: 0 20px; // Padding for left and right
+}
+
+.pageFooterBotBlock {
+    
+    display: flex; // Use flexbox for layout
+    flex-direction: column;
+    justify-content: space-between; // Space between items
+    align-items: center; // Center items vertically
+    flex-wrap: wrap; // Wrap items if needed
+}
+
+.pageFooterBotItem {
+    flex: 1; // Allow items to grow equally
+    margin: 10px 0; // Margin for top and bottom
+    text-align: left; // Align text to the left
+}
+
+.pageFooterBotItemLarge {
+    flex: 2; // Make the large item take more space
+}
+
+.copyright {
+    display: block; // Display as block
+    font-size: 10px; // Font size
+    line-height: 1.5; // Line height
+}
+
+a {
+    color: #333; // Dark color for links
+    text-decoration: none; // No underline
+    &:hover {
+        text-decoration: underline; // Underline on hover
+    }
+}
+
+.visuallyHidden {
+    position: absolute; // Hide visually
+    width: 1px; // Small width
+    height: 1px; // Small height
+    margin: -1px; // Negative margin
+    padding: 0; // No padding
+    overflow: hidden; // Hide overflow
+    clip: rect(0, 0, 0, 0); // Clip the rect
+    border: 0; // No border
+}
+
+// Specific styles for image link
+.pageFooterBotItem a img {
+    margin-left: 5px; // Margin on the left
+    vertical-align: middle; // Align image vertically
+}

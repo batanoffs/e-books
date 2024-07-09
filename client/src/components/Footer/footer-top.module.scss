@@ -1,0 +1,110 @@
+.pageFooterTop {
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 22px;
+    position: relative;
+    padding-top: 20px;
+    border-top: 2px solid #c8c8c8;
+}
+
+.pageFooterTopContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pageFooterLogoContainer {
+    display: flex;
+    align-items: center;
+}
+
+.logoFooter {
+    display: flex;
+}
+
+.logoFooter img {
+    width: 120px;
+    height: 70px;
+}
+
+.certificate {
+    display: flex;
+    align-items: center;
+}
+
+.certificate img {
+    width: 94px;
+    height: 94px;
+}
+
+.pageFooterCtas {
+    display: flex;
+    padding: 20px 0; // Padding for top and bottom
+}
+
+.pageFooterCtasList {
+    display: flex; // Use flexbox for layout
+    gap: 10px;
+    justify-content: start; // Space between items
+    align-items: center; // Center items vertically
+    flex-wrap: wrap; // Wrap items if needed
+    list-style: none; // Remove list style
+}
+
+.pageFooterCtasItem {
+    text-align: center; // Center text
+}
+
+.pageFooterCTA {
+    // display: flex;
+    // align-items: center;
+    // color: #333;
+    height: 40px;
+
+    display: inline-flex; // Use inline-flex for alignment
+    align-items: center; // Center items vertically
+    justify-content: center; // Center items horizontally
+    padding: 10px 20px; // Padding for the CTA
+    background-color: #efefef; // White background color for the CTA
+    font-weight: 500;
+    border-radius: 20px; // Rounded corners
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Light shadow for depth
+    color: #333; // Dark color for text
+    text-decoration: none; // No underline
+    font-size: 16px; // Font size
+    transition: background-color 0.3s; // Smooth transition for hover
+    &:hover {
+        background-color: #f0f0f0; // Slightly darker background on hover
+        text-decoration: none;
+    }
+}
+
+.icon {
+    margin-right: 8px; // Margin on the right for spacing
+}
+
+.icon_32 {
+    width: 32px;
+    height: 32px;
+}
+
+.pageFooterCtasItem:last-child {
+    margin-right: 0;
+}
+
+.pageFooterCtasItem:nth-child(3) {
+    margin-right: 0;
+}
+
+.pageFooterCtasItem:nth-child(4) {
+    margin-right: 0;
+}
+
+.pageFooterCtasItem:nth-child(5) {
+    margin-right: 0;
+}
