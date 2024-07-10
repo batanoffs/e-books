@@ -1,4 +1,3 @@
-// styles.js
 import { useTheme } from '@mui/material/styles';
 import { alpha } from '@mui/material/styles';
 
@@ -52,4 +51,3 @@ export const inputBaseStyles = () => {
         },
     };
 };
-
