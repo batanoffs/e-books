@@ -1,0 +1,40 @@
+import { Button } from '@mui/material';
+
+interface FeaturedProps {
+    book: {
+        _id: string;
+        title: string;
+        author: string;
+        imageUrl: string;
+        description: string;
+        price: number;
+        category: string;
+        stock: number;
+    };
+    styles: typeof styles;
+}
+
+export const Featured = ({ book, styles }: FeaturedProps) => {
+    const { imageUrl, title, author, price, description, _id } = book;
+    return (
+        <div className={styles.container}>
+            <div className={styles.textContainer}>
+                <h1>{title}</h1>
+                <p>{author}</p>
+                <p>{price} лв.</p>
+                <span>{description}</span>
+                <div className={styles.buttonsContainer}>
+                    <Button variant="contained" className={styles.button}>
+                        Купи
+                    </Button>
+                    <Button variant="contained" className={styles.button} href={`/books/${_id}`}>
+                        Виж детайли
+                    </Button>
+                </div>
+            </div>
+            <div>
+                <img className={styles.image} src={imageUrl} alt={title} />
+            </div>
+        </div>
+    );
+};
