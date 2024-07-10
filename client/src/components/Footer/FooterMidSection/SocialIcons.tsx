@@ -1,37 +1,30 @@
-const SocialIcon = ({ href, title, extraClass = '', isImage = false, styles }) => (
+import { IconButton } from '@mui/material';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import BookIcon from '@mui/icons-material/Book';
+
+const SocialIcon = ({ href, title, styles, extraClass = '' }) => (
     <li className={styles.pageFooterIconsItem}>
-        <a href={href} title={title} target="_blank" rel="noopener" className={extraClass}>
-            {isImage ? (
-                <img
-                    src=""
-                    className={styles.icon}
-                    alt={title}
-                    width="22"
-                    height="24"
-                    loading="lazy"
-                />
-            ) : (
-                <svg className={styles.icon}>
-                    <use xlinkHref="" />
-                </svg>
-            )}
-        </a>
+        <IconButton
+            href={href}
+            title={title}
+            target="_blank"
+            rel="noopener"
+            className={styles.pageFooterIconsItem}
+        >
+            {title === 'Facebook' && <FacebookIcon />}
+            {title === 'Instagram' && <InstagramIcon />}
+            {title === 'blog' && <BookIcon />}
+        </IconButton>
     </li>
 );
 
 const SocialIcons = ({ styles }) => (
     <div className={styles.pageFooterMidBlock}>
         <div className={styles.pageFooterMidBlockItem}>
-            <ul className={styles.pageFooterIconsPageFooterIconsSocial}>
+            <ul className={styles.pageFooterIcons}>
                 <SocialIcon styles={styles} href="" title="Facebook" />
-                <SocialIcon styles={styles} href="" title="instagram" />
-                <SocialIcon
-                    styles={styles}
-                    href=""
-                    title="TikTok"
-                    extraClass={styles.iconTiktok}
-                    isImage={true}
-                />
+                <SocialIcon styles={styles} href="" title="Instagram" />
                 <SocialIcon styles={styles} href="" title="blog" />
             </ul>
         </div>

@@ -32,25 +32,25 @@ export default function FooterMidSection() {
                         title='Книжарница "Нов живот"'
                         toggleId="footer-cat-toggle-2"
                         items={[
-                            { href: '', title: 'За нас' },
-                            { href: '', title: 'Цени и срокове за доставка' },
-                            { href: '', title: 'Политика за поверителност' },
-                            { href: '', title: 'Кариери' },
-                            { href: '', title: 'Връщане и замяна на стока' },
+                            { href: '/about', title: 'За нас' },
+                            { href: '/prices', title: 'Цени и срокове за доставка' },
+                            { href: '/politics', title: 'Политика за поверителност' },
+                            { href: '/career', title: 'Кариери' },
+                            { href: '/refund', title: 'Връщане и замяна на стока' },
                             {
                                 href: '#',
                                 title: 'Настройки за поверителност',
                                 extraProps: { 'data-amcookie-js': 'footer-link' },
                             },
-                            { href: '', title: 'Реклама в Нов Живот' },
-                            { href: '', title: 'Онлайн решаване на спорове' },
-                            { href: '', title: 'Свържи се с нас' },
-                            { href: '', title: 'Общи условия' },
-                            { href: '', title: 'Често задавани въпроси' },
-                            { href: '', title: 'Магазини Нов Живот center' },
-                            { href: '', title: 'Начин на плащане' },
-                            { href: '', title: 'Защита на лични данни' },
-                            { href: '', title: 'Франчайз' },
+                            { href: '/advertising', title: 'Реклама в Нов Живот' },
+                            { href: '/support', title: 'Онлайн решаване на спорове' },
+                            { href: '/contact', title: 'Свържи се с нас' },
+                            { href: '/terms', title: 'Общи условия' },
+                            { href: '/faq', title: 'Често задавани въпроси' },
+                            { href: '/shops', title: 'Магазини Нов Живот center' },
+                            { href: '/payment', title: 'Начин на плащане' },
+                            { href: '/privacy', title: 'Защита на лични данни' },
+                            { href: '/franchise', title: 'Франчайз' },
                         ]}
                         styles={styles}
                     >
