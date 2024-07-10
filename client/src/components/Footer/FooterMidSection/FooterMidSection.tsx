@@ -38,7 +38,7 @@ export default function FooterMidSection() {
                             { href: '/career', title: 'Кариери' },
                             { href: '/refund', title: 'Връщане и замяна на стока' },
                             {
-                                href: '#',
+                                href: '/privacy-settings',
                                 title: 'Настройки за поверителност',
                                 extraProps: { 'data-amcookie-js': 'footer-link' },
                             },
