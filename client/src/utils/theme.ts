@@ -2,9 +2,14 @@ import { createTheme } from '@mui/material/styles';
 
 const darkTheme = createTheme({
     typography: {
-        button: {
+        allVariants: {
+            fontFamily: 'Montserrat Alternates',
             textTransform: 'none',
+            fontSize: 14,
         },
+    },
+    shape: {
+        borderRadius: 10,
     },
     palette: {
         mode: 'dark',
@@ -27,7 +32,7 @@ const darkTheme = createTheme({
     },
 });
 
-const theme = createTheme({
+const whiteTheme = createTheme({
     typography: {
         allVariants: {
             fontFamily: 'Montserrat Alternates',
@@ -86,7 +91,7 @@ const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme
 
 const themeOptions = {
     darkTheme,
-    theme,
+    whiteTheme,
     isDarkMode,
 };
 
