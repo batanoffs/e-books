@@ -72,7 +72,7 @@ export default function Newsletter() {
                                             <span className={styles.checkRadioRipple}></span>
                                             Съгласен съм с{' '}
                                         </span>
-                                        <a href="#" className={styles.privacyPolicy}>
+                                        <a href="/privacy-policy" className={styles.privacyPolicy}>
                                             Политика за обработка на лични данни.
                                         </a>
                                     </label>
@@ -91,14 +91,14 @@ export default function Newsletter() {
                                 </h6>
                             </div>
                         </div>
-                        <div className={styles.newsletterShapes}>
+                        {/* <div className={styles.newsletterShapes}>
                             <img
                                 src=""
                                 alt="leaf graphic"
                                 loading="lazy"
                                 className={`${styles.newsletterShapeRight} ${styles.aNLShapeDown}`}
                             />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
