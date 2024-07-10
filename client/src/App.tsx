@@ -1,15 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
 
 import HomePage from './pages/home/HomePage';
 import BookDetailsPage from './pages/details/BookDetailsPage';
 import LoginPage from './pages/login/LoginPage';
 import RegisterPage from './pages/register/RegisterPage';
 import AdminPage from './pages/ReactAdmin/Admin';
-import Header from './components/appBar/AppBar';
+import Header from './components/appBar/Header';
+import Footer from './components/Footer/Footer';
+import Layout from './components/Layout/Layout';
 // import AdminGuard from './middlewares/guards';
-import themeOptions from './utils/theme';
-import Footer from './components/Footer/Footer'
+
 import './index.scss';
 
 const routes = {
@@ -17,22 +17,26 @@ const routes = {
     '/books/:id': <BookDetailsPage />,
     '/login': <LoginPage />,
     '/register': <RegisterPage />,
-    '/admin/*': <AdminPage /> /*TODO add admin Guard */,
 };
 
 const App = () => {
     return (
-        <ThemeProvider theme={themeOptions.theme}>
-            <Router>
-                {!window.location.pathname.includes('admin') && <Header />}
+        <Router>
+            {!window.location.pathname.includes('admin') && <Header />}
+            <Layout>
                 <Routes>
                     {Object.entries(routes).map(([path, element]) => (
                         <Route key={path} path={path} element={element} />
                     ))}
                 </Routes>
-            </Router>
+            </Layout>
+
             {!window.location.pathname.includes('admin') && <Footer />}
-        </ThemeProvider>
+
+            <Routes>
+                <Route path="/admin/*" element={<AdminPage />} />
+            </Routes>
+        </Router>
     );
 };
 
