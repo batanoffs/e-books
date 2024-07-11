@@ -6,11 +6,11 @@ export default function FooterTop() {
             <div className={styles.wrapper}>
                 <div className={styles.pageFooterTopContainer}>
                     <div className={styles.pageFooterLogoContainer}>
-                        <a href="" className={styles.logoFooter}>
-                            <img src="1.png" alt="logo" loading="lazy" width="150" />
+                        <a href="/" className={styles.logoFooter}>
+                            <img src="1.png" alt="logo" loading="lazy" width="200" height="80" />
                         </a>
                     </div>
-                    <span className={styles.certificate}>
+                    {/* <span className={styles.certificate}>
                         <img
                             src="#"
                             alt="certificate for superbrand"
@@ -18,7 +18,7 @@ export default function FooterTop() {
                             width="94"
                             height="94"
                         />
-                    </span>
+                    </span> */}
                     <div className={styles.pageFooterCtas}>
                         <ul className={styles.pageFooterCtasList}>
                             <li className={styles.pageFooterCtasItem}>
