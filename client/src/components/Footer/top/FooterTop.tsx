@@ -7,7 +7,7 @@ export default function FooterTop() {
                 <div className={styles.pageFooterTopContainer}>
                     <div className={styles.pageFooterLogoContainer}>
                         <a href="" className={styles.logoFooter}>
-                            <img src="logo.png" alt="logo" loading="lazy" width="150" />
+                            <img src="1.png" alt="logo" loading="lazy" width="150" />
                         </a>
                     </div>
                     <span className={styles.certificate}>

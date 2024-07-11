@@ -29,7 +29,7 @@ export default function FooterMidSection() {
 
                     {/* Company Section */}
                     <FooterSection
-                        title='Книжарница "Нов живот"'
+                        title='Книжарница "Емануил"'
                         toggleId="footer-cat-toggle-2"
                         items={[
                             { href: '/about', title: 'За нас' },
@@ -42,12 +42,12 @@ export default function FooterMidSection() {
                                 title: 'Настройки за поверителност',
                                 extraProps: { 'data-amcookie-js': 'footer-link' },
                             },
-                            { href: '/advertising', title: 'Реклама в Нов Живот' },
+                            { href: '/advertising', title: 'Реклама в Емануил' },
                             { href: '/support', title: 'Онлайн решаване на спорове' },
                             { href: '/contact', title: 'Свържи се с нас' },
                             { href: '/terms', title: 'Общи условия' },
                             { href: '/faq', title: 'Често задавани въпроси' },
-                            { href: '/shops', title: 'Магазини Нов Живот center' },
+                            { href: '/shops', title: 'Магазини Емануил center' },
                             { href: '/payment', title: 'Начин на плащане' },
                             { href: '/privacy', title: 'Защита на лични данни' },
                             { href: '/franchise', title: 'Франчайз' },

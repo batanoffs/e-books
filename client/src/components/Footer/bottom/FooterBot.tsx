@@ -7,9 +7,9 @@ export default function FooterBot() {
                 <div className={styles.pageFooterBotBlock}>
                     <div className={`${styles.pageFooterBotItem} ${styles.pageFooterBotItemLarge}`}>
                         <span className={styles.copyright}>
-                            Книжарница „Нов живот“ е запазена марка на книжарница АД, BG
+                            Книжарница „Емануил“ е запазена марка на книжарница "Емануил АД", BG
                         </span>
-                        <span className={styles.copyright}>2024 © Нов живот. Всички права запазени.</span>
+                        <span className={styles.copyright}>2024 © Емануил. Всички права запазени.</span>
                     </div>
                     <div className={styles.pageFooterBotItem}>
                         <span className={styles.copyright}>

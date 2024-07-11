@@ -1,7 +1,9 @@
-.newsletter {
+.container {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    padding: 40px 0;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 60px;
 }
 
 .newsletterTop {
@@ -46,6 +48,9 @@
 }
 
 .newsletterTitle {
+    position: relative;
+    display: inline-block;
+    margin-top: -200px;
     margin-bottom: 10px;
 }
 

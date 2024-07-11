@@ -2,7 +2,7 @@ import styles from './newsletter.module.scss';
 
 export default function Newsletter() {
     return (
-        <section className={styles.newsletter}>
+        <div className={styles.container}>
             <div className={styles.newsletterTop}>
                 <div className={styles.wrapperInner}>
                     <div className={styles.newsletterImageBlock}>
@@ -17,7 +17,6 @@ export default function Newsletter() {
                     </div>
                     <div className={styles.newsletterCont}>
                         <h2 className={styles.newsletterTitle}>Запиши се за бюлетина ни</h2>
-                        <strong className={styles.newsletterSubtitle}>&nbsp;</strong>
                         {/* <img
                             src=""
                             alt="leaf graphic"
@@ -102,6 +101,6 @@ export default function Newsletter() {
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     );
 }

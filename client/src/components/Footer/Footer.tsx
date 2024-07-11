@@ -1,15 +1,14 @@
-import Newsletter from './Newsletter';
-import FooterTop from './FooterTop';
-import FooterMidSection from './FooterMidSection/FooterMidSection';
-import FooterBot from './FooterBot';
-import './footer.scss';
+import Newsletter from './top/Newsletter';
+import FooterTop from './top/FooterTop';
+import FooterMid from './middle/FooterMid';
+import FooterBot from './bottom/FooterBot';
 
 const Footer = () => {
     return (
-        <footer className="footer">
-            <Newsletter />
+        <footer>
+            {!window.location.pathname.includes('registracia') && <Newsletter />}
             <FooterTop />
-            <FooterMidSection />
+            <FooterMid />
             <FooterBot />
         </footer>
     );
