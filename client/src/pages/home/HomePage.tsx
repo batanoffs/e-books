@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { API } from '../../constants/api';
 import { SingleCarousel } from '../../components/assets/SingleCarousel';
-// import { MultyCarousel } from '../../assets/MultyCarousel';
+import { MultiCarousel } from '../../components/assets/MultiCarousel';
 
 interface Book {
     _id: string;
@@ -27,9 +27,17 @@ const HomePage = () => {
         fetchBooks();
     }, []);
 
+    const isLoading = books.length === 0 ? true : false;
     return (
         <>
-            {books && <SingleCarousel books={books} />}
+            {isLoading ? (
+                <h1>Loading...</h1>
+            ) : (
+                <>
+                    <SingleCarousel books={books} />
+                    <MultiCarousel books={books} />
+                </>
+            )}
         </>
     );
 };
