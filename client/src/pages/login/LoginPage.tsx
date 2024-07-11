@@ -1,22 +1,25 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
+import { Link } from '@mui/material';
 import { API } from '../../constants/api';
 
-import styles from './login-page.module.css';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
-const cookieOptions: Record<string, boolean | number | string> = {
-    // Set the "SameSite=None" and "Secure" attributes
-    sameSite: 'None',
-    secure: true,
-    maxAge: 60 * 60 * 24 * 7, // 1 week
-    path: '/', // default path
-};
+import styles from './login-page.module.scss';
+import { useLoginModal } from '../../store/helperModal';
 
-const LoginPage = () => {
+const LoginModal = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const open = useLoginModal((state) => state.open);
+    const toggleOpen = useLoginModal((state) => state.toggleOpen);
+
     const navigate = useNavigate();
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -24,7 +27,6 @@ const LoginPage = () => {
 
         try {
             if (!email || !password) {
-                //TODO improve alert messages
                 throw new Error('Имейл и парола са задъжителни');
             }
 
@@ -45,32 +47,56 @@ const LoginPage = () => {
     };
 
     return (
-        <form className={styles.form} onSubmit={handleLogin}>
-            <div>
-                <label>Имейл</label>
-                <input
-                    className={styles.input}
-                    type="text"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
+        <Modal
+            open={open}
+            onClose={toggleOpen}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+        >
+            <div className={styles.paper}>
+                <Typography variant="subtitle2" id="modal-title">
+                    Вход
+                </Typography>
+                <form className={styles.form} onSubmit={handleLogin}>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Имейл"
+                        type="email"
+                        fullWidth
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <TextField
+                        margin="dense"
+                        id="name"
+                        label="Парола"
+                        type="password"
+                        fullWidth
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className={styles.button}
+                    >
+                        Вход
+                    </Button>
+                    <Link href="/registracia" underline="hover" variant="inherit">
+                        Нямаш акаунт? Регистрирай се.
+                    </Link>
+                    <Link href="/zabravena-parola" underline="hover">
+                        Забравена парола?
+                    </Link>
+                </form>
             </div>
-            <div>
-                <label>Парола</label>
-                <input
-                    className={styles.input}
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </div>
-            <button className={styles.button} type="submit">
-                Вход
-            </button>
-        </form>
+        </Modal>
     );
 };
 
-export default LoginPage;
+export default LoginModal;
