@@ -33,7 +33,7 @@ export const SingleCarousel = ({ books }: BookProps) => {
     const settings = {
         dots: true,
         infinite: true,
-        autoplay: true,
+        autoplay: true, //TODO edit autoplay
         speed: 5000,
         autoplaySpeed: 10000,
         arrows: true,
