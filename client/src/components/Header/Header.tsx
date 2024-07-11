@@ -49,16 +49,19 @@ const Header = () => {
     const navigationHandler = (page: string) => {
         switch (page) {
             case 'Книги':
-                navigate('/books');
+                navigate('/knigi');
+                break;
+            case 'Учебници':
+                navigate('/uchebnici');
                 break;
             case 'Най-продавани':
-                navigate('/popular');
+                navigate('/nai-prodavani');
                 break;
             case 'Контакти':
-                navigate('/contacts');
+                navigate('/kontakti');
                 break;
             case 'Всички':
-                navigate('/items');
+                navigate('/vsichki');
                 break;
             default:
                 navigate('/');
@@ -68,9 +71,8 @@ const Header = () => {
 
     return (
         <AppBar position="static">
-            <Container maxWidth="lg" >
+            <Container maxWidth="lg">
                 <Toolbar variant="dense" sx={{ height: 80 }} disableGutters>
-                    
                     <Logo />
                     <NavigationMenu
                         anchorElNav={anchorElNav}

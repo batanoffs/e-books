@@ -1,15 +1,17 @@
 // UserMenu.tsx
-import {Box,IconButton,Menu,MenuItem,Typography,Tooltip,Avatar,Button} from '@mui/material';
+import { Box, IconButton, Menu, MenuItem, Typography, Tooltip, Avatar, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { isAuth } from '../../utils/auth';
+import {useLoginModal} from '../../store/helperModal';
 
 const settings = [
     { name: 'Начало', path: '/' },
-    { name: 'Профил', path: '/profile' },
-    { name: 'Акаунт', path: '/account' },
+    { name: 'Профил', path: '/profil' },
+    { name: 'Акаунт', path: '/akaunt' },
 ];
 
 const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handleLogout }) => {
+    const toggleOpen = useLoginModal((state) => state.toggleOpen)
     return (
         <Box sx={{ flexGrow: 0 }}>
             {isAuth() ? (
@@ -41,11 +43,8 @@ const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handl
                 </>
             ) : (
                 <Box sx={{ display: 'flex', gap: 1 }}>
-                    <Button variant="contained" color="info" component={Link} to="/login">
+                    <Button variant="contained" color="info" onClick={toggleOpen}>
                         Вход
-                    </Button>
-                    <Button variant="contained" color="secondary" component={Link} to="/register">
-                        Регистрация
                     </Button>
                 </Box>
             )}
@@ -54,3 +53,28 @@ const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handl
 };
 
 export default UserMenu;
+
+function App() {
+    // "select" the needed state and actions, in this case, the firstName value
+    // and the action updateFirstName
+    const firstName = usePersonStore((state) => state.firstName)
+    const updateFirstName = usePersonStore((state) => state.updateFirstName)
+  
+    return (
+      <main>
+        <label>
+          First name
+          <input
+            // Update the "firstName" state
+            onChange={(e) => updateFirstName(e.currentTarget.value)}
+            value={firstName}
+          />
+        </label>
+  
+        <p>
+          Hello, <strong>{firstName}!</strong>
+        </p>
+      </main>
+    )
+  }
+  

@@ -9,10 +9,10 @@ const Logo = () => {
         <>
             <Box
                 component="img"
-                src="/logo.png"
+                src="/1.png"
                 alt="Logo"
                 onClick={() => navigate('/')}
-                sx={{ display: { xs: 'none', md: 'flex', cursor: 'pointer' }, mr: 5, width:100, height: 60 }}
+                sx={{ display: { xs: 'none', md: 'flex', cursor: 'pointer' }, mr: 5, height: 70 }}
             />
             {/* <Typography
                 variant="h6"
