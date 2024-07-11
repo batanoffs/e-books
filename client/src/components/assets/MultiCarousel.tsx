@@ -1,21 +1,23 @@
-import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { Bookcard } from './Bookcard';
 
-interface Props {
+interface BookProps {
     books: {
-        id: number;
+        _id: string;
         title: string;
         author: string;
-        rating: number;
-        cover: string;
+        imageUrl: string;
+        description: string;
+        price: number;
+        category: string;
+        stock: number;
     }[];
 }
 
-const MultyCarousel: React.FC<Props> = ({ books }) => {
+const MultiCarousel = ({ books }: BookProps) => {
     const settings = {
         dots: true,
         infinite: true,
@@ -51,14 +53,14 @@ const MultyCarousel: React.FC<Props> = ({ books }) => {
         ],
     };
     return (
-        <div className="">
+        <div className="" style={{ marginTop: '5em' }}>
             <Slider {...settings}>
                 {books.map((book) => (
-                    <Bookcard key={book.id} book={book} />
+                    <Bookcard key={book._id} book={book} />
                 ))}
             </Slider>
         </div>
     );
 };
 
-export { MultyCarousel };
+export { MultiCarousel };
