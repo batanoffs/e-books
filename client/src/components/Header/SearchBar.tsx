@@ -15,7 +15,7 @@ const SearchBar = ({ handleSearchInputChange }) => {
                 <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-                placeholder="Search…"
+                placeholder="Търсене..."
                 inputProps={{ 'aria-label': 'search' }}
                 onChange={handleSearchInputChange}
             />
