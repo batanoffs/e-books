@@ -10,9 +10,13 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 import './index.scss';
+import NotFoundPage from './components/utils/404';
+import Books from './pages/books/Books';
 
 const children = [
     { path: '/', element: <HomePage /> },
+    { path: '/knigi', element: <Books /> },
+    // { path: '/uchebnici', element:  },
     { path: '/knigi/:id', element: <BookDetailsPage /> },
     { path: '/registracia', element: <Register /> },
 ];
@@ -30,6 +34,7 @@ const App = () => {
             </main>
             <Routes>
                 <Route path="/admin/*" element={<AdminPage />} />
+                {/* <Route path="/*" element={<NotFoundPage />} /> */}
             </Routes>
             {!window.location.pathname.includes('admin') && <Footer />}
         </Router>
@@ -37,3 +42,4 @@ const App = () => {
 };
 
 export default App;
+
