@@ -1,11 +1,17 @@
+import { Routes, Route } from 'react-router-dom';
+
 import styles from './layout.module.scss';
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    return (
-        <main>
-            <section className={styles.wrapper}>{children}</section>
-        </main>
-    );
+type LayoutProps = {
+    child: { path: string; element: React.ReactNode };
 };
 
-export default Layout;
+export const Layout = ({ child }: LayoutProps) => {
+    return (
+        <section className={styles.wrapper}>
+            <Routes>
+                <Route path={child.path} element={child.element} />
+            </Routes>
+        </section>
+    );
+};
