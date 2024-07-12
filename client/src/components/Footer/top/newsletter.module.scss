@@ -1,18 +1,44 @@
 .container {
     width: 100%;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     max-width: 1140px;
     margin: 0 auto;
     padding: 0 60px;
 }
 
+.newsletterCont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+
+    h2 {
+        color: #6f42c1;
+        font-weight: 600;
+        margin: 1em 0;
+    }
+}
+
 .newsletterTop {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+
+    .newsletterImageBlock {
+        display: flex;
+        align-items: center;
+    }
+
+    .newsletterImageBlock img:first-child {
+        width: 170px;
+        height: auto;
+    }
 }
 
 .privacyPolicy {
-    color: rgb(0, 0, 0);
+    color: #6f42c1;
     font-style: italic;
 }
 
@@ -24,44 +50,9 @@
     margin: 0 auto;
 }
 
-.newsletterImageBlock {
-    display: flex;
-    align-items: center;
-}
 
-.newsletterImageBlock img:first-child {
-    width: 170px;
-    height: auto;
-}
 
-.newsletterImageBlock img:last-child {
-    width: 335px;
-    height: auto;
-}
 
-.newsletterCont {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.newsletterTitle {
-    position: relative;
-    display: inline-block;
-    margin-top: -200px;
-    margin-bottom: 10px;
-}
-
-.newsletterSubtitle {
-    margin-bottom: 10px;
-}
-
-.newsletterBot {
-    display: flex;
-    justify-content: center;
-}
 
 .newsletterForm {
     display: flex;
@@ -79,7 +70,7 @@
 .newsletterInputCont input {
     padding: 10px;
     margin-right: 10px;
-    border: 1px solid #eaeaea;
+    border: 1px solid #6f42c1;
     border-radius: 5px;
     flex-grow: 1;
 }
@@ -150,7 +141,7 @@
 .termsLabel {
     font-size: 12px;
     line-height: 1.5;
-    color: #6f42c1;
+    color: #000000;
 }
 
 .newsletterMessageLabel {
