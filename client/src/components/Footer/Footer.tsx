@@ -6,7 +6,7 @@ import FooterBot from './bottom/FooterBot';
 const Footer = () => {
     return (
         <footer>
-            {!window.location.pathname.includes('registracia') && <Newsletter />}
+            {!window.location.pathname.includes('register') && <Newsletter />}
             <FooterTop />
             <FooterMid />
             <FooterBot />

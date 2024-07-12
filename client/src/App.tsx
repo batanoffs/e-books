@@ -5,20 +5,21 @@ import BookDetailsPage from './pages/details/BookDetailsPage';
 import LoginModal from './pages/login/LoginPage';
 import Register from './pages/register/RegisterPage';
 import AdminPage from './pages/ReactAdmin/Admin';
-import { Layout } from './components/Layout/Layout';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 import './index.scss';
 import NotFoundPage from './components/utils/404';
 import Books from './pages/books/Books';
+import { MainLayout } from './components/Layout/MainLayout';
 
 const children = [
     { path: '/', element: <HomePage /> },
-    { path: '/knigi', element: <Books /> },
-    // { path: '/uchebnici', element:  },
-    { path: '/knigi/:id', element: <BookDetailsPage /> },
-    { path: '/registracia', element: <Register /> },
+    { path: '/books', element: <Books /> },
+    // { path: '/textbooks', element:  },
+    { path: '/books/:id', element: <BookDetailsPage /> },
+    { path: '/register', element: <Register /> },
+    { path: '*', element: <NotFoundPage /> },
 ];
 
 const App = () => {
@@ -27,14 +28,9 @@ const App = () => {
             {!window.location.pathname.includes('admin') && <Header />}
             <LoginModal />
 
-            <main className="main-wrapper">
-                {children.map((child) => (
-                    <Layout key={child.path} child={child} />
-                ))}
-            </main>
+            <MainLayout children={children} />
             <Routes>
                 <Route path="/admin/*" element={<AdminPage />} />
-                {/* <Route path="/*" element={<NotFoundPage />} /> */}
             </Routes>
             {!window.location.pathname.includes('admin') && <Footer />}
         </Router>
@@ -42,4 +38,3 @@ const App = () => {
 };
 
 export default App;
-

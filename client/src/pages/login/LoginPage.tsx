@@ -87,7 +87,7 @@ const LoginModal = () => {
                     >
                         Вход
                     </Button>
-                    <Link href="/registracia" underline="hover" variant="inherit">
+                    <Link href="/register" underline="hover" variant="inherit">
                         Нямаш акаунт? Регистрирай се.
                     </Link>
                     <Link href="/zabravena-parola" underline="hover">

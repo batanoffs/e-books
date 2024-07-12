@@ -49,19 +49,19 @@ const Header = () => {
     const navigationHandler = (page: string) => {
         switch (page) {
             case 'Книги':
-                navigate('/knigi');
+                navigate('/books');
                 break;
             case 'Учебници':
-                navigate('/uchebnici');
+                navigate('/textbooks');
                 break;
             case 'Най-продавани':
-                navigate('/nai-prodavani');
+                navigate('/popular');
                 break;
             case 'Контакти':
-                navigate('/kontakti');
+                navigate('/contacts');
                 break;
             case 'Всички':
-                navigate('/vsichki');
+                navigate('/all-products');
                 break;
             default:
                 navigate('/');
