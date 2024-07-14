@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import themeOptions from './utils/theme';
 
 import App from './App';
+import './styles/index.scss';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);

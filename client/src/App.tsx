@@ -8,7 +8,6 @@ import AdminPage from './pages/ReactAdmin/Admin';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
-import './index.scss';
 import NotFoundPage from './components/utils/404';
 import Books from './pages/books/Books';
 import { MainLayout } from './components/Layout/MainLayout';
