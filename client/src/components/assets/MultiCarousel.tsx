@@ -2,7 +2,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { Bookcard } from './Bookcard';
+import { BookcardCarousel } from './BookcardCarousel';
 
 interface BookProps {
     books: {
@@ -56,7 +56,7 @@ const MultiCarousel = ({ books }: BookProps) => {
         <div className="" style={{ marginTop: '5em' }}>
             <Slider {...settings}>
                 {books.map((book) => (
-                    <Bookcard key={book._id} book={book} />
+                    <BookcardCarousel key={book._id} book={book} />
                 ))}
             </Slider>
         </div>

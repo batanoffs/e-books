@@ -8,13 +8,12 @@ import AdminPage from './pages/ReactAdmin/Admin';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import NotFoundPage from './components/utils/404';
-import Books from './pages/books/Books';
+import BooksPage from './pages/books/BooksPage';
 import { useSpinner } from './store/utils';
 import Spinner from './components/utils/Spinner';
 
 const App = () => {
     const { isLoading } = useSpinner();
-    // const isLoading = useSpinner((state) => state.isLoading);
 
     return (
         <Router>
@@ -26,7 +25,7 @@ const App = () => {
                 <Route path="/admin/*" element={<AdminPage />} />
                 <Route path="*" element={<NotFoundPage />} />
                 <Route path="/" element={<HomePage />} />
-                <Route path="/books" element={<Books />} />
+                <Route path="/books" element={<BooksPage />} />
                 <Route path="/books/:id" element={<BookDetailsPage />} />
                 <Route path="/register" element={<Register />} />
             </Routes>
