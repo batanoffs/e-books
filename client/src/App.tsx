@@ -7,30 +7,30 @@ import Register from './pages/register/RegisterPage';
 import AdminPage from './pages/ReactAdmin/Admin';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-
 import NotFoundPage from './components/utils/404';
 import Books from './pages/books/Books';
-import { MainLayout } from './components/Layout/MainLayout';
-
-const children = [
-    { path: '/', element: <HomePage /> },
-    { path: '/books', element: <Books /> },
-    // { path: '/textbooks', element:  },
-    { path: '/books/:id', element: <BookDetailsPage /> },
-    { path: '/register', element: <Register /> },
-    { path: '*', element: <NotFoundPage /> },
-];
+import { useSpinner } from './store/utils';
+import Spinner from './components/utils/Spinner';
 
 const App = () => {
+    const { isLoading } = useSpinner();
+    // const isLoading = useSpinner((state) => state.isLoading);
+
     return (
         <Router>
             {!window.location.pathname.includes('admin') && <Header />}
-            <LoginModal />
+            {isLoading && <Spinner />}
 
-            <MainLayout children={children} />
+            <LoginModal />
             <Routes>
                 <Route path="/admin/*" element={<AdminPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+                <Route path="/" element={<HomePage />} />
+                <Route path="/books" element={<Books />} />
+                <Route path="/books/:id" element={<BookDetailsPage />} />
+                <Route path="/register" element={<Register />} />
             </Routes>
+
             {!window.location.pathname.includes('admin') && <Footer />}
         </Router>
     );

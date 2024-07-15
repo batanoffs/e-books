@@ -4,9 +4,11 @@ import axios from 'axios';
 import { API } from '../../constants/api';
 import { SingleCarousel } from '../../components/assets/SingleCarousel';
 import { MultiCarousel } from '../../components/assets/MultiCarousel';
+import HomeLayout from '../../components/Layout/HomeLayout';
+import { useSpinner } from '../../store/utils';
 
 interface Book {
-    _id: string;
+    id: string;
     title: string;
     author: string;
     price: number;
@@ -18,28 +20,34 @@ interface Book {
 
 const HomePage = () => {
     const [books, setBooks] = useState<Book[]>([]);
+    const toggleLoading = useSpinner((state) => state.toggleLoading);
 
     useEffect(() => {
         const fetchBooks = async () => {
-            const response = await axios.get(API.BOOKS);
-            setBooks(response.data);
+            try {
+                const response = await axios.get(API.BOOKS);
+                setBooks(response.data);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                toggleLoading();
+            }
         };
         fetchBooks();
     }, []);
 
-    const isLoading = books.length === 0 ? true : false;
-    return (
-        <>
-            {isLoading ? (
-                <h1>Loading...</h1>
-            ) : (
-                <>
-                    <SingleCarousel books={books} />
-                    <MultiCarousel books={books} />
-                </>
-            )}
-        </>
-    );
+    const content = [
+        {
+            id: 'featured',
+            element: <SingleCarousel books={books} />,
+        },
+        {
+            id: 'popular',
+            element: <MultiCarousel books={books} />,
+        },
+    ];
+
+    return <HomeLayout children={content} />;
 };
 
 export default HomePage;
