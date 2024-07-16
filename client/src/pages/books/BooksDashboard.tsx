@@ -10,7 +10,7 @@ interface BooksDashboardProps {
 }
 
 export const BooksDashboard = ({ books }: BooksDashboardProps) => (
-    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'start', gap: '1em' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'start', gap: '0.5em' }}>
         {books.map((book) => (
             <BookCard key={book._id} book={book} />
         ))}

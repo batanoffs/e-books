@@ -1,0 +1,27 @@
+.dashboard-wrapper {
+    header {
+        width: 100%;
+        padding: 0 20px;
+        height: 100px;
+    }
+
+    .dashboard-container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 0 20px;
+        margin-bottom: 2em;
+        border-radius: 0.3125em;
+
+        aside {
+            flex: 0 0 max(200px);
+            padding: 0 20px;
+        }
+
+        section {
+            flex: 1 1 0;
+            padding: 0 20px;
+        }
+    }
+}

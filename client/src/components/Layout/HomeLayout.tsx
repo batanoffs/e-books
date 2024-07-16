@@ -1,4 +1,4 @@
-import styles from './layout.module.scss';
+import styles from './home-layout.module.scss';
 
 type MainLayoutProps = {
     children: Array<{
