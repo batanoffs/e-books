@@ -5,6 +5,7 @@ import orderRoutes from './orderRoutes';
 import userRoutes from './userRoutes';
 import adminRoutes from './adminRoutes';
 import authRoutes from './authRoutes';
+import textbookRoutes from './textbookRoutes';
 
 const router = express.Router();
 
@@ -13,5 +14,6 @@ router.use('/books', bookRoutes);
 router.use('/orders', orderRoutes);
 router.use('/users', userRoutes);
 router.use('/admin', adminRoutes);
+router.use('/textbooks', textbookRoutes)
 
 export default router;
