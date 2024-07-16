@@ -97,8 +97,8 @@
     }
 
     img {
-        width: 90%;
-        padding: 0.5em 0.5em 3em 1em;
+        width: 100%;
+        padding: 0em 0.5em;
         transition: 0.3s;
         align-self: center;
         height: auto;
@@ -114,22 +114,23 @@
 
 @media (min-width: 768px) {
     .container {
-        width: 240px; /* Set width for large screens */
+        width: 180px; /* Set width for large screens */
     }
 }
 
 @media (min-width: 992px) {
     .container {
-        width: 240px; /* Set width for extra large screens */
+        width: 180px; /* Set width for extra large screens */
     }
 }
 
 @media (min-width: 1200px) {
     .container {
-        width: 200px; /* Set width for extra extra large screens */
+        width: 180px; /* Set width for extra extra large screens */
     }
 }
 
-.container:hover img {
-    transform: scale(1.2);
+.container img:hover {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
 }

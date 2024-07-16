@@ -1,12 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 
 import styles from './books.module.scss';
+import { useFiltersStore } from '../../store/categories';
 
 export const BooksNav = () => {
-    const category = 'Всички';
+    const setCategory = useFiltersStore((state) => state.setCategory);
     const navigate = useNavigate();
 
     const handleCategoryChange = (category: string) => {
+        setCategory(category);
         navigate(`/books/category/${category}`);
     };
 

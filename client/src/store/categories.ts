@@ -1,15 +1,15 @@
-import create from 'zustand';
+import { create } from 'zustand';
 
 type CategoriesState = {
-    categories: string[];
+    category: string | null;
     filters: string[];
-    setCategories: (categories: string[]) => void;
+    setCategory: (category: string | null) => void;
     setFilters: (filters: string[]) => void;
 };
 
-export const useCategoriesStore = create<CategoriesState>((set) => ({
-    categories: [],
+export const useFiltersStore = create<CategoriesState>((set) => ({
+    category: 'all',
     filters: [],
-    setCategories: (categories: string[]) => set({ categories }),
+    setCategory: (category: string | null) => set({ category }),
     setFilters: (filters: string[]) => set({ filters }),
 }));
