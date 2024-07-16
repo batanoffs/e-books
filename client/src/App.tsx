@@ -11,6 +11,7 @@ import NotFoundPage from './components/utils/404';
 import BooksPage from './pages/books/BooksPage';
 import { useSpinner } from './store/utils';
 import Spinner from './components/utils/Spinner';
+import TextBooksPage from './pages/books/TextBooksPage';
 
 const App = () => {
     const { isLoading } = useSpinner();
@@ -26,6 +27,7 @@ const App = () => {
                 <Route path="*" element={<NotFoundPage />} />
                 <Route path="/" element={<HomePage />} />
                 <Route path="/books" element={<BooksPage />} />
+                <Route path="/textbooks" element={<TextBooksPage />} />
                 <Route path="/books/:id" element={<BookDetailsPage />} />
                 <Route path="/register" element={<Register />} />
             </Routes>
