@@ -2,7 +2,7 @@
 import { Box, IconButton, Menu, MenuItem, Typography, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const pages = ['Книги', 'Учебници', 'Най-продавани', 'Всички', 'Контакти'];
+const pages = ['Най-продавани', 'Книги', 'Учебници', 'Канцелария', 'Контакти'];
 
 const NavigationMenu = ({
     anchorElNav,
@@ -45,7 +45,7 @@ const NavigationMenu = ({
                     <Button
                         key={page}
                         onClick={() => navigationHandler(page)}
-                        variant="text" 
+                        variant="text"
                         color="inherit"
                     >
                         {page}
