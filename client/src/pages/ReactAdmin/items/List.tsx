@@ -4,15 +4,16 @@ const ItemsList = (props: any) => (
     <List {...props}>
         <Datagrid rowClick="edit">
             <TextField source="id" label="ID" />
-            <TextField source="title" label="Title" />
-            <NumberField source="price" label="Price" />
-            <TextField source="description" label="Description" />
-            <ImageField source="imageUrl" label="Image" />
-            <NumberField source="stock" label="Stock" />
-            <TextField source="category" label="Category" />
+            <TextField source="title" label="Заглавие" />
+            <NumberField source="price" label="Цена" />
+            <TextField source="description" label="Описание" />
+            <ImageField source="imageUrl" label="Изображение" />
+            <NumberField source="stock" label="Количество" />
+            <TextField source="category" label="Категория" />
         </Datagrid>
     </List>
 );
 
 export default ItemsList;
+
 

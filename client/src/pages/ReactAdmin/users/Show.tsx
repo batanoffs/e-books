@@ -4,8 +4,8 @@ import { Show, SimpleShowLayout, TextField } from 'react-admin';
 const UserShow: React.FC = (props) => (
     <Show {...props}>
         <SimpleShowLayout>
-            <TextField source="email" />
-            <TextField source="role" />
+            <TextField label="Имейл" source="email" />
+            <TextField label="Роля" source="role" />
         </SimpleShowLayout>
     </Show>
 );

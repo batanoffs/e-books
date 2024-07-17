@@ -37,6 +37,7 @@ const AdminPage = () => (
             edit={UserEdit}
             show={UserShow}
             create={UserCreate}
+            options={{ label: 'Потребители' }}
         />
         <Resource
             name="orders"
@@ -44,6 +45,7 @@ const AdminPage = () => (
             edit={OrdersEdit}
             show={OrdersShow}
             create={OrdersCreate}
+            options={{ label: 'Поръчки' }}
         />
         <Resource
             name="books"
@@ -51,6 +53,7 @@ const AdminPage = () => (
             edit={BookEdit}
             show={BookShow}
             create={BookCreate}
+            options={{ label: 'Книги' }}
         />
         <Resource
             name="textbooks"
@@ -58,6 +61,7 @@ const AdminPage = () => (
             edit={TextbookEdit}
             show={TextbookShow}
             create={TextbookCreate}
+            options={{ label: 'Учебници' }}
         />
         <Resource
             name="items"
@@ -65,6 +69,7 @@ const AdminPage = () => (
             edit={ItemsEdit}
             show={ItemsShow}
             create={ItemsCreate}
+            options={{ label: 'Канцелария' }}
         />
         <Resource
             name="featured"
@@ -72,6 +77,7 @@ const AdminPage = () => (
             edit={FeaturedEdit}
             show={FeaturedShow}
             create={FeaturedCreate}
+            options={{ label: 'Промотирани' }}
         />
     </Admin>
 );

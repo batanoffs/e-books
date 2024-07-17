@@ -1,5 +1,12 @@
 import React from 'react';
-import { Edit, SimpleForm, TextInput, NumberInput, SelectInput, useRecordContext } from 'react-admin';
+import {
+    Edit,
+    SimpleForm,
+    TextInput,
+    NumberInput,
+    SelectInput,
+    useRecordContext,
+} from 'react-admin';
 
 const BookEdit: React.FC = (props) => {
     const record = useRecordContext();
@@ -7,19 +14,23 @@ const BookEdit: React.FC = (props) => {
     return (
         <Edit {...props}>
             <SimpleForm>
-                <TextInput source="title" />
-                <TextInput source="author" />
-                <NumberInput source="price" />
-                <TextInput source="description" multiline />
-                <TextInput source="imageUrl" />
-                <NumberInput source="stock" />
-                <SelectInput source="category" choices={[
-                    { id: 'Self-Help', name: 'Self-Help' },
-                    { id: 'Business', name: 'Business' },
-                    { id: 'Fiction', name: 'Fiction' },
-                    { id: 'Spirituality', name: 'Spirituality' },
-                    { id: 'Poetry', name: 'Poetry' }
-                ]} />
+                <TextInput source="title" label="Заглавие" />
+                <TextInput source="author" label="Автор" />
+                <NumberInput source="price" label="Цена" />
+                <TextInput source="description" multiline label="Описание" />
+                <TextInput source="imageUrl" label="Изображение" />
+                <NumberInput source="stock" label="Количество" />
+                <SelectInput
+                    source="category"
+                    label="Категория"
+                    choices={[
+                        { id: 'Self-Help', name: 'Self-Help' },
+                        { id: 'Business', name: 'Business' },
+                        { id: 'Fiction', name: 'Fiction' },
+                        { id: 'Spirituality', name: 'Spirituality' },
+                        { id: 'Poetry', name: 'Poetry' },
+                    ]}
+                />
             </SimpleForm>
         </Edit>
     );

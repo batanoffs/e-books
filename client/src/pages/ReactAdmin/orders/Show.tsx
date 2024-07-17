@@ -3,13 +3,13 @@ import { Show, SimpleShowLayout, TextField, NumberField, ArrayField, Datagrid } 
 const OrdersShow = (props) => (
     <Show {...props}>
         <SimpleShowLayout>
-            <TextField source="userId" />
-            <TextField source="status" />
-            <NumberField source="total" />
-            <ArrayField source="books">
+            <TextField source="userId" label="Идентификатор на потребител" />
+            <TextField source="status" label="Статус" />
+            <NumberField source="total" label="Обща сума" />
+            <ArrayField source="books" label="Книги">
                 <Datagrid rowClick="show">
-                    <TextField source="bookId" />
-                    <NumberField source="quantity" />
+                    <TextField source="bookId" label="Идентификатор на книга" />
+                    <NumberField source="quantity" label="Количество" />
                 </Datagrid>
             </ArrayField>
         </SimpleShowLayout>
@@ -17,3 +17,4 @@ const OrdersShow = (props) => (
 );
 
 export default OrdersShow;
+

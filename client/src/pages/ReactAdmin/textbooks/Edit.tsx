@@ -7,13 +7,13 @@ const TextbookEdit: React.FC = (props) => {
     return (
         <Edit {...props}>
             <SimpleForm>
-                <TextInput source="title" />
-                <TextInput source="author" />
-                <NumberInput source="price" />
-                <TextInput source="description" multiline />
-                <TextInput source="imageUrl" />
-                <NumberInput source="stock" />
-                <SelectInput source="category" choices={[
+                <TextInput source="title" label="Заглавие" />
+                <TextInput source="author" label="Автор" />
+                <NumberInput source="price" label="Цена" />
+                <TextInput source="description" multiline label="Описание" />
+                <TextInput source="imageUrl" label="Изображение" />
+                <NumberInput source="stock" label="Количество" />
+                <SelectInput source="category" label="Категория" choices={[
                     { id: 'Self-Help', name: 'Self-Help' },
                     { id: 'Business', name: 'Business' },
                     { id: 'Fiction', name: 'Fiction' },
@@ -26,3 +26,4 @@ const TextbookEdit: React.FC = (props) => {
 };
 
 export default TextbookEdit;
+

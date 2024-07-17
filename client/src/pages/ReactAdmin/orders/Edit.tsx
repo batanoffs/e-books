@@ -6,17 +6,21 @@ const OrdersEdit = (props) => {
     return (
         <Edit {...props}>
             <SimpleForm>
-                <TextInput source="userId" />
-                <SelectInput source="status" choices={[
-                    { id: 'pending', name: 'pending' },
-                    { id: 'shipped', name: 'shipped' },
-                    { id: 'delivered', name: 'delivered' }
-                ]} />
-                <NumberInput source="total" />
-                <ArrayInput source="books">
+                <TextInput source="userId" label="id потребител" />
+                <SelectInput
+                    source="status"
+                    label="Статус"
+                    choices={[
+                        { id: 'pending', name: 'чакащ' },
+                        { id: 'shipped', name: 'изпратен' },
+                        { id: 'delivered', name: 'получен' }
+                    ]}
+                />
+                <NumberInput source="total" label="Обща цена" />
+                <ArrayInput source="books" label="Книги">
                     <SimpleFormIterator>
-                        <TextInput source="bookId" />
-                        <NumberInput source="quantity" />
+                        <TextInput source="bookId" label="id книга" />
+                        <NumberInput source="quantity" label="Количество" />
                     </SimpleFormIterator>
                 </ArrayInput>
             </SimpleForm>

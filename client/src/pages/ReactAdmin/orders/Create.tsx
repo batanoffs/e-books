@@ -7,6 +7,7 @@ const OrdersCreate = (props) => (
                 source="userId"
                 reference="users"
                 validate={[required()]}
+                label="Потребител"
             >
                 <SelectInput optionText="username" />
             </ReferenceInput>
@@ -14,15 +15,17 @@ const OrdersCreate = (props) => (
                 source="books"
                 reference="books"
                 validate={[required()]}
+                label="Книга"
             >
                 <SelectInput optionText="title" />
             </ReferenceInput>
-            <NumberInput source="quantity" validate={[required()]} />
-            <NumberInput source="total" validate={[required()]} />
-            <TextInput source="status" validate={[required()]} />
+            <NumberInput source="quantity" validate={[required()]} label="Количество" />
+            <NumberInput source="total" validate={[required()]} label="Обща цена" />
+            <TextInput source="status" validate={[required()]} label="Статус" />
         </SimpleForm>
     </Create>
 );
 
 export default OrdersCreate;
+
 

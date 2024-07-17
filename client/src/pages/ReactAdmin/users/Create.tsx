@@ -4,13 +4,14 @@ import { Create, SimpleForm, TextInput, required, SelectInput } from 'react-admi
 const UserCreate: React.FC = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="email" validate={[required()]} />
-            <TextInput source="password" validate={[required()]} />
+            <TextInput source="email" label="Имейл" validate={[required()]} />
+            <TextInput source="password" label="Парола" validate={[required()]} />
             <SelectInput
                 source="role"
+                label="Роля"
                 choices={[
-                    { id: 'user', name: 'User' },
-                    { id: 'admin', name: 'Admin' },
+                    { id: 'user', name: 'Потребител' },
+                    { id: 'admin', name: 'Администратор' },
                 ]}
             />
         </SimpleForm>
@@ -18,3 +19,4 @@ const UserCreate: React.FC = (props) => (
 );
 
 export default UserCreate;
+
