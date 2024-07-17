@@ -1,17 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 
 import styles from './navigation.module.scss';
-import { useFiltersStore } from '../../../store/categories';
 
-export const DashboardNavigationAndFilters = () => {
-    const categories = useFiltersStore((state) => state.categories);
+export const DashboardNavigationAndFilters = ({ categories }: { categories: string[] }) => {
     const navigate = useNavigate();
 
     if (!categories) {
         return null;
     }
-
-    console.log(categories);
 
     const categoryTranslation: Record<string, string> = {
         All: 'всички',

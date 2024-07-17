@@ -12,7 +12,9 @@ type PageProps = {
 
 const BooksPage = ({ path }: PageProps) => {
     const [books, setBooks] = useState([]);
-    const setCategories = useFiltersStore((state) => state.setCategories);
+    const setBookCategories = useFiltersStore((state) => state.setBookCategories);
+    const bookCategories = useFiltersStore((state) => state.bookCategories);
+
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -20,19 +22,19 @@ const BooksPage = ({ path }: PageProps) => {
             const books = response.data;
             setBooks(books);
             const categoriesFromBooks = Array.from(new Set(books.map((book) => book.category)));
-            setCategories(categoriesFromBooks);
+            setBookCategories(categoriesFromBooks);
         };
         fetchBooks();
     }, []);
 
     const content = [
         {
-            id: 'books',
+            id: 'booksCollection',
             element: <DashboardBody books={books} />,
         },
     ];
 
-    return <DashboardLayout path={path} children={content} />;
+    return <DashboardLayout path={path} children={content} categories={bookCategories} />;
 };
 
 export default BooksPage;

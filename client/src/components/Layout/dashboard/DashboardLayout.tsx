@@ -9,9 +9,10 @@ type MainLayoutProps = {
         element: JSX.Element;
     }>;
     path: string;
+    categories: string[];
 };
 
-export const DashboardLayout = ({ children, path }: MainLayoutProps) => {
+export const DashboardLayout = ({ children, path, categories }: MainLayoutProps) => {
     return (
         <main className="main-wrapper">
             <header>
@@ -19,7 +20,7 @@ export const DashboardLayout = ({ children, path }: MainLayoutProps) => {
             </header>
             <div className="dashboard-container">
                 <aside>
-                    <DashboardNavigationAndFilters />
+                    <DashboardNavigationAndFilters categories={categories} />
                 </aside>
                 <section>
                     {children && children.map((child) => <div key={child.id}>{child.element}</div>)}

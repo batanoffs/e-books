@@ -1,19 +1,27 @@
 import { create } from 'zustand';
 
 type CategoriesState = {
-    category: string | null;
-    categories: string[];
+    navCategory: string | null;
+    bookCategories: string[];
+    textbookCategories: string[];
+    itemCategories: string[];
     filters: string[];
-    setCategory: (category: string | null) => void;
+    setNavCategory: (category: string | null) => void;
     setFilters: (filters: string[]) => void;
-    setCategories: (categories: string[]) => void;
+    setBookCategories: (categories: string[]) => void;
+    setTextbookCategories: (categories: string[]) => void;
+    setItemCategories: (categories: string[]) => void;
 };
 
 export const useFiltersStore = create<CategoriesState>((set) => ({
-    category: 'all',
-    categories: [],
+    navCategory: 'all',
+    bookCategories: [],
+    textbookCategories: [],
+    itemCategories: [],
     filters: [],
-    setCategories: (categories: string[]) => set({ categories }),
-    setCategory: (category: string | null) => set({ category }),
+    setBookCategories: (bookCategories: string[]) => set({ bookCategories }),
+    setTextbookCategories: (textbookCategories: string[]) => set({ textbookCategories }),
+    setItemCategories: (itemCategories: string[]) => set({ itemCategories }),
+    setNavCategory: (navCategory: string | null) => set({ navCategory }),
     setFilters: (filters: string[]) => set({ filters }),
 }));

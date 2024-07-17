@@ -2,9 +2,9 @@ import { useFiltersStore } from '../../../store/categories';
 import styles from './header.module.scss';
 
 export const DashboardHeader = ({ path }): JSX.Element | null => {
-    const category = useFiltersStore((state) => state.category);
+    const navCategory = useFiltersStore((state) => state.navCategory);
 
-    if (!category) {
+    if (!navCategory) {
         return null;
     }
 
@@ -18,7 +18,7 @@ export const DashboardHeader = ({ path }): JSX.Element | null => {
         poetry: 'поезия',
     };
 
-    const translatedCategory = categoryTranslation[category];
+    const translatedCategory = categoryTranslation[navCategory];
 
     return (
         <div className={styles.container}>
