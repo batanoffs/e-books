@@ -1,4 +1,4 @@
-import { Favorite, ShoppingCart, Star } from '@mui/icons-material';
+import { Favorite, ShoppingCart } from '@mui/icons-material';
 
 import styles from './bookcard.module.scss';
 

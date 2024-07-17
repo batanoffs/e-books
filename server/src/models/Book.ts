@@ -9,7 +9,7 @@ const BookSchema: Schema = new Schema({
     imageUrl: { type: String, required: true },
     stock: { type: Number, required: true },
     category: {
-        type: ['Self-Help', 'Business', 'Fiction', 'Spirituality', 'Poetry'], //TODO edit category
+        type: String, //TODO add fixed categories
         required: true,
     },
 });

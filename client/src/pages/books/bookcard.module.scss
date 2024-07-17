@@ -108,25 +108,25 @@
 
 @media (min-width: 576px) {
     .container {
-        width: 220px; /* Set width for medium screens */
+        width: max(240px); /* Set width for medium screens */
     }
 }
 
 @media (min-width: 768px) {
     .container {
-        width: 180px; /* Set width for large screens */
+        width: max(200px); /* Set width for large screens */
     }
 }
 
 @media (min-width: 992px) {
     .container {
-        width: 180px; /* Set width for extra large screens */
+        width: max(200px); /* Set width for extra large screens */
     }
 }
 
 @media (min-width: 1200px) {
     .container {
-        width: 180px; /* Set width for extra extra large screens */
+        width: max(170px); /* Set width for extra extra large screens */
     }
 }
 

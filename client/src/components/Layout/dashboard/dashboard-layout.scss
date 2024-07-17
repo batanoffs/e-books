@@ -8,11 +8,17 @@ header {
     display: flex;
     flex-direction: row;
     gap: 1em;
+    padding: 0 20px;
     margin-bottom: 2em;
 
     aside {
-        flex: 0 0 max(240px);
-        padding: 0 20px;
+        flex: 0 0 max(200px);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        transition: 0.3s;
+        height: auto;
     }
 
     section {

@@ -42,7 +42,7 @@ export const DashboardHeader = ({ path }): JSX.Element | null => {
                 </div>
 
                 <div className={styles.itemsPerPageContainer}>
-                    <p>Резултати на страница:</p>
+                    <p>Покажи по:</p>
                     <select name="itemsPerPage" id="itemsPerPage">
                         <option value="10">10</option>
                         <option value="20">20</option>

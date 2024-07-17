@@ -22,7 +22,7 @@ const TextBooksPage = ({ path }: PageProps) => {
 
     const content = [
         {
-            id: 'collection',
+            id: 'textbooks',
             element: <DashboardBody books={textbooks} />,
         },
     ];

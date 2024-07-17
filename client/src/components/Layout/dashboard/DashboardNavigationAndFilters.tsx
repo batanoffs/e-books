@@ -1,16 +1,30 @@
 import { useNavigate } from 'react-router-dom';
 
+import styles from './navigation.module.scss';
 import { useFiltersStore } from '../../../store/categories';
 
-import styles from './navigation.module.scss';
-
 export const DashboardNavigationAndFilters = () => {
-    const setCategory = useFiltersStore((state) => state.setCategory);
+    const categories = useFiltersStore((state) => state.categories);
     const navigate = useNavigate();
 
+    if (!categories) {
+        return null;
+    }
+
+    console.log(categories);
+
+    const categoryTranslation: Record<string, string> = {
+        All: 'всички',
+        Fiction: 'художествена литература',
+        'Non-fiction': 'наука',
+        'Self-Help': 'самопомощ',
+        Business: 'бизнес',
+        Spirituality: 'духовност',
+        Poetry: 'поезия',
+    };
+
     const handleCategoryChange = (category: string) => {
-        setCategory(category);
-        navigate(`/books/category/${category}`);
+        navigate(`/books/category/${category.toLowerCase()}`);
     };
 
     return (
@@ -18,13 +32,11 @@ export const DashboardNavigationAndFilters = () => {
             <h6>Категории</h6>
             <div className={styles.line}></div>
             <ul>
-                <li onClick={() => handleCategoryChange('all')}>Всички</li>
-                <li onClick={() => handleCategoryChange('fiction')}>Художествена литература</li>
-                <li onClick={() => handleCategoryChange('non-fiction')}>Наука</li>
-                <li onClick={() => handleCategoryChange('self-help')}>Самопомощ</li>
-                <li onClick={() => handleCategoryChange('business')}>Бизнес</li>
-                <li onClick={() => handleCategoryChange('spirituality')}>Духовност</li>
-                <li onClick={() => handleCategoryChange('poetry')}>Поезия</li>
+                {categories.map((category, index) => (
+                    <li key={index} onClick={() => handleCategoryChange(category)}>
+                        {categoryTranslation[category]}
+                    </li>
+                ))}
             </ul>
 
             <h6>Филтри</h6>
