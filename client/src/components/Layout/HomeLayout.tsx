@@ -1,5 +1,3 @@
-import styles from './home-layout.module.scss';
-
 type MainLayoutProps = {
     children: Array<{
         id: string;
@@ -12,7 +10,7 @@ const HomeLayout = ({ children }: MainLayoutProps) => {
         <main className="main-wrapper">
             {children &&
                 children.map((child) => (
-                    <section key={child.id} className={styles.wrapper}>
+                    <section key={child.id} style={{ padding: '0 60px' }}>
                         {child.element}
                     </section>
                 ))}

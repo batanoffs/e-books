@@ -1,7 +1,7 @@
-import { useFiltersStore } from '../../store/categories';
+import { useFiltersStore } from '../../../store/categories';
 import styles from './header.module.scss';
 
-export const BooksHeader = (): JSX.Element | null => {
+export const DashboardHeader = ({ path }): JSX.Element | null => {
     const category = useFiltersStore((state) => state.category);
 
     if (!category) {
@@ -25,7 +25,7 @@ export const BooksHeader = (): JSX.Element | null => {
             {/* TODO extract this client navigation for future use */}
             <div className={styles.navigation}>
                 <p>
-                    книжарница / книги / <span> {translatedCategory?.toLocaleLowerCase()} </span>
+                    {path} / <span> {translatedCategory?.toLocaleLowerCase()} </span>
                 </p>
 
                 <h1>{translatedCategory}</h1>

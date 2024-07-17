@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 
-import styles from './books.module.scss';
-import { useFiltersStore } from '../../store/categories';
+import { useFiltersStore } from '../../../store/categories';
 
-export const BooksNav = () => {
+import styles from './navigation.module.scss';
+
+export const DashboardNavigationAndFilters = () => {
     const setCategory = useFiltersStore((state) => state.setCategory);
     const navigate = useNavigate();
 

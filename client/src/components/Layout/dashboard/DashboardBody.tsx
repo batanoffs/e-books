@@ -1,4 +1,4 @@
-import { BookCard } from './BookCard';
+import { BookCard } from '../../../pages/books/BookCard';
 
 interface Book {
     _id: string;
@@ -9,7 +9,7 @@ interface BooksDashboardProps {
     books: Book[];
 }
 
-export const BooksDashboard = ({ books }: BooksDashboardProps) => (
+export const DashboardBody = ({ books }: BooksDashboardProps) => (
     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'start', gap: '0.5em' }}>
         {books.map((book) => (
             <BookCard key={book._id} book={book} />

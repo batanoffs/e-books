@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { API } from '../../constants/api.ts';
-import { BooksHeader } from '../../pages/books/BooksHeader';
-import { BooksNav } from '../../pages/books/BooksNav';
-import { BooksDashboard } from './BooksDashboard.tsx';
-import { DashboardLayout } from '../../components/Layout/DashbaordLayout.tsx';
+import { DashboardBody } from '../../components/Layout/dashboard/DashboardBody.tsx';
+import { DashboardLayout } from '../../components/Layout/dashboard/DashboardLayout.tsx';
 
-const BooksPage = () => {
+type PageProps = {
+    path: string;
+};
+
+const BooksPage = ({ path }: PageProps) => {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
@@ -21,11 +23,11 @@ const BooksPage = () => {
     const content = [
         {
             id: 'collection',
-            element: <BooksDashboard books={books} />,
+            element: <DashboardBody books={books} />,
         },
     ];
 
-    return <DashboardLayout header={<BooksHeader />} aside={<BooksNav />} children={content} />;
+    return <DashboardLayout path={path} children={content} />;
 };
 
 export default BooksPage;
