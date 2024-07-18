@@ -35,7 +35,7 @@ const App = () => {
 
             <LoginModal />
             <Routes>
-                <Route path="/admin" element={<AdminPage />} />
+                <Route path="/admin/*" element={<AdminPage />} />
                 <Route path="/" element={<HomePage />} />
                 <Route path="/books" element={<BooksPage path="книжарница / книги" />} />
                 <Route path="/books/:id" element={<BookDetailsPage />} />
