@@ -1,0 +1,9 @@
+const OrderDetailsPage = () => {
+    return (
+        <div>
+            <h1>Orders Page</h1>
+        </div>
+    );
+};
+
+export default OrderDetailsPage;
