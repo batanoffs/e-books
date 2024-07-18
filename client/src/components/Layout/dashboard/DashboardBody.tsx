@@ -1,18 +1,18 @@
 import { BookCard } from '../../../pages/books/BookCard';
 
-interface Book {
+interface Item {
     _id: string;
     [key: string]: any; // Additional properties of the book
 }
 
-interface BooksDashboardProps {
-    books: Book[];
+interface DashboardProps {
+    items: Item[];
 }
 
-export const DashboardBody = ({ books }: BooksDashboardProps) => (
+export const DashboardBody = ({ items }: DashboardProps) => (
     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', gap: '0.5em' }}>
-        {books.map((book) => (
-            <BookCard key={book._id} book={book} />
+        {items.map((item) => (
+            <BookCard key={item._id} book={item} /> //TODO replace with dynamic component
         ))}
     </div>
 );

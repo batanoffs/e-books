@@ -20,7 +20,9 @@ const TextBooksPage = ({ path }: PageProps) => {
             const response = await axios.get(API.TEXTBOOKS);
             const textbooks = response.data;
             setTextBooks(textbooks);
-            const categoriesFromTextbooks = Array.from(new Set(textbooks.map((textbook) => textbook.category)));
+            const categoriesFromTextbooks = Array.from(
+                new Set(textbooks.map((textbook) => textbook.category))
+            );
             setTextbookCategories(categoriesFromTextbooks);
         };
         fetchBooks();
@@ -29,11 +31,11 @@ const TextBooksPage = ({ path }: PageProps) => {
     const content = [
         {
             id: 'textbooks',
-            element: <DashboardBody books={textbooks}  />,
+            element: <DashboardBody items={textbooks} />,
         },
     ];
 
-    return <DashboardLayout path={path} children={content} categories={textbookCategories}/>;
+    return <DashboardLayout path={path} children={content} categories={textbookCategories} />;
 };
 
 export default TextBooksPage;

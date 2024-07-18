@@ -30,7 +30,7 @@ const BooksPage = ({ path }: PageProps) => {
     const content = [
         {
             id: 'booksCollection',
-            element: <DashboardBody books={books} />,
+            element: <DashboardBody items={books} />,
         },
     ];
 
