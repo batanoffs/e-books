@@ -1,3 +1,4 @@
+import Logo from '../../assets/Logo';
 import styles from './footer-top.module.scss';
 
 export default function FooterTop() {
@@ -7,7 +8,7 @@ export default function FooterTop() {
                 <div className={styles.pageFooterTopContainer}>
                     <div className={styles.pageFooterLogoContainer}>
                         <a href="/" className={styles.logoFooter}>
-                            <img src="1.png" alt="logo" loading="lazy" width="200" height="80" />
+                            <Logo />
                         </a>
                     </div>
                     {/* <span className={styles.certificate}>

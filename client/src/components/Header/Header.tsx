@@ -3,7 +3,7 @@ import { AppBar, Container, Toolbar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import Logo from './LogoAppBar';
+import Logo from '../assets/Logo';
 import NavigationMenu from './NavMenu';
 import SearchBar from './SearchBar';
 import UserMenu from './UserMenu';
