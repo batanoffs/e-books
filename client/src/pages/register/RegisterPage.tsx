@@ -19,12 +19,7 @@ type Inputs = {
 };
 
 const Register = () => {
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm<Inputs>();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
     const toggleOpenTerms = useTermsModal((state) => state.toggleOpen);
     const toggleOpenPrivacy = usePrivacyModal((state) => state.toggleOpen);
 
