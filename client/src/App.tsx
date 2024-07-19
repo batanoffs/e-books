@@ -19,18 +19,18 @@ import CartPage from './pages/cart/CartPage';
 import CheckoutPage from './pages/checkout/CheckoutPage';
 import OrdersConfirmationPage from './pages/orders/OrdersConfirmationPage';
 import OrderDetailsPage from './pages/orders/OrderDetailsPage';
-import FaqPage from './pages/faq/FaqPage'
+import FaqPage from './pages/faq/FaqPage';
 import ContactsPage from './pages/contacts/ContactsPage';
 import AboutPage from './pages/about/AboutPage';
 import PopularPage from './pages/popular/PopularPage';
 
 const App = () => {
     const { isLoading } = useSpinner();
-    const isAdminLocation = window.location.pathname.startsWith('/admin');
+    const adminLocation = window.location.pathname?.includes('admin');
 
     return (
         <Router>
-            {!isAdminLocation && <Header />}
+            {!adminLocation && <Header />}
             {isLoading && <Spinner />}
 
             <LoginModal />
@@ -41,13 +41,13 @@ const App = () => {
                 <Route path="/books/:id" element={<BookDetailsPage />} />
                 <Route path="/textbooks" element={<TextBooksPage path="книжарnica / учебнижци" />} />
                 <Route path="/textbooks/:id" element={<TextBookDetailsPage />} />
-                <Route path="/stationery" element={<StationeryPage path="книжарница / канцелария" />} />
+                <Route element={<StationeryPage path="книжарница / канцелария" />} path="/stationery" />
                 <Route path="/stationery/:id" element={<StationeryDetailsPage />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/orders" element={<OrdersConfirmationPage />} />
                 <Route path="/orders/:id" element={<OrderDetailsPage />} />
-                <Route path='/popular' element={<PopularPage/>} />
+                <Route path="/popular" element={<PopularPage />} />
                 {/* <Route path="/profile" element={<ProfilePage />} /> */}
                 <Route path="/contacts" element={<ContactsPage />} />
                 <Route path="/about" element={<AboutPage />} />
@@ -57,10 +57,9 @@ const App = () => {
                 <Route path="/*" element={<Navigate to="/" />} />
             </Routes>
 
-            {!isAdminLocation && <Footer />}
+            {!adminLocation && <Footer />}
         </Router>
     );
 };
 
 export default App;
-
