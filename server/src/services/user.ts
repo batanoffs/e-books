@@ -4,31 +4,30 @@ import User from '../models/User';
 import bcrypt from 'bcrypt';
 
 async function registerUser(identity: string, password: string, role: string): Promise<IUser> {
-    //TODO add props if needed (username)
-    const existing = await User.findOne({ [identityName]: identity });
-
-    if (existing) {
-        throw new Error(`This email is already in use`);
-    }
-
-    const user = new User({
-        [identityName]: identity,
-        password: await bcrypt.hash(password, 10), //TODO add props if needed (username)
-        role,
-    });
-
     try {
-        await user.save();
+        const existingUser = await User.findOne({ [identityName]: identity });
+        if (existingUser) {
+            throw new Error(`This email is already in use`);
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = new User({
+            [identityName]: identity,
+            password: hashedPassword,
+            role,
+        });
+
+        const savedUser = await newUser.save();
+        console.log('User successfully created:', savedUser);
+        return savedUser;
     } catch (error: any) {
+        console.error('Failed to register user:', error);
         if (error.code === 11000) {
-            // error duplicate name
-            throw new Error(`This email is already in use`); //TODO check for username and email if needed
+            throw new Error(`This email is already in use`);
         } else {
             throw new Error(`Exceptional error occurred: ${error.message}`);
         }
     }
-
-    return user;
 }
 
 async function loginUser(identity: string, password: string): Promise<IUser> {
