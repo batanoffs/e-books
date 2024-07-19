@@ -1,62 +1,64 @@
-import axios from 'axios';
 import { AuthProvider, HttpError } from 'react-admin';
-import { API } from '../../constants/api';
-
-const cookieOptions: Record<string, boolean | number | string> = {
-    // Set the "SameSite=None" and "Secure" attributes
-    sameSite: 'None',
-    secure: true,
-    maxAge: 60 * 60 * 24 * 7, // 1 week
-    path: '/', // default path
-};
+import { authService } from '../../services/authService';
 
 export const authProvider: AuthProvider = {
     login: async ({ username, password }) => {
-        // const user = data.users.find((u) => u.username === username && u.password === password);
         const email = username;
+
         try {
-            const response = await axios.post(API.LOGIN, { email, password });
-            console.log('user', response);
-            const userData = response.data;
-
-            if (response) {
-                // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-                let { password, ...userToPersist } = userData;
-                localStorage.setItem('user', JSON.stringify(userToPersist));
-
-                document.cookie = `token=${response.data.token}; ${Object.entries(cookieOptions)
-                    .map(([key, value]) => `${key}=${value}`)
-                    .join('; ')}`; // Set the cookie with the options
-                return Promise.resolve();
+            const redirectUrl = await authService.login(email, password);
+            console.log('redirectUrl', redirectUrl);
+            if (!redirectUrl) {
+                return Promise.reject(
+                    new HttpError('Неоторизиран потребител', 401, {
+                        message: 'Невалиден потребителско име или парола',
+                    })
+                );
             }
-
-            return Promise.reject(
-                new HttpError('Unauthorized', 401, {
-                    message: 'Invalid username or password',
-                })
-            );
+            return Promise.resolve();
         } catch (error) {
             return Promise.reject(
-                new HttpError('Unauthorized', 401, {
-                    message: 'Error while logging in',
+                new HttpError('Неоторизиран потребител', 401, {
+                    message: 'Грешка при влизане',
                 })
             );
         }
     },
-    logout: () => {
-        localStorage.removeItem('user');
+    logout: async () => {
+        const { redirectUrl } = await authService.logout();
+        return Promise.resolve(redirectUrl);
+    },
+    checkError: (error) => {
+        const status = error.status;
+        if (status === 401 || status === 403) {
+            const existingToken = document.cookie
+                .split(';')
+                .map((cookie) => cookie.trim())
+                .find((cookie) => cookie.startsWith('token='));
+            if (existingToken) {
+                document.cookie = `${existingToken};`;
+            }
+            return Promise.reject(
+                new HttpError('Неоторизиран', status, {
+                    message: 'Липсва токен',
+                })
+            );
+        }
+        // друг код на грешка (404, 500 и т.н.): не е необходимо да се излизва
         return Promise.resolve();
     },
-    checkError: () => Promise.resolve(),
-    checkAuth: () => (localStorage.getItem('user') ? Promise.resolve() : Promise.reject()),
-    getPermissions: () => {
-        return Promise.resolve(undefined);
+    checkAuth: () => {
+        const token = document.cookie
+            .split(';')
+            .map((cookie) => cookie.trim())
+            .find((cookie) => cookie.startsWith('token='))
+            ?.split('=')[1];
+        return token
+            ? Promise.resolve()
+            : Promise.reject(new HttpError('Неоторизиран', 401, { message: 'Липсва токен' }));
     },
-    getIdentity: () => {
-        const persistedUser = localStorage.getItem('user');
-        const user = persistedUser ? JSON.parse(persistedUser) : null;
-
-        return Promise.resolve(user);
+    getPermissions: () => {
+        return Promise.resolve();
     },
 };
 

@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 import { Link } from '@mui/material';
-import { API } from '../../constants/api';
 
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
@@ -12,38 +10,24 @@ import Button from '@mui/material/Button';
 
 import styles from './login-page.module.scss';
 import { useLoginModal } from '../../store/helperModal';
+import { authService } from '../../services/authService';
 
 const LoginModal = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
+
     const open = useLoginModal((state) => state.open);
     const toggleOpen = useLoginModal((state) => state.toggleOpen);
 
-    const navigate = useNavigate();
-
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+        const { redirectUrl, message } = await authService.login(email, password);
 
-        try {
-            if (!email || !password) {
-                throw new Error('Имейл и парола са задъжителни');
-            }
-
-            const response = await axios.post(API.LOGIN, { email, password });
-
-            if (response.data.redirectUrl.includes('admin')) {
-                return navigate('/admin/dashboard');
-            }
-
-            document.cookie = `token=${response.data.token}; ${Object.entries(cookieOptions)
-                .map(([key, value]) => `${key}=${value}`)
-                .join('; ')}`; // Set the cookie with the options
-
-            navigate(response.data.redirectUrl);
-        } catch (error) {
-            console.error('Login failed', error);
-        }
+        toggleOpen();
+        navigate(redirectUrl);
+        console.log(message, redirectUrl);
     };
 
     return (

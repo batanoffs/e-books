@@ -9,29 +9,50 @@ import { PrivacyRulesModal } from './PrivacyRulesModal';
 import { GeneralRulesModal } from './GeneralRulesModal';
 
 import styles from './register.module.scss';
+import { authService } from '../../services/authService';
 
 type Inputs = {
     email: string;
     password: string;
+    repass: string;
     generalConditions: boolean;
     privacyPolicy: boolean;
     newsletter: boolean;
 };
 
 const Register = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm<Inputs>();
     const toggleOpenTerms = useTermsModal((state) => state.toggleOpen);
     const toggleOpenPrivacy = usePrivacyModal((state) => state.toggleOpen);
 
     const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        try {
-            await axios.post('/api/register', data);
-            navigate('/login');
-        } catch (error) {
-            console.error('Registration failed', error);
+        const { email, generalConditions, privacyPolicy, newsletter, password, repass } = data;
+        const credentials = {
+            email,
+            password,
+            repass,
+            role: 'user',
+        };
+
+        if (!generalConditions || !privacyPolicy) {
+            throw new Error('Моля приемете условията и политиката за поверителност');
         }
+
+        if (password !== repass) {
+            throw new Error('Паролите не съвпадат');
+        }
+
+        const responseData = await authService.register(credentials);
+        const { redirectUrl, message } = responseData;
+        console.log(message);
+        navigate(redirectUrl);
     };
 
     const handleFacebookLogin = async () => {
@@ -76,6 +97,18 @@ const Register = () => {
                         type="password"
                         id="password"
                         {...register('password', { required: true })}
+                    />
+                    {errors.password && <span className={styles.error}>Полето е задължително</span>}
+                </div>
+
+                <div className={styles.field}>
+                    <label htmlFor="repass">
+                        <span>Потвърди парола</span>
+                    </label>
+                    <input
+                        type="password"
+                        id="repass"
+                        {...register('repass', { required: true })}
                     />
                     {errors.password && <span className={styles.error}>Полето е задължително</span>}
                 </div>
