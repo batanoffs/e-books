@@ -4,7 +4,7 @@ import axios from 'axios';
 import { API } from '../../constants/api';
 import { SingleCarousel } from '../../components/assets/SingleCarousel';
 import { MultiCarousel } from '../../components/assets/MultiCarousel';
-import HomeLayout from '../../components/Layout/HomeLayout';
+import MainLayout from '../../components/Layout/HomeLayout';
 import { useSpinner } from '../../store/utils';
 
 interface Book {
@@ -47,7 +47,7 @@ const HomePage = () => {
         },
     ];
 
-    return <HomeLayout children={content} />;
+    return <MainLayout children={content} />;
 };
 
 export default HomePage;
