@@ -22,14 +22,18 @@ const getUserRole = async () => {
     }
     //TODO decode token
     const decodedToken = jwt_decode<{ role: string }>(token);
-    
+
     return decodedToken.role;
 };
 
 const checkIfUserIsAdmin = () => {
     const userRole = getUserRole(); // Get user role
 
-    return userRole === "admin"; // Check if user has admin role
+    // Check if user has admin role
+    if (!userRole) {
+        return false;
+    }
+    return true;
 };
 
 export { isGuest, isAuth, getToken, checkIfUserIsAdmin };

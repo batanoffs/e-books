@@ -2,27 +2,27 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 
 import { useSpinner } from './store/utils';
 import Spinner from './components/utils/Spinner';
-import HomePage from './pages/home/HomePage';
-import BookDetailsPage from './pages/details/BookDetailsPage';
-import LoginModal from './pages/login/LoginPage';
-import Register from './pages/register/RegisterPage';
+import HomePage from './pages/Home/HomePage';
+import BookDetailsPage from './pages/Details/BookDetailsPage';
+import LoginModal from './pages/Login/LoginPage';
+import Register from './pages/Register/RegisterPage';
 import AdminPage from './pages/ReactAdmin/Admin';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import NotFoundPage from './components/utils/404';
-import BooksPage from './pages/books/BooksPage';
-import TextBooksPage from './pages/textbooks/TextBooksPage';
-import TextBookDetailsPage from './pages/textbooks/TextBookDetailsPage';
-import StationeryPage from './pages/stationery/StationeryPage';
-import StationeryDetailsPage from './pages/stationery/StationeryDetailsPage';
-import CartPage from './pages/cart/CartPage';
-import CheckoutPage from './pages/checkout/CheckoutPage';
-import OrdersConfirmationPage from './pages/orders/OrdersConfirmationPage';
-import OrderDetailsPage from './pages/orders/OrderDetailsPage';
-import FaqPage from './pages/faq/FaqPage';
-import ContactsPage from './pages/contacts/ContactsPage';
-import AboutPage from './pages/about/AboutPage';
-import PopularPage from './pages/popular/PopularPage';
+import BooksPage from './pages/Books/BooksPage';
+import TextBooksPage from './pages/Textbooks/TextBooksPage';
+import TextBookDetailsPage from './pages/Textbooks/TextBookDetailsPage';
+import StationeryPage from './pages/Stationery/StationeryPage';
+import StationeryDetailsPage from './pages/Stationery/StationeryDetailsPage';
+import CartPage from './pages/Cart/CartPage';
+import CheckoutPage from './pages/Checkout/CheckoutPage';
+import OrdersConfirmationPage from './pages/Orders/OrdersConfirmationPage';
+import OrderDetailsPage from './pages/Orders/OrderDetailsPage';
+import FaqPage from './pages/Faq/FaqPage';
+import ContactsPage from './pages/Contacts/ContactsPage';
+import AboutPage from './pages/About/AboutPage';
+import PopularPage from './pages/Popular/PopularPage';
 
 const App = () => {
     const { isLoading } = useSpinner();

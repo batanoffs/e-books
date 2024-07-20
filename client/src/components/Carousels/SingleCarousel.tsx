@@ -1,11 +1,11 @@
 import Slider from 'react-slick';
 
-import { Featured } from './Featured.tsx';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import styles from './single-carousel.module.scss';
+import { Featured } from '../Cards/Featured';
 
 interface BookProps {
     books: {

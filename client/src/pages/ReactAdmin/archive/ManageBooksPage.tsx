@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { API } from '../../../constants/api';
+import { API } from '../../../utils/constants/api';
 import styles from './mange-books-page.module.css';
 
 interface Book {

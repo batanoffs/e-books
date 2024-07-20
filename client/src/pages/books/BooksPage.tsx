@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { API } from '../../constants/api.ts';
+import { API } from '../../utils/constants/api.ts';
 import { useFiltersStore } from '../../store/categories.ts';
 import { DashboardBody } from '../../components/Layout/dashboard/DashboardBody.tsx';
 import { DashboardLayout } from '../../components/Layout/dashboard/DashboardLayout.tsx';

@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { checkIfUserIsAdmin } from '../utils/auth';
+import { checkIfUserIsAdmin } from '../utils/helpers/auth';
 import AdminPage from '../pages/ReactAdmin/Admin';
 
 const AdminGuard = () => {

@@ -12,6 +12,8 @@ type MainLayoutProps = {
     categories: string[];
 };
 
+
+//TODO improve dynamic pipelines for sidebar filters and header 
 export const DashboardLayout = ({ children, path, categories }: MainLayoutProps) => {
     return (
         <main className="main-wrapper">

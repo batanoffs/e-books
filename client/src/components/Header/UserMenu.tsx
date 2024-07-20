@@ -1,7 +1,7 @@
 // UserMenu.tsx
 import { Box, IconButton, Menu, MenuItem, Typography, Tooltip, Avatar, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { isAuth } from '../../utils/auth';
+import { isAuth } from '../../utils/helpers/auth';
 import {useLoginModal} from '../../store/helperModal';
 
 const settings = [

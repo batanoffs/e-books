@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { API } from '../../constants/api';
-import { SingleCarousel } from '../../components/assets/SingleCarousel';
-import { MultiCarousel } from '../../components/assets/MultiCarousel';
+import { API } from '../../utils/constants/api';
 import MainLayout from '../../components/Layout/HomeLayout';
 import { useSpinner } from '../../store/utils';
+import { SingleCarousel } from '../../components/Carousels/SingleCarousel';
+import { MultiCarousel } from '../../components/Carousels/MultiCarousel';
 
 interface Book {
     id: string;

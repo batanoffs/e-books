@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API } from '../constants/api';
+import { API } from '../utils/constants/api';
 
 const login = async (email: string, password: string) => {
     if (!email || !password) {

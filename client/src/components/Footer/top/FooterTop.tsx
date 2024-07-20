@@ -1,4 +1,4 @@
-import Logo from '../../assets/Logo';
+import Logo from '../../Logo/Logo';
 import styles from './footer-top.module.scss';
 
 export default function FooterTop() {

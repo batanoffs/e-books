@@ -37,6 +37,28 @@ export const DashboardNavigationAndFilters = ({ categories }: { categories: stri
 
             <h6>Филтри</h6>
             <div className={styles.filter}>
+                {/* TODO FILTERS */}
+                {/*  <div className={`${styles.filterBox} js-accordion-cont is-active`} attribute="price">
+                        <div data-role="ln_title" className={`${styles.filterBoxHeader}`} tabIndex={0}>
+                            <div className={`${styles.filterBoxHeaderTitle} js-accordion-toggler`} data-show="6">
+                                <span>Цена</span>
+                                <svg className={`${styles.icon}`}>
+                                    <use href="#icon-chevron-down"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <div data-role="ln_content" className={`${styles.filterBoxBody} js-accordion-block`} data-show="6" style={{ display: 'block' }}>
+                        <div className={`${styles.smileESRangeSlider}`} data-role="range-price-slider-price">
+                            <div className={`${styles.uiSlider} ui-slider-horizontal ui-widget ui-widget-content ui-corner-all`} aria-disabled="false">
+                                <div className={`${styles.uiSliderRange} ui-widget-header ui-corner-all`} style={{ left: '0%', width: '100%' }}></div>
+                                <a className={`${styles.uiSliderHandle} ui-state-default ui-corner-all`} href="#" style={{ left: '0%' }}></a>
+                                <a className={`${styles.uiSliderHandle} ui-state-default ui-corner-all`} href="#" style={{ left: '100%' }}></a>
+                            </div>
+                            <div data-role="from-label">5,00&nbsp;лв.</div>
+                            <div data-role="to-label">60,99&nbsp;лв.</div>
+                        </div>
+                    </div>
+                </div> */}
                 <ul>
                     <li onClick={() => handlePriceFilter('price=0-20')}>Цена: до 20 лв.</li>
                     <li onClick={() => handlePriceFilter('price=20-50')}>Цена: 20 - 50 лв.</li>

@@ -1,4 +1,4 @@
-import { BookCard } from '../../../pages/books/BookCard';
+import { BookCard } from '../../../pages/Books/BookCard';
 
 interface Item {
     _id: string;

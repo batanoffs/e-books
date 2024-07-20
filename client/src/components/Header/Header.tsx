@@ -3,11 +3,11 @@ import { AppBar, Container, Toolbar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import Logo from '../assets/Logo';
+import Logo from '../Logo/Logo';
 import NavigationMenu from './NavMenu';
 import SearchBar from './SearchBar';
 import UserMenu from './UserMenu';
-import { API } from '../../constants/api';
+import { API } from '../../utils/constants/api';
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);

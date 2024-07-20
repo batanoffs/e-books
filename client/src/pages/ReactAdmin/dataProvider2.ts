@@ -1,6 +1,6 @@
 import { stringify } from 'query-string';
 import { fetchUtils, DataProvider } from 'ra-core';
-import { getToken } from '../../utils/auth';
+import { getToken } from '../../utils/helpers/auth';
 
 const httpClient = async (
     url: string,
