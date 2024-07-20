@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 
-interface FeaturedProps {
+interface CarouselCard {
     book: {
         _id: string;
         title: string;
@@ -14,7 +14,7 @@ interface FeaturedProps {
     styles: typeof styles;
 }
 
-export const Featured = ({ book, styles }: FeaturedProps) => {
+export const CarouselCard = ({ book, styles }: CarouselCard) => {
     const { imageUrl, title, author, price, description, _id } = book;
     return (
         <div className={styles.container}>

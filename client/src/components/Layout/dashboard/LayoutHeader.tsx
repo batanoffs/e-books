@@ -1,7 +1,7 @@
 import { useFiltersStore } from '../../../store/categories';
 import styles from './header.module.scss';
 
-export const DashboardHeader = ({ path }): JSX.Element | null => {
+export const LayoutHeader = ({ path }): JSX.Element | null => {
     const navCategory = useFiltersStore((state) => state.navCategory);
 
     if (!navCategory) {

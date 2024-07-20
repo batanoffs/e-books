@@ -2,8 +2,8 @@ import { Favorite, ShoppingCart } from '@mui/icons-material';
 
 import styles from './bookcard.module.scss';
 
-export const BookCard = ({ book }) => {
-    const { _id, title, author, price, imageUrl } = book;
+export const BookCard = ({ item }) => {
+    const { _id, title, author, price, imageUrl } = item;
 
     return (
         <div className={styles.container} data-id={_id}>

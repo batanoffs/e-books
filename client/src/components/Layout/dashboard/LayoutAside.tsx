@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './navigation.module.scss';
 
-export const DashboardNavigationAndFilters = ({ categories }: { categories: string[] }) => {
+export const LayoutAside = ({ categories }: { categories: string[] }) => {
     const navigate = useNavigate();
 
     if (!categories) {

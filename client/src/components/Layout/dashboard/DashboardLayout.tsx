@@ -1,32 +1,20 @@
 import './dashboard-layout.scss';
 
-import { DashboardHeader } from './DashboardHeader';
-import { DashboardNavigationAndFilters } from './DashboardNavigationAndFilters';
-
 type MainLayoutProps = {
-    children: Array<{
-        id: string;
-        element: JSX.Element;
-    }>;
     path: string;
-    categories: string[];
+    header: JSX.Element;
+    aside: JSX.Element;
+    [key: string]: any;
 };
 
-
-//TODO improve dynamic pipelines for sidebar filters and header 
-export const DashboardLayout = ({ children, path, categories }: MainLayoutProps) => {
+//TODO improve dynamic pipelines for sidebar filters and header
+export const DashboardLayout = ({ children, header, aside, path, ...props }: MainLayoutProps) => {
     return (
         <main className="main-wrapper">
-            <header>
-                <DashboardHeader path={path} />
-            </header>
+            <header>{header}</header>
             <div className="dashboard-container">
-                <aside>
-                    <DashboardNavigationAndFilters categories={categories} />
-                </aside>
-                <section>
-                    {children && children.map((child) => <div key={child.id}>{child.element}</div>)}
-                </section>
+                <aside>{aside}</aside>
+                <section>{children}</section>
             </div>
         </main>
     );

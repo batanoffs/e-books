@@ -1,11 +1,10 @@
 import Slider from 'react-slick';
 
-
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import styles from './single-carousel.module.scss';
-import { Featured } from '../Cards/Featured';
+import { CarouselCard } from '../Cards/CarouselCard';
 
 interface BookProps {
     books: {
@@ -71,7 +70,7 @@ export const SingleCarousel = ({ books }: BookProps) => {
     return (
         <Slider className={styles.carousel} {...settings}>
             {books.map((book) => (
-                <Featured key={book._id} book={book} styles={styles} />
+                <CarouselCard key={book._id} book={book} styles={styles} />
             ))}
         </Slider>
     );

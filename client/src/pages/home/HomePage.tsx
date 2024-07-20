@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { API } from '../../utils/constants/api';
-import MainLayout from '../../components/Layout/HomeLayout';
+import { MainLayout } from '../../components/Layout/main/MainLayout';
 import { useSpinner } from '../../store/utils';
 import { SingleCarousel } from '../../components/Carousels/SingleCarousel';
 import { MultiCarousel } from '../../components/Carousels/MultiCarousel';

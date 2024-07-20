@@ -4,7 +4,10 @@ import axios from 'axios';
 import { API } from '../../utils/constants/api.ts';
 import { DashboardBody } from '../../components/Layout/dashboard/DashboardBody.tsx';
 import { DashboardLayout } from '../../components/Layout/dashboard/DashboardLayout.tsx';
+import { LayoutHeader } from '../../components/Layout/dashboard/LayoutHeader.tsx';
+import { LayoutAside } from '../../components/Layout/dashboard/LayoutAside.tsx';
 import { useFiltersStore } from '../../store/categories.ts';
+import { BookCard } from '../Books/BookCard.tsx';
 
 type PageProps = {
     path: string;
@@ -27,15 +30,15 @@ const TextBooksPage = ({ path }: PageProps) => {
         };
         fetchBooks();
     }, []);
-
-    const content = [
-        {
-            id: 'textbooks',
-            element: <DashboardBody items={textbooks} />,
-        },
-    ];
-
-    return <DashboardLayout path={path} children={content} categories={textbookCategories} />;
+    return (
+        <DashboardLayout
+            path={path}
+            header={<LayoutHeader path={path} />}
+            aside={<LayoutAside categories={textbookCategories} />}
+        >
+            <DashboardBody items={textbooks} CardComponent={BookCard} />
+        </DashboardLayout>
+    );
 };
 
 export default TextBooksPage;

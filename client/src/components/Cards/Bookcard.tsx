@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import Skeleton from '@mui/material/Skeleton';
 
-export const BookcardCarousel = ({ book, loading = false }) => {
+export const Bookcard = ({ book, loading = false }) => {
     const [elevation, setElevation] = useState(0);
     const { id, imageUrl, title, author, rating, price } = book;
 

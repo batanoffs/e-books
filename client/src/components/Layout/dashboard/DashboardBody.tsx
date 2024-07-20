@@ -1,18 +1,19 @@
-import { BookCard } from '../../../pages/Books/BookCard';
+interface DashboardBodyProps {
+    items: Item[];
+    CardComponent: React.ComponentType<React.PropsWithChildren<{ item: Item }>>;
+}
 
 interface Item {
     _id: string;
-    [key: string]: any; // Additional properties of the book
+    [key: string]: unknown;
 }
 
-interface DashboardProps {
-    items: Item[];
-}
-
-export const DashboardBody = ({ items }: DashboardProps) => (
+export const DashboardBody = ({ items, CardComponent }: DashboardBodyProps) => (
     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', gap: '0.5em' }}>
-        {items.map((item) => (
-            <BookCard key={item._id} book={item} /> //TODO replace with dynamic component
-        ))}
+        {items.length > 0 ? (
+            items.map((item) => <CardComponent key={item._id} item={item} />)
+        ) : (
+            <p>Няма намерени книги</p>
+        )}
     </div>
 );
