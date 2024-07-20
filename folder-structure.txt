@@ -41,6 +41,10 @@ e-books/
 │   │   ├── utils/              # Utility functions
 │   │   │   ├── constants/
 │   │   │   └── helpers/
+│   │   ├── tests/              # Unit and integration tests
+│   │   │   ├── components/
+│   │   │   ├── pages/
+│   │   │   └── services/
 │   │   ├── App.tsx             # Main App component
 │   │   ├── main.tsx            # Entry point
 │   │   └── vite-env.d.ts       # Route definitions
