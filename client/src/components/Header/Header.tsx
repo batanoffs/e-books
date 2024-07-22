@@ -8,10 +8,13 @@ import NavigationMenu from './NavMenu';
 import SearchBar from './SearchBar';
 import UserMenu from './UserMenu';
 import { API } from '../../utils/constants/api';
+import { useFiltersStore } from '../../store/categories';
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+    const setNavCategory = useFiltersStore((state) => state.setNavCategory);
+
     const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
@@ -49,20 +52,24 @@ const Header = () => {
     const navigationHandler = (page: string) => {
         switch (page) {
             case 'Книги':
-                navigate('/books');
+                setNavCategory('all');
+                navigate('/catalog/books/all');
                 break;
             case 'Учебници':
-                navigate('/textbooks');
+                setNavCategory('all');
+                navigate('/catalog/textbooks/all');
+                break;
+            case 'Канцелария':
+                setNavCategory('all');
+                navigate('/catalog/stationery/all');
                 break;
             case 'Най-продавани':
-                navigate('/popular');
+                navigate('/catalog/popular');
                 break;
             case 'Контакти':
                 navigate('/contacts');
                 break;
-            case 'Всички':
-                navigate('/all-products');
-                break;
+
             default:
                 navigate('/');
                 break;
