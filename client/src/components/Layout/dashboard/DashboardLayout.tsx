@@ -1,14 +1,13 @@
 import './dashboard-layout.scss';
 
 type MainLayoutProps = {
-    path: string;
     header: JSX.Element;
     aside: JSX.Element;
     [key: string]: any;
 };
 
 //TODO improve dynamic pipelines for sidebar filters and header
-export const DashboardLayout = ({ children, header, aside, path, ...props }: MainLayoutProps) => {
+export const DashboardLayout = ({ children, header, aside, ...props }: MainLayoutProps) => {
     return (
         <main className="main-wrapper">
             <header>{header}</header>

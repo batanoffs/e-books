@@ -1,10 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 
 import styles from './navigation.module.scss';
+import { useFiltersStore } from '../../../store/categories';
 
-export const LayoutAside = ({ categories }: { categories: string[] }) => {
+type Categories = {
+    categories: string[];
+};
+
+export const LayoutAside = ({ categories }: Categories) => {
     const navigate = useNavigate();
-
+    const setNavCategory = useFiltersStore((state) => state.setNavCategory);
     if (!categories) {
         return null;
     }
@@ -20,7 +25,9 @@ export const LayoutAside = ({ categories }: { categories: string[] }) => {
     };
 
     const handleCategoryChange = (category: string) => {
-        navigate(`/books/category/${category.toLowerCase()}`);
+        const currentCategory = category.toLowerCase();
+        setNavCategory(currentCategory);
+        navigate(`/catalog/books/${category.toLowerCase()}`);
     };
 
     return (

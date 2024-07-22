@@ -1,4 +1,4 @@
-interface DashboardBodyProps {
+interface CatalogItems {
     items: Item[];
     CardComponent: React.ComponentType<React.PropsWithChildren<{ item: Item }>>;
 }
@@ -8,7 +8,7 @@ interface Item {
     [key: string]: unknown;
 }
 
-export const DashboardBody = ({ items, CardComponent }: DashboardBodyProps) => (
+export const CatalogItems = ({ items, CardComponent }: CatalogItems) => (
     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', gap: '0.5em' }}>
         {items.length > 0 ? (
             items.map((item) => <CardComponent key={item._id} item={item} />)
