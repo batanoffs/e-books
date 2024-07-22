@@ -6,6 +6,7 @@ export const API = {
     REGISTER: baseURL + '/api/register',
     BOOKS: baseURL + '/api/books',
     TEXTBOOKS: baseURL + '/api/textbooks',
+    STATIONERY: baseURL + '/api/stationery',
     CATEGORIES: baseURL + '/api/categories',
     ORDERS: baseURL + '/api/orders',
     USERS: baseURL + '/api/users',
