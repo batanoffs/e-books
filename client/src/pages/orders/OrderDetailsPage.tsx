@@ -1,8 +1,8 @@
-import useStore from '../../store/cart';
+import useCartStore from '../../store/cart';
 
 
 const OrderDetailsPage = () => {
-    const order = useStore((state) => state.order);
+    const order = useCartStore((state) => state.order);
 
     if (!order) {
         return <p>No order details available</p>;
