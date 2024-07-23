@@ -24,7 +24,7 @@ interface StoreState {
     resetCart: () => void;
 }
 
-const useStore = create<StoreState>((set) => ({
+const useCartStore = create<StoreState>((set) => ({
     cart: [],
     order: null,
     addToCart: (item) =>
@@ -60,4 +60,4 @@ const useStore = create<StoreState>((set) => ({
         })),
 }));
 
-export default useStore;
+export default useCartStore;
