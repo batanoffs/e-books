@@ -9,6 +9,7 @@ import SearchBar from './SearchBar';
 import UserMenu from './UserMenu';
 import { API } from '../../utils/constants/api';
 import { useFiltersStore } from '../../store/categories';
+import CartButton from './Cart';
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -94,6 +95,7 @@ const Header = () => {
                         handleCloseUserMenu={handleCloseUserMenu}
                         handleLogout={handleLogout}
                     />
+                    <CartButton />
                 </Toolbar>
             </Container>
         </AppBar>
