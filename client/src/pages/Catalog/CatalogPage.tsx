@@ -9,7 +9,7 @@ import { LayoutAside } from '../../components/Layout/dashboard/LayoutAside';
 import { CatalogItems } from '../../components/Layout/dashboard/CatalogItems';
 import { useFiltersStore } from '../../store/categories';
 import { ItemCard } from '../../components/Cards/ItemCard';
-import DetailsPage from '../Details/DetailsPage';
+import { DetailsPage } from '../Details/DetailsPage';
 
 const CatalogPage = () => {
     const [items, setItems] = useState([]);

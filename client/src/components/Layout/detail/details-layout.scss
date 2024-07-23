@@ -1,0 +1,28 @@
+header {
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 1em;
+    height: auto;
+}
+
+.details-container {
+    display: flex;
+    gap: 4em;
+    padding: 0 20px;
+    margin-bottom: 2em;
+
+    aside {
+        flex: 0 0 max(300px);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        transition: 0.3s;
+        height: auto;
+    }
+
+    section {
+        flex: 1;
+    }
+}
+

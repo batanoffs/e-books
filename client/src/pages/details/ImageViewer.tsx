@@ -10,26 +10,20 @@ export const ImageViewer = ({ imageUrl }) => {
 
     return (
         <div className={styles.imageViewer}>
-            <div className={styles.imageViewerContainer}>
-                <div className={styles.imageViewerHolder}>
-                    <div className={styles.imageViewerSlider}>
-                        <div className={styles.imageViewerContainerWrap}>
-                            {images.map((image, index) => (
-                                <div className={styles.imageViewerItem} key={index}>
-                                    <div className={styles.aspectRatio}>
-                                        <img
-                                            src={image.src}
-                                            loading="lazy"
-                                            width="100%"
-                                            height="auto"
-                                            alt={image.alt}
-                                        />
-                                    </div>
-                                </div>
-                            ))}
+            <div className={styles.imageViewerContainerWrap}>
+                {images.map((image, index) => (
+                    <div className={styles.imageViewerItem} key={index}>
+                        <div className={styles.aspectRatio}>
+                            <img
+                                src={image.src}
+                                loading="lazy"
+                                width="100%"
+                                height="auto"
+                                alt={image.alt}
+                            />
                         </div>
                     </div>
-                </div>
+                ))}
             </div>
             <div className={styles.imageViewerPagination}>
                 {images.map((_, index) => (
