@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import useStore from '../../store/cart';
+import useCartStore from '../../store/cart';
 
 import CheckoutPaymentOptions from './CheckoutPaymentOptions';
 import DeliveryOptions from './DeliveryOptions';
 
 const CheckoutPage: React.FC = () => {
-    const cart = useStore((state) => state.cart);
-    const placeOrder = useStore((state) => state.placeOrder);
+    const cart = useCartStore((state) => state.cart);
+    const placeOrder = useCartStore((state) => state.placeOrder);
     const [paymentMethod, setPaymentMethod] = useState<string>('');
     const [deliveryMethod, setDeliveryMethod] = useState<string>('');
 
