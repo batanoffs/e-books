@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
 import styles from './details.module.scss';
+import QuantityInput from '../../components/QuantityInput/QuantityInput';
 
 interface ProductDetailsProps {
     title: string;
@@ -50,22 +51,43 @@ export const ProductDetails = ({
     const [isReturnsOpen, setIsReturnsOpen] = useState<boolean>(false);
     const [isCommentsOpen, setIsCommentsOpen] = useState<boolean>(false);
 
-    const handleAddToCart = async () => {
+    const handleAddToCart = async (id, quantity) => {
         //TODO add to cart
-        await axios.post(`/cart/${_id}`);
+        console.log('Added to cart');
+
+        // await axios.post(`/cart/${_id}`);
     };
 
     const handleBuyNow = async () => {
         //TODO buy now
+        console.log('Buy now');
 
-        await axios.put(`/cart/${_id}`, { quantity: 1 });
+        // await axios.put(`/cart/${_id}`, { quantity: 1 });
+    };
+
+    const handleAddToWishlist = async () => {
+        //TODO buy now
+        console.log('Added to wishlist');
+
+        // await axios.put(`/cart/${_id}`, { quantity: 1 });
     };
 
     return (
         <div className={styles.detailsWrapper}>
             <div className={styles.dropdownSection}>
                 <div className={styles.detailsContainer}>
-                    <h1 className={styles.title}>{title}</h1>
+                    <div className={styles.titleSection}>
+                        <h1 className={styles.title}>{title}</h1>
+                        <Tooltip title="Добави в любими">
+                            <IconButton
+                                className={styles.likeButton}
+                                onClick={handleAddToWishlist}
+                                aria-label="add to wishlist"
+                            >
+                                <FavoriteBorderIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </div>
                     <h2 className={styles.author}>{author}</h2>
                     <div className={styles.availability}>{availability}</div>
                     <div className={styles.priceSection}>
@@ -73,17 +95,25 @@ export const ProductDetails = ({
                         <div className={styles.deliveryPrice}>Доставка: {deliveryPrice}</div>
                     </div>
                     <div className={styles.actions}>
-                        <Tooltip title="Добави в любими">
-                            <IconButton className={styles.likeButton} aria-label="add to wishlist">
-                                <FavoriteBorderIcon />
+                        <IconButton
+                            className={styles.cartButton}
+                            onClick={handleBuyNow}
+                            aria-label="buy now"
+                        >
+                            Купи сега
+                        </IconButton>
+
+                        <div className={styles.cartContainer}>
+                            <IconButton
+                                className={styles.cartButton}
+                                onClick={handleAddToCart}
+                                aria-label="add to wishlist"
+                            >
+                                <ShoppingCartIcon /> Добави в количка
                             </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Добави в количка">
-                            <IconButton className={styles.cartButton} aria-label="add to wishlist">
-                                <ShoppingCartIcon />
-                                Добави
-                            </IconButton>
-                        </Tooltip>
+
+                            <QuantityInput itemId={_id} handleAddToCart={handleAddToCart} />
+                        </div>
                     </div>
                 </div>
                 <div className={styles.dropdownContainer}>

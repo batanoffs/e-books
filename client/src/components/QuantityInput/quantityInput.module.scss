@@ -1,0 +1,70 @@
+$orange: #ff9800;
+$orangeLighter: lighten($orange, 20%);
+
+.counterContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .counterButton {
+        width: 30px;
+        height: 30px;
+        border-radius: 5px;
+        background-color: transparent;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            color: $orangeLighter;
+        }
+
+        &.counterButtonActive {
+            color: $orange;
+        }
+    }
+
+    input {
+        text-align: center;
+        padding: 5px;
+        color: $orange;
+        font-size: 1.2em;
+        font-weight: bold;
+        width: 60px;
+        border: 1px solid $orange;
+        border-radius: 4px;
+        background-color: transparent;
+        transition: background-color 0.3s ease;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        &::-webkit-increment,
+        &::-webkit-decrement {
+            -webkit-appearance: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        &::-webkit-increment {
+            margin-top: 5px;
+        }
+
+        &::-webkit-decrement {
+            margin-bottom: 5px;
+        }
+    }
+
+    .visuallyhidden {
+        position: absolute;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        width: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
+    }
+}
