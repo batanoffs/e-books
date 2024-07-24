@@ -21,11 +21,11 @@ import CatalogPage from './pages/Catalog/CatalogPage';
 
 const App = () => {
     const { isLoading } = useSpinner();
-    const adminLocation = window.location.pathname?.includes('admin');
+    const isAdminLocation = window.location.pathname?.toLowerCase().includes('admin');
 
     return (
         <Router>
-            {!adminLocation && <Header />}
+            {!isAdminLocation && <Header />}
             {isLoading && <Spinner />}
 
             <LoginModal />
@@ -46,7 +46,7 @@ const App = () => {
                 {/* <Route path="/profile" element={<ProfilePage />} /> */}
             </Routes>
 
-            {!adminLocation && <Footer />}
+            {!isAdminLocation && <Footer />}
         </Router>
     );
 };
