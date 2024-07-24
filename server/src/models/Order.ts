@@ -1,11 +1,12 @@
 import { model, Schema } from 'mongoose';
-import { IOrder } from '../interfaces/order.interface';
+import { IOrderSchema } from '../interfaces/order.interface';
 
 const OrderSchema: Schema = new Schema({
     userId: { type: String, required: true },
-    books: [
+    products: [
         {
-            bookId: { type: String, required: true },
+            productId: { type: Schema.Types.ObjectId, required: true, refPath: 'productType' },
+            productType: { type: String, required: true, enum: ['Book', 'Textbook', 'Stationery'] },
             quantity: { type: Number, required: true },
         },
     ],
@@ -18,6 +19,6 @@ const OrderSchema: Schema = new Schema({
     },
 });
 
-const Order = model<IOrder>('Order', OrderSchema);
+const Order = model<IOrderSchema>('Order', OrderSchema);
 
 export default Order;

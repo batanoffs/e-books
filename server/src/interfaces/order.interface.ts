@@ -1,6 +1,7 @@
-export interface IOrder extends Document {
+export interface IOrderSchema extends Document {
     userId: string;
-    books: { bookId: string; quantity: number }[];
+    products: { productId: string; productType: 'Book' | 'Textbook' | 'Stationery'; quantity: number }[];
     total: number;
     status: string;
 }
+

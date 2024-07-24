@@ -6,7 +6,7 @@ import Book from '../models/Book';
 import User from '../models/User';
 import Order from '../models/Order';
 import Featured from '../models/Featured';
-import Item from '../models/Item';
+import Stationery from '../models/Stationery';
 import Textbook from '../models/Textbook';
 
 const router = Router();
@@ -16,7 +16,7 @@ const router = Router();
 router.use(isAdmin);
 
 router.use('/users', raExpressMongoose(User, { q: ['email', 'role'], useLean: false }));
-router.use('/items', raExpressMongoose(Item, { q: ['title','price','description','imageUrl','stock','category'] }));
+router.use('/items', raExpressMongoose(Stationery, { q: ['title','price','description','imageUrl','stock','category'] }));
 router.use('/books', raExpressMongoose(Book, { q: ['title','title','author','price','description','imageUrl','stock','category'] }));
 router.use('/textbooks', raExpressMongoose(Textbook, { q: ['title','title','author','price','description','imageUrl','stock','category'] }));
 router.use('/featured', raExpressMongoose(Featured, { q: ['title','title','author','price','description','imageUrl','stock','category'] }));

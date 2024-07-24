@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
-import { IItem } from '../interfaces/item.interface';
+import { IStationerySchema } from '../interfaces/stationery.interface';
 
-const ItemSchema: Schema = new Schema({
+const StationerySchema: Schema = new Schema({
     title: { type: String, required: true },
     price: { type: Number, required: true },
     description: { type: String, required: true },
@@ -10,6 +10,6 @@ const ItemSchema: Schema = new Schema({
     stock: { type: Number, required: true },
 });
 
-const Item = model<IItem>('Item', ItemSchema);
+const Stationery = model<IStationerySchema>('Stationery', StationerySchema);
 
-export default Item;
+export default Stationery;

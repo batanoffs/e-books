@@ -1,4 +1,4 @@
-export interface IBook {
+export interface IBookSchema {
   title: string;
   author: string;
   price: number;
