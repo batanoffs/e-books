@@ -7,13 +7,15 @@ export const ItemCard = ({ item }) => {
     const navigate = useNavigate();
 
     const addToCartHandler = (e) => {
-        //TODO
+        //TODO add item to cart
         const parent = e.currentTarget.closest(`.${styles.container}`);
         const id = parent.getAttribute('data-id');
         console.log('Added to cart', id);
     };
 
-    const addToFavoritesHandler = (e) => {
+    const addToWishlistHandler = (e) => {
+        //TODO add item to wishlist
+
         const parent = e.currentTarget.closest(`.${styles.container}`);
         const id = parent.getAttribute('data-id');
         console.log('Added to favorites', id);
@@ -29,7 +31,7 @@ export const ItemCard = ({ item }) => {
         <div onClick={goToDetailsHandler} className={styles.container} data-id={_id}>
             <div className={styles.bookImageContainer}>
                 <div className={styles.buttonContainer}>
-                    <button onClick={addToFavoritesHandler}>
+                    <button onClick={addToWishlistHandler}>
                         <Favorite />
                     </button>
                     <button onClick={addToCartHandler}>
