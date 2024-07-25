@@ -1,16 +1,21 @@
 import React from 'react';
 import {
+    EditProps,
     Edit,
     SimpleForm,
     TextInput,
     NumberInput,
     SelectInput,
-    useRecordContext,
+    DateInput,
 } from 'react-admin';
 
-const BookEdit: React.FC = (props) => {
-    const record = useRecordContext();
-
+/**
+ * Book edit params.
+ *
+ * @param {EditProps} props - The React Admin Edit component props.
+ * @returns {React.ReactElement} The rendered Edit component.
+ */
+const BookEdit: React.FC<EditProps> = (props: EditProps): React.ReactElement => {
     return (
         <Edit {...props}>
             <SimpleForm>
@@ -24,13 +29,20 @@ const BookEdit: React.FC = (props) => {
                     source="category"
                     label="Категория"
                     choices={[
-                        { id: 'Self-Help', name: 'Self-Help' },
-                        { id: 'Business', name: 'Business' },
-                        { id: 'Fiction', name: 'Fiction' },
-                        { id: 'Spirituality', name: 'Spirituality' },
-                        { id: 'Poetry', name: 'Poetry' },
+                        { id: 'Self-Help', name: 'Самопомощ' },
+                        { id: 'Business', name: 'Бизнес' },
+                        { id: 'Fiction', name: 'Фантастика' },
+                        { id: 'Spirituality', name: 'Духовност' },
+                        { id: 'Poetry', name: 'Поезия' },
                     ]}
                 />
+                <TextInput source="publisher" label="Издателство" />
+                <TextInput source="language" label="Език" />
+                <DateInput source="yearPublished" label="Год на издаване" />
+                <NumberInput source="pages" label="Страници" />
+                <TextInput source="translator" label="Преводач" />
+                <TextInput source="dimensions" label="Размери" />
+                <TextInput source="coverPageType" label="Вид корица" />
             </SimpleForm>
         </Edit>
     );
