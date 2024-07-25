@@ -1,10 +1,31 @@
 import { Request, Response } from 'express';
 import Book from '../models/Book';
+import { validationResult } from 'express-validator';
+import saveCover from '../utils/saveCover';
 
+// Create a book with image handling
 export const createBook = async (req: Request, res: Response) => {
-    const { title, author, price, description, stock, category, imageUrl } = req.body;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+
+    const newBook = new Book({
+        title: req.body.title,
+        author: req.body.author,
+        price: req.body.price,
+        description: req.body.description,
+        stock: req.body.stock,
+        category: req.body.category,
+        publisher: req.body.publisher,
+        language: req.body.language,
+        publishDate: req.body.yearPublished,
+        pageCount: req.body.pages,
+        translator: req.body.translator,
+        dimensions: req.body.dimensions,
+        coverPageType: req.body.coverPageType,
+    });
+    saveCover(newBook, req.body.cover);
     try {
-        const newBook = new Book({ title, author, price, description, stock, category, imageUrl });
         await newBook.save();
         res.status(201).json(newBook);
     } catch (error) {
@@ -34,19 +55,32 @@ export const getBookById = async (req: Request, res: Response) => {
     }
 };
 
+// Update a book by ID
 export const updateBook = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { title, author, price, description, stock, category, imageUrl } = req.body;
+    const newBook = new Book({
+        title: req.body.title,
+        author: req.body.author,
+        price: req.body.price,
+        description: req.body.description,
+        stock: req.body.stock,
+        category: req.body.category,
+        publisher: req.body.publisher,
+        language: req.body.language,
+        publishDate: req.body.yearPublished,
+        pageCount: req.body.pages,
+        translator: req.body.translator,
+        dimensions: req.body.dimensions,
+        coverPageType: req.body.coverPageType,
+    });
+    saveCover(newBook, req.body.cover);
+
     try {
-        const book = await Book.findByIdAndUpdate(
-            id,
-            { title, author, price, description, stock, category, imageUrl },
-            { new: true }
-        );
-        if (!book) {
+        const updatedBook = await Book.findByIdAndUpdate(id, { newBook }, { new: true });
+        if (!updatedBook) {
             return res.status(404).json({ message: 'Book not found' });
         }
-        res.status(200).json(book);
+        res.status(200).json(updatedBook);
     } catch (error) {
         res.status(500).json({ message: 'Error updating book', error });
     }
@@ -55,8 +89,8 @@ export const updateBook = async (req: Request, res: Response) => {
 export const deleteBook = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
-        const book = await Book.findByIdAndDelete(id);
-        if (!book) {
+        const deletedBook = await Book.findByIdAndDelete(id);
+        if (!deletedBook) {
             return res.status(404).json({ message: 'Book not found' });
         }
         res.status(200).json({ message: 'Book deleted successfully' });
