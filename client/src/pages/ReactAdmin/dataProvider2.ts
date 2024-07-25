@@ -4,20 +4,55 @@ import { getToken } from '../../utils/helpers/auth';
 
 const httpClient = async (
     url: string,
-    options: { headers?: Record<string, string>; method?: string; body?: string } = {}
+    options: { headers?: Record<string, string>; method?: string; body?: any } = {}
 ) => {
     const headers = new Headers(options.headers);
 
     const token = getToken();
     if (token) {
         // It's not necessary to manually set the 'Cookie' header if you're using credentials: 'include'
-        // headers.set('Cookie', `token=${token}`);
+        headers.set('Cookie', `token=${token}`);
     }
 
     return fetchUtils.fetchJson(url, { ...options, headers, credentials: 'include' });
 };
 
+const convertFileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        console.log('reader: ', reader);
+
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+};
+
 export default (apiUrl: string): DataProvider => ({
+    //TODO updated for filepont json image (only one)
+    create: async (resource: string, params: { data: any }) => {
+        const { images, ...rest } = params.data;
+
+        console.log('create item params: ', params.data);
+
+        const imageToBase64 = images.length > 0 ? await convertFileToBase64(images[0].file) : null;
+        console.log('image: ', imageToBase64);
+
+        const data = {
+            ...rest,
+            coverImage: imageToBase64,
+            coverImageType: images.length > 0 ? images[0].file.type : null,
+        };
+        const url = `${apiUrl}/${resource}`;
+
+        const { json } = await httpClient(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+        });
+
+        return { data: { ...data, id: json.id } };
+    },
+
     getList: async (
         resource: string,
         params: {
@@ -41,9 +76,9 @@ export default (apiUrl: string): DataProvider => ({
         if (!headers.has('x-total-count')) {
             throw new Error(
                 'The X-Total-Count header is missing in the HTTP Response. ' +
-                'The jsonServer Data Provider expects responses for lists of resources ' +
-                'to contain this header with the total number of results to build the pagination. ' +
-                'If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?'
+                    'The jsonServer Data Provider expects responses for lists of resources ' +
+                    'to contain this header with the total number of results to build the pagination. ' +
+                    'If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?'
             );
         }
 
@@ -94,9 +129,9 @@ export default (apiUrl: string): DataProvider => ({
         if (!headers.has('x-total-count')) {
             throw new Error(
                 'The X-Total-Count header is missing in the HTTP Response. ' +
-                'The jsonServer Data Provider expects responses for lists of resources ' +
-                'to contain this header with the total number of results to build the pagination. ' +
-                'If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?'
+                    'The jsonServer Data Provider expects responses for lists of resources ' +
+                    'to contain this header with the total number of results to build the pagination. ' +
+                    'If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?'
             );
         }
 
@@ -125,15 +160,6 @@ export default (apiUrl: string): DataProvider => ({
             body: JSON.stringify(params.data),
         });
         return { data: json };
-    },
-
-    create: async (resource: string, params: { data: any }) => {
-        const url = `${apiUrl}/${resource}`;
-        const { json } = await httpClient(url, {
-            method: 'POST',
-            body: JSON.stringify(params.data),
-        });
-        return { data: { ...params.data, id: json.id } };
     },
 
     delete: async (resource: string, params: { id: string }) => {
