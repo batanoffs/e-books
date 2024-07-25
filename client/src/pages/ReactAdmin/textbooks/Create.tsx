@@ -2,7 +2,7 @@ import React from 'react';
 import { Create, SimpleForm, TextInput, NumberInput, required } from 'react-admin';
 
 const TextbookCreate: React.FC = (props) => (
-    <Create {...props}>
+    <Create {...props} title={'Добавяне на нов учебник'}>
         <SimpleForm>
             <TextInput source="title" validate={[required()]} label="Заглавие" />
             <TextInput source="author" validate={[required()]} label="Автор" />

@@ -1,7 +1,7 @@
 import { Create, SimpleForm, TextInput, NumberInput, required } from 'react-admin';
 
 const ItemsCreate = (props) => (
-    <Create {...props}>
+    <Create {...props} title={'Добавяне на нови канцеларски материали'}>
         <SimpleForm>
             <TextInput source="title" validate={[required()]} label="Заглавие" />
             <NumberInput source="price" validate={[required()]} label="Цена" />

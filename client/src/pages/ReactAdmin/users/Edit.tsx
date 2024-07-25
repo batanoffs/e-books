@@ -1,7 +1,7 @@
 import { Edit, SimpleForm, TextInput, SelectInput } from 'react-admin';
 
 const UserEdit = (props) => (
-    <Edit {...props}>
+    <Edit {...props} title={'Списък с потребители'}>
         <SimpleForm>
             <TextInput source="email" label="Имейл" />
             <TextInput source="password" label="Парола" />

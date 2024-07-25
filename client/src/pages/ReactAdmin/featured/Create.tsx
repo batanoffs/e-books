@@ -1,7 +1,7 @@
 import { Create, SimpleForm, TextInput, NumberInput, required } from 'react-admin';
 
 const FeaturedCreate = (props) => (
-    <Create {...props}>
+    <Create {...props} title={'Добавяне на нов продукт в промотирани'}>
         <SimpleForm>
             <TextInput source="title" validate={[required()]} label="Заглавие" />
             <TextInput source="author" validate={[required()]} label="Автор" />
