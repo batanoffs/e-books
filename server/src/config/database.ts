@@ -2,10 +2,12 @@ import mongoose, { Mongoose } from 'mongoose';
 import { connectionString } from '../constants/serverSetup';
 
 require('../models/Book');
-require('../models/User');
-require('../models/Order'); 
 require('../models/Featured');
-require('../models/Item');
+require('../models/Order'); 
+require('../models/ShoppingCart');
+require('../models/Stationery');
+require('../models/Textbook');
+require('../models/User');
 
 
 mongoose.set('strictQuery', false);
