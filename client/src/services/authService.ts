@@ -8,6 +8,8 @@ const login = async (email: string, password: string) => {
     try {
         const response = await axios.post(API.LOGIN, { email, password });
         const { token, redirectUrl, message } = response.data;
+        console.log('response-data', response.data);
+        
         // Check if there is an existing token
         const currentToken = document.cookie
             .split(';')

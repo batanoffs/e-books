@@ -24,6 +24,8 @@ const LoginModal = () => {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         const { redirectUrl, message } = await authService.login(email, password);
+        
+        console.log(message, redirectUrl);
 
         toggleOpen();
         navigate(redirectUrl);
