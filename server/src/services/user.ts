@@ -1,9 +1,13 @@
 import { identityName } from '../constants/identity';
-import { IUser } from '../interfaces/user.interface';
+import { IUserSchema } from '../interfaces/user.interface';
 import User from '../models/User';
 import bcrypt from 'bcrypt';
 
-async function registerUser(identity: string, password: string, role: string): Promise<IUser> {
+async function registerUser(
+    identity: string,
+    password: string,
+    role: string
+): Promise<IUserSchema> {
     try {
         const existingUser = await User.findOne({ [identityName]: identity });
         if (existingUser) {
@@ -30,7 +34,7 @@ async function registerUser(identity: string, password: string, role: string): P
     }
 }
 
-async function loginUser(identity: string, password: string): Promise<IUser> {
+async function loginUser(identity: string, password: string): Promise<IUserSchema> {
     const user = await User.findOne({ [identityName]: identity });
 
     if (!user) {
