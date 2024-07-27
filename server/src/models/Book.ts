@@ -28,6 +28,10 @@ BookSchema.virtual('coverImagePath').get(function () {
     }
 });
 
+BookSchema.set('toJSON', {
+    virtuals: true,
+});
+
 const Book = model<IBookSchema>('Book', BookSchema);
 
 export default Book;
