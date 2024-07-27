@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useSpinner } from './store/utils';
 import Spinner from './components/utils/Spinner';
 import HomePage from './pages/Home/HomePage';
@@ -20,12 +20,20 @@ import PopularPage from './pages/Popular/PopularPage';
 import CatalogPage from './pages/Catalog/CatalogPage';
 
 const App = () => {
+    const [isAdmin, setIsAdmin] = useState(false);
     const { isLoading } = useSpinner();
-    const isAdminLocation = window.location.pathname?.toLowerCase().includes('admin');
+    let location = useLocation();
+
+    useEffect(() => {
+        console.log(location);
+
+        let isAdminLocation = location.pathname?.toLowerCase().includes('admin');
+        setIsAdmin(isAdminLocation);
+    }, [location]);
 
     return (
-        <Router>
-            {!isAdminLocation && <Header />}
+        <>
+            {!isAdmin && <Header />}
             {isLoading && <Spinner />}
 
             <LoginModal />
@@ -46,8 +54,8 @@ const App = () => {
                 {/* <Route path="/profile" element={<ProfilePage />} /> */}
             </Routes>
 
-            {!isAdminLocation && <Footer />}
-        </Router>
+            {!isAdmin && <Footer />}
+        </>
     );
 };
 
