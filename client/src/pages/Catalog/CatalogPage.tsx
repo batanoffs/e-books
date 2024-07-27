@@ -50,6 +50,9 @@ const CatalogPage = () => {
         fetchItems();
     }, [type, setCategoriesForType]);
 
+    console.log('items:', items);
+    
+
     const headerText =
         type === 'books' ? 'книги' : type === 'textbooks' ? 'учебници' : 'канцелария';
 
