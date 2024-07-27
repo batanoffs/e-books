@@ -5,7 +5,7 @@ interface CarouselCard {
         _id: string;
         title: string;
         author: string;
-        imageUrl: string;
+        coverImagePath: string;
         description: string;
         price: number;
         category: string;
@@ -15,7 +15,7 @@ interface CarouselCard {
 }
 
 export const CarouselCard = ({ book, styles }: CarouselCard) => {
-    const { imageUrl, title, author, price, description, _id } = book;
+    const { coverImagePath, title, author, price, description, _id } = book;
     return (
         <div className={styles.container}>
             <div className={styles.textContainer}>
@@ -33,7 +33,7 @@ export const CarouselCard = ({ book, styles }: CarouselCard) => {
                 </div>
             </div>
             <div>
-                <img className={styles.image} src={imageUrl} alt={title} />
+                <img className={styles.image} src={coverImagePath} alt={title} />
             </div>
         </div>
     );

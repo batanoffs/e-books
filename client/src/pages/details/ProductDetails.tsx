@@ -23,9 +23,12 @@ interface ProductDetailsProps {
     isbn: string;
     publisher: string;
     publicationYear: number;
-    pages: number;
+    pageCount: number;
     language: string;
     dimensions: string;
+    coverPageType: string;
+    publishDate: Date;
+    stock: number;
     _id: string;
 }
 
@@ -40,8 +43,10 @@ export const ProductDetails = ({
     translator,
     isbn,
     publisher,
-    publicationYear,
-    pages,
+    publishDate,
+    stock,
+    coverPageType,
+    pageCount,
     language,
     dimensions,
     _id,
@@ -150,16 +155,16 @@ export const ProductDetails = ({
                                             <strong>Език:</strong> {language}
                                         </p>
                                         <p>
-                                            <strong>Година на издаване:</strong> {publicationYear}
+                                            <strong>Година на издаване:</strong> {publishDate}
                                         </p>
                                         <p>
-                                            <strong>Страници брой:</strong> {pages}
+                                            <strong>Страници брой:</strong> {pageCount}
                                         </p>
                                         <p>
                                             <strong>Размер см:</strong> {dimensions}
                                         </p>
                                         <p>
-                                            <strong>Вид корица:</strong> {dimensions}
+                                            <strong>Вид корица:</strong> {coverPageType}
                                         </p>
                                     </div>
                                 </div>

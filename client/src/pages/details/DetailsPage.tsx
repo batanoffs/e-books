@@ -16,7 +16,7 @@ interface Item {
     price: number;
     description: string;
     stock: number;
-    imageUrl: string;
+    coverImagePath: string;
 }
 
 export const DetailsPage = ({ type, path }: { type: string | undefined }) => {
@@ -47,7 +47,7 @@ export const DetailsPage = ({ type, path }: { type: string | undefined }) => {
                     hasSorting={false}
                 />
             }
-            aside={<ImageViewer imageUrl={book.imageUrl} />}
+            aside={<ImageViewer imageUrl={book.coverImagePath} />}
             path={path}
         >
             <ProductDetails {...book} />

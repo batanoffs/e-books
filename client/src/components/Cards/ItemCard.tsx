@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './itemcard.module.scss';
 
 export const ItemCard = ({ item }) => {
-    const { _id, title, author, price, imageUrl } = item;
+    const { _id, title, author, price, coverImagePath } = item;
     const navigate = useNavigate();
 
     const addToCartHandler = (e) => {
@@ -38,7 +38,7 @@ export const ItemCard = ({ item }) => {
                         <ShoppingCart />
                     </button>
                 </div>
-                <img src={imageUrl} alt={title} />
+                <img src={coverImagePath} alt={title} />
             </div>
             <div className={styles.bookInfo}>
                 <h6>{title}</h6>

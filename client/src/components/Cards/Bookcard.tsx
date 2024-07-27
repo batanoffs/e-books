@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
 
 export const Bookcard = ({ book, loading = false }) => {
-    const { id, imageUrl, title, author, price } = book ?? {};
+    const { id, coverImagePath, title, author, price } = book ?? {};
 
     if (!book) return null;
 
@@ -17,7 +17,7 @@ export const Bookcard = ({ book, loading = false }) => {
             {loading ? (
                 <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
             ) : (
-                <CardMedia component="img" alt={title} image={imageUrl} />
+                <CardMedia component="img" alt={title} image={coverImagePath} />
             )}
 
             <CardContent sx={{ padding: '0.5em' }}>
