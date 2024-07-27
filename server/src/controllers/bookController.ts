@@ -25,6 +25,9 @@ export const createBook = async (req: Request, res: Response) => {
         coverPageType: req.body.coverPageType,
     });
     saveCover(newBook, req.body.cover);
+
+    console.log(newBook);
+
     try {
         await newBook.save();
         res.status(201).json(newBook);
@@ -67,7 +70,7 @@ export const updateBook = async (req: Request, res: Response) => {
         category: req.body.category,
         publisher: req.body.publisher,
         language: req.body.language,
-        publishDate: req.body.yearPublished,
+        publishDate: req.body.publishDate,
         pageCount: req.body.pages,
         translator: req.body.translator,
         dimensions: req.body.dimensions,
