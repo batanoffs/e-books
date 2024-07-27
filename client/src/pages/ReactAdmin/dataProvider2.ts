@@ -17,40 +17,23 @@ const httpClient = async (
     return fetchUtils.fetchJson(url, { ...options, headers, credentials: 'include' });
 };
 
-const convertFileToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        console.log('reader: ', reader);
-
-        reader.onload = () => resolve(reader.result.split(',')[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-    });
-};
-
 export default (apiUrl: string): DataProvider => ({
     //TODO updated for filepont json image (only one)
     create: async (resource: string, params: { data: any }) => {
-        const { images, ...rest } = params.data;
 
-        console.log('create item params: ', params.data);
-
-        const imageToBase64 = images.length > 0 ? await convertFileToBase64(images[0].file) : null;
-        console.log('image: ', imageToBase64);
-
-        const data = {
-            ...rest,
-            coverImage: imageToBase64,
-            coverImageType: images.length > 0 ? images[0].file.type : null,
-        };
+        console.log('DataProvider create params: ', params.data);
         const url = `${apiUrl}/${resource}`;
+
+        console.log('create url: ', url);
+        console.log('apiUrl:', apiUrl);
+        console.log('resource: ', resource);
 
         const { json } = await httpClient(url, {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(params.data),
         });
 
-        return { data: { ...data, id: json.id } };
+        return { data: { ...params.data, id: json.id } };
     },
 
     getList: async (
@@ -81,6 +64,8 @@ export default (apiUrl: string): DataProvider => ({
                     'If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?'
             );
         }
+
+        console.log('getList json: ', json);
 
         return {
             data: json,
