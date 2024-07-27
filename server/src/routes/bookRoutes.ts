@@ -21,11 +21,11 @@ router.post(
         body('coverPageType').notEmpty().withMessage('Cover page type is required'),
         body('dimensions').isLength({ min: 1 }).withMessage('Dimensions is required'),
         body('language').notEmpty().withMessage('Language is required'),
-        body('pageCount').isInt({ gt: 0 }).withMessage('Pages must be a positive integer'),
+        body('pageCount').isNumeric().withMessage('Pages must be a positive integer'),
         body('publisher').notEmpty().withMessage('Publisher is required'),
         body('stock').isInt({ gt: 0 }).withMessage('Stock must be a positive integer'),
         body('translator').notEmpty().withMessage('Translator is required'),
-        body('yearPublished').isDate().withMessage('Year published is required'),
+        body('publishDate').isDate().withMessage('Year published is required'),
         validateRequest,
     ],
     createBook
