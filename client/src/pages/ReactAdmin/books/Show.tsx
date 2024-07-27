@@ -21,7 +21,7 @@ import {
 const BookShow: React.FC<ShowProps> = (props) => (
     <Show {...props}>
         <SimpleShowLayout>
-            <TextField source="id" label="ID" />
+            <TextField source="id" label="ID" hidden/>
             <TextField source="title" label="Заглавие" />
             <TextField source="author" label="Автор" />
             <NumberField source="price" label="Цена" />

@@ -23,7 +23,7 @@ const BookEdit: React.FC<EditProps> = (props: EditProps): React.ReactElement => 
                 <TextInput source="author" label="Автор" />
                 <NumberInput source="price" label="Цена" />
                 <TextInput source="description" multiline label="Описание" />
-                <TextInput source="imageUrl" label="Изображение" />
+                <TextInput source="cover" label="Изображение" />
                 <NumberInput source="stock" label="Количество" />
                 <SelectInput
                     source="category"
@@ -38,8 +38,8 @@ const BookEdit: React.FC<EditProps> = (props: EditProps): React.ReactElement => 
                 />
                 <TextInput source="publisher" label="Издателство" />
                 <TextInput source="language" label="Език" />
-                <DateInput source="yearPublished" label="Год на издаване" />
-                <NumberInput source="pages" label="Страници" />
+                <DateInput source="publishDate" label="Год на издаване" />
+                <NumberInput source="pageCount" label="Страници" />
                 <TextInput source="translator" label="Преводач" />
                 <TextInput source="dimensions" label="Размери" />
                 <TextInput source="coverPageType" label="Вид корица" />
