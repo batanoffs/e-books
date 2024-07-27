@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSpinner } from './store/utils';
 import Spinner from './components/utils/Spinner';
