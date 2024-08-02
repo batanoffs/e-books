@@ -25,8 +25,6 @@ const App = () => {
     let location = useLocation();
 
     useEffect(() => {
-        console.log(location);
-
         let isAdminLocation = location.pathname?.toLowerCase().includes('admin');
         setIsAdmin(isAdminLocation);
     }, [location]);
