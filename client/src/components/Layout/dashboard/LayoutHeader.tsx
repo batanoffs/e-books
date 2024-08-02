@@ -8,9 +8,8 @@ export const LayoutHeader = ({ path, navCategory, title, hasSorting, resultCount
                 <p>
                     {path} / <span>{title}</span>
                 </p>
-
-                {navCategory && <h1>{navCategory}</h1>}
             </div>
+            <div className={styles.categoryTitle}>{navCategory && <h1>{navCategory}</h1>}</div>
 
             {hasSorting && (
                 <div className={styles.sorting}>

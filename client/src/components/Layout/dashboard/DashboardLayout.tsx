@@ -1,4 +1,4 @@
-import './dashboard-layout.scss';
+import styles from './dashboard.module.scss';
 
 type MainLayoutProps = {
     header: JSX.Element;
@@ -11,7 +11,7 @@ export const DashboardLayout = ({ children, header, aside, ...props }: MainLayou
     return (
         <main className="main-wrapper">
             <header>{header}</header>
-            <div className="dashboard-container">
+            <div className={styles.dashboardContainer}>
                 <aside>{aside}</aside>
                 <section>{children}</section>
             </div>

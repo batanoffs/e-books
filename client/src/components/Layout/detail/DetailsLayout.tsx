@@ -1,4 +1,4 @@
-import './details-layout.scss';
+import styles from './details.module.scss';
 
 type MainLayoutProps = {
     header: JSX.Element;
@@ -11,7 +11,7 @@ export const DetailsLayout = ({ children, header, aside, ...props }: MainLayoutP
     return (
         <main className="main-wrapper">
             <header>{header}</header>
-            <div className="details-container">
+            <div className={styles.detailsContainer}>
                 <aside>{aside}</aside>
                 <section>{children}</section>
             </div>

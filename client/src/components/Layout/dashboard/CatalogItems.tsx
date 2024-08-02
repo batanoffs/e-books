@@ -1,6 +1,7 @@
 interface CatalogItems {
     items: Item[];
     CardComponent: React.ComponentType<React.PropsWithChildren<{ item: Item }>>;
+    sx?: React.CSSProperties;
 }
 
 interface Item {
@@ -8,8 +9,8 @@ interface Item {
     [key: string]: unknown;
 }
 
-export const CatalogItems = ({ items, CardComponent }: CatalogItems) => (
-    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', gap: '0.5em' }}>
+export const CatalogItems = ({ items, CardComponent, sx }: CatalogItems) => (
+    <div style={sx}>
         {items.length > 0 ? (
             items.map((item) => <CardComponent key={item._id} item={item} />)
         ) : (
