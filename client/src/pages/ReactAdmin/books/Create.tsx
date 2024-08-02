@@ -71,7 +71,7 @@ const BookCreate = (props) => {
         <Create {...props} title={'Добавяне на нова книга'}>
             <SimpleForm onSubmit={handleSave}>
                 <Box display={{ xs: 'block', sm: 'flex' }} sx={{ width: '100%', gap: 2 }}>
-                    <Box>
+                    <div>
                         <TextInput source="title" validate={[required()]} label="Заглавие" />
                         <TextInput source="author" validate={[required()]} label="Автор" />
                         <NumberInput source="price" validate={[required()]} label="Цена" />
@@ -99,6 +99,7 @@ const BookCreate = (props) => {
                             className="filepond"
                             imageResizeTargetWidth={150}
                             imageResizeTargetHeight={100}
+                            labelIdle='Провлачете снимка или <span class="filepond--label-action">Потърсете</span>'
                             allowReorder={true}
                             allowDrop={true}
                             allowReplace={true}
@@ -108,20 +109,8 @@ const BookCreate = (props) => {
                             maxFileSize="5MB"
                             imagePreviewMaxFileSize="5MB"
                         />
-
-                        {/* <ImageInput
-                        accept={{ 'image/*': ['.png', '.jpg', '.jpeg'] }}
-                        source="images"
-                        validate={[required()]}
-                        maxSize={5000000}
-                        label="Изображение"
-                        multiple={true}
-                        placeholder="Изберете изображение или провлачете, за да го добавите."
-                    >
-                        <ImageField source="src" title="images" />
-                    </ImageInput> */}
-                    </Box>
-                    <Box>
+                    </div>
+                    <div>
                         <TextInput source="publisher" label="Издателство" />
                         <TextInput source="language" label="Език" />
                         <DateInput source="publishDate" label="Год на издаване" />
@@ -129,7 +118,7 @@ const BookCreate = (props) => {
                         <TextInput source="translator" label="Преводач" />
                         <TextInput source="dimensions" label="Размери" />
                         <TextInput source="coverPageType" label="Вид корица" />
-                    </Box>
+                    </div>
                 </Box>
             </SimpleForm>
         </Create>

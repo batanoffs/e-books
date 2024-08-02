@@ -3,15 +3,12 @@ import {
     Datagrid,
     TextField,
     NumberField,
-    ImageField,
-    Root,
     DateField,
     Filter,
     TextInput,
     useFieldValue,
 } from 'react-admin';
-
-import { Typography } from '@mui/material';
+import { CustomCoverImage } from './CustomCoverImage';
 
 const BookFilter = (props: any) => (
     <Filter {...props}>
@@ -19,27 +16,13 @@ const BookFilter = (props: any) => (
     </Filter>
 );
 
-export const CustomerCard = ({ className = '', ...rest }) => {
-    const coverImage = useFieldValue({ source: 'coverImage' });
-    const coverImageType = useFieldValue({ source: 'coverImageType' });
-    const title = useFieldValue({ source: 'title' });
-    const img = `data:${coverImageType};base64,${coverImage}`;
-    return (
-        <Typography component="div" className={className}>
-            <li style={{ listStyle: 'none' }}>
-                <img alt="cover" title={coverImage} src={img} style={{ width: '120px' }} />
-            </li>
-        </Typography>
-    );
-};
-
 const BookList = (props: any) => {
     const title = useFieldValue({ source: 'title' });
     console.log('title:', title);
     return (
         <List {...props} title="Книги" filters={<BookFilter />}>
             <Datagrid rowClick="edit" style={{ overflow: 'auto' }}>
-                <CustomerCard />
+                <CustomCoverImage />
                 <TextField
                     source="title"
                     label="Заглавие"
@@ -68,7 +51,7 @@ const BookList = (props: any) => {
                 />
                 <NumberField
                     source="price"
-                    label="Цена"
+                    label="Цена(лв.)"
                     sortable={true}
                     style={{ maxWidth: '100px' }}
                 />
@@ -87,9 +70,9 @@ const BookList = (props: any) => {
                 />
                 <NumberField
                     source="stock"
-                    label="Количество"
+                    label="Наличност(бр.)"
                     sortable={true}
-                    style={{ maxWidth: '100px' }}
+                    style={{ maxWidth: '150px' }}
                 />
                 <TextField
                     source="category"
@@ -112,7 +95,7 @@ const BookList = (props: any) => {
                 />
                 <DateField
                     source="publishDate"
-                    label="Год на издаване"
+                    label="Издадена на(дата)"
                     sortable={false}
                     style={{ maxWidth: '200px' }}
                 />
@@ -124,7 +107,7 @@ const BookList = (props: any) => {
                 />
                 <DateField
                     source="createdAt"
-                    label="Добавена на"
+                    label="Създадена на(дата)"
                     sortable={false}
                     style={{ maxWidth: '200px' }}
                 />

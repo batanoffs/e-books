@@ -25,20 +25,13 @@ import FeaturedList from './featured/List';
 import FeaturedEdit from './featured/Edit';
 import FeaturedShow from './featured/Show';
 import FeaturedCreate from './featured/Create';
+import { myTheme } from './theme';
 
 const apiUrl = 'http://localhost:5001/api/admin';
 const dataProvider = restProvider(apiUrl);
 
 const AdminPage = () => (
-    <Admin basename="/admin" dataProvider={dataProvider} authProvider={authProvider}>
-        <Resource
-            name="users"
-            list={UserList}
-            edit={UserEdit}
-            show={UserShow}
-            create={UserCreate}
-            options={{ label: 'Потребители' }}
-        />
+    <Admin basename="/admin" dataProvider={dataProvider} authProvider={authProvider} theme={myTheme}>
         <Resource
             name="orders"
             list={OrdersList}
@@ -55,6 +48,7 @@ const AdminPage = () => (
             create={BookCreate}
             options={{ label: 'Книги' }}
         />
+
         <Resource
             name="textbooks"
             list={TextbookList}
@@ -78,6 +72,14 @@ const AdminPage = () => (
             show={FeaturedShow}
             create={FeaturedCreate}
             options={{ label: 'Промотирани' }}
+        />
+        <Resource
+            name="users"
+            list={UserList}
+            edit={UserEdit}
+            show={UserShow}
+            create={UserCreate}
+            options={{ label: 'Потребители' }}
         />
     </Admin>
 );

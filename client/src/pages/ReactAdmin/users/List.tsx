@@ -10,5 +10,3 @@ const UserList = (props: any) => (
 );
 
 export default UserList;
-
-
