@@ -1,7 +1,7 @@
 module.exports = {
     trailingComma: 'es5',
     tabWidth: 4,
-    semi: true,
+    semi: false,
     singleQuote: true,
     printWidth: 80,
     bracketSpacing: true,
@@ -13,9 +13,9 @@ module.exports = {
     htmlWhitespaceSensitivity: 'strict',
     endOfLine: 'auto',
     singleAttributePerLine: false,
-    jsxSingleQuote: false,
+    jsxSingleQuote: true,
     quoteProps: 'as-needed',
-    useTabs: false,
+    useTabs: true,
     overrides: [
         {
             files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
