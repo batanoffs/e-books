@@ -2,7 +2,10 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
-    padding: 1em 0 0.5em 0;
+
+    .categoryTitle {
+        text-align: center;
+    }
 }
 
 .navigation {
@@ -19,8 +22,8 @@
     }
 
     display: flex;
-    width: 60%;
-    justify-content: space-between;
+    width: 100%;
+    justify-content: flex-start;
     align-items: flex-start;
 }
 
