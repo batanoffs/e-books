@@ -18,6 +18,10 @@ const UserSchema: Schema = new Schema(
             enum: ['user', 'admin'],
             default: 'user',
         },
+        register_date: {
+            type: Date,
+            default: Date.now
+        }
     },
     {
         collation: {
