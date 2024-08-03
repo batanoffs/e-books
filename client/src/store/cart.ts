@@ -1,63 +1,48 @@
-import { create } from 'zustand';
+import { create } from 'zustand'
 
 interface CartItem {
-    id: string;
-    title: string;
-    price: number;
-    quantity: number;
+	productType: string
+	productId: string
+	quantity: number
+	name: string
+	price: number
 }
 
-interface Order {
-    id: string;
-    items: CartItem[];
-    paymentMethod: string;
-    deliveryMethod: string;
+interface CartState {
+	cart: CartItem[]
+	updateQuantity: (id: string, quantity: number) => void
+	addToCart: (item: Omit<CartItem, 'quantity'>) => void
+	removeFromCart: (id: string) => void
 }
 
-interface StoreState {
-    cart: CartItem[];
-    order: Order | null;
-    addToCart: (item: Omit<CartItem, 'quantity'>) => void;
-    removeFromCart: (id: string) => void;
-    updateQuantity: (id: string, quantity: number) => void;
-    placeOrder: (order: Order) => void;
-    resetCart: () => void;
-}
+const useCartStore = create<CartState>((set) => ({
+	cart: [],
+	addToCart: (item) => {
+		set((state) => {
+			const existingProduct = state.cart.find(
+				(product) => product.productId === item.productId
+			)
+			if (existingProduct) {
+				existingProduct.quantity += item.quantity
+			} else {
+				set({
+					cart: [...state.cart, { ...item, quantity: item.quantity }],
+				})
+			}
+		})
+	},
+	removeFromCart: (id) =>
+		set((state) => {
+			const updatedCart = state.cart.filter((item) => item.productId !== id)
+			return { cart: updatedCart }
+		}),
+	updateQuantity: (id, quantity) =>
+		set((state) => {
+			const updatedCart = state.cart.map((item) =>
+				item.productId === id ? { ...item, quantity } : item
+			)
+			return { cart: updatedCart }
+		}),
+}))
 
-const useCartStore = create<StoreState>((set) => ({
-    cart: [],
-    order: null,
-    addToCart: (item) =>
-        set((state) => {
-            const existingItem = state.cart.find((cartItem) => cartItem.id === item.id);
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                state.cart.push({ ...item, quantity: 1 });
-            }
-            return { cart: [...state.cart] };
-        }),
-    removeFromCart: (id) =>
-        set((state) => ({
-            cart: state.cart.filter((item) => item.id !== id),
-        })),
-    updateQuantity: (id, quantity) =>
-        set((state) => {
-            const item = state.cart.find((cartItem) => cartItem.id === id);
-            if (item) {
-                item.quantity = quantity;
-            }
-            return { cart: [...state.cart] };
-        }),
-    placeOrder: (order) =>
-        set(() => ({
-            order: order,
-            cart: [],
-        })),
-    resetCart: () =>
-        set(() => ({
-            cart: [],
-        })),
-}));
-
-export default useCartStore;
+export default useCartStore
