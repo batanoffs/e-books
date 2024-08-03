@@ -2,7 +2,7 @@ const express = require('express');
 
 import { body } from 'express-validator';
 
-import { register, login, logout } from '../controllers/authController';
+import { register, login, logout } from '../controllers/auth';
 import { isGuest } from '../middlewares/guards';
 
 const router = express.Router();

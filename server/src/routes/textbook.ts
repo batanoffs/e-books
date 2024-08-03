@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createTextbook, getTextbooks, getTextbookById, updateTextbook, deleteTextbook } from '../controllers/textbookController';
+import { createTextbook, getTextbooks, getTextbookById, updateTextbook, deleteTextbook } from '../controllers/textbook';
 import { body } from 'express-validator';
 import validateRequest  from '../middlewares/validateRequest';
 

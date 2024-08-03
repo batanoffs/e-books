@@ -5,7 +5,7 @@ import {
     getOrderById,
     updateOrder,
     deleteOrder,
-} from '../controllers/orderController';
+} from '../controllers/order';
 
 const router = Router();
 

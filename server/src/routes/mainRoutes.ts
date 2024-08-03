@@ -1,13 +1,13 @@
 const express = require('express');
 
-import bookRoutes from './bookRoutes';
-import orderRoutes from './orderRoutes';
-import userRoutes from './userRoutes';
-import adminRoutes from './adminRoutes';
-import authRoutes from './authRoutes';
-import textbookRoutes from './textbookRoutes';
-import cartRoutes from './cartRoutes';
-import featuredRoutes from './featuredRoutes';
+import bookRoutes from './book';
+import orderRoutes from './order';
+import userRoutes from './user';
+import adminRoutes from './admin';
+import authRoutes from './auth';
+import textbookRoutes from './textbook';
+import cartRoutes from './cart';
+import featuredRoutes from './featured';
 
 const router = express.Router();
 

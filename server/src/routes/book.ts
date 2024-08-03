@@ -4,7 +4,7 @@ import {
     getBooks,
     getBookById,
     deleteBook,
-} from '../controllers/bookController';
+} from '../controllers/book';
 import { body } from 'express-validator';
 import validateRequest from '../middlewares/validateRequest';
 

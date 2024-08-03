@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getFeaturedProducts, markAsFeatured, removeFromFeatured } from '../controllers/featuredController';
+import { getFeaturedProducts, markAsFeatured, removeFromFeatured } from '../controllers/featured';
 
 const router = Router();
 
