@@ -1,70 +1,92 @@
-import { Box, Button, Paper, Typography } from '@mui/material';
-import useCartStore from '../../store/cart';
+import { Box, Button, Paper, Typography, Grid } from '@mui/material'
+import { useEffect } from 'react'
+import axios from 'axios'
+
+import { API } from '../../utils/constants/api'
+import useCartStore from '../../store/cart'
+import { getUserId } from '../../utils/helpers/auth'
+import CartItem from './CartItem'
 
 const CartPage = () => {
-    const cart = useCartStore((state) => state.cart);
-    const removeFromCart = useCartStore((state) => state.removeFromCart);
-    const updateQuantity = useCartStore((state) => state.updateQuantity);
+	const cart = useCartStore((state) => state.cart)
+	const removeFromCart = useCartStore((state) => state.removeFromCart)
+	const updateQuantity = useCartStore((state) => state.updateQuantity)
 
-    return (
-        <Box
-            sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-                height: '90vh',
-            }}
-        >
-            <Paper
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    padding: 2,
-                    maxWidth: 600,
-                    margin: '0 auto',
-                }}
-            >
-                <Typography variant="h4" component="h1" gutterBottom>
-                    Shopping Cart
-                </Typography>
-                {cart.length === 0 ? (
-                    <Typography variant="body1" component="p" align="center">
-                        Your cart is empty
-                    </Typography>
-                ) : (
-                    cart.map((item) => (
-                        <Box
-                            key={item.id}
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                margin: 2,
-                            }}
-                        >
-                            <Typography variant="h6" component="h2" gutterBottom>
-                                {item.title}
-                            </Typography>
-                            <Typography variant="body1" component="p">
-                                Price: {item.price}
-                            </Typography>
-                            <input
-                                type="number"
-                                value={item.quantity}
-                                onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
-                                sx={{ margin: 1 }}
-                            />
-                            <Button variant="contained" onClick={() => removeFromCart(item.id)}>
-                                Remove
-                            </Button>
-                        </Box>
-                    ))
-                )}
-            </Paper>
-        </Box>
-    );
-};
+	useEffect(() => {
+		const fetchCart = async () => {
+			try {
+				const userId = await getUserId()
+				const response = await axios.get(API.CART + userId)
+				if (response.data) {
+					useCartStore.setState({ cart: response.data.products })
+				}
+			} catch (error) {
+				console.error(error)
+			}
+		}
 
-export default CartPage;
+		fetchCart()
+	}, [])
+
+	const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+
+	return (
+		<Box
+			sx={{
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				flexDirection: 'column',
+				minHeight: '90vh',
+				padding: 2,
+			}}
+		>
+			<Typography variant='h6' component='h6' gutterBottom>
+				Shopping Cart
+			</Typography>
+			<Paper
+				sx={{
+					width: '100%',
+					maxWidth: 800,
+					padding: 2,
+				}}
+			>
+				{cart.length === 0 ? (
+					<Typography variant='body1' component='p' align='center'>
+						Your cart is empty
+					</Typography>
+				) : (
+					<Grid container spacing={2}>
+						{cart.map((item) => (
+							<Grid item xs={12} key={item.productId}>
+								<CartItem
+									item={item}
+									removeFromCart={removeFromCart}
+									updateQuantity={updateQuantity}
+								/>
+							</Grid>
+						))}
+
+						<Grid item xs={12}>
+							<Box
+								sx={{
+									display: 'flex',
+									justifyContent: 'space-between',
+									alignItems: 'center',
+									marginTop: 2,
+								}}
+							>
+								<Typography variant='h6'>Total: {total} лв.</Typography>
+								<Button variant='contained' color='primary' size='large'>
+									Checkout
+								</Button>
+							</Box>
+						</Grid>
+					</Grid>
+				)}
+			</Paper>
+		</Box>
+	)
+}
+
+export default CartPage
