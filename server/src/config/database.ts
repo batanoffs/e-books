@@ -4,7 +4,7 @@ import { connectionString } from '../constants/serverSetup';
 require('../models/Book');
 require('../models/Featured');
 require('../models/Order'); 
-require('../models/ShoppingCart');
+require('../models/Cart');
 require('../models/Stationery');
 require('../models/Textbook');
 require('../models/User');

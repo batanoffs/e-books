@@ -2,9 +2,9 @@ import { Request, Response } from 'express-serve-static-core';
 import Order from '../models/Order';
 
 export const createOrder = async (req: Request, res: Response) => {
-    const { userId, books, total, status } = req.body;
+    const { userId, items, total, status } = req.body;
     try {
-        const newOrder = new Order({ userId, books, total, status });
+        const newOrder = new Order({ userId, items, total, status });
         await newOrder.save();
         res.status(201).json(newOrder);
     } catch (error) {
@@ -36,11 +36,11 @@ export const getOrderById = async (req: Request, res: Response) => {
 
 export const updateOrder = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { userId, books, total, status } = req.body;
+    const { userId, items, total, status } = req.body;
     try {
         const order = await Order.findByIdAndUpdate(
             id,
-            { userId, books, total, status },
+            { userId, items, total, status },
             { new: true }
         );
         if (!order) {

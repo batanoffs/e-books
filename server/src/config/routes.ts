@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import appRouter from '../routes/appRoutes';
+import appRouter from '../routes/mainRoutes';
 
 /**
  * Configures the routes for the application.
