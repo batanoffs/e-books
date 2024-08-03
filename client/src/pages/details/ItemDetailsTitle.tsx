@@ -6,9 +6,11 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { ProductDetailsProps } from '../../interfaces/ProductDetailsProps.interface'
 
 interface ItemDetailsTitleProps extends ProductDetailsProps {
-	handleAddToCart: (itemId: string, itemQuantity: number) => void
+	handleAddToCart: () => void
 	handleBuyNow: () => void
 	handleAddToWishlist: () => void
+	quantity: number
+	setQuantity: (quantity: number) => void
 	styles: Record<string, string>
 }
 
@@ -16,13 +18,14 @@ export const ItemDetailsTitle = ({
 	handleAddToCart,
 	handleBuyNow,
 	handleAddToWishlist,
+	setQuantity,
+	quantity,
 	styles,
 	title,
 	author,
 	availability,
 	price,
 	deliveryPrice,
-	_id,
 }: ItemDetailsTitleProps) => {
 	return (
 		<div className={styles.detailsContainer}>
@@ -56,13 +59,13 @@ export const ItemDetailsTitle = ({
 				<div className={styles.cartContainer}>
 					<IconButton
 						className={styles.cartButton}
-						onClick={() => handleAddToCart(_id, 1)}
+						onClick={handleAddToCart}
 						aria-label='add to wishlist'
 					>
 						<ShoppingCartIcon /> Добави в количка
 					</IconButton>
 
-					<QuantityInput itemId={_id} handleAddToCart={handleAddToCart} />
+					<QuantityInput quantity={quantity} setQuantity={setQuantity} />
 				</div>
 			</div>
 		</div>
