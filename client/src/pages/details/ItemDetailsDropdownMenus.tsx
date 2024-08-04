@@ -74,7 +74,8 @@ export const ItemDetailsDropdownMenus = (props: ItemDetailsDropdownMenus) => {
 									<strong>Език:</strong> {language}
 								</p>
 								<p>
-									<strong>Година на издаване:</strong> {publishDate}
+									<strong>Година на издаване:</strong>{' '}
+									{new Date(publishDate).getFullYear()}
 								</p>
 								<p>
 									<strong>Страници брой:</strong> {pageCount}
