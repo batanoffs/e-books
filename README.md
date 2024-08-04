@@ -1,40 +1,18 @@
 # E-commerce bookstore full stack project
 
-### Technologies used
+## Technologies
 
 #### Front-end:
 
--   React
--   Redux
--   TypeScript
--   Material UI
--   SCSS
--   React Router
--   React Admin
--   React Slick
--   React Hook Form
--   FilePond
--   Zustand (state managment)
--   Axios
--   SASS
+    React, Redux, TypeScript, Material UI, SCSS, React Router, React Admin, React Slick, React Hook Form, FilePond, Zustand, Axios, SASS
 
 #### Back-end:
 
--   Node
--   Express
--   MongoDB
--   Mongoose
--   Typescript
--   JWT
--   Express-Mongoose-RA-JSON-Server
--   Axios
+    Node, Express, MongoDB, Mongoose, Typescript, JWT, Express-Mongoose-RA-JSON-Server, Axios
 
 #### Tools:
 
--   Vite
--   ESLint
--   Prettier
--   Yarn
+    Vite, ESLint, Prettier, Yarn
 
 ### Fixes and updates:
 
@@ -52,7 +30,7 @@
 -   updated carousels functionality buttons etc
 -   fix catalog hover buttons issues and functionality
 
-### FUTURE Development:
+## FUTURE Development:
 
 1. Create the logic for the rest of the products (sanitary and textbooks)
 2. Create more components in home page for example blog or categories
@@ -97,8 +75,8 @@
 14. Implement newsletter logic
 15. Research and implement forgotten password logic
 
-
 ### Folder Structure
+
 ```
 e-books/
 ├── client/
