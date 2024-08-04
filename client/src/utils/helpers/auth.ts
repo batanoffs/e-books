@@ -42,10 +42,8 @@ const getUserRole = async () => {
 
 const getUserId = async () => {
 	const token = getToken()
-	if (!token) {
-		console.error('No token found in cookies')
-		return
-	}
+	if (!token) return new Error('No token found in cookies')
+
 	try {
 		const responseFromUser = await axios.get(API.USER_ID, {
 			headers: {
