@@ -7,6 +7,10 @@ const CartProductSchema: Schema = new Schema(
             type: String, 
             required: true 
         },
+        productImage: {
+            type: String,
+            required: true
+        },
 		productId: { 
             type: Schema.Types.ObjectId, 
             required: true 
