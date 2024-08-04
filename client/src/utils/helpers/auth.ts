@@ -11,11 +11,24 @@ const isAuth = (): boolean => {
 }
 
 const getToken = (): string | undefined => {
-	return document.cookie
+	const SearchTokenCookie = document.cookie
 		.split(';')
 		.map((cookie) => cookie.trim())
 		.find((cookie) => cookie.startsWith('token='))
-		?.split('=')[1]
+
+	if (!SearchTokenCookie) {
+		console.error('No token found in cookies')
+		return
+	}
+
+	const token = SearchTokenCookie.split('=')[1]
+
+	if (!token || token === 'undefined' || token === 'null') {
+		console.error('Invalid token found in cookies')
+		return
+	}
+
+	return token
 }
 
 const getUserRole = async () => {
