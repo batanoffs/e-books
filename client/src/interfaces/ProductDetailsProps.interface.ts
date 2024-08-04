@@ -3,7 +3,6 @@ export interface ProductDetailsProps {
 	author: string
 	description: string
 	price: number
-	deliveryPrice: number
 	availability: string
 	sku: string
 	translator: string
