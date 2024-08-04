@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import axios from 'axios'
 
 import { ProductDetailsProps } from '../../interfaces/ProductDetailsProps.interface'
 import { ItemDetailsDropdownMenus } from './ItemDetailsDropdownMenus'
 import { ItemDetailsTitle } from './ItemDetailsTitle'
-import { getUserId } from '../../utils/helpers/auth'
-import { API } from '../../utils/constants/api'
 
 import styles from './details.module.scss'
+import { cartService } from '../../services/cartService'
 
 export const ProductDetails = ({ ...props }: { props: ProductDetailsProps }) => {
 	const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(true)
@@ -19,22 +17,8 @@ export const ProductDetails = ({ ...props }: { props: ProductDetailsProps }) => 
 	const navigate = useNavigate()
 
 	const handleAddToCart = async () => {
-		const { _id, price, title } = props
-
-		if (!_id || !price || !title) return new Error('Missing product data')
-
 		try {
-			const userId = await getUserId()
-			const data = {
-				userId,
-				productId: _id,
-				quantity,
-				name: title,
-				price,
-				productType: 'book',
-			}
-
-			await axios.post(API.CART, data)
+			await cartService.addToCart(props, quantity, 'book')
 		} catch (error) {
 			console.error('Error getting user ID or adding to cart:', error)
 		}
