@@ -41,9 +41,6 @@ const CartPage = () => {
 				padding: 2,
 			}}
 		>
-			<Typography variant='h6' component='h6' gutterBottom>
-				Shopping Cart
-			</Typography>
 			<Paper
 				sx={{
 					width: '100%',
