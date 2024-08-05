@@ -10,6 +10,7 @@ interface BookProps {
         author: string;
         imageUrl: string;
         description: string;
+        coverImagePath: string;
         price: number;
         category: string;
         stock: number;
