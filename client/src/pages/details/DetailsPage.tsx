@@ -48,7 +48,6 @@ export const DetailsPage = ({ type, path }: { type: string | undefined }) => {
 				/>
 			}
 			aside={<ImageViewer imageUrl={book.coverImagePath} />}
-			path={path}
 		>
 			<ProductDetails {...book} />
 		</DetailsLayout>
