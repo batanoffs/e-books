@@ -11,76 +11,61 @@ const isAuth = (): boolean => {
 }
 
 const getToken = (): string | undefined => {
-	const SearchTokenCookie = document.cookie
-		.split(';')
-		.map((cookie) => cookie.trim())
-		.find((cookie) => cookie.startsWith('token='))
+	const cookieName = 'token='
+	const cookies = document.cookie.split(';')
+	const tokenCookie = cookies.find((cookie) => cookie.trim().startsWith(cookieName))
 
-	if (!SearchTokenCookie) {
-		console.error('No token found in cookies')
-		return
-	}
+	if (!tokenCookie) return undefined
 
-	const token = SearchTokenCookie.split('=')[1]
+	const token = tokenCookie.split('=')[1]
 
-	if (!token || token === 'undefined' || token === 'null') {
-		console.error('Invalid token found in cookies')
-		return
-	}
+	if (!token || token === 'undefined' || token === 'null') return undefined
 
 	return token
 }
 
 const getUserRole = async () => {
-	const token = getToken()
-	if (!token) {
-		console.error('No token found in cookies')
-		return
-	}
 	try {
-		const responseFromUser = await axios.get(API.USERS, {
+		const token = getToken()
+		const response = await axios.get(API.USERS, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
 		})
-		const userRole = responseFromUser.data.role
-
-		console.log('User Role:', userRole)
+		const userRole = response.data.role
+		if (!userRole) return new Error('User role not found')
 
 		return userRole
 	} catch (error) {
-		console.error('Error fetching user ID:', error)
+		console.error('Error fetching user Role:', error)
 	}
 }
 
 const getUserId = async () => {
-	const token = getToken()
-	if (!token) return new Error('No token found in cookies')
-
 	try {
+		const token = getToken()
+
 		const responseFromUser = await axios.get(API.USER_ID, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
 		})
 		const userId = responseFromUser.data.userId
-
-		console.log('User ID:', userId)
-
+		if (!userId) return new Error('User ID not found')
 		return userId
 	} catch (error) {
 		console.error('Error fetching user ID:', error)
 	}
 }
 
-const checkIfUserIsAdmin = () => {
-	const userRole = getUserRole() // Get user role
-
-	// Check if user has admin role
-	if (!userRole) {
+const checkIfUserIsAdmin = async () => {
+	try {
+		const userRole = await getUserRole()
+		return userRole === 'admin'
+	} catch (error) {
+		console.error('Error checking if user is admin:', error)
 		return false
 	}
-	return true
 }
 
 export { isGuest, isAuth, getToken, checkIfUserIsAdmin, getUserId, getUserRole }
