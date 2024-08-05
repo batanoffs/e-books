@@ -17,11 +17,7 @@ export const ProductDetails = ({ ...props }: { props: ProductDetailsProps }) => 
 	const navigate = useNavigate()
 
 	const handleAddToCart = async () => {
-		try {
-			await cartService.addToCart(props, quantity, 'book')
-		} catch (error) {
-			console.error('Error getting user ID or adding to cart:', error)
-		}
+		await cartService.addToCart(props, quantity, 'book')
 	}
 
 	const handleBuyNow = async () => {
