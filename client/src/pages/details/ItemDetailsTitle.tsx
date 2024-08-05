@@ -25,8 +25,9 @@ export const ItemDetailsTitle = ({
 	author,
 	availability,
 	price,
-	deliveryPrice,
-}: ItemDetailsTitleProps) => {
+	publisher,
+}: // deliveryPrice,
+ItemDetailsTitleProps) => {
 	return (
 		<div className={styles.detailsContainer}>
 			<div className={styles.titleSection}>
@@ -41,11 +42,14 @@ export const ItemDetailsTitle = ({
 					</IconButton>
 				</Tooltip>
 			</div>
-			<h2 className={styles.author}>{author}</h2>
+			<div className={styles.authorDetails}>
+				<span>{author}</span>
+				<span>{publisher}</span>
+			</div>
 			<div className={styles.availability}>{availability}</div>
 			<div className={styles.priceSection}>
 				<div className={styles.price}>{price} лв.</div>
-				<div className={styles.deliveryPrice}>Доставка: {deliveryPrice}</div>
+				{/* <div className={styles.deliveryPrice}>Доставка: {deliveryPrice}</div> */}
 			</div>
 			<div className={styles.actions}>
 				<IconButton

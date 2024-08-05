@@ -36,7 +36,7 @@ export const ProductDetails = ({ ...props }: { props: ProductDetailsProps }) => 
 	}
 
 	return (
-		<div className={styles.detailsWrapper}>
+		<>
 			<ItemDetailsTitle
 				{...{
 					handleAddToCart,
@@ -62,6 +62,6 @@ export const ProductDetails = ({ ...props }: { props: ProductDetailsProps }) => 
 					...props,
 				}}
 			/>
-		</div>
+		</>
 	)
 }
