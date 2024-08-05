@@ -53,6 +53,7 @@ Tools: Git, Vite, ESLint, Prettier, Yarn, Nodemon
 -   [ ] decide on how much you want to use material ui (performance issues)
 -   [ ] updated carousels functionality buttons etc
 -   [ ] fix catalog hover buttons issues and functionality
+-   [ ] fix issues with Menu component from Material UI for anchorEl property
 
 ## Usage
 
