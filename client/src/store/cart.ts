@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { cartService } from '../services/cartService'
 
 interface CartItem {
 	productType: string
@@ -12,7 +13,8 @@ interface CartState {
 	cart: CartItem[]
 	updateQuantity: (id: string, quantity: number) => void
 	addToCart: (item: Omit<CartItem, 'quantity'>) => void
-	removeFromCart: (id: string) => void
+	removeFromCart: (productId: string, userId: string) => void
+	clearCart: (userId: string) => void
 }
 
 const useCartStore = create<CartState>((set) => ({
@@ -31,11 +33,13 @@ const useCartStore = create<CartState>((set) => ({
 			}
 		})
 	},
-	removeFromCart: (id) =>
+	removeFromCart: async (productId, userId) => {
+		await cartService.removeOne(productId, userId)
 		set((state) => {
-			const updatedCart = state.cart.filter((item) => item.productId !== id)
+			const updatedCart = state.cart.filter((item) => item.productId !== productId)
 			return { cart: updatedCart }
-		}),
+		})
+	},
 	updateQuantity: (id, quantity) =>
 		set((state) => {
 			const updatedCart = state.cart.map((item) =>
@@ -43,6 +47,10 @@ const useCartStore = create<CartState>((set) => ({
 			)
 			return { cart: updatedCart }
 		}),
+	clearCart: async (userId) => {
+		await cartService.removeAll(userId)
+		set({ cart: [] })
+	},
 }))
 
 export default useCartStore
