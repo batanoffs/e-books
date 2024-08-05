@@ -9,6 +9,9 @@ const login = async (email: string, password: string) => {
 	try {
 		const response = await axios.post(API.LOGIN, { email, password })
 		const { token, redirectUrl, message } = response.data
+		if (!token || !redirectUrl || !message)
+			throw new Error('Response token, redirectUrl or message is empty')
+
 		const currentToken = getToken()
 
 		if (currentToken !== token) {
@@ -19,8 +22,7 @@ const login = async (email: string, password: string) => {
 		}
 		return { redirectUrl, message }
 	} catch (error) {
-		// Handle login error
-		throw new Error('Login failed')
+		console.error('Login failed', error)
 	}
 }
 
