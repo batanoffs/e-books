@@ -4,6 +4,8 @@ interface ICartProduct {
     productType: 'Book' | 'Textbook' | 'Items'; //TODO Specify the types of products
     productId: Types.ObjectId; // Reference to the specific product
     quantity: number;
+    productImage: Buffer;
+    productImageType: String;
     name: string;
     price: number;
 }
