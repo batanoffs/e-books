@@ -1,0 +1,135 @@
+/*---------------------------------------
+  CUSTOM PROPERTIES ( VARIABLES )    
+-----------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Pangolin&display=swap');
+
+:root {
+	--body-font-family: 'Montserrat Alternates', sans-serif;
+
+	--primary-color: #6f42c1;
+	--primary-hover-color: #6028c8;
+	--primary-bg-color: #a60067;
+
+	--secondary-color: #dc602e;
+	--secondary-hover-color: #e4ac73;
+	--secondary-bg-color: #333;
+
+	--third-bg-color: #ccdde2ff;
+
+	--custom-btn-bg-color: #ccdde2ff;
+
+	--heading-color: #333;
+
+	--p-color: #1d3557ff;
+
+	--border-color: #ccdde2ff;
+
+	--link-hover-color: #dc602e;
+
+	--logo--background-color: #44464c;
+	--logo--icon-color: #41a6d1;
+	--logo--text-color: #5c5959;
+
+	--label-font-size: 1em;
+	--menu-font-size: 1em;
+	--menu-font-weight: 400;
+	--btn-font-size: 1em;
+	--card-title-font-size: 1em;
+	--copyright-font-size: 0.8em;
+
+	--border-radius-large: 1em;
+	--border-radius-component: 1em;
+	--border-radius-medium: 1.1em;
+	--border-radius-small: 0.8em;
+
+	--font-weight-light: 400;
+	--font-weight-normal: 500;
+	--font-weight-bold: 600;
+}
+
+html {
+	scrollbar-width: none;
+	font: 16px/1.5 var(--body-font-family);
+}
+
+body,
+table,
+input {
+	font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: var(--font-weight-bold);
+	line-height: 1.2;
+	color: var(--heading-color);
+}
+
+h1 {
+	font-size: 2.8em;
+} /* 14 * 2.8 = 39px */
+h2 {
+	font-size: 2.2em;
+} /* 14 * 2.2 = 31px */
+h3 {
+	font-size: 1.8em;
+} /* 14 * 1.8 = 25px */
+h4 {
+	font-size: 1.6em;
+} /* 14 * 1.6 = 22px */
+h5 {
+	font-size: 1.2em;
+	padding-bottom: 0.5em;
+} /* 14 * 1.2 = 17px */
+h6 {
+	font-size: 1em;
+} /* 14 * 1.0 = 14px */
+
+li {
+	list-style-position: outside;
+}
+
+p {
+	color: var(--p-color);
+	font-size: 1em;
+	font-weight: var(--font-weight-light);
+}
+
+ul li {
+	color: var(--p-color);
+	font-size: var(--card-title-font-size);
+	font-weight: var(--font-weight-normal);
+}
+
+a,
+button {
+	touch-action: manipulation;
+	transition: all 0.3s;
+}
+
+label {
+	display: inline-block;
+	padding-right: 0.6em;
+	text-align: right;
+}
+
+a {
+	display: inline-block;
+	color: var(--primary-color);
+	text-decoration: none;
+}
+
+a:hover {
+	color: var(--link-hover-color);
+}
+
+b,
+strong {
+	font-weight: var(--font-weight-bold);
+	color: var(--heading-color);
+}

@@ -1,7 +1,4 @@
-$purple: #aa49e7;
-$orange: #e4ac73;
-$gray: #f9f9f9;
-$black: #000000;
+@use '../../styles/base/colors' as colors;
 
 .detailsContainer {
 	margin-bottom: 30px;
@@ -10,6 +7,18 @@ $black: #000000;
 		align-items: center;
 		gap: 10px;
 		margin-bottom: 20px;
+	}
+
+	.authorDetails {
+		display: flex;
+		gap: 10px;
+		margin-bottom: 10px;
+		text-decoration: underline;
+
+		span:hover {
+			cursor: pointer;
+			color: colors.$purple;
+		}
 	}
 
 	h1 {
@@ -39,7 +48,7 @@ $black: #000000;
 
 		.deliveryPrice {
 			font-size: 1em;
-			color: $gray;
+			color: colors.$gray;
 		}
 	}
 
@@ -62,19 +71,19 @@ $black: #000000;
 	}
 
 	.actions .wishlistButton {
-		background-color: $gray;
+		background-color: colors.$gray;
 
 		&:hover {
-			background-color: darken($purple, 10%);
+			background-color: darken(colors.$purple, 10%);
 		}
 	}
 
 	.actions .cartButton {
 		&:nth-child(1) {
-			background-color: $orange;
+			background-color: colors.$orange;
 		}
 		&:hover {
-			background-color: darken($orange, 10%);
+			background-color: darken(colors.$orange, 10%);
 		}
 	}
 
@@ -91,7 +100,7 @@ $black: #000000;
 			transition: background-color 0.3s ease;
 
 			&:hover {
-				background-color: darken($orange, 10%);
+				background-color: darken(colors.$orange, 10%);
 			}
 		}
 
@@ -160,7 +169,7 @@ $black: #000000;
 			p,
 			div {
 				margin: 5px 0;
-				color: $black;
+				color: colors.$black;
 			}
 		}
 
@@ -175,7 +184,7 @@ $black: #000000;
 		div {
 			font-size: 1em;
 			margin-top: 10px;
-			color: $black;
+			color: colors.$black;
 		}
 	}
 }
