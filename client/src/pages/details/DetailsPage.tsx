@@ -19,7 +19,7 @@ interface Item {
 	coverImagePath: string
 }
 
-export const DetailsPage = ({ type, path }: { type: string | undefined }) => {
+export const DetailsPage = ({ type, path }: { type: string | undefined; path: string }) => {
 	const id = useParams().id
 	const [book, setBook] = useState<Item | null>(null)
 
