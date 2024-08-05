@@ -1,4 +1,7 @@
 export const fetchDeliveryOptions = async () => {
+
+    //TODO research and create endpoints
+    
     const speedyResponse = await fetch('https://api.speedy.bg/offices');
     const econtResponse = await fetch('https://api.econt.bg/offices');
 
