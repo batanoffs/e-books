@@ -2,18 +2,35 @@ import { Request, Response } from 'express'
 import Cart from '../models/Cart'
 
 export const addToCart = async (req: Request, res: Response) => {
-	const { userId, productId, quantity, name, price, productType } = req.body
+	const {
+		userId,
+		productId,
+		quantity,
+		name,
+		price,
+		productType,
+		productImage,
+		productImageType,
+	} = req.body
 
 	try {
 		let cart = await Cart.findOne({ userId })
-		console.log('find cart:', cart)
 
 		if (!cart) {
 			cart = new Cart({
 				userId,
-				products: [{ productType, productId, quantity, name, price }],
+				products: [
+					{
+						productType,
+						productImage,
+						productImageType,
+						productId,
+						quantity,
+						name,
+						price,
+					},
+				],
 			})
-			console.log('new cart:', cart)
 		} else {
 			const existingProduct = cart.products.find(
 				product => product.productId.toString() === productId.toString()
@@ -21,7 +38,15 @@ export const addToCart = async (req: Request, res: Response) => {
 			if (existingProduct) {
 				existingProduct.quantity += quantity
 			} else {
-				cart.products.push({ productType, productId, quantity, name, price })
+				cart.products.push({
+					productType,
+					productImage,
+					productImageType,
+					productId,
+					quantity,
+					name,
+					price,
+				})
 			}
 		}
 
@@ -47,8 +72,15 @@ export const getCart = async (req: Request, res: Response) => {
 }
 
 export const removeProductFromCart = async (req: Request, res: Response) => {
-	const { userId, productId } = req.params
+	const { userId, productId } = req.query
+	
+	console.log(req.query)
 
+	console.log('userId:', userId, 'productId:', productId)
+
+	if (!userId || !productId) {
+		return res.status(400).json({ message: 'User ID or product ID are missing' })
+	}
 	try {
 		const cart = await Cart.findOne({ userId })
 
@@ -69,19 +101,42 @@ export const removeProductFromCart = async (req: Request, res: Response) => {
 }
 
 export const clearCart = async (req: Request, res: Response) => {
-	const { userId } = req.params
-
+	const userId = req.query.userId
+	if (!userId) {
+		return res.status(400).json({ message: 'User ID is required' })
+	}
 	try {
-		const cart = await Cart.findOne({ userId })
+		const cart = await Cart.findOneAndUpdate({ userId }, { products: [] }, { new: true })
 
 		if (!cart) {
 			return res.status(404).json({ message: 'Cart not found' })
 		}
 
-		cart.products = []
-		await cart.save()
 		res.status(200).json({ message: 'Cart cleared successfully' })
 	} catch (error) {
 		res.status(500).json({ message: 'Error clearing cart', error })
 	}
 }
+
+// export const clearCart = async (req: Request, res: Response) => {
+// 	console.log(req)
+// 	console.log(req.query)
+
+// 	const userId = req.query?.split('=')[1]
+
+// 	console.log('userId', userId)
+
+// 	try {
+// 		const cart = await Cart.findOne({ userId })
+
+// 		if (!cart) {
+// 			return res.status(404).json({ message: 'Cart not found' })
+// 		}
+
+// 		cart.products = []
+// 		await cart.save()
+// 		res.status(200).json({ message: 'Cart cleared successfully' })
+// 	} catch (error) {
+// 		res.status(500).json({ message: 'Error clearing cart', error })
+// 	}
+// }
