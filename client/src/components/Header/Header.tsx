@@ -8,7 +8,7 @@ import NavigationMenu from './NavMenu';
 import SearchBar from './SearchBar';
 import UserMenu from './UserMenu';
 import { API } from '../../utils/constants/api';
-import { useFiltersStore } from '../../store/categories';
+import { useFiltersStore } from '../../store/filters';
 import CartButton from './Cart';
 
 const Header = () => {
@@ -42,7 +42,7 @@ const Header = () => {
     const handleLogout = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.get(API.LOGOUT);
+            await axios.get(API.LOGOUT);
             document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
             navigate('/');
         } catch (error) {

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import styles from './navigation.module.scss';
-import { useFiltersStore } from '../../../store/categories';
+import { useFiltersStore } from '../../../store/filters';
 
 type Categories = {
     categories: string[];

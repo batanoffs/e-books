@@ -8,7 +8,7 @@ import { LayoutAside } from '../../components/Layout/dashboard/LayoutAside'
 import { CatalogItems } from '../../components/Layout/dashboard/CatalogItems'
 import { ItemCard } from '../../components/Cards/ItemCard'
 import { DetailsPage } from '../Details/DetailsPage'
-import { useFiltersStore } from '../../store/categories'
+import { useFiltersStore } from '../../store/filters'
 import { API } from '../../utils/constants/api'
 
 const CatalogPage = () => {
