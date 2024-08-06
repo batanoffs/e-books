@@ -43,7 +43,6 @@ export const ItemCard = ({ item }) => {
             <div className={styles.bookInfo}>
                 <h6>{title}</h6>
                 <p>{author}</p>
-
                 <p>{price} лв.</p>
             </div>
         </div>

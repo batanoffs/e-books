@@ -1,10 +1,8 @@
 .container {
 	position: relative;
-	display: flex;
+	display: inline-flex;
 	flex-direction: column;
-
 	overflow: hidden;
-	width: 100%; /* Make it full width initially */
 
 	&:hover {
 		.bookImageContainer {
@@ -18,10 +16,21 @@
 	}
 
 	.bookImageContainer {
-		position: relative;
-		width: 100%;
-		height: max(220px);
+		// position: relative;
+		flex: 1 1 max(200px);
+		// width: 100%;
 		overflow: hidden;
+
+		img {
+			width: auto;
+			height: 100%;
+			padding: 0em 0.5em;
+			transition: 0.3s;
+			object-fit: cover;
+			display: block;
+			margin: 0 auto;
+			cursor: pointer;
+		}
 
 		.buttonContainer {
 			position: absolute;
@@ -45,7 +54,8 @@
 			align-items: center;
 			padding: 0.5em;
 			border-radius: 100%;
-			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.2);
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+				0 4px 16px rgba(0, 0, 0, 0.2);
 			background-color: #fff;
 			cursor: pointer;
 
@@ -58,55 +68,33 @@
 				margin: 0 auto;
 			}
 		}
-
-		img {
-			width: auto;
-			height: 100%;
-			padding: 0em 0.5em;
-			transition: 0.3s;
-			object-fit: cover;
-			display: block;
-			margin: 0 auto;
-			cursor: pointer;
-		}
 	}
 
 	.bookInfo {
+		margin-top: 0.5em;
+		padding: 0;
 		display: flex;
-		gap: 0.2em;
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
-		padding-top: 0.5em;
+		justify-content: flex-start;
 
 		h6 {
+			margin: 0;
 			font-size: small;
 			text-align: center;
 			font-weight: 800;
 			height: 2.5em;
 			overflow: hidden;
-			text-overflow: ellipsis;
-			-webkit-box-orient: vertical;
-			-moz-box-orient: vertical;
-			box-orient: vertical;
 			cursor: pointer;
 		}
 
 		p {
+			margin: 0;
 			font-size: small;
 		}
 
 		p:last-of-type {
 			font-weight: 700;
-		}
-
-		.rating {
-			display: flex;
-			align-items: center;
-		}
-
-		.rating > * {
-			margin-right: 0.5em;
 		}
 	}
 }
