@@ -1,0 +1,65 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .categoryTitle {
+        text-align: center;
+    }
+}
+
+.navigation {
+    &,
+    p,
+    span {
+        margin: 0;
+        font-size: small;
+    }
+
+    span {
+        font-weight: bold;
+    }
+
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.sorting {
+    &,
+    p,
+    span {
+        margin: 0;
+        font-size: small;
+    }
+
+    span {
+        color: #ffc107;
+        font-weight: bold;
+    }
+
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 1px solid #c8c8c8;
+    gap: 2em;
+    align-items: center;
+}
+
+.sortContainer,
+.itemsPerPageContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.5em;
+
+    select {
+        padding: 0.5em;
+        border-radius: 0.5em;
+        border: 1px solid #c8c8c8;
+        background-color: #fff;
+        color: #333;
+        font-size: small;
+    }
+}
