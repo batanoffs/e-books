@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 import { API } from '../../utils/constants/api'
-import { LayoutHeader } from '../../components/Layout/dashboard/LayoutHeader'
+import { LayoutHeader } from '../../components/Layout/catalog/LayoutHeader'
 import { DetailsLayout } from '../../components/Layout/detail/DetailsLayout'
 import { ImageViewer } from './ImageViewer'
 
