@@ -37,7 +37,6 @@ export const Bookcard = ({ book, loading = false }) => {
 								fontSize: 'small',
 								fontWeight: 800,
 								textAlign: 'center',
-								height: '3em',
 								overflow: 'hidden',
 								textOverflow: 'ellipsis',
 								WebkitLineClamp: 2,
