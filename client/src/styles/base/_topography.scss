@@ -57,6 +57,9 @@ body,
 table,
 input {
 	font: inherit;
+	height: 2.5em;
+	border: 1px solid var(--primary-color);
+	border-radius: 0.2em;
 }
 
 h1,
