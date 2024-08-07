@@ -42,18 +42,18 @@ Tools: Git, Vite, ESLint, Prettier, Yarn, Nodemon
 
 -   [ ] fix issues with session expire and users
 -   [ ] fix issues with cookies token for admins validation
--   [ ] fix server duplicate code replace with already created utils
--   [ ] create filters for catalog Pages
+-   [ ] fix server duplicate code - replace with already created utils
 -   [ ] fix css warnings (low priority)
--   [ ] create logic for checkout page
--   [ ] update cart logic and think about state management issues for items and quantity
--   [ ] redesign discuss business logic for buy now button
--   [ ] maybe add property for product type to each model schema of items/products
--   [ ] refactor theme and reuseable code for scss and maybe react
--   [ ] decide on how much you want to use material ui (performance issues)
--   [ ] updated carousels functionality buttons etc
 -   [ ] fix catalog hover buttons issues and functionality
 -   [ ] fix issues with Menu component from Material UI for anchorEl property
+-   [x] update cart logic and think about state management issues for items and quantity
+-   [ ] updated carousels functionality buttons etc
+-   [ ] update theme and reuseable code for scss and maybe react
+-   [ ] update add property for product type to each model schema of items/products
+-   [ ] create filters for catalog Pages
+-   [ ] create logic for checkout page
+-   [ ] redesign discuss business logic for buy now button
+-   [ ] decide on how much material ui components will be used (performance issues)
 
 ## Usage
 
@@ -71,7 +71,7 @@ Here are some examples of how to use this project:
 
 ## Installation
 
-To get started with this project, follow these steps:
+To get started with this project you need `mongodb` installed for handling the database then:
 
 1. Clone the repository
 
@@ -101,7 +101,7 @@ git clone https://github.com/batanoffs/e-books.git
 ./cd client && yarn run dev
 ```
 
-5. Open your browser and go to [http://localhost:3000/mini-finance/](http://localhost:3000/mini-finance/) to view the app.
+5. Open your browser and go to [http://localhost:5173/](http://localhost:5173/) to view the app.
 6. Login with test credentials or register new account
 
 ## Project content
@@ -151,7 +151,7 @@ git clone https://github.com/batanoffs/e-books.git
 6. Research and integrate location API of some sort for smooth user experience
 7. Integrate payment logic for ePay, card, EasyPay, PayPal, cash, bank-transfer
 8. Create pages mentioned in the footer common questions about etc
-9. Maybe add blog articles
+9. Maybe add blog articles functionality for admin panel
 10. Implement vouchers and promotions discounts etc. Discuss the business logic with the client
 11. Implement testing unit with JEST, end-to-end Playwright. Discuss coverage
 12. Create search logic
