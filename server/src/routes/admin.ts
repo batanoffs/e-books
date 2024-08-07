@@ -8,18 +8,7 @@ import Order from '../models/Order';
 import Featured from '../models/Featured';
 import Stationery from '../models/Stationery';
 import Textbook from '../models/Textbook';
-import { IBookSchema } from '../interfaces/book.interface';
-
-const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']; // Update if needed
-
-const saveCover = (newBook: IBookSchema, coverEncoded: string) => {
-    if (!coverEncoded) return;
-    const cover = JSON.parse(coverEncoded);
-    if (cover && imageMimeTypes.includes(cover.type)) {
-        newBook.coverImage = Buffer.from(cover.data, 'base64');
-        newBook.coverImageType = cover.type;
-    }
-};
+import saveCover from '../utils/saveCover';
 
 const router = Router();
 
