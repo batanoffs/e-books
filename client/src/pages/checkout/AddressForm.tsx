@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { locationOptions } from '../../utils/constants/regions'
+import { locationOptions } from '../../utils/constants/location'
 
 const Tooltip = ({ content }) => (
 	<div className='field-tooltip toggle'>

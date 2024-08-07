@@ -1,4 +1,4 @@
-import { locationOptions } from '../../utils/constants/regions'
+import { locationOptions } from '../../utils/constants/location'
 
 type PaymentOptionsProps = {
 	onChange: (method: string) => void
