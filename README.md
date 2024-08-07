@@ -42,18 +42,16 @@ Tools: Git, Vite, ESLint, Prettier, Yarn, Nodemon
 
 -   [ ] fix issues with session expire and users
 -   [ ] fix issues with cookies token for admins validation
--   [ ] fix server duplicate code - replace with already created utils
+-   [x] fix server duplicate code - replace with already created utils
 -   [ ] fix css warnings (low priority)
 -   [ ] fix catalog hover buttons issues and functionality
 -   [ ] fix issues with Menu component from Material UI for anchorEl property
 -   [x] update cart logic and think about state management issues for items and quantity
 -   [ ] updated carousels functionality buttons etc
 -   [ ] update theme and reuseable code for scss and maybe react
--   [ ] update add property for product type to each model schema of items/products
--   [ ] create filters for catalog Pages
--   [ ] create logic for checkout page
--   [ ] redesign discuss business logic for buy now button
--   [ ] decide on how much material ui components will be used (performance issues)
+-   [ ] update filters for catalog Pages
+-   [ ] update logic for checkout page
+-   [ ] add property for product type to each model schema of items/products
 
 ## Usage
 
@@ -158,6 +156,10 @@ git clone https://github.com/batanoffs/e-books.git
 13. Header nav bar update is needed
 14. Implement newsletter logic
 15. Research and implement forgotten password logic
+16. Decide on how much material ui components will be used (performance issues)
+17. Redesign discuss business logic for buy now button and authentication
+
+
 
 ## Design and Architecture
 
@@ -242,13 +244,8 @@ Server build on express and mongodb for backend and mongoose for mongodb schema.
 
 #### Services
 
--   **auth** for Authentication
--   **cart** for Cart
--   **product** for Products
--   **stationery** for Stationeries
--   **textbook** for Textbooks
--   **user** for Users
--   **wishlist** for Wishlists
+-   **user** for Authentication
+-   **jwt** for creating and verifying tokens
 
 #### Middlewares
 
