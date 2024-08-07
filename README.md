@@ -32,11 +32,17 @@ username `pesho@abv.bg` password `qweasd123`
 
 ## Technologies
 
-Frontend: React, TypeScript, Zustand, React Admin, Material UI, SASS, React Slick-Carousel, React-Slick, React Hook Form, FilePond, Axios, 
-
-Backend: Node, Express, MongoDB, Mongoose, Typescript, JsonWebToken, Express-Mongoose-RA-JSON-Server, Axios, Cors, Bcrypt, Cookie-parser, Dotenv, 
-
-Tools: Git, Vite, ESLint, Prettier, Yarn, Nodemon
+-   Frontend - `React` `TypeScript`
+-   UI - `Material UI` `SASS` `Slick-Carousel` `React-Slick` `FilePond`
+-   Forms - `React Hook Form`
+-   State management - `Zustand`
+-   Admin panel manager - `React Admin`
+-   Server - `Node` `Express` `Cors` `Cookie-parser` `Express-Mongoose-RA-JSON-Server`
+-   Database - `MongoDB` `Mongoose`
+-   Encryption - `Bcrypt`
+-   Authentication - `JsonWebToken`
+-   Handling requests - `Axios`
+-   Tools - `Git` `Vite` `ESLint` `Prettier` `Yarn` `Nodemon`
 
 ## Fixes and updates:
 
@@ -159,8 +165,6 @@ git clone https://github.com/batanoffs/e-books.git
 16. Decide on how much material ui components will be used (performance issues)
 17. Redesign discuss business logic for buy now button and authentication
 
-
-
 ## Design and Architecture
 
 Server build on express and mongodb for backend and mongoose for mongodb schema. Client build on vite and react for frontend.
@@ -258,7 +262,7 @@ Server build on express and mongodb for backend and mongoose for mongodb schema.
 
 -   **auth** for Authentication routes
 -   **admin** for the Admin panel and management of products, users, orders, featured items. It uses `raExpressMongoose` library to handle the database operations for `react-admin`.
--   **cart** for user cart routes 
+-   **cart** for user cart routes
 -   **featured** (todo) for Featured products routes
 -   **order** for Orders routes
 -   **stationery** for Stationeries routes
