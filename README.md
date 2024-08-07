@@ -32,9 +32,9 @@ username `pesho@abv.bg` password `qweasd123`
 
 ## Technologies
 
-Frontend: React, Redux, TypeScript, Material UI, SCSS, React Router, React Admin, React Slick, React Hook Form, FilePond, Zustand, Axios, SASS
+Frontend: React, TypeScript, Zustand, React Admin, Material UI, SASS, React Slick-Carousel, React-Slick, React Hook Form, FilePond, Axios, 
 
-Backend: Node, Express, MongoDB, Mongoose, Typescript, JWT, Express-Mongoose-RA-JSON-Server, Axios,
+Backend: Node, Express, MongoDB, Mongoose, Typescript, JsonWebToken, Express-Mongoose-RA-JSON-Server, Axios, Cors, Bcrypt, Cookie-parser, Dotenv, 
 
 Tools: Git, Vite, ESLint, Prettier, Yarn, Nodemon
 
