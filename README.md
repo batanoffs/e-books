@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/Licence-MIT-teal)](https://opensource.org/licenses/MIT)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-teal)](https://github.com/prettier/prettier)
 
-# Table of Contents
+## Table of Contents
 
 -   [Test account](#test-account)
 -   [Technologies](#technologies)
@@ -163,64 +163,126 @@ git clone https://github.com/batanoffs/e-books.git
 
 Server build on express and mongodb for backend and mongoose for mongodb schema. Client build on vite and react for frontend.
 
-## Front-end architecture
+### **Front-end architecture**
 
 #### Context Providers with Zustand Store
 
-**Cart Store** stores and provides data from the server to the cart of the authenticated user.
+-   **Cart Store** stores and provides data from the server to the cart of the authenticated user.
 
-**Filter Store** provides and stores data for the filter section in the catalog page
+-   **Filter Store** provides and stores data for the filter section in the catalog page
 
-**Location Store** saves the current location and provides it to the header component and footer component for the admin panel
+-   **Location Store** saves the current location and provides it to the header component and footer component for the admin panel
 
-**User Data Store** holds information about the currently authenticated user. It provides getters and setters for the user's data, including the user's username, whether the user is logged in, and whether the user is an admin.
+-   **User Data Store** holds information about the currently authenticated user. It provides getters and setters for the user's data, including the user's username, whether the user is logged in, and whether the user is an admin.
 
-**Modal Store** is a helper store that provides state if the modal is open or not
+-   **Modal Store** is a helper store that provides state if the modal is open or not
 
 #### Custom Hooks
 
-**useAlert()** takes an error message and sets it in the state of the alert
+-   **useAlert()** takes an error message and sets it in the state of the alert
 
 #### Routers
 
--   Router is located in **App** component
+-   Main Router is located in **App** component
 
 #### Utils
 
 -   Constants
 
-**api.ts** stores base URL and endpoints to be used in all services
+    -   **api.ts** stores base URL and endpoints to be used in all services
+    -   **location.ts** stores array of regions and countries to be used in the location dropdown
 
 -   Helpers
 
-**auth.ts** stores base URL and endpoints to be used in all services
-**theme.ts** stores base URL and endpoints to be used in all services
-
-**formatDate(date)** TODO
+    -   **getToken()** gets user token
+    -   **getUserRole()** gets user role
+    -   **getUserId()** gets user id
+    -   **checkIfUserIsAdmin()** checks if user is admin
+    -   **isAuth()** checks if user is authenticated
+    -   **isGuest()** checks if user is not authenticated
+    -   **themeOptions** provides theme options for the MUI theme
+    -   **formatDate(date)** formats the date
+    -   **currencyFormatterToBGN(value)** formats the value to BGN currency
 
 #### Services
 
 -   **authService** for Authentication
--   **cardGeneratorService** for Virtual card generation
--   **exchangeRateService** for Exchange Rate
--   **notificationService** for Notifications
--   **transactionService** for Transactions
--   **userDataService** for User Data
+-   **cartService** for handling cart data
+-   **productService** for handling products data (todo)
 
+### **Back-end architecture**
 
-## Back-end architecture
+#### Express config
 
-#### Database schema - tables and relations between them
-
-#### Services
-
-#### Utils
-
-#### Middlewares
-
-#### Interfaces
-
-#### Controllers
+-   **express.ts** contains express middleware
+-   **database.ts** contains mongoose middleware
+-   **routes.ts** contains express routes
 
 #### Models
 
+-   **Book** for Books
+-   **Cart** for Cart
+-   **Featured** for Featured
+-   **Order** for Orders
+-   **Stationery** for bookstore stationeries
+-   **Textbook** for Textbooks
+-   **User** for Users
+-   **Wishlist** for users Wishlist
+
+#### Controllers
+
+-   **auth** for Authentication contains `logic` `register` and `logout`
+-   **cart** for handling cart data contains logic `addToCart`, `getCart`, `removeProductFromCart`, `clearCart`
+-   **featured** for handling featured data contains logic `getFeaturedProducts`, `markAsFeatured`, `removeFromFeatured`
+-   **order** for handling order data contains logic `createOrder`, `getOrderById`, `getOrders`, `updateOrderStatus`, `deleteOrder`
+-   **stationery** for handling stationery data contains logic `createStationery`, `getStationeries`, `updateStationery`, `deleteStationery`
+-   **textbook** for handling textbook data contains logic `createTextbook`, `getTextbooks`, `updateTextbook`, `deleteTextbook`
+-   **user** for handling user data contains logic `getUsers`, `getUserByIdFromToken`, `getUserById`, `updateUser`, `deleteUser`
+-   **wishlist**(todo) for handling wishlist data contains logic `createWishlist`, `getWishlist`, `updateWishlist`, `deleteWishlist`
+
+#### Services
+
+-   **auth** for Authentication
+-   **cart** for Cart
+-   **product** for Products
+-   **stationery** for Stationeries
+-   **textbook** for Textbooks
+-   **user** for Users
+-   **wishlist** for Wishlists
+
+#### Middlewares
+
+-   **cors** for cors setup for the express server
+-   **guards** isUser, isAdmin, isGuest - checks if user is authenticated and roles
+-   **session** validates the session if token is present, if not clears the cookie token
+-   **validateRequest** validate the requests
+
+#### Routes
+
+-   **auth** for Authentication routes
+-   **admin** for the Admin panel and management of products, users, orders, featured items. It uses `raExpressMongoose` library to handle the database operations for `react-admin`.
+-   **cart** for user cart routes 
+-   **featured** (todo) for Featured products routes
+-   **order** for Orders routes
+-   **stationery** for Stationeries routes
+-   **textbook** for Textbooks routes
+-   **user** for Users routes
+-   **wishlist** for Wishlists routes
+-   **mainRoutes** combines all routes
+
+#### Interfaces
+
+-   **IBookSchema** for Books
+-   **ICartSchema** for Cart
+-   **IFeaturedSchema** for Featured
+-   **IOrderSchema** for Orders
+-   **IStationerySchema** for Stationeries
+-   **ITextbookSchema** for Textbooks
+-   **IUserSchema** for Users
+-   **IWishlistSchema** for Wishlists
+
+#### Utils
+
+-   **parseError(error)**: This function takes in an `error` object and returns a new error object with a consistent structure. It is designed to handle different types of errors that can occur in an application.
+
+-   **saveCover(newBook, coverEncoded)**: This function converts a base64 encoded image into a Buffer and saves it to the `newBook` object as `coverImage`.
