@@ -7,9 +7,9 @@ export default function FooterBot() {
                 <div className={styles.pageFooterBotBlock}>
                     <div className={`${styles.pageFooterBotItem} ${styles.pageFooterBotItemLarge}`}>
                         <span className={styles.copyright}>
-                            Книжарница „Емануил“ е запазена марка на книжарница "Емануил АД", BG
+                            Книжарница „книги бг“ е запазена марка на книжарница "книги бг АД", BG
                         </span>
-                        <span className={styles.copyright}>2024 © Емануил. Всички права запазени.</span>
+                        <span className={styles.copyright}>2024 © книги бг. Всички права запазени.</span>
                     </div>
                     <div className={styles.pageFooterBotItem}>
                         <span className={styles.copyright}>
