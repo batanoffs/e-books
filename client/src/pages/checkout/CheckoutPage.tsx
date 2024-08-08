@@ -6,12 +6,14 @@ import { DeliveryOptions } from './DeliveryOptions'
 import { CheckoutLayout } from '../../components/Layout/checkout/CheckoutLayout'
 import { CheckoutOverview } from './CheckoutAsideOverview'
 import { AddressForm } from './AddressForm'
+import { useForm } from 'react-hook-form'
 
 const CheckoutPage: React.FC = () => {
 	const cart = useCartStore((state) => state.cart)
 	const placeOrder = useCartStore((state) => state.placeOrder)
 	const [paymentMethod, setPaymentMethod] = useState<string>('')
 	const [deliveryMethod, setDeliveryMethod] = useState<string>('')
+	const { control, handleSubmit } = useForm()
 
 	const handlePlaceOrder = () => {
 		if (!paymentMethod || !deliveryMethod) {
@@ -25,9 +27,9 @@ const CheckoutPage: React.FC = () => {
 		<CheckoutLayout
 			aside={<CheckoutOverview cart={cart} handlePlaceOrder={handlePlaceOrder} />}
 		>
-			<DeliveryOptions onChange={(method) => setDeliveryMethod(method)} />
-			<AddressForm />
-			<PaymentOptions onChange={(method) => setPaymentMethod(method)} />
+			<DeliveryOptions control={control} onChange={(method) => setDeliveryMethod(method)} />
+			<AddressForm control={control} />
+			<PaymentOptions control={control} onChange={(method) => setPaymentMethod(method)} />
 		</CheckoutLayout>
 	)
 }
