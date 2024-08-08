@@ -1,12 +1,9 @@
 @use '../../styles/base/colors' as colors;
 
 .detailsContainer {
-	margin-bottom: 30px;
 	.titleSection {
 		display: flex;
 		align-items: center;
-		gap: 10px;
-		margin-bottom: 20px;
 	}
 
 	.authorDetails {
@@ -19,16 +16,6 @@
 			cursor: pointer;
 			color: colors.$purple;
 		}
-	}
-
-	h1 {
-		font-size: 1.5em;
-		margin: 10px 0;
-	}
-
-	h2 {
-		font-size: 1.2em;
-		margin: 10px 0;
 	}
 
 	.availability {
@@ -151,11 +138,10 @@
 .dropdownContainer {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
 
 	.dropdown {
 		cursor: pointer;
-		margin-bottom: 20px;
+
 		.metaData {
 			text-align: left;
 			display: flex;
@@ -165,26 +151,25 @@
 				flex: 0 0 auto;
 				width: 50%;
 			}
-
-			p,
-			div {
+			p {
 				margin: 5px 0;
-				color: colors.$black;
+				font-weight: 600;
+
+				&:hover {
+					color: colors.$orange;
+					text-decoration: underline;
+				}
 			}
 		}
 
-		h3 {
-			font-size: 1.2em;
+		h5 {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-		}
-
-		p,
-		div {
-			font-size: 1em;
-			margin-top: 10px;
-			color: colors.$black;
+			margin: 0.5em 0;
+			&:hover {
+				color: colors.$orange;
+			}
 		}
 	}
 }
