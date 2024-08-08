@@ -14,10 +14,10 @@ const DeliveryInfoDropdown = ({
 }: DeliveryInfoDropdownProps) => {
 	return (
 		<div className={styles.dropdown} onClick={() => setIsDeliveryInfoOpen(!isDeliveryInfoOpen)}>
-			<h3>
+			<h5>
 				Информация за доставка
 				{isDeliveryInfoOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
-			</h3>
+			</h5>
 			{isDeliveryInfoOpen && (
 				<div>
 					<p>Доставката обикновено трае между 3 и 5 работни дни.</p>

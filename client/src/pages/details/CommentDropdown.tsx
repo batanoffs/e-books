@@ -13,10 +13,10 @@ const CommentDropdown = ({ isCommentsOpen, setIsCommentsOpen, styles }: CommentD
 	
 	return (
 		<div className={styles.dropdown} onClick={handleClick}>
-			<h3>
+			<h5>
 				Коментари
 				{isCommentsOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
-			</h3>
+			</h5>
 			{isCommentsOpen && <p>{message}</p>}
 		</div>
 	)

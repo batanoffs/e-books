@@ -27,10 +27,10 @@ const DescriptionDropdown = ({
 }: DescriptionDropdownProps) => {
 	return (
 		<div className={styles.dropdown} onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}>
-			<h3>
+			<h5>
 				Описание
 				{isDescriptionOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
-			</h3>
+			</h5>
 			{isDescriptionOpen && (
 				<div>
 					<div className={styles.metaData}>
