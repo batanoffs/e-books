@@ -1,35 +1,99 @@
-import React, { useState } from 'react'
-import useCartStore from '../../store/cart'
+import { useForm, Controller } from 'react-hook-form'
+import {
+	Box,
+	FormControl,
+	FormControlLabel,
+	Grid,
+	FormLabel,
+	Radio,
+	RadioGroup,
+	Table,
+	TableBody,
+	TableCell,
+	InputLabel,
+	MenuItem,
+	Select,
+	TableHead,
+	TableRow,
+	Typography,
+	Button,
+	TextField,
+} from '@mui/material'
 
-import PaymentOptions from './PaymentOptions'
-import { DeliveryOptions } from './DeliveryOptions'
+import { CommentForOrder } from './CommentForOrder'
 import { CheckoutLayout } from '../../components/Layout/checkout/CheckoutLayout'
 import { CheckoutOverview } from './CheckoutAsideOverview'
-import { AddressForm } from './AddressForm'
-import { useForm } from 'react-hook-form'
+import { DiscountCode } from './DiscountCode'
+import { InputFormField } from '../../components/InputFormField/InputFormField'
+import { paymentOptions, regionOptions, deliveryOptions } from '../../utils/constants/paymentFormConstants'
+import { Faktura } from './Faktura'
 
-const CheckoutPage: React.FC = () => {
+import useCartStore from '../../store/cart'
+import { DeliveryForm } from './DeliveryForm'
+import { AddressForm } from './AddressForm'
+import { PaymentForm } from './PaymentForm'
+
+type CheckoutFormValues = {
+	firstname: string
+	lastname: string
+	telephone: string
+	postcode: string
+	region_id: string
+	city: string
+	street: string
+	shippingMethod: string
+	paymentMethod: string
+	custom_attributes: {
+		shiping_delivery_data: string
+	}
+}
+
+const CheckoutPage = () => {
 	const cart = useCartStore((state) => state.cart)
 	const placeOrder = useCartStore((state) => state.placeOrder)
-	const [paymentMethod, setPaymentMethod] = useState<string>('')
-	const [deliveryMethod, setDeliveryMethod] = useState<string>('')
-	const { control, handleSubmit } = useForm()
 
-	const handlePlaceOrder = () => {
-		if (!paymentMethod || !deliveryMethod) {
-			alert('Please select payment and delivery methods.')
-			return
-		}
-		placeOrder({ id: new Date().toISOString(), items: cart, paymentMethod, deliveryMethod })
+	const { control, handleSubmit, formState } = useForm<CheckoutFormValues>({
+		defaultValues: {
+			shippingMethod: '',
+			paymentMethod: '',
+		},
+	})
+
+	const { errors } = formState // Extract the errors from formState
+
+	const handlePlaceOrder = (data: CheckoutFormValues) => {
+		console.table(data);
+		
+		placeOrder({
+			id: new Date().toISOString(),
+			items: cart,
+			paymentMethod: data.paymentMethod,
+			deliveryMethod: data.shippingMethod,
+		})
 	}
 
 	return (
 		<CheckoutLayout
-			aside={<CheckoutOverview cart={cart} handlePlaceOrder={handlePlaceOrder} />}
+			aside={
+				<CheckoutOverview cart={cart} handlePlaceOrder={handleSubmit(handlePlaceOrder)} />
+			}
 		>
-			<DeliveryOptions control={control} onChange={(method) => setDeliveryMethod(method)} />
-			<AddressForm control={control} />
-			<PaymentOptions control={control} onChange={(method) => setPaymentMethod(method)} />
+			<form onSubmit={handleSubmit(handlePlaceOrder)}>
+				<AddressForm errors={errors} control={control} />
+
+				<DeliveryForm errors={errors} control={control} />
+
+				<PaymentForm control={control} errors={errors} />
+
+				<DiscountCode />
+				<CommentForOrder control={control} Controller={Controller} />
+
+				<Box mt={3}>
+					<Button type='submit' variant='contained' color='primary'>
+						Place Order
+					</Button>
+				</Box>
+			</form>
 		</CheckoutLayout>
 	)
 }
