@@ -1,5 +1,4 @@
-
-import { locationOptions } from '../../utils/constants/location'
+import { regionOptions } from '../../../utils/constants/paymentFormConstants'
 
 export const BillingAddress = () => {
 	return (
@@ -196,44 +195,6 @@ export const BillingAddress = () => {
 									</div>
 								</fieldset>
 
-								<div className='field _required fc-dirty'>
-									<label className='label' htmlFor='MBI35BK'>
-										<span>Държава</span>
-									</label>
-
-									<div className='control'>
-										<select
-											className='select'
-											name='country_id'
-											id='MBI35BK'
-											aria-required='true'
-											aria-invalid='false'
-											aria-aria-placeholder='Държава *'
-										>
-											<option value=''>Моля изберете</option>
-											<option
-												data-title='България'
-												value='BG'
-												selected={true}
-											>
-												България
-											</option>
-											<option
-												data-title='──────────'
-												value='delimiter'
-												disabled={true}
-											>
-												──────────
-											</option>
-											{locationOptions.countryOptions.map((option, index) => (
-												<option key={index} value={option.value}>
-													{option.label}
-												</option>
-											))}
-										</select>
-									</div>
-								</div>
-
 								<div className='field fc-dirty'>
 									<label className='label' htmlFor='QV528RF'>
 										<span>Област / Провинция</span>
@@ -250,7 +211,7 @@ export const BillingAddress = () => {
 											<option value='' selected={true}>
 												Моля изберете регион.
 											</option>
-											{locationOptions.regionOptions.map((option, index) => (
+											{regionOptions.map((option, index) => (
 												<option key={index} value={option.value}>
 													{option.label}
 												</option>
