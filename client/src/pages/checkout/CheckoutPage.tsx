@@ -1,32 +1,10 @@
 import { useForm, Controller } from 'react-hook-form'
-import {
-	Box,
-	FormControl,
-	FormControlLabel,
-	Grid,
-	FormLabel,
-	Radio,
-	RadioGroup,
-	Table,
-	TableBody,
-	TableCell,
-	InputLabel,
-	MenuItem,
-	Select,
-	TableHead,
-	TableRow,
-	Typography,
-	Button,
-	TextField,
-} from '@mui/material'
+import { Box, Button } from '@mui/material'
 
 import { CommentForOrder } from './CommentForOrder'
 import { CheckoutLayout } from '../../components/Layout/checkout/CheckoutLayout'
 import { CheckoutOverview } from './CheckoutAsideOverview'
 import { DiscountCode } from './DiscountCode'
-import { InputFormField } from '../../components/InputFormField/InputFormField'
-import { paymentOptions, regionOptions, deliveryOptions } from '../../utils/constants/paymentFormConstants'
-import { Faktura } from './Faktura'
 
 import useCartStore from '../../store/cart'
 import { DeliveryForm } from './DeliveryForm'
@@ -62,8 +40,8 @@ const CheckoutPage = () => {
 	const { errors } = formState // Extract the errors from formState
 
 	const handlePlaceOrder = (data: CheckoutFormValues) => {
-		console.table(data);
-		
+		console.table(data)
+
 		placeOrder({
 			id: new Date().toISOString(),
 			items: cart,
