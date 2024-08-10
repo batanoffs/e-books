@@ -1,105 +1,109 @@
-import React, { useState } from 'react';
-import { AppBar, Container, Toolbar } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useState, MouseEvent, ChangeEvent, FormEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
-import Logo from '../Logo/Logo';
-import NavigationMenu from './NavMenu';
-import SearchBar from './SearchBar';
-import UserMenu from './UserMenu';
-import { API } from '../../utils/constants/api';
-import { useFiltersStore } from '../../store/filters';
-import CartButton from './Cart';
+import { AppBar, Container, Toolbar } from '@mui/material'
+import { useFiltersStore } from '../../store/filters'
+import { API } from '../../utils/constants/api'
+
+import Logo from '../Logo/Logo'
+import SearchBar from './SearchBar'
+import NavigationMenu from './NavMenu'
+import UserMenu from './UserMenu'
+import CartButton from './Cart'
+import ScrollTop from '../ScrollTop/BackToTop'
 
 const Header = () => {
-    const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-    const setNavCategory = useFiltersStore((state) => state.setNavCategory);
+	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
+	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
+	const setNavCategory = useFiltersStore((state) => state.setNavCategory)
+	const [searchQuery, setSearchQuery] = useState('')
+	const navigate = useNavigate()
 
-    const [searchQuery, setSearchQuery] = useState('');
-    const navigate = useNavigate();
+	const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
+		setAnchorElNav(event.currentTarget)
+	}
 
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget);
-    };
+	const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
+		setAnchorElUser(event.currentTarget)
+	}
 
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
+	const handleCloseNavMenu = () => {
+		setAnchorElNav(null)
+	}
 
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
+	const handleCloseUserMenu = () => {
+		setAnchorElUser(null)
+	}
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+	const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setSearchQuery(event.target.value)
+	}
 
-    const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchQuery(event.target.value);
-    };
+	const handleLogout = async (e: FormEvent) => {
+		e.preventDefault()
+		try {
+			await axios.get(API.LOGOUT)
+			document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+			navigate('/')
+		} catch (error) {
+			console.error('Logout failed', error)
+		}
+	}
 
-    const handleLogout = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try {
-            await axios.get(API.LOGOUT);
-            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-            navigate('/');
-        } catch (error) {
-            console.error('Logout failed', error);
-        }
-    };
+	const navigationHandler = (page: string) => {
+		switch (page) {
+			case 'Книги':
+				setNavCategory('all')
+				navigate('/catalog/books/all')
+				break
+			case 'Учебници':
+				setNavCategory('all')
+				navigate('/catalog/textbooks/all')
+				break
+			case 'Канцелария':
+				setNavCategory('all')
+				navigate('/catalog/stationery/all')
+				break
+			case 'Най-продавани':
+				navigate('/catalog/popular')
+				break
+			case 'Контакти':
+				navigate('/contacts')
+				break
 
-    const navigationHandler = (page: string) => {
-        switch (page) {
-            case 'Книги':
-                setNavCategory('all');
-                navigate('/catalog/books/all');
-                break;
-            case 'Учебници':
-                setNavCategory('all');
-                navigate('/catalog/textbooks/all');
-                break;
-            case 'Канцелария':
-                setNavCategory('all');
-                navigate('/catalog/stationery/all');
-                break;
-            case 'Най-продавани':
-                navigate('/catalog/popular');
-                break;
-            case 'Контакти':
-                navigate('/contacts');
-                break;
+			default:
+				navigate('/')
+				break
+		}
+	}
 
-            default:
-                navigate('/');
-                break;
-        }
-    };
+	return (
+		<>
+			<AppBar position='static'>
+				<Container maxWidth='lg'>
+					<Toolbar variant='dense' sx={{ height: 80 }} disableGutters>
+						<Logo />
+						<NavigationMenu
+							anchorElNav={anchorElNav}
+							handleOpenNavMenu={handleOpenNavMenu}
+							handleCloseNavMenu={handleCloseNavMenu}
+							navigationHandler={navigationHandler}
+						/>
+						<SearchBar handleSearchInputChange={handleSearchInputChange} />
+						<UserMenu
+							anchorElUser={anchorElUser}
+							handleOpenUserMenu={handleOpenUserMenu}
+							handleCloseUserMenu={handleCloseUserMenu}
+							handleLogout={handleLogout}
+						/>
+						<CartButton />
+					</Toolbar>
+				</Container>
+			</AppBar>
+			<ScrollTop />
+		</>
+	)
+}
 
-    return (
-        <AppBar position="static">
-            <Container maxWidth="lg">
-                <Toolbar variant="dense" sx={{ height: 80 }} disableGutters>
-                    <Logo />
-                    <NavigationMenu
-                        anchorElNav={anchorElNav}
-                        handleOpenNavMenu={handleOpenNavMenu}
-                        handleCloseNavMenu={handleCloseNavMenu}
-                        navigationHandler={navigationHandler}
-                    />
-                    <SearchBar handleSearchInputChange={handleSearchInputChange} />
-                    <UserMenu
-                        anchorElUser={anchorElUser}
-                        handleOpenUserMenu={handleOpenUserMenu}
-                        handleCloseUserMenu={handleCloseUserMenu}
-                        handleLogout={handleLogout}
-                    />
-                    <CartButton />
-                </Toolbar>
-            </Container>
-        </AppBar>
-    );
-};
-
-export default Header;
+export default Header
