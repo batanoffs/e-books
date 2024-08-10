@@ -16,7 +16,7 @@ const CartButton = () => {
     const cartItemCount = useCartStore((state) => state.cart.length);
 
     return (
-        <Badge badgeContent={cartItemCount} color="primary">
+        <Badge badgeContent={cartItemCount} color="secondary">
             <Button
                 variant="contained"
                 color="primary"
