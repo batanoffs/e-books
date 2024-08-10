@@ -2,7 +2,7 @@
 import { Box, IconButton, Menu, MenuItem, Typography, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const pages = ['Най-продавани', 'Книги', 'Учебници', 'Канцелария', 'Контакти'];
+const pages = ['Най-продавани', 'Книги', 'Учебници', 'Канцелария' ];
 
 const NavigationMenu = ({
     anchorElNav,
