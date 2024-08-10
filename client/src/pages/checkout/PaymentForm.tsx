@@ -25,7 +25,9 @@ export const PaymentForm = ({ control, errors }: PaymentOptionsProps) => {
 	return (
 		<Box component='li' id='payment-method'>
 			<FormControl component='fieldset' fullWidth>
-				<FormLabel component='legend'>Payment Method</FormLabel>
+				<FormLabel component='legend'>
+					<h6>Изберете начин на плащане</h6>
+				</FormLabel>
 				<Controller
 					name='paymentMethod'
 					control={control}
@@ -33,14 +35,14 @@ export const PaymentForm = ({ control, errors }: PaymentOptionsProps) => {
 					render={({ field }) => (
 						<RadioGroup {...field}>
 							<Table>
-								<TableHead>
+								{/* <TableHead>
 									<TableRow>
 										<TableCell></TableCell>
 										<TableCell>Цена</TableCell>
 										<TableCell>Доставчик</TableCell>
 										<TableCell>Метод</TableCell>
 									</TableRow>
-								</TableHead>
+								</TableHead> */}
 								<TableBody>
 									{paymentOptions.map((option) => (
 										<TableRow key={option.value}>
@@ -65,7 +67,7 @@ export const PaymentForm = ({ control, errors }: PaymentOptionsProps) => {
 					<Typography color='error'>{errors.paymentMethod.message}</Typography>
 				)}
 			</FormControl>
-			<Faktura />
+			{/* <Faktura /> */}
 		</Box>
 	)
 }

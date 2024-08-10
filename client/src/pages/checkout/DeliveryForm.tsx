@@ -21,7 +21,8 @@ export const DeliveryForm = ({ errors, control }) => {
 	return (
 		<Box component='li' id='shipping-method'>
 			<FormControl component='fieldset' fullWidth>
-				<FormLabel component='legend'>Метод за доставка</FormLabel>
+				<FormLabel component='legend'>
+					<h6>Изберете начин на доставка</h6></FormLabel>
 				<Controller
 					name='shippingMethod'
 					control={control}

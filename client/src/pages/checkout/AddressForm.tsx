@@ -1,9 +1,9 @@
 import {
 	Box,
-	Typography,
 	FormControl,
 	Grid,
 	InputLabel,
+	FormLabel,
 	MenuItem,
 	Select,
 	TextField,
@@ -15,7 +15,10 @@ import { InputFormField } from '../../components/InputFormField/InputFormField'
 export const AddressForm = ({ control, errors }) => {
 	return (
 		<Box component='li' id='address-form'>
-			<Typography variant='h5'>Адрес за доставка</Typography>
+			<FormLabel component='legend'>
+				<h6 style={{ margin: '1em 0' }}>Адрес за доставка</h6>
+			</FormLabel>
+
 			<Grid container spacing={2}>
 				<Grid item xs={12} sm={6}>
 					<InputFormField

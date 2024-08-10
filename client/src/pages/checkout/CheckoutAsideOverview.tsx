@@ -1,7 +1,7 @@
 export const CheckoutOverview = ({ cart, handlePlaceOrder }) => {
 	return (
 		<>
-			<h5>Обобщение на поръчката</h5>
+			<h6>Обобщение на поръчката</h6>
 			<ul>
 				{cart.map((product) => (
 					<li key={product.id}>
