@@ -1,98 +1,171 @@
-import { createTheme } from '@mui/material/styles';
+// #228be6, #6028c8, #071108, #bfb1c1, #faf3dd
 
-const darkTheme = createTheme({
-    typography: {
-        allVariants: {
-            fontFamily: 'Montserrat Alternates',
-            textTransform: 'none',
-            fontSize: 14,
-        },
-    },
-    shape: {
-        borderRadius: 10,
-    },
-    palette: {
-        mode: 'dark',
-        primary: {
-            main: '#fff',
-            light: '#fff',
-            dark: '#c0c0c0',
-            contrastText: '#000',
-        },
-        secondary: {
-            main: '#fff',
-            light: '#fff',
-            dark: '#c0c0c0',
-            contrastText: '#000',
-        },
-        background: {
-            paper: '#212121',
-            default: '#121212',
-        },
-    },
-});
+import { createTheme } from '@mui/material/styles'
 
-const whiteTheme = createTheme({
-    typography: {
-        allVariants: {
-            fontFamily: 'Montserrat Alternates',
-            textTransform: 'none',
-            fontSize: 14,
-        },
-    },
-    shape: {
-        borderRadius: 10,
-    },
-    palette: {
-        primary: {
-            main: '#fff',
-            light: '#fdfdff',
-            dark: '#e5e5e5',
-            contrastText: '#555',
-        },
-        secondary: {
-            main: '#f5f5f5',
-            light: '#edeeef',
-            dark: '#dcdcf0',
-            contrastText: '#555',
-        },
-        success: {
-            main: '#e5fafa',
-            light: '#d9f1f1',
-            dark: '#bcdcf0',
-            contrastText: '#555',
-        },
-        error: {
-            main: '#fdecec',
-            light: '#fedce0',
-            dark: '#fcd7c0',
-            contrastText: '#555',
-        },
-        warning: {
-            main: '#fff9e6',
-            light: '#fff2d3',
-            dark: '#fcd7c0',
-            contrastText: '#555',
-        },
-        info: {
-            main: '#e1f6f9',
-            light: '#c9eaf8',
-            dark: '#bcdcf0',
-            contrastText: '#555',
-        },
-        background: {
-            paper: '#fff',
-            default: '#f5f5f5',
-        },
-    },
-});
+const themeOptions = createTheme({
+	palette: {
+		mode: 'light', // Add support for dark mode switching
+		primary: {
+			main: '#228be6', // Primary color
+			light: '#4aa8f2', // Light variant for primary
+			dark: '#176ab3', // Dark variant for primary
+			contrastText: '#ffffff', // Contrast text for primary
+		},
+		secondary: {
+			main: '#6f42c1',
+			light: '#9b6ee5',
+			dark: '#4b2990',
+			contrastText: '#f4f6f8',
+		},
+		text: {
+			primary: '#071108', // Primary text color
+			secondary: '#bfb1c1', // Secondary text color
+			disabled: '#5c5959', // Disabled text color
+			hint: '#6028c8', // Hint color
+		},
+		background: {
+			default: '#fff', // Slightly off-white background for better readability
+			paper: '#f4f6f8',
+		},
+		error: {
+			main: '#d32f2f', // Error color
+		},
+		warning: {
+			main: '#ed6c02', // Warning color
+		},
+		info: {
+			main: '#0288d1', // Info color
+		},
+		success: {
+			main: '#2e7d32', // Success color
+		},
+		divider: '#bfb1c1', // Divider color for UI elements
+	},
+	typography: {
+		fontFamily: 'Montserrat Alternates, sans-serif',
+		h1: {
+			fontSize: '2.5rem',
+			fontWeight: 700,
+			letterSpacing: '-0.01562em',
+		},
+		h2: {
+			fontSize: '2rem',
+			fontWeight: 600,
+			letterSpacing: '-0.00833em',
+		},
+		h3: {
+			fontSize: '1.75rem',
+			fontWeight: 500,
+			letterSpacing: '0em',
+		},
+		body1: {
+			fontSize: '1rem',
+			fontWeight: 400,
+			lineHeight: 1.5,
+		},
+		body2: {
+			fontSize: '0.875rem',
+			fontWeight: 400,
+			lineHeight: 1.43,
+		},
+		button: {
+			textTransform: 'none', // Ensure no capitalization in buttons
+			fontWeight: 600,
+		},
+		caption: {
+			fontSize: '0.75rem',
+			fontWeight: 400,
+			lineHeight: 1.66,
+			color: '#6028c8',
+		},
+		allVariants: {
+			textTransform: 'none',
+			fontSize: 16,
+		},
+	},
+	shape: {
+		borderRadius: 12, // Retain rounded corners
+	},
+	components: {
+		MuiAppBar: {
+			styleOverrides: {
+				colorInherit: {
+					backgroundColor: '#ffffff',
+					color: '#333333',
+				},
+			},
+			defaultProps: {
+				color: 'inherit',
+			},
+		},
+		MuiButton: {
+			defaultProps: {
+				disableElevation: true, // Removes the shadow for buttons
+			},
+			styleOverrides: {
+				root: {
+					borderRadius: 8, // Slightly more rounded buttons
+				},
+				containedPrimary: {
+					color: '#ffffff',
+				},
+				containedSecondary: {
+					color: '#ffffff',
+				},
+			},
+		},
+		MuiPaper: {
+			styleOverrides: {
+				root: {
+					backgroundImage: 'none', // Remove box shadow by default
+				},
+			},
+		},
+		MuiInputBase: {
+			styleOverrides: {
+				root: {
+					borderRadius: 8,
+				},
+			},
+		},
+		MuiCard: {
+			styleOverrides: {
+				root: {
+					borderRadius: 16,
+					boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', // Subtle shadow for cards
+				},
+			},
+		},
+		MuiLink: {
+			defaultProps: {
+				underline: 'hover', // Links only underlined on hover
+			},
+		},
+		MuiAccordion: {
+			styleOverrides: {
+				root: {
+					borderRadius: 8,
+					boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', // Subtle shadow for accordions
+				},
+			},
+		},
+	},
+	breakpoints: {
+		values: {
+			xs: 0,
+			sm: 600,
+			md: 900,
+			lg: 1200,
+			xl: 1536,
+		},
+	},
+})
 
-const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
 
-const themeOptions = {
-    darkTheme,
-    whiteTheme,
-    isDarkMode,
-};
+export const theme = {
+	themeOptions,
+	isDarkMode,
+}
 
-export default themeOptions;
+export default themeOptions
