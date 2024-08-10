@@ -13,7 +13,7 @@ const settings = [
 const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handleLogout }) => {
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
 	return (
-		<Box sx={{ flexGrow: 0 }}>
+		<Box sx={{ flexGrow: 0, mr: 2 }}>
 			{isAuth() ? (
 				<>
 					<Tooltip title='Open settings'>
@@ -22,7 +22,7 @@ const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handl
 						</IconButton>
 					</Tooltip>
 					<Menu
-						sx={{ mt: '45px' }}
+						sx={{ mt: '45px', }}
 						id='menu-appbar'
 						anchorEl={anchorElUser}
 						anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
