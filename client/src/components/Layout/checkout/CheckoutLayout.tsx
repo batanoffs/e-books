@@ -1,21 +1,24 @@
 import styles from './checkout.module.scss'
+import Box from '@mui/material/Box'
 
 type propsType = {
 	aside: JSX.Element
 	[key: string]: any
 }
 
-export const CheckoutLayout = ({ children, aside, ...props }: propsType) => {
+export const CheckoutLayout = ({ children, aside, onSubmitForm }: propsType) => {
 	return (
 		<main className='main-wrapper'>
-			<section className={styles.checkoutContainer}>
-				<article>
-					<ol className='opc' id='checkoutSteps'>
-						{children}
-					</ol>
-				</article>
+			<Box
+				component='form'
+				onSubmit={onSubmitForm}
+				className={styles.checkoutContainer}
+				noValidate
+				autoComplete='off'
+			>
+				<article>{children}</article>
 				<aside>{aside}</aside>
-			</section>
+			</Box>
 		</main>
 	)
 }
