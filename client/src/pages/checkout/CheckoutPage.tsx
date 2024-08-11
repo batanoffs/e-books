@@ -1,8 +1,8 @@
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { CommentForOrder } from './CommentForOrder'
 import { CheckoutLayout } from '../../components/Layout/checkout/CheckoutLayout'
 import { CheckoutOverview } from './CheckoutAsideOverview'
+import { CommentForOrder } from './CommentForOrder'
 import { DiscountCode } from './DiscountCode'
 
 import { DeliveryForm } from './DeliveryForm'
@@ -20,6 +20,8 @@ type CheckoutFormValues = {
 	street: string
 	shippingMethod: string
 	paymentMethod: string
+	discountCode: string
+	comment: string
 	custom_attributes: {
 		shiping_delivery_data: string
 	}
@@ -28,10 +30,22 @@ type CheckoutFormValues = {
 const CheckoutPage = () => {
 	const cart = useCartStore((state) => state.cart)
 	const placeOrder = useCartStore((state) => state.placeOrder)
-	const { control, handleSubmit, formState } = useForm<CheckoutFormValues>({
+	const { control, handleSubmit, formState, reset } = useForm<CheckoutFormValues>({
 		defaultValues: {
 			shippingMethod: '',
 			paymentMethod: '',
+			discountCode: '',
+			comment: '',
+			firstname: '',
+			lastname: '',
+			telephone: '',
+			postcode: '',
+			region_id: '',
+			city: '',
+			street: '',
+			custom_attributes: {
+				shiping_delivery_data: '',
+			},
 		},
 	})
 
@@ -41,6 +55,7 @@ const CheckoutPage = () => {
 
 	const handlePlaceOrder = (data: CheckoutFormValues) => {
 		console.table(data)
+		console.log('formState', formState)
 
 		// placeOrder({
 		// 	id: new Date().toISOString(),
@@ -56,21 +71,14 @@ const CheckoutPage = () => {
 
 	return (
 		<CheckoutLayout
-			aside={
-				<CheckoutOverview
-					cart={cart}
-					handleBackToCart={handleBackToCart}
-					handlePlaceOrder={handleSubmit(handlePlaceOrder)}
-				/>
-			}
+			aside={<CheckoutOverview cart={cart} handleBackToCart={handleBackToCart} />}
+			onSubmitForm={handleSubmit(handlePlaceOrder)}
 		>
-			<form onSubmit={handleSubmit(handlePlaceOrder)}>
-				<AddressForm errors={errors} control={control} />
-				<DeliveryForm errors={errors} control={control} />
-				<PaymentForm control={control} errors={errors} />
-				<DiscountCode />
-				<CommentForOrder control={control} Controller={Controller} />
-			</form>
+			<AddressForm errors={errors} control={control} />
+			<DeliveryForm errors={errors} control={control} />
+			<PaymentForm control={control} errors={errors} />
+			{/* <DiscountCode control={control} reset={reset} errors={errors} /> */}
+			{/* <CommentForOrder control={control} Controller={Controller} /> */}
 		</CheckoutLayout>
 	)
 }
