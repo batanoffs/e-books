@@ -11,7 +11,6 @@ import SearchBar from './SearchBar'
 import NavigationMenu from './NavMenu'
 import UserMenu from './UserMenu'
 import CartButton from './Cart'
-import ScrollTop from '../ScrollTop/BackToTop'
 
 const Header = () => {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
@@ -101,7 +100,6 @@ const Header = () => {
 					</Toolbar>
 				</Container>
 			</AppBar>
-			<ScrollTop />
 		</>
 	)
 }
