@@ -14,12 +14,12 @@ import { InputFormField } from '../../components/InputFormField/InputFormField'
 
 export const AddressForm = ({ control, errors }) => {
 	return (
-		<Box component='li' id='address-form'>
-			<FormLabel component='legend'>
-				<h6 style={{ margin: '1em 0' }}>Адрес за доставка</h6>
+		<Box component='div' id='address-form'>
+			<FormLabel sx={{ mb: 1, color: 'text.primary' }} component='legend'>
+				Адрес за доставка
 			</FormLabel>
 
-			<Grid container spacing={2}>
+			<Grid container columnSpacing={1}>
 				<Grid item xs={12} sm={6}>
 					<InputFormField
 						label='Име'
@@ -41,6 +41,7 @@ export const AddressForm = ({ control, errors }) => {
 				<Grid item xs={12} sm={6}>
 					<InputFormField
 						label='Телефон'
+						type='number'
 						name='telephone'
 						required
 						control={control}
@@ -50,6 +51,7 @@ export const AddressForm = ({ control, errors }) => {
 				<Grid item xs={12} sm={6}>
 					<InputFormField
 						label='Пощенски код'
+						type='number'
 						name='postcode'
 						control={control}
 						errors={errors?.postcode}
@@ -62,7 +64,7 @@ export const AddressForm = ({ control, errors }) => {
 							name='region_id'
 							control={control}
 							render={({ field }) => (
-								<Select {...field}>
+								<Select {...field} required>
 									{regionOptions.map((option) => (
 										<MenuItem key={option.value} value={option.value}>
 											{option.label}
@@ -77,6 +79,7 @@ export const AddressForm = ({ control, errors }) => {
 					<InputFormField
 						label='Населено място'
 						name='city'
+						required
 						control={control}
 						errors={errors?.city}
 					/>
@@ -85,19 +88,20 @@ export const AddressForm = ({ control, errors }) => {
 					<InputFormField
 						label='Адрес'
 						name='street'
+						required
 						control={control}
 						errors={errors?.street}
 					/>
 				</Grid>
 				<Grid item xs={12}>
-					<FormControl fullWidth margin='normal'>
-						<InputLabel>Допълнителна информация за доставка</InputLabel>
-						<Controller
-							name='custom_attributes.shiping_delivery_data'
-							control={control}
-							render={({ field }) => <TextField {...field} multiline rows={2} />}
-						/>
-					</FormControl>
+					<InputFormField
+						label='Допълнителна информация за доставка'
+						name='custom_attributes.shiping_delivery_data'
+						multiline={true}
+						rows={2}
+						control={control}
+						errors={errors?.street}
+					/>
 				</Grid>
 			</Grid>
 		</Box>

@@ -5,12 +5,12 @@ import {
 	FormControl,
 	FormControlLabel,
 	FormLabel,
+	Paper,
 	Radio,
 	RadioGroup,
 	Table,
 	TableBody,
 	TableCell,
-	TableHead,
 	TableRow,
 	Typography,
 } from '@mui/material'
@@ -23,11 +23,11 @@ type PaymentOptionsProps = {
 
 export const PaymentForm = ({ control, errors }: PaymentOptionsProps) => {
 	return (
-		<Box component='li' id='payment-method'>
-			<FormControl component='fieldset' fullWidth>
-				<FormLabel component='legend'>
-					<h6>Изберете начин на плащане</h6>
-				</FormLabel>
+		<FormControl component='fieldset' fullWidth id='payment-method'>
+			<FormLabel sx={{ mb: 2, ml: 2, color: 'text.primary' }} component='h5'>
+				Изберете начин на плащане
+			</FormLabel>
+			<Paper>
 				<Controller
 					name='paymentMethod'
 					control={control}
@@ -50,12 +50,12 @@ export const PaymentForm = ({ control, errors }: PaymentOptionsProps) => {
 												<FormControlLabel
 													value={option.value}
 													control={<Radio />}
-													label=''
+													label={''}
 												/>
 											</TableCell>
+											<TableCell>{option.method}</TableCell>
 											<TableCell>{option.value}</TableCell>
 											<TableCell>{option.provider}</TableCell>
-											<TableCell>{option.method}</TableCell>
 										</TableRow>
 									))}
 								</TableBody>
@@ -66,8 +66,8 @@ export const PaymentForm = ({ control, errors }: PaymentOptionsProps) => {
 				{errors?.paymentMethod && (
 					<Typography color='error'>{errors.paymentMethod.message}</Typography>
 				)}
-			</FormControl>
+			</Paper>
 			{/* <Faktura /> */}
-		</Box>
+		</FormControl>
 	)
 }

@@ -33,7 +33,7 @@ export const regionOptions = [
 export const paymentOptions = [
 	{
 		value: 'cash',
-		provider: 'Econt Express - в офис или EcontATM 24/7',
+		provider: 'чрез Econt или Speedy',
 		method: 'Наложен платеж',
 	},
 	{
@@ -44,18 +44,18 @@ export const paymentOptions = [
 	{
 		value: 'EasyPay',
 		provider: 'EasyPay',
-		method: 'EasyPay',
+		method: 'онлайн плащане',
 	},
 
 	{
 		value: 'Epay',
 		provider: 'Epay',
-		method: 'Epay',
+		method: 'онлайн плащане',
 	},
 	{
 		value: 'card',
 		provider: 'Visa Master Card',
-		method: 'Visa Master Card',
+		method: 'онлайн плащане',
 	},
 ]
 
@@ -69,13 +69,13 @@ export const deliveryOptions = [
 	{
 		value: 'econt',
 		price: '5.99 лв.',
-		provider: 'Econt Express - в офис или EcontATM 24/7',
-		method: 'Econt Express',
+		provider: 'Econt Express',
+		method: 'до офис или EcontATM 24/7',
 	},
 	{
 		value: 'speedy',
 		price: '5.99 лв.',
 		provider: 'Speedy',
-		method: 'Speedy',
+		method: 'до офис',
 	},
 ]
