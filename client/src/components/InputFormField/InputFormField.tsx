@@ -8,6 +8,8 @@ type InputFormFieldProps = {
 	required?: boolean
 	control: any
 	errors?: any
+	multiline?: boolean
+	rows?: number
 }
 
 export const InputFormField = ({
@@ -17,23 +19,49 @@ export const InputFormField = ({
 	required = false,
 	control,
 	errors,
+	multiline,
+	rows,
 }: InputFormFieldProps) => {
 	return (
-		<FormControl fullWidth margin='normal'>
-			<Controller
-				name={name}
-				control={control}
-				render={({ field }) => (
-					<TextField
-						{...field}
-						label={label}
-						type={type}
-						required={required}
-						error={Boolean(errors)}
-						helperText={errors?.message}
+		<>
+			{type === 'number' && (
+				<FormControl fullWidth margin='normal'>
+					<Controller
+						name={name}
+						control={control}
+						render={({ field }) => (
+							<TextField
+								{...field}
+								label={label}
+								type={type}
+								required={required}
+								error={Boolean(errors)}
+								helperText='Incorrect entry.'
+							/>
+						)}
 					/>
-				)}
-			/>
-		</FormControl>
+				</FormControl>
+			)}
+			{type === 'text' && (
+				<FormControl fullWidth margin='normal'>
+					<Controller
+						name={name}
+						control={control}
+						render={({ field }) => (
+							<TextField
+								{...field}
+								label={label}
+								type={type}
+								rows={rows}
+								multiline={multiline}
+								required={required}
+								error={Boolean(errors)}
+								helperText='Incorrect entry.'
+							/>
+						)}
+					/>
+				</FormControl>
+			)}
+		</>
 	)
 }
