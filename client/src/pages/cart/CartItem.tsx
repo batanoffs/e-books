@@ -1,4 +1,5 @@
 import { Box, Button, Typography, TextField } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import { getUserId } from '../../utils/helpers/auth'
 
@@ -43,9 +44,9 @@ const CartItem = ({ item, removeFromCart, updateQuantity }) => {
 					Цена: {formatCurrencyToBGN(item.price * item.quantity)}
 				</Typography>
 			</Box>
-			<Box sx={{ width: '15%' }}>
-				<Button variant='contained' color='error' onClick={removeProductFromCart}>
-					Изтрий
+			<Box sx={{ width: '5%' }}>
+				<Button variant='text' color='error' onClick={removeProductFromCart}>
+					<DeleteIcon />
 				</Button>
 			</Box>
 		</Box>
