@@ -26,7 +26,7 @@ export const CarouselCard = ({ book, styles }: CarouselCard) => {
 				<p>{formatCurrency}</p>
 				<span>{description}</span>
 				<div className={styles.buttonsContainer}>
-					<Button variant='contained' className={styles.button}>
+					<Button variant='contained' color='secondary' className={styles.button}>
 						Купи
 					</Button>
 					<Button variant='contained' className={styles.button} href={`/books/${_id}`}>
