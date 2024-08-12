@@ -10,7 +10,6 @@ import Logo from '../Logo/Logo'
 import SearchBar from './SearchBar'
 import NavigationMenu from './NavMenu'
 import UserMenu from './UserMenu'
-import CartButton from './Cart'
 
 const Header = () => {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
@@ -96,7 +95,6 @@ const Header = () => {
 							handleCloseUserMenu={handleCloseUserMenu}
 							handleLogout={handleLogout}
 						/>
-						<CartButton />
 					</Toolbar>
 				</Container>
 			</AppBar>
