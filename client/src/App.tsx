@@ -33,8 +33,7 @@ const App = () => {
 	return (
 		<>
 			{!isAdmin && <Header />}
-			<ScrollTop />
-
+			{!isAdmin && <ScrollTop />}
 			{isLoading && <Spinner />}
 
 			<LoginModal />
