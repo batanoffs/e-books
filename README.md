@@ -14,6 +14,8 @@
     -   [About](#about)
     -   [Catalog](#catalog)
     -   [Product details](#product-details)
+    -   [Cart](#cart)
+    -   [Checkout](#checkout)
     -   [Profile menu](#profile-menu)
     -   [Admin panel](#admin-panel)
 -   [Design and Architecture](#design-and-architecture)
@@ -119,6 +121,10 @@ git clone https://github.com/batanoffs/e-books.git
 ### Catalog
 
 ### Product details
+
+### Cart
+
+### Checkout
 
 ### Profile menu
 
