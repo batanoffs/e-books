@@ -8,6 +8,7 @@ import { DetailsLayout } from '../../components/Layout/detail/DetailsLayout'
 import { ImageViewer } from './ImageViewer'
 
 import { ProductDetails } from './ProductDetails'
+import Spinner from '../../components/utils/Spinner'
 
 interface Item {
 	_id: string
@@ -20,7 +21,7 @@ interface Item {
 }
 
 export const DetailsPage = ({ type, path }: { type: string | undefined; path: string }) => {
-	const id = useParams().id
+	const productID = useParams().id
 	const [book, setBook] = useState<Item | null>(null)
 
 	const detailsApi =
@@ -28,13 +29,13 @@ export const DetailsPage = ({ type, path }: { type: string | undefined; path: st
 
 	useEffect(() => {
 		const fetchBook = async () => {
-			const response = await axios.get(`${detailsApi}/${id}`)
+			const response = await axios.get(`${detailsApi}/${productID}`)
 			setBook(response.data)
 		}
 		fetchBook()
-	}, [id])
+	}, [productID])
 
-	if (!book) return <div>Loading...</div>
+	if (!book) return <Spinner />
 
 	return (
 		<DetailsLayout
