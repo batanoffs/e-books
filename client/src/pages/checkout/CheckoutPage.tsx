@@ -28,8 +28,7 @@ type CheckoutFormValues = {
 }
 
 const CheckoutPage = () => {
-	const cart = useCartStore((state) => state.cart)
-	const placeOrder = useCartStore((state) => state.placeOrder)
+	// const placeOrder = useCartStore((state) => state.placeOrder)
 	const { control, handleSubmit, formState, reset } = useForm<CheckoutFormValues>({
 		defaultValues: {
 			shippingMethod: '',
@@ -71,7 +70,7 @@ const CheckoutPage = () => {
 
 	return (
 		<CheckoutLayout
-			aside={<CheckoutOverview cart={cart} handleBackToCart={handleBackToCart} />}
+			aside={<CheckoutOverview handleBackToCart={handleBackToCart} />}
 			onSubmitForm={handleSubmit(handlePlaceOrder)}
 		>
 			<AddressForm errors={errors} control={control} />

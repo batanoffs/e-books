@@ -12,14 +12,16 @@ import {
 } from '@mui/material'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import { useEffect, useState } from 'react'
+import useCartStore from '../../store/cart'
 
-export const CheckoutOverview = ({ cart, handleBackToCart }) => {
+export const CheckoutOverview = ({ handleBackToCart }) => {
+	const cart = useCartStore((state) => state.cart)
 	const [totalSum, setTotalSum] = useState(0)
 
 	useEffect(() => {
 		const calculateTotalSum = () => {
-			const total = cart.reduce((acc, product) => {
-				return acc + product.price * product.quantity
+			const total = cart.reduce((acc, item) => {
+				return acc + item.product.price * item.quantity
 			}, 0)
 			setTotalSum(total)
 		}
@@ -43,10 +45,13 @@ export const CheckoutOverview = ({ cart, handleBackToCart }) => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{cart.map((product) => (
-							<TableRow key={product.id}>
+						{cart.map((item) => (
+							<TableRow key={item.product.id}>
 								<TableCell>
-									<img style={{ width: '50px' }} src={product.productImagePath} />
+									<img
+										style={{ width: '50px' }}
+										src={item.product.coverImagePath}
+									/>
 								</TableCell>
 								<TableCell
 									sx={{
@@ -58,10 +63,10 @@ export const CheckoutOverview = ({ cart, handleBackToCart }) => {
 										lineHeight: '1.2',
 									}}
 								>
-									{product.name}
+									{item.product.title}
 								</TableCell>
-								<TableCell>{formatCurrencyToBGN(product.price)}</TableCell>
-								<TableCell>{product.quantity}</TableCell>
+								<TableCell>{formatCurrencyToBGN(item.product.price)}</TableCell>
+								<TableCell>{item.quantity}</TableCell>
 							</TableRow>
 						))}
 					</TableBody>

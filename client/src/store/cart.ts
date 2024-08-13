@@ -2,17 +2,21 @@ import { create } from 'zustand'
 import { cartService } from '../services/cartService'
 
 interface CartItem {
-	productType: string
-	productId: string
+	product: {
+		id: string
+		coverImagePath: string
+		coverImage: Buffer
+		coverImageType: string
+		title: string
+		price: number
+	}
 	quantity: number
-	name: string
-	price: number
 }
 
 interface CartState {
 	cart: CartItem[]
 	updateQuantity: (id: string, quantity: number) => void
-	addToCart: (item: Omit<CartItem, 'quantity'>) => void
+	addToCart: (item: CartItem) => void
 	removeFromCart: (productId: string, userId: string) => void
 	clearCart: (userId: string) => void
 }
@@ -22,28 +26,33 @@ const useCartStore = create<CartState>((set) => ({
 	addToCart: (item) => {
 		set((state) => {
 			const existingProduct = state.cart.find(
-				(product) => product.productId === item.productId
+				(product) => product.product.id === item.product.id
 			)
 			if (existingProduct) {
-				existingProduct.quantity += item.quantity
+				return {
+					...state,
+					cart: state.cart.map((product) =>
+						product.product.id === item.product.id
+							? { ...product, quantity: product.quantity + item.quantity }
+							: product
+					),
+				}
 			} else {
-				set({
-					cart: [...state.cart, { ...item, quantity: item.quantity }],
-				})
+				return { ...state, cart: [...state.cart, { ...item, quantity: item.quantity }] }
 			}
 		})
 	},
 	removeFromCart: async (productId, userId) => {
 		await cartService.removeOne(productId, userId)
 		set((state) => {
-			const updatedCart = state.cart.filter((item) => item.productId !== productId)
+			const updatedCart = state.cart.filter((item) => item.product.id !== productId)
 			return { cart: updatedCart }
 		})
 	},
 	updateQuantity: (id, quantity) =>
 		set((state) => {
 			const updatedCart = state.cart.map((item) =>
-				item.productId === id ? { ...item, quantity } : item
+				item.product.id === id ? { ...item, quantity } : item
 			)
 			return { cart: updatedCart }
 		}),
@@ -54,3 +63,4 @@ const useCartStore = create<CartState>((set) => ({
 }))
 
 export default useCartStore
+

@@ -40,12 +40,13 @@ const addToCart = async (props: any, quantity: number, productType: string) => {
 		const data = {
 			userId,
 			productId: _id,
-			productImage: coverImage,
-			productImageType: coverImageType,
 			quantity,
-			name: title,
-			price,
-			productType,
+			// productId: _id,
+			// productImage: coverImage,
+			// productImageType: coverImageType,
+			// name: title,
+			// price,
+			// productType,
 		}
 		await axios.post(API.CART, data, {
 			headers: {

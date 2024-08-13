@@ -10,7 +10,8 @@ export const CartList = () => {
 	const updateQuantity = useCartStore((state) => state.updateQuantity)
 	const removeFromCart = useCartStore((state) => state.removeFromCart)
 
-	const getTotalItems = () => cart.reduce((sum, item) => sum + item.quantity, 0)
+	const getTotalItems = () =>
+		cart.reduce((sum, item) => sum + item.quantity, 0)
 
 	const clearCartHandler = async () => {
 		//TODO add confirmation
@@ -22,6 +23,8 @@ export const CartList = () => {
 		//TODO
 		console.log('updateCartHandler')
 	}
+
+	console.log('cart:', cart)
 
 	return (
 		<Paper
@@ -38,7 +41,7 @@ export const CartList = () => {
 			) : (
 				<Grid container spacing={0}>
 					{cart.map((item) => (
-						<Grid item xs={12} key={item.productId}>
+						<Grid item xs={12} key={item.product.id}>
 							<CartItem
 								item={item}
 								removeFromCart={removeFromCart}

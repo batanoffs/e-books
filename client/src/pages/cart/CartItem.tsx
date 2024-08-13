@@ -15,25 +15,25 @@ const CartItem = ({ item, removeFromCart, updateQuantity }) => {
 			sx={{ borderBottom: '1px solid #ddd', paddingBottom: 2, marginBottom: 2 }}
 		>
 			<Box sx={{ width: '10%', marginRight: 2 }}>
-				<img src={item.productImagePath} alt={item.name} style={{ width: '80px' }} />
+				<img src={item.product.coverImagePath} alt={item.product.title} style={{ width: '80px' }} />
 			</Box>
 			<Box sx={{ width: '30%' }}>
 				<Typography variant='h6' component='h2'>
-					{item.name}
+					{item.product.title}
 				</Typography>
 			</Box>
 
-			<Box sx={{ width: '10%' }}>
+			{/* <Box sx={{ width: '10%' }}>
 				<Typography variant='body1' component='p'>
 					{item.productType}
 				</Typography>
-			</Box>
+			</Box> */}
 
 			<Box sx={{ width: '15%' }}>
 				<TextField
 					type='number'
 					value={item.quantity}
-					onChange={(e) => updateQuantity(item.productId, parseInt(e.target.value))}
+					onChange={(e) => updateQuantity(item.product.id, parseInt(e.target.value))}
 					inputProps={{ min: 1 }}
 					sx={{ width: '100px', marginY: 1 }}
 				/>
@@ -41,7 +41,7 @@ const CartItem = ({ item, removeFromCart, updateQuantity }) => {
 
 			<Box sx={{ width: '20%' }}>
 				<Typography variant='body1' component='p'>
-					Цена: {formatCurrencyToBGN(item.price * item.quantity)}
+					Цена: {formatCurrencyToBGN(item.product.price * item.quantity)}
 				</Typography>
 			</Box>
 			<Box sx={{ width: '5%' }}>
