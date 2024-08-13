@@ -17,6 +17,8 @@
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.17",
     "@mui/material": "^5.15.17",
+    "@stripe/react-stripe-js": "^2.7.3",
+    "@stripe/stripe-js": "^4.2.0",
     "@types/slick-carousel": "^1.6.40",
     "axios": "^0.24.0",
     "filepond": "^4.31.1",
