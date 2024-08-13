@@ -2,50 +2,61 @@ import { Request, Response } from 'express'
 import Cart from '../models/Cart'
 
 export const addToCart = async (req: Request, res: Response) => {
-	const {
-		userId,
-		productId,
-		quantity,
-		name,
-		price,
-		productType,
-		productImage,
-		productImageType,
-	} = req.body
+	// const {
+	// 	userId,
+	// 	productId,
+	// 	quantity,
+	// 	name,
+	// 	price,
+	// 	productType,
+	// 	productImage,
+	// 	productImageType,
+	// } = req.body
+	const { userId, productId, quantity } = req.body
 
 	try {
-		let cart = await Cart.findOne({ userId })
-
+		// let cart = await Cart.findOne({ userId })
+		// let cart = await Cart.findOne({ userId }).populate('products.product')
+		let cart = await Cart.findOne({ userId }).populate('products.product', '_id')
 		if (!cart) {
 			cart = new Cart({
 				userId,
 				products: [
+					// {
+					// 	productType,
+					// 	productImage,
+					// 	productImageType,
+					// 	productId,
+					// 	quantity,
+					// 	name,
+					// 	price,
+					// },
 					{
-						productType,
-						productImage,
-						productImageType,
-						productId,
+						product: productId,
 						quantity,
-						name,
-						price,
 					},
 				],
 			})
 		} else {
+			// const existingProduct = cart.products.find(
+			// 	product => product.productId.toString() === productId.toString()
+			// )
 			const existingProduct = cart.products.find(
-				product => product.productId.toString() === productId.toString()
+				product => product.product._id.toString() === productId.toString()
 			)
 			if (existingProduct) {
 				existingProduct.quantity += quantity
 			} else {
 				cart.products.push({
-					productType,
-					productImage,
-					productImageType,
-					productId,
+					product: productId,
 					quantity,
-					name,
-					price,
+					// productType,
+					// productImage,
+					// productImageType,
+					// productId,
+					// quantity,
+					// name,
+					// price,
 				})
 			}
 		}
@@ -59,37 +70,42 @@ export const addToCart = async (req: Request, res: Response) => {
 
 export const getCart = async (req: Request, res: Response) => {
 	const { userId } = req.params
-
+  
 	try {
-		const cart = await Cart.findOne({ userId })
-		if (!cart) {
-			return res.status(404).json({ message: 'Cart not found' })
+	  const cart = await Cart.findOne({ userId })
+	  if (!cart) {
+		return res.status(404).json({ message: 'Cart not found' })
+	  }
+	  const products = await cart.populate({
+		path: 'products.product',
+		select: 'title price coverImagePath coverImage coverImageType',
+		options: {
+			
 		}
-		res.status(200).json(cart)
+	  })
+  
+	  res.status(200).json(products.products) // Returns only the products
 	} catch (error) {
-		res.status(500).json({ message: 'Error fetching cart', error })
+	  res.status(500).json({ message: 'Error fetching cart', error })
 	}
-}
+  }
 
 export const removeProductFromCart = async (req: Request, res: Response) => {
 	const { userId, productId } = req.query
-	
-	console.log(req.query)
-
-	console.log('userId:', userId, 'productId:', productId)
 
 	if (!userId || !productId) {
 		return res.status(400).json({ message: 'User ID or product ID are missing' })
 	}
 	try {
-		const cart = await Cart.findOne({ userId })
+		// const cart = await Cart.findOne({ userId })
+		let cart = await Cart.findOne({ userId }).populate('products.product', '_id')
 
 		if (!cart) {
 			return res.status(404).json({ message: 'Cart not found' })
 		}
 
 		const updatedProducts = cart.products.filter(
-			product => product.productId.toString() !== productId.toString()
+			product => product.product._id.toString() !== productId.toString()
 		)
 		cart.products = updatedProducts
 
@@ -117,26 +133,3 @@ export const clearCart = async (req: Request, res: Response) => {
 		res.status(500).json({ message: 'Error clearing cart', error })
 	}
 }
-
-// export const clearCart = async (req: Request, res: Response) => {
-// 	console.log(req)
-// 	console.log(req.query)
-
-// 	const userId = req.query?.split('=')[1]
-
-// 	console.log('userId', userId)
-
-// 	try {
-// 		const cart = await Cart.findOne({ userId })
-
-// 		if (!cart) {
-// 			return res.status(404).json({ message: 'Cart not found' })
-// 		}
-
-// 		cart.products = []
-// 		await cart.save()
-// 		res.status(200).json({ message: 'Cart cleared successfully' })
-// 	} catch (error) {
-// 		res.status(500).json({ message: 'Error clearing cart', error })
-// 	}
-// }

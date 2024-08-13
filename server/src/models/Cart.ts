@@ -3,49 +3,50 @@ import { IShoppingCart } from '../interfaces/cart.interface'
 
 const CartProductSchema: Schema = new Schema(
 	{
-		productType: {
-			type: String,
-			required: true,
-		},
-		productImage: {
-			type: Buffer,
-			required: true,
-		},
-		productImageType: {
-			type: String,
-			required: true,
-		},
-		productId: {
+		// productType: {
+		// 	type: String,
+		// 	required: true,
+		// },
+		// productImage: {
+		// 	type: Buffer,
+		// 	required: true,
+		// },
+		// productImageType: {
+		// 	type: String,
+		// 	required: true,
+		// },
+		product: {
 			type: Schema.Types.ObjectId,
+			ref: 'Book',
 			required: true,
 		},
 		quantity: {
 			type: Number,
 			required: true,
 		},
-		name: {
-			type: String,
-			required: true,
-		},
-		price: {
-			type: Number,
-			required: true,
-		},
+		// name: {
+		// 	type: String,
+		// 	required: true,
+		// },
+		// price: {
+		// 	type: Number,
+		// 	required: true,
+		// },
 	},
 	{ _id: false }
 )
 
-CartProductSchema.virtual('productImagePath').get(function () {
-    if (this.productImage != null && this.productImageType != null) {
-        return `data:${this.productImageType};charset=utf-8;base64,${this.productImage.toString(
-            'base64'
-        )}`;
-    }
-});
+// CartProductSchema.virtual('productImagePath').get(function () {
+//     if (this.productImage != null && this.productImageType != null) {
+//         return `data:${this.productImageType};charset=utf-8;base64,${this.productImage.toString(
+//             'base64'
+//         )}`;
+//     }
+// });
 
-CartProductSchema.set('toJSON', {
-    virtuals: true,
-});
+// CartProductSchema.set('toJSON', {
+//     virtuals: true,
+// });
 
 const ShoppingCartSchema: Schema = new Schema(
 	{
