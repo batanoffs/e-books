@@ -13,6 +13,7 @@ export interface ProductDetailsProps {
 	language: string
 	dimensions: string
 	coverPageType: string
+	productImagePath?: string
 	publishDate: Date
 	stock: number
 	_id: string
