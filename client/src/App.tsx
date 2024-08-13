@@ -19,6 +19,7 @@ import AboutPage from './pages/About/AboutPage'
 import PopularPage from './pages/Popular/PopularPage'
 import CatalogPage from './pages/Catalog/CatalogPage'
 import ScrollTop from './components/ScrollTop/BackToTop'
+import Return from './pages/Checkout/Return'
 
 const App = () => {
 	const [isAdmin, setIsAdmin] = useState(false)
@@ -42,6 +43,7 @@ const App = () => {
 				<Route path='/' element={<HomePage />} />
 				<Route path='/catalog/*' element={<CatalogPage />} />
 				<Route path='/checkout' element={<CheckoutPage />} />
+				<Route path='/return' element={<Return />} />
 				<Route path='/cart' element={<CartPage />} />
 				<Route path='/contacts' element={<ContactsPage />} />
 				<Route path='/orders' element={<OrdersConfirmationPage />} />
