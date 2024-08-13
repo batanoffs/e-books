@@ -1,6 +1,4 @@
 import { JwtPayload, SignOptions, verify, sign } from 'jsonwebtoken'
-import { tokenExpiration } from '../constants/serverSetup'
-import { secret } from '../constants/identity'
 
 function createToken(userData: { email: string; _id?: string }): string {
 	const payload: JwtPayload = {
@@ -8,15 +6,15 @@ function createToken(userData: { email: string; _id?: string }): string {
 		_id: userData._id,
 	}
 
-	const token = sign(payload, process.env.JWT_SECRET || secret, {
-		expiresIn: tokenExpiration,
+	const token = sign(payload, process.env.JWT_SECRET!, {
+		expiresIn: process.env.TOKEN_EXPIRATION,
 	} as SignOptions)
 
 	return token
 }
 
 function verifyToken(token: string): JwtPayload {
-	const data = verify(token, secret) as JwtPayload
+	const data = verify(token, process.env.JWT_SECRET!) as JwtPayload
 
 	return data
 }
