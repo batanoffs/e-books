@@ -1,6 +1,4 @@
 import { Router } from 'express'
-import { body } from 'express-validator'
-import validateRequest from '../middlewares/validateRequest'
 import { checkoutSession, getPaymentSessionStatus } from '../controllers/stripe'
 
 const router = Router()
