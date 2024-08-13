@@ -17,15 +17,9 @@ router.use(isAdmin);
 
 router.use('/users', raExpressMongoose(User, { q: ['email', 'role'], useLean: false }));
 router.use('/users', raExpressMongoose(User, { q: ['email', 'role'], useLean: false }));
-router.use(
-    '/items',
-    raExpressMongoose(Stationery, {
-        q: ['title', 'price', 'description', 'imageUrl', 'stock', 'category'],
-    })
-);
+router.use('/items', raExpressMongoose(Stationery, { q: ['title', 'price', 'description', 'imageUrl', 'stock', 'category'], }));
 
-router.use(
-    '/books',
+router.use( '/books',
     async (req, res, next) => {
         if (req.method === 'POST' && req.body.cover) {
             saveCover(req.body, req.body.cover);
@@ -63,20 +57,20 @@ router.use(
         useLean: true,
     })
 );
-router.use(
-    '/textbooks',
+
+router.use('/textbooks',
     raExpressMongoose(Textbook, {
         q: ['title', 'title', 'author', 'price', 'description', 'imageUrl', 'stock', 'category'],
     })
 );
-router.use(
-    '/featured',
+
+router.use('/featured',
     raExpressMongoose(Featured, {
         q: ['title', 'title', 'author', 'price', 'description', 'imageUrl', 'stock', 'category'],
     })
 );
-router.use(
-    '/orders',
+
+router.use('/orders',
     raExpressMongoose(Order, { q: ['title', 'userId', 'books', 'total', 'status'] })
 );
 
