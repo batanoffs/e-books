@@ -25,13 +25,13 @@ import FeaturedList from './featured/List';
 import FeaturedEdit from './featured/Edit';
 import FeaturedShow from './featured/Show';
 import FeaturedCreate from './featured/Create';
-import { myTheme } from './theme';
+import { API } from '../../utils/constants/api';
+import { theme } from '../../utils/helpers/theme';
 
-const apiUrl = 'http://localhost:5001/api/admin';
-const dataProvider = restProvider(apiUrl);
+const dataProvider = restProvider(API.ADMIN);
 
 const AdminPage = () => (
-    <Admin basename="/admin" dataProvider={dataProvider} authProvider={authProvider} theme={myTheme}>
+    <Admin basename="/admin" dataProvider={dataProvider} authProvider={authProvider} theme={theme.themeOptions}>
         <Resource
             name="orders"
             list={OrdersList}
