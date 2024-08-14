@@ -1,5 +1,9 @@
-import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined'
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined'
+import { useState } from 'react'
+import TextField from '@mui/material/TextField'
+import IconButton from '@mui/material/IconButton'
+import InputAdornment from '@mui/material/InputAdornment'
+import AddIcon from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Remove'
 
 import styles from './quantityInput.module.scss'
 
@@ -9,60 +13,50 @@ interface QuantityInputProps {
 }
 
 const QuantityInput = ({ quantity, setQuantity }: QuantityInputProps) => {
-	const decreaseQuantity = () => {
-		if (quantity > 1) {
-			setQuantity((prevQuantity) => prevQuantity - 1)
+	const [localQuantity, setLocalQuantity] = useState(quantity)
+
+	const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const newQuantity = Number(event.target.value)
+		setLocalQuantity(newQuantity)
+	}
+
+	const handleDecreaseQuantity = () => {
+		if (localQuantity > 1) {
+			setLocalQuantity((prevQuantity) => prevQuantity - 1)
 		}
 	}
 
-	const increaseQuantity = () => {
-		if (quantity < 9999) {
-			setQuantity((prevQuantity) => prevQuantity + 1)
+	const handleIncreaseQuantity = () => {
+		if (localQuantity < 9999) {
+			setLocalQuantity((prevQuantity) => prevQuantity + 1)
 		}
+	}
+
+	const handleSubmit = () => {
+		setQuantity(localQuantity)
 	}
 
 	return (
 		<div className={styles.counterContainer}>
-			<label htmlFor='qty' className={styles.visuallyhidden}>
-				Количество:
-			</label>
-			<button
-				type='button'
-				className={styles.counterButton}
-				disabled={quantity === 1}
-				aria-label='Decrease quantity'
-				onClick={decreaseQuantity}
-			>
-				<IndeterminateCheckBoxOutlinedIcon />
-			</button>
-
-			<input
-				type='number'
-				name='qty'
-				id='qty'
-				min={1}
-				max={9999}
-				step={1}
-				value={quantity}
-				className={styles.cartInput}
-				data-validate={JSON.stringify({
-					'required-number': true,
-					'validate-item-quantity': {
-						minAllowed: 1,
-						maxAllowed: 10000,
-					},
-				})}
-				onChange={(event) => setQuantity(Number(event.target.value))}
-				style={{ appearance: 'textfield' }}
-			/>
-			<button
-				type='button'
-				className={styles.counterButton}
-				aria-label='Increase quantity'
-				onClick={increaseQuantity}
-			>
-				<AddBoxOutlinedIcon />
-			</button>
+			<InputAdornment position='start'>
+				<IconButton onClick={handleDecreaseQuantity} disabled={localQuantity === 1}>
+					<RemoveIcon />
+				</IconButton>
+				<TextField
+					type='text'
+					inputMode='numeric'
+					name='qty'
+					id='qty'
+					inputProps={{ min: 1, max: 9999, step: 1 }}
+					value={localQuantity}
+					className={styles.cartInput}
+					onChange={handleQuantityChange}
+					onBlur={handleSubmit}
+				/>
+				<IconButton onClick={handleIncreaseQuantity} disabled={localQuantity === 9999}>
+					<AddIcon />
+				</IconButton>
+			</InputAdornment>
 		</div>
 	)
 }
