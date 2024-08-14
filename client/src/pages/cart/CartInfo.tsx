@@ -1,5 +1,9 @@
 import { useNavigate } from 'react-router-dom'
-import { Box, Button, Paper, Typography, Grid } from '@mui/material'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid'
 import useCartStore from '../../store/cart'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 
@@ -33,10 +37,10 @@ const CartInfo = () => {
 						alignItems: 'center',
 					}}
 				>
-					<Typography variant='h7'>Общо: {formattedTotal}</Typography>
+					<Typography variant='h6'>Общо: {formattedTotal}</Typography>
 					<Button
 						variant='contained'
-						color='info'
+						color='secondary'
 						size='large'
 						onClick={onPaymentHandler}
 					>

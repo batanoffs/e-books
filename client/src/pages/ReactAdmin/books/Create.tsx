@@ -1,21 +1,12 @@
+import { Create, SimpleForm, TextInput, NumberInput, required, DateInput, useNotify, useRedirect, useDataProvider } from 'react-admin';
 import { useState } from 'react';
 
-import {
-    Create,
-    SimpleForm,
-    TextInput,
-    NumberInput,
-    required,
-    DateInput,
-    useNotify,
-    useRedirect,
-    useDataProvider,
-} from 'react-admin';
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 import { FilePond, registerPlugin } from 'react-filepond';
+
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import 'filepond/dist/filepond.min.css';
 
@@ -28,16 +19,6 @@ const BookCreate = (props) => {
     const dataProvider = useDataProvider();
 
     const handleSave = async (values) => {
-        // console.log('handleSave values:', values);
-        // console.log('handleSave values:', files[0]);
-        // console.log('handleSave values:', files[0]);
-
-        // console.log('getFileEncodeBase64String values:', files[0].getFileEncodeBase64String());
-        // console.log('handleSave setFile:', files[0].setFile());
-        // console.log('handleSave getFileEncodeDataURL:', files[0].getFileEncodeDataURL());
-        // console.log('handleSave getMetadata:', files[0].getMetadata());
-        // console.log('handleSave setMetadata:', files[0].setMetadata());
-
         try {
             const cover = files.map((file) => {
                 console.log('file:', file);

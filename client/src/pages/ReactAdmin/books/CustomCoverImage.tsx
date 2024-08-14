@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import { useFieldValue } from 'react-admin';
 
 type CustomCoverImageProps = {
@@ -29,7 +29,7 @@ export const CustomCoverImage = ({
             <li style={{ listStyle: 'none' }}>
                 <img
                     alt="cover"
-                    name="cover"
+                    id='cover'
                     title={title}
                     src={newCover ? newCover : img}
                     style={{ maxWidth: imgWidth }}

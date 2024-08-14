@@ -1,4 +1,8 @@
-import { Box, Button, Paper, Typography, Grid } from '@mui/material'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid'
 
 import CartItem from './CartItem'
 import { getUserId } from '../../utils/helpers/auth'
@@ -10,8 +14,7 @@ export const CartList = () => {
 	const updateQuantity = useCartStore((state) => state.updateQuantity)
 	const removeFromCart = useCartStore((state) => state.removeFromCart)
 
-	const getTotalItems = () =>
-		cart.reduce((sum, item) => sum + item.quantity, 0)
+	const getTotalItems = () => cart.reduce((sum, item) => sum + item.quantity, 0)
 
 	const clearCartHandler = async () => {
 		//TODO add confirmation

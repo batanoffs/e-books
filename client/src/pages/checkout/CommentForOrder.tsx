@@ -1,13 +1,11 @@
-import {
-	Box,
-	Button,
-	FormControl,
-	TextareaAutosize,
-	Typography,
-	Accordion,
-	AccordionSummary,
-	AccordionDetails,
-} from '@mui/material'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import FormControl from '@mui/material/FormControl'
+import TextareaAutosize from '@mui/material/TextareaAutosize'
+import Typography from '@mui/material/Typography'
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 export const CommentForOrder = ({ control, Controller }) => {

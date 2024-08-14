@@ -1,11 +1,12 @@
 import { useState, MouseEvent, ChangeEvent, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import AppBar from '@mui/material/AppBar'
+import Container from '@mui/material/Container'
+import Toolbar from '@mui/material/Toolbar'
 import axios from 'axios'
 
-import { AppBar, Container, Toolbar } from '@mui/material'
 import { useFiltersStore } from '../../store/filters'
 import { API } from '../../utils/constants/api'
-
 import Logo from '../Logo/Logo'
 import SearchBar from './SearchBar'
 import NavigationMenu from './NavMenu'

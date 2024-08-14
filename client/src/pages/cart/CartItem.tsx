@@ -1,4 +1,7 @@
-import { Box, Button, Typography, TextField } from '@mui/material'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import TextField from '@mui/material/TextField'
 import DeleteIcon from '@mui/icons-material/Delete'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import { getUserId } from '../../utils/helpers/auth'
@@ -15,7 +18,11 @@ const CartItem = ({ item, removeFromCart, updateQuantity }) => {
 			sx={{ borderBottom: '1px solid #ddd', paddingBottom: 2, marginBottom: 2 }}
 		>
 			<Box sx={{ width: '10%', marginRight: 2 }}>
-				<img src={item.product.coverImagePath} alt={item.product.title} style={{ width: '80px' }} />
+				<img
+					src={item.product.coverImagePath}
+					alt={item.product.title}
+					style={{ width: '80px' }}
+				/>
 			</Box>
 			<Box sx={{ width: '30%' }}>
 				<Typography variant='h6' component='h2'>

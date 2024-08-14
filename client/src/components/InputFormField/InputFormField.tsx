@@ -1,5 +1,6 @@
-import { FormControl, TextField } from '@mui/material'
 import { Controller } from 'react-hook-form'
+import FormControl from '@mui/material/FormControl'
+import TextField from '@mui/material/TextField'
 
 type InputFormFieldProps = {
 	label: string

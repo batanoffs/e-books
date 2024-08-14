@@ -10,7 +10,7 @@ interface CommentDropdownProps {
 const CommentDropdown = ({ isCommentsOpen, setIsCommentsOpen, styles }: CommentDropdownProps) => {
 	const handleClick = () => setIsCommentsOpen(!isCommentsOpen)
 	const message = isCommentsOpen ? 'Няма налични коментари все още за този продукт.' : ''
-	
+
 	return (
 		<div className={styles.dropdown} onClick={handleClick}>
 			<h5>

@@ -1,20 +1,19 @@
+import { Controller } from 'react-hook-form'
+
+import FormControl from '@mui/material/FormControl'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormLabel from '@mui/material/FormLabel'
+import Paper from '@mui/material/Paper'
+import Radio from '@mui/material/Radio'
+import RadioGroup from '@mui/material/RadioGroup'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableRow from '@mui/material/TableRow'
+import Typography from '@mui/material/Typography'
+
 import { paymentOptions } from '../../utils/constants/paymentFormConstants'
 import { Faktura } from './Faktura'
-import {
-	Box,
-	FormControl,
-	FormControlLabel,
-	FormLabel,
-	Paper,
-	Radio,
-	RadioGroup,
-	Table,
-	TableBody,
-	TableCell,
-	TableRow,
-	Typography,
-} from '@mui/material'
-import { Controller } from 'react-hook-form'
 
 type PaymentOptionsProps = {
 	control: any

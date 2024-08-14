@@ -1,4 +1,8 @@
-import { Toolbar, useScrollTrigger, Box, Fab, Fade } from '@mui/material'
+import Toolbar from '@mui/material/Toolbar'
+import Box from '@mui/material/Box'
+import Fab from '@mui/material/Fab'
+import Fade from '@mui/material/Fade'
+import useScrollTrigger from '@mui/material/useScrollTrigger'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 
 interface BackToTopProps {
@@ -35,7 +39,7 @@ const BackToTop = ({ children }: BackToTopProps) => {
 
 const ScrollTop = () => (
 	<>
-		<Toolbar id='back-to-top-anchor' sx={{ height: "10px" }}/>
+		<Toolbar id='back-to-top-anchor' sx={{ height: '10px' }} />
 		<BackToTop>
 			<Fab size='large' aria-label='scroll back to top'>
 				<KeyboardArrowUpIcon sx={{ height: '40px', width: '40px' }} />

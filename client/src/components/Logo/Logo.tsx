@@ -1,6 +1,5 @@
-// Logo.tsx
-import { Box } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import Box from '@mui/material/Box'
 
 const Logo = () => {
 	const navigate = useNavigate()
@@ -32,7 +31,7 @@ const Logo = () => {
 					</text>
 				</g>
 				<g transform='translate(137.60687955030443 18)' stroke='none'>
-                <text
+					<text
 						x='0'
 						y='40.5'
 						fontFamily={`"Caveat", "sans-serif"`}

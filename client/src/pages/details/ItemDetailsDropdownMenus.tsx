@@ -1,8 +1,9 @@
-import { ProductDetailsProps } from '../../interfaces/ProductDetailsProps.interface'
 import CommentDropdown from './CommentDropdown'
 import ReturnsDropdown from './ReturnsDropdown'
 import DeliveryInfoDropdown from './DeliveryDropdown'
 import DescriptionDropdown from './DescriptionDropdown'
+
+import { ProductDetailsProps } from '../../interfaces/ProductDetailsProps.interface'
 
 interface ItemDetailsDropdownMenus extends ProductDetailsProps {
 	isDescriptionOpen: boolean

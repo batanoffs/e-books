@@ -1,17 +1,16 @@
 import { useState } from 'react'
-import {
-	Accordion,
-	AccordionSummary,
-	AccordionDetails,
-	Box,
-	Button,
-	FormControl,
-	InputLabel,
-	OutlinedInput,
-	Typography,
-} from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Controller } from 'react-hook-form'
+
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import OutlinedInput from '@mui/material/OutlinedInput'
+import Typography from '@mui/material/Typography'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 export const DiscountCode = ({ control, errors, reset }) => {
 	const [expanded, setExpanded] = useState<Boolean>(false)

@@ -1,9 +1,16 @@
-// UserMenu.tsx
-import { Box, IconButton, Menu, MenuItem, Typography, Tooltip, Avatar, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
+import Box from '@mui/material/Box'
+import IconButton from '@mui/material/IconButton'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import Typography from '@mui/material/Typography'
+import Tooltip from '@mui/material/Tooltip'
+import Avatar from '@mui/material/Avatar'
+import Button from '@mui/material/Button'
+
 import { isAuth } from '../../utils/helpers/auth'
 import { useLoginModal } from '../../store/helperModal'
-import CartButton from './Cart'
+import CartButton from './CartButton'
 
 const settings = [
 	{ name: 'Начало', path: '/' },

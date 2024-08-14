@@ -1,5 +1,6 @@
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
+
 import { ProductDetailsProps } from '../../interfaces/ProductDetailsProps.interface'
 import { formatDate } from '../../utils/helpers/formatDate'
 
@@ -57,8 +58,7 @@ const DescriptionDropdown = ({
 								<strong>Език:</strong> {language}
 							</p>
 							<p>
-								<strong>Година на издаване:</strong>{' '}
-								{formatDate(publishDate)}
+								<strong>Година на издаване:</strong> {formatDate(publishDate)}
 							</p>
 							<p>
 								<strong>Страници брой:</strong> {pageCount}

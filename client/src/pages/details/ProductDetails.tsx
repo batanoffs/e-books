@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { ProductDetailsProps } from '../../interfaces/ProductDetailsProps.interface'
 import { ItemDetailsDropdownMenus } from './ItemDetailsDropdownMenus'
 import { ItemDetailsTitle } from './ItemDetailsTitle'
+import { cartService } from '../../services/cartService'
 
 import styles from './details.module.scss'
-import { cartService } from '../../services/cartService'
 
 export const ProductDetails = ({ ...props }: { props: ProductDetailsProps }) => {
 	const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(true)

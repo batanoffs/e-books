@@ -1,9 +1,9 @@
 const OrdersConfirmationPage = () => {
-    return (
-        <div>
-            <h1>Order Details</h1>
-        </div>
-    );
-};
+	return (
+		<div>
+			<h1>Order Details</h1>
+		</div>
+	)
+}
 
-export default OrdersConfirmationPage;
+export default OrdersConfirmationPage

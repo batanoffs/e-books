@@ -14,12 +14,12 @@ import { API } from '../../utils/constants/api'
 const CatalogPage = () => {
 	const [items, setItems] = useState([])
 	const [categories, setCategories] = useState([])
-	const navCategory = useFiltersStore(state => state.navCategory)
+	const navCategory = useFiltersStore((state) => state.navCategory)
 	const params = useParams()
 	const type = Object.values(params)[0]?.split('/')[0]
 
 	const setCategoriesForType = useFiltersStore(
-		state => state[`set${type.charAt(0).toUpperCase() + type.slice(1)}Categories`]
+		(state) => state[`set${type.charAt(0).toUpperCase() + type.slice(1)}Categories`]
 	)
 
 	useEffect(() => {
@@ -28,7 +28,7 @@ const CatalogPage = () => {
 			const response = await axios.get(apiUrl)
 			const items = response.data
 			setItems(items)
-			const categories = Array.from(new Set(items.map(item => item.category)))
+			const categories = Array.from(new Set(items.map((item) => item.category)))
 			setCategories(categories)
 			setCategoriesForType && setCategoriesForType(categories)
 		}
