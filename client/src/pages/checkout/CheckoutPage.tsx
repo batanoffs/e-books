@@ -9,6 +9,8 @@ import { DeliveryForm } from './DeliveryForm'
 import { AddressForm } from './AddressForm'
 import { PaymentForm } from './PaymentForm'
 import useCartStore from '../../store/cart'
+import { API } from '../../utils/constants/api'
+// import { getToken } from '../../utils/helpers/auth'
 
 type CheckoutFormValues = {
 	firstname: string
@@ -55,13 +57,31 @@ const CheckoutPage = () => {
 	const handlePlaceOrder = (data: CheckoutFormValues) => {
 		console.table(data)
 		console.log('formState', formState)
-
-		// placeOrder({
-		// 	id: new Date().toISOString(),
-		// 	items: cart,
-		// 	paymentMethod: data.paymentMethod,
-		// 	deliveryMethod: data.shippingMethod,
-		// })
+		// const token = getToken()
+		fetch(API.CHECKOUT + 'create-checkout-session', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				// 'Authorization': `Bearer: ${token}`,
+			},
+			body: JSON.stringify({
+				items: [
+					{ id: 1, quantity: 1 },
+					{ id: 2, quantity: 2 },
+				],
+			}),
+		})
+			.then((res) => {
+				if (res.ok) return res.json()
+				return res.json().then((json) => Promise.reject(json))
+			})
+			.then(({ url }) => {
+				window.location = url
+				// console.log(url)
+			})
+			.catch((error) => {
+				console.error(error.error)
+			})
 	}
 
 	const handleBackToCart = () => {

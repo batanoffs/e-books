@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { checkoutSession, getPaymentSessionStatus } from '../controllers/stripe'
+import { checkoutSession } from '../controllers/stripe'
 
 const router = Router()
 
 router.post('/create-checkout-session', checkoutSession)
 
-router.get('/session-status', getPaymentSessionStatus)
+// router.get('/session-status', getPaymentSessionStatus)
 
 export default router
