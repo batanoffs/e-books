@@ -14,8 +14,6 @@ const CartPage = () => {
 			try {
 				const userId = await getUserId()
 				const response = await axios.get(API.CART + userId)
-				console.log(response.data)
-
 				if (response.data) {
 					useCartStore.setState({ cart: response.data })
 				}
