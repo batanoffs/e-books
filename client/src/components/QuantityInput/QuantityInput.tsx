@@ -8,32 +8,31 @@ import RemoveIcon from '@mui/icons-material/Remove'
 import styles from './quantityInput.module.scss'
 
 interface QuantityInputProps {
-	setQuantity: (quantity: number) => void
 	quantity: number
+	onChangeQuantity: () => void
 }
 
-const QuantityInput = ({ quantity, setQuantity }: QuantityInputProps) => {
+const QuantityInput = ({ quantity, onChangeQuantity }: QuantityInputProps) => {
 	const [localQuantity, setLocalQuantity] = useState(quantity)
 
 	const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newQuantity = Number(event.target.value)
 		setLocalQuantity(newQuantity)
+		onChangeQuantity()
 	}
 
 	const handleDecreaseQuantity = () => {
 		if (localQuantity > 1) {
 			setLocalQuantity((prevQuantity) => prevQuantity - 1)
+			onChangeQuantity()
 		}
 	}
 
 	const handleIncreaseQuantity = () => {
 		if (localQuantity < 9999) {
 			setLocalQuantity((prevQuantity) => prevQuantity + 1)
+			onChangeQuantity()
 		}
-	}
-
-	const handleSubmit = () => {
-		setQuantity(localQuantity)
 	}
 
 	return (
@@ -45,13 +44,13 @@ const QuantityInput = ({ quantity, setQuantity }: QuantityInputProps) => {
 				<TextField
 					type='text'
 					inputMode='numeric'
+					disabled
 					name='qty'
 					id='qty'
 					inputProps={{ min: 1, max: 9999, step: 1 }}
 					value={localQuantity}
 					className={styles.cartInput}
 					onChange={handleQuantityChange}
-					onBlur={handleSubmit}
 				/>
 				<IconButton onClick={handleIncreaseQuantity} disabled={localQuantity === 9999}>
 					<AddIcon />
