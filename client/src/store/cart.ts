@@ -5,8 +5,6 @@ interface CartItem {
 	product: {
 		id: string
 		coverImagePath: string
-		coverImage: Buffer
-		coverImageType: string
 		title: string
 		price: number
 	}
@@ -63,4 +61,3 @@ const useCartStore = create<CartState>((set) => ({
 }))
 
 export default useCartStore
-
