@@ -1,22 +1,36 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import TextField from '@mui/material/TextField'
 import DeleteIcon from '@mui/icons-material/Delete'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import { getUserId } from '../../utils/helpers/auth'
+import QuantityInput from '../../components/QuantityInput/QuantityInput'
+import useConfirm from '../../hooks/useConfirm'
+import useCartStore from '../../store/cart'
 
-const CartItem = ({ item, removeFromCart, updateQuantity }) => {
-	const removeProductFromCart = async () => {
+const CartItem = ({ item, onChangeQuantity }) => {
+	const { dialog, confirm } = useConfirm()
+	
+	const removeFromCart = useCartStore((state) => state.removeFromCart)
+
+	const handleRemoveProduct = async () => {
 		const userId = await getUserId()
-		await removeFromCart(item.productId, userId)
+		const alert = await confirm(
+			'Изтриване',
+			'Сигурни ли сте, че искате да потвърдите това действие?'
+		)
+
+		if (alert) return removeFromCart(item.product.id, userId)
 	}
+
 	return (
 		<Box
 			display='flex'
 			alignItems='center'
 			sx={{ borderBottom: '1px solid #ddd', paddingBottom: 2, marginBottom: 2 }}
 		>
+			{dialog}
+
 			<Box sx={{ width: '10%', marginRight: 2 }}>
 				<img
 					src={item.product.coverImagePath}
@@ -30,20 +44,9 @@ const CartItem = ({ item, removeFromCart, updateQuantity }) => {
 				</Typography>
 			</Box>
 
-			{/* <Box sx={{ width: '10%' }}>
-				<Typography variant='body1' component='p'>
-					{item.productType}
-				</Typography>
-			</Box> */}
-
 			<Box sx={{ width: '15%' }}>
-				<TextField
-					type='number'
-					value={item.quantity}
-					onChange={(e) => updateQuantity(item.product.id, parseInt(e.target.value))}
-					inputProps={{ min: 1 }}
-					sx={{ width: '100px', marginY: 1 }}
-				/>
+				<QuantityInput quantity={item.quantity} onChangeQuantity={onChangeQuantity} />
+				{/* onChange={(e) => updateQuantity(item.product.id, parseInt(e.target.value))} */}
 			</Box>
 
 			<Box sx={{ width: '20%' }}>
@@ -52,7 +55,7 @@ const CartItem = ({ item, removeFromCart, updateQuantity }) => {
 				</Typography>
 			</Box>
 			<Box sx={{ width: '5%' }}>
-				<Button variant='text' color='error' onClick={removeProductFromCart}>
+				<Button variant='text' color='error' onClick={handleRemoveProduct}>
 					<DeleteIcon />
 				</Button>
 			</Box>
