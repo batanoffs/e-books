@@ -60,7 +60,7 @@ export const CarouselCard = ({ book, styles }: CarouselCard) => {
 				<h1>{title}</h1>
 				<p>{author}</p>
 				<p>{formatCurrency}</p>
-				<span>{description}</span>
+				<span className={styles.description}>{description}</span>
 				<div className={styles.buttonsContainer}>
 					<Button
 						variant='contained'
