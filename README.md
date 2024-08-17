@@ -185,19 +185,23 @@ Server build on express and mongodb for backend and mongoose for mongodb schema.
 
 #### Context Providers with Zustand Store
 
+-   **Alert Store** is a helper store that provides state if the alert is open or not
+
 -   **Cart Store** stores and provides data from the server to the cart of the authenticated user.
 
 -   **Filter Store** provides and stores data for the filter section in the catalog page
+
+-   **Modal Store** is a helper store that provides state if the modal is open or not
 
 -   **Location Store** saves the current location and provides it to the header component and footer component for the admin panel
 
 -   **User Data Store** holds information about the currently authenticated user. It provides getters and setters for the user's data, including the user's username, whether the user is logged in, and whether the user is an admin.
 
--   **Modal Store** is a helper store that provides state if the modal is open or not
+-   **Wishlist Store** stores and provides data from the server to the wishlist of the authenticated user.
 
 #### Custom Hooks
 
--   **useAlert()** takes an error message and sets it in the state of the alert
+-   **useConfirm()** is a hook opens modal to ask the user for confirmation
 
 #### Routers
 
