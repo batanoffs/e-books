@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import axios from 'axios'
 
 import { ProductDetailsProps } from '../../interfaces/ProductDetailsProps.interface'
 import { ItemDetailsDropdownMenus } from './ItemDetailsDropdownMenus'
@@ -8,6 +8,8 @@ import { cartService } from '../../services/cartService'
 
 import styles from './details.module.scss'
 import useCartStore from '../../store/cart'
+import { API } from '../../utils/constants/api'
+import { useAlertStore } from '../../store/alert'
 
 export const ProductDetails = ({ item }: { props: ProductDetailsProps }) => {
 	const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(true)
@@ -15,8 +17,9 @@ export const ProductDetails = ({ item }: { props: ProductDetailsProps }) => {
 	const [isReturnsOpen, setIsReturnsOpen] = useState<boolean>(false)
 	const [isCommentsOpen, setIsCommentsOpen] = useState<boolean>(false)
 	const [quantity, setQuantity] = useState<number>(1)
+
+	const showAlert = useAlertStore((state) => state.showAlert)
 	const addToCart = useCartStore((state) => state.addToCart)
-	const navigate = useNavigate()
 
 	const handleAddToCart = async (e) => {
 		const target = e.target
@@ -33,17 +36,24 @@ export const ProductDetails = ({ item }: { props: ProductDetailsProps }) => {
 		const quantityValue = Number(quantityInputElement.value)
 		addToCart(currentItem)
 		await cartService.addToCart(item, quantityValue, 'book')
-	}
-
-	const handleBuyNow = async () => {
-		//TODO buy now
-		console.log('Buy now')
-		// navigate('/checkout')
+		showAlert('Успешно добавен продукт', 'success')
 	}
 
 	const handleAddToWishlist = async () => {
-		//TODO buy now
-		console.log('Added to wishlist')
+		const productId = item._id
+		if (!productId) return console.log('productId not found')
+
+		const response = await axios.post(
+			API.WISHLIST,
+			{ productId },
+			{
+				withCredentials: true,
+			}
+		)
+
+		if (response.status === 200) {
+			showAlert('Успешно добавен продукт', 'success')
+		}
 	}
 
 	return (
@@ -51,7 +61,6 @@ export const ProductDetails = ({ item }: { props: ProductDetailsProps }) => {
 			<ItemDetailsTitle
 				{...{
 					handleAddToCart,
-					handleBuyNow,
 					handleAddToWishlist,
 					styles,
 					quantity,
