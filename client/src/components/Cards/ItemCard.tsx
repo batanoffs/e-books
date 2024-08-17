@@ -1,51 +1,94 @@
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 import Favorite from '@mui/icons-material/Favorite'
 import ShoppingCart from '@mui/icons-material/ShoppingCart'
+
+import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
+import useCartStore from '../../store/cart'
+import { useAlertStore } from '../../store/alert'
+import { useLoginModal } from '../../store/helperModal'
+import { isAuth } from '../../middlewares/guards'
+import { cartService } from '../../services/cartService'
+import { API } from '../../utils/constants/api'
 
 import styles from './itemcard.module.scss'
 
 export const ItemCard = ({ item }) => {
+	const showAlert = useAlertStore((state) => state.showAlert)
+	const addToCart = useCartStore((state) => state.addToCart)
+	const toggleOpen = useLoginModal((state) => state.toggleOpen)
 	const { _id, title, author, price, coverImagePath } = item
 	const navigate = useNavigate()
 
-	const addToCartHandler = (e) => {
-		//TODO add item to cart
-		const parent = e.currentTarget.closest(`.${styles.container}`)
-		const id = parent.getAttribute('data-id')
-		console.log('Added to cart', id)
+	const formattedPrice = formatCurrencyToBGN(price)
+
+	const addToCartHandler = async () => {
+		const isUserAuthenticated = isAuth()
+		if (!isUserAuthenticated) {
+			toggleOpen()
+			return showAlert('Моля, влезте в акаунта си, за да продължите', 'info')
+		}
+		const currentItem = {
+			product: {
+				id: _id,
+				coverImagePath: coverImagePath,
+				title: title,
+				price: price,
+			},
+			quantity: 1,
+		}
+		addToCart(currentItem)
+		await cartService.addToCart(item, 1, 'book')
+		showAlert('Успешно добавен продукт', 'success')
 	}
 
-	const addToWishlistHandler = (e) => {
-		//TODO add item to wishlist
+	const addToWishlistHandler = async () => {
+		const isUserAuthenticated = isAuth()
+		if (!isUserAuthenticated) {
+			toggleOpen()
+			return showAlert('Моля, влезте в акаунта си, за да продължите', 'info')
+		}
+		if (!_id) {
+			console.log('productId not found')
+			return showAlert('Възникна грешка - продуктът не е намерен', 'error')
+		}
 
-		const parent = e.currentTarget.closest(`.${styles.container}`)
-		const id = parent.getAttribute('data-id')
-		console.log('Added to favorites', id)
+		const response = await axios.post(
+			API.WISHLIST,
+			{ productId: _id },
+			{
+				withCredentials: true,
+			}
+		)
+
+		if (response.status === 200) {
+			showAlert('Успешно добавен продукт', 'success')
+		}
 	}
 
-	const goToDetailsHandler = (e) => {
-		const parent = e.currentTarget
-		const id = parent.getAttribute('data-id')
-		navigate(`${window.location.pathname}/${id}`)
+	const goToDetailsHandler = () => {
+		navigate(`/catalog/books/all/${_id}`)
 	}
 
 	return (
-		<div onClick={goToDetailsHandler} className={styles.container} data-id={_id}>
-			<div className={styles.bookImageContainer}>
-				<div className={styles.buttonContainer}>
-					<button onClick={addToWishlistHandler}>
-						<Favorite />
-					</button>
-					<button onClick={addToCartHandler}>
-						<ShoppingCart />
-					</button>
-				</div>
+		<div className={styles.container} data-id={_id}>
+			<div className={styles.bookImageContainer} onClick={goToDetailsHandler}>
+				{isAuth() && (
+					<div className={styles.buttonContainer}>
+						<button onClick={addToWishlistHandler}>
+							<Favorite />
+						</button>
+						<button onClick={addToCartHandler}>
+							<ShoppingCart />
+						</button>
+					</div>
+				)}
 				<img src={coverImagePath} alt={title} />
 			</div>
 			<div className={styles.bookInfo}>
 				<h6>{title}</h6>
 				<p>{author}</p>
-				<p>{price} лв.</p>
+				<p>{formattedPrice}</p>
 			</div>
 		</div>
 	)
