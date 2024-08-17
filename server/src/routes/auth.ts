@@ -27,6 +27,7 @@ router.post(
             .withMessage("Passwords don't match"),
         body('role')
             .trim()
+            .optional({ checkFalsy: true })
             .custom(value => value === 'user' || value === 'admin')
             .withMessage('Role must be user or admin'),
     ],

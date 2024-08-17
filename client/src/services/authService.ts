@@ -27,7 +27,6 @@ const login = async (email: string, password: string) => {
 		return { redirectUrl, message }
 	} catch (error) {
 		console.error('Login failed', error)
-		throw error
 	}
 }
 
@@ -35,7 +34,7 @@ const register = async (credentials: {
 	email: string
 	password: string
 	repass: string
-	role: string
+	// role: typeof process.env.ROLE
 }) => {
 	if (!credentials.email || !credentials.password) {
 		throw new Error('Email and password are required')
@@ -61,7 +60,7 @@ const logout = async () => {
 
 		const { redirectUrl, message } = response.data
 		document.cookie = 'token=;'
-		
+
 		return { redirectUrl, message }
 	} catch (error) {
 		console.error('Logout failed', error)
