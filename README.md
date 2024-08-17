@@ -52,7 +52,7 @@ username `pesho@abv.bg` password `qweasd123`
 ## Fixes and updates:
 
 -   [ ] fix issues with session expire and users
--   [ ] fix issues with cookies token for admins validation
+-   [x] fix issues with cookies token for admins validation
 -   [x] fix server duplicate code - replace with already created utils
 -   [ ] fix css warnings (low priority)
 -   [ ] fix catalog hover buttons issues and functionality
@@ -269,15 +269,15 @@ Server build on express and mongodb for backend and mongoose for mongodb schema.
 
 #### Services
 
--   **user** for Authentication
+-   **user** for Authentication (register, login, logout)
 -   **jwt** for creating and verifying tokens
 
 #### Middlewares
 
 -   **cors** for cors setup for the express server
 -   **guards** isUser, isAdmin, isGuest - checks if user is authenticated and roles
--   **session** validates the session if token is present, if not clears the cookie token
--   **validateRequest** validate the requests
+-   **session** validates the session. If token is present, sets the user in the request object
+-   **validateRequest** validates the requests
 
 #### Routes
 
