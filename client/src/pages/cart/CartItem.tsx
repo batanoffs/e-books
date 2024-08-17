@@ -7,20 +7,25 @@ import { getUserId } from '../../utils/helpers/auth'
 import QuantityInput from '../../components/QuantityInput/QuantityInput'
 import useConfirm from '../../hooks/useConfirm'
 import useCartStore from '../../store/cart'
+import { useAlertStore } from '../../store/alert'
 
 const CartItem = ({ item, onChangeQuantity }) => {
 	const { dialog, confirm } = useConfirm()
-	
+
+	const showAlert = useAlertStore((state) => state.showAlert)
 	const removeFromCart = useCartStore((state) => state.removeFromCart)
 
 	const handleRemoveProduct = async () => {
 		const userId = await getUserId()
 		const alert = await confirm(
 			'Изтриване',
-			'Сигурни ли сте, че искате да потвърдите това действие?'
+			'Сигурни ли сте, че искате да изтриете този продукт?'
 		)
 
-		if (alert) return removeFromCart(item.product.id, userId)
+		if (alert) {
+			showAlert('Успешно изтрит продукт', 'success')
+			return removeFromCart(item.product.id, userId)
+		}
 	}
 
 	return (
