@@ -1,4 +1,4 @@
-// SearchBar.tsx
+import { useState, ChangeEvent } from 'react'
 import { styled } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 import SearchIcon from '@mui/icons-material/Search'
@@ -8,7 +8,22 @@ const Search = styled('div')(searchStyles)
 const SearchIconWrapper = styled('div')(searchIconWrapperStyles)
 const StyledInputBase = styled(InputBase)(inputBaseStyles)
 
-const SearchBar = ({ handleSearchInputChange }) => {
+const SearchBar = () => {
+	const [searchQuery, setSearchQuery] = useState('')
+
+	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === 'Enter') {
+			handleSearch()
+		}
+	}
+	const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setSearchQuery(event.target.value)
+	}
+
+	const handleSearch = async () => {
+		// TODO: Add search functionality
+	}
+
 	return (
 		<Search>
 			<SearchIconWrapper>
@@ -18,6 +33,7 @@ const SearchBar = ({ handleSearchInputChange }) => {
 				placeholder='Търсене...'
 				inputProps={{ 'aria-label': 'search' }}
 				onChange={handleSearchInputChange}
+				onKeyPress={handleKeyPress}
 			/>
 		</Search>
 	)

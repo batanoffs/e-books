@@ -1,4 +1,4 @@
-import { useState, MouseEvent, ChangeEvent, FormEvent } from 'react'
+import { useState, MouseEvent, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
@@ -11,12 +11,13 @@ import Logo from '../Logo/Logo'
 import SearchBar from './SearchBar'
 import NavigationMenu from './NavMenu'
 import UserMenu from './UserMenu'
+import { useAlertStore } from '../../store/alert'
 
 const Header = () => {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
 	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
 	const setNavCategory = useFiltersStore((state) => state.setNavCategory)
-	const [searchQuery, setSearchQuery] = useState('')
+	const showAlert = useAlertStore((state) => state.showAlert)
 	const navigate = useNavigate()
 
 	const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
@@ -35,18 +36,16 @@ const Header = () => {
 		setAnchorElUser(null)
 	}
 
-	const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setSearchQuery(event.target.value)
-	}
-
 	const handleLogout = async (e: FormEvent) => {
 		e.preventDefault()
 		try {
-			await axios.get(API.LOGOUT)
+			const response = await axios.get(API.LOGOUT)
+			const { redirectUrl, message } = response.data
 			document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-			navigate('/')
+			showAlert(message, 'success')
+			navigate(redirectUrl)
 		} catch (error) {
-			console.error('Logout failed', error)
+			showAlert('Възникна грешка!', 'error')
 		}
 	}
 
@@ -89,7 +88,7 @@ const Header = () => {
 							handleCloseNavMenu={handleCloseNavMenu}
 							navigationHandler={navigationHandler}
 						/>
-						<SearchBar handleSearchInputChange={handleSearchInputChange} />
+						<SearchBar />
 						<UserMenu
 							anchorElUser={anchorElUser}
 							handleOpenUserMenu={handleOpenUserMenu}
