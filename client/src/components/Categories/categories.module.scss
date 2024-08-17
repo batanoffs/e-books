@@ -1,0 +1,35 @@
+.categoryContainer {
+	display: flex;
+	justify-content: center;
+	margin-top: 5em;
+	gap: 1em;
+}
+
+.categoryItem {
+	background-color: #f0f3f6;
+	width: 250px;
+	height: 130px;
+	border-radius: 15px;
+	text-align: center;
+	cursor: pointer;
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+	transition: background-color 0.3s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&:hover {
+		background-color: #e2e6ea;
+	}
+}
+
+.categoryText {
+	background-color: #2f2f2f;
+	color: white;
+	padding: 5px 15px;
+	font-size: 1.2em;
+	margin: auto;
+	margin: auto 0;
+	border-radius: 10px;
+	font-family: 'Comic Sans MS', sans-serif;
+}
