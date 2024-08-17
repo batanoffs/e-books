@@ -8,14 +8,11 @@ const WishlistSchema = new Schema(
 			ref: 'User',
 			require: true,
 		},
-		product: {
-			type: Schema.Types.ObjectId,
-			ref: 'Product',
-			require: true,
-		},
-		note: {
-			type: String,
-		},
+		productRefs: [
+			{
+				product: { type: Schema.Types.ObjectId, ref: 'Book' },
+			},
+		],
 	},
 	{ timestamps: true, versionKey: false }
 )

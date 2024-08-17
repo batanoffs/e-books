@@ -9,6 +9,7 @@ import textbookRoutes from './textbook'
 import cartRoutes from './cart'
 import featuredRoutes from './featured'
 import stripeRoutes from './stripe'
+import wishlistRoutes from './wishlist'
 
 const router = express.Router()
 
@@ -21,5 +22,6 @@ router.use('/textbooks', textbookRoutes)
 router.use('/cart', cartRoutes)
 router.use('/featured', featuredRoutes)
 router.use('/checkout', stripeRoutes)
+router.use('/wishlist', wishlistRoutes)
 
 export default router

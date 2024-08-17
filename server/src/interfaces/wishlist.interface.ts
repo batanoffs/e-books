@@ -1,5 +1,8 @@
+import { Types } from 'mongoose'
+
 export interface IWishlistSchema {
-	user: string
-	product: string
-	note: string
+	user: Types.ObjectId
+	productRefs: {
+		product: Types.ObjectId
+	}[]
 }
