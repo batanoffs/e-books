@@ -25,8 +25,8 @@ const getCart = async (): Promise<any> => {
 
 const addToCart = async (props: any, quantity: number, productType: string) => {
 	try {
-		const { _id, price, title, coverImage, coverImageType } = props
-		if (!_id || !price || !title || !coverImage || !coverImageType) {
+		const { _id } = props
+		if (!_id) {
 			throw new Error('Missing product data')
 		}
 		const userId = await getUserId()
