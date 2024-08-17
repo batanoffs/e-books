@@ -9,6 +9,7 @@ import { GeneralRulesModal } from './GeneralRulesModal'
 import { authService } from '../../services/authService'
 
 import styles from './register.module.scss'
+import { useAlertStore } from '../../store/alert'
 
 type Inputs = {
 	email: string
@@ -28,6 +29,7 @@ const Register = () => {
 	} = useForm<Inputs>()
 	const toggleOpenTerms = useTermsModal((state) => state.toggleOpen)
 	const toggleOpenPrivacy = usePrivacyModal((state) => state.toggleOpen)
+	const showAlert = useAlertStore((state) => state.showAlert)
 
 	const navigate = useNavigate()
 
@@ -37,21 +39,23 @@ const Register = () => {
 			email,
 			password,
 			repass,
-			role: 'user',
 		}
 
 		if (!generalConditions || !privacyPolicy) {
-			throw new Error('Моля приемете условията и политиката за поверителност')
+			return showAlert('Моля приемете условията и политиката за поверителност', 'error')
 		}
 
 		if (password !== repass) {
-			throw new Error('Паролите не съвпадат')
+			return showAlert('Паролите не съвпадат', 'error')
 		}
-
-		const responseData = await authService.register(credentials)
-		const { redirectUrl, message } = responseData
-		console.log(message)
-		navigate(redirectUrl)
+		try {
+			const responseData = await authService.register(credentials)
+			const { redirectUrl, message } = responseData
+			navigate(redirectUrl)
+			showAlert(message, 'success')
+		} catch (error) {
+			showAlert('Регистрацията е неуспешна', 'error')
+		}
 	}
 
 	const handleFacebookLogin = async () => {

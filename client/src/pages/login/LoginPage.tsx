@@ -9,27 +9,28 @@ import Button from '@mui/material/Button'
 
 import { useLoginModal } from '../../store/helperModal'
 import { authService } from '../../services/authService'
+import { useAlertStore } from '../../store/alert'
 
 import styles from './login-page.module.scss'
 
 const LoginModal = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-
-	const navigate = useNavigate()
-
 	const open = useLoginModal((state) => state.open)
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
+	const showAlert = useAlertStore((state) => state.showAlert)
+	const navigate = useNavigate()
 
 	const handleLogin = async (e: React.FormEvent) => {
 		e.preventDefault()
-		const { redirectUrl, message } = await authService.login(email, password)
-
-		console.log(message, redirectUrl)
-
-		toggleOpen()
-		navigate(redirectUrl)
-		console.log(message, redirectUrl)
+		try {
+			const { redirectUrl, message } = await authService.login(email, password)
+			toggleOpen()
+			navigate(redirectUrl)
+			showAlert(message, 'success')
+		} catch (error) {
+			showAlert('Невалиден имейл или парола', 'error')
+		}
 	}
 
 	return (
