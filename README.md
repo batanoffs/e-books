@@ -9,6 +9,7 @@
 -   [Technologies](#technologies)
 -   [Usage](#usage)
 -   [Installation](#installation)
+-   [UX/UI](#ux-ui)
 -   [Project content](#project-content)
     -   [Login Register](#login-register)
     -   [About](#about)
@@ -110,7 +111,11 @@ git clone https://github.com/batanoffs/e-books.git
 ```
 
 5. Open your browser and go to [http://localhost:5173/](http://localhost:5173/) to view the app.
-6. Login with test credentials or register new account
+6. Register new account and login
+
+## UX UI
+
+![knigibguxui](https://github.com/user-attachments/assets/7efc6120-09a9-41da-b374-cd6b99ab5cb5)
 
 ## Project content
 
