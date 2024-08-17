@@ -11,7 +11,6 @@ import QuantityInput from '../../components/QuantityInput/QuantityInput'
 
 interface ItemDetailsTitleProps extends ProductDetailsProps {
 	handleAddToCart: () => void
-	handleBuyNow: () => void
 	handleAddToWishlist: () => void
 	quantity: number
 	setQuantity: (quantity: number) => void
@@ -20,7 +19,6 @@ interface ItemDetailsTitleProps extends ProductDetailsProps {
 
 export const ItemDetailsTitle = ({
 	handleAddToCart,
-	handleBuyNow,
 	handleAddToWishlist,
 	setQuantity,
 	quantity,
