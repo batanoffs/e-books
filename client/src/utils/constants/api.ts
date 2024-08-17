@@ -14,4 +14,5 @@ export const API = {
 	CART: baseURL + '/api/cart/',
 	ADMIN: baseURL + '/api/admin/',
 	CHECKOUT: baseURL + '/api/checkout/',
+	WISHLIST: baseURL + '/api/wishlist/',
 }
