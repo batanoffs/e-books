@@ -5,11 +5,14 @@ import { ProductDetailsProps } from '../../interfaces/ProductDetailsProps.interf
 import { ItemDetailsDropdownMenus } from './ItemDetailsDropdownMenus'
 import { ItemDetailsTitle } from './ItemDetailsTitle'
 import { cartService } from '../../services/cartService'
+import { isAuth } from '../../middlewares/guards'
+import { API } from '../../utils/constants/api'
+
+import useCartStore from '../../store/cart'
+import { useAlertStore } from '../../store/alert'
+import { useLoginModal } from '../../store/helperModal'
 
 import styles from './details.module.scss'
-import useCartStore from '../../store/cart'
-import { API } from '../../utils/constants/api'
-import { useAlertStore } from '../../store/alert'
 
 export const ProductDetails = ({ item }: { props: ProductDetailsProps }) => {
 	const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(true)
@@ -18,10 +21,16 @@ export const ProductDetails = ({ item }: { props: ProductDetailsProps }) => {
 	const [isCommentsOpen, setIsCommentsOpen] = useState<boolean>(false)
 	const [quantity, setQuantity] = useState<number>(1)
 
+	const toggleOpen = useLoginModal((state) => state.toggleOpen)
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const addToCart = useCartStore((state) => state.addToCart)
 
 	const handleAddToCart = async (e) => {
+		const isUserAuthenticated = isAuth()
+		if (!isUserAuthenticated) {
+			toggleOpen()
+			return showAlert('Моля, влезте в акаунта си, за да продължите', 'info')
+		}
 		const target = e.target
 		const currentItem = {
 			product: {
