@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import axios from 'axios'
 
 import { MainLayout } from '../../components/Layout/main/MainLayout'
@@ -6,6 +6,8 @@ import { MultiCarousel } from '../../components/Carousels/MultiCarousel'
 import { SingleCarousel } from '../../components/Carousels/SingleCarousel'
 import { API } from '../../utils/constants/api'
 import { useSpinner } from '../../store/spinner'
+import CategoryList from '../../components/Categories/Categories'
+import ShowcaseList from '../../components/ShowCase/ShowCase'
 
 interface Book {
 	id: string
@@ -20,21 +22,26 @@ interface Book {
 
 const HomePage = () => {
 	const [books, setBooks] = useState<Book[]>([])
+	const [bookCategories, setBookCategories] = useState<string[]>([])
 	const toggleLoading = useSpinner((state) => state.toggleLoading)
 
-	useEffect(() => {
-		const fetchBooks = async () => {
-			try {
-				const response = await axios.get(API.BOOKS)
-				setBooks(response.data)
-			} catch (error) {
-				console.error(error)
-			} finally {
-				toggleLoading()
-			}
+	const fetchBooksCallback = useCallback(async () => {
+		try {
+			const response = await axios.get(API.BOOKS)
+			const fetchedBooks = response.data
+
+			setBooks(fetchedBooks)
+			setBookCategories([...new Set(fetchedBooks.map((book: Book) => book.category))])
+		} catch (error) {
+			console.error(error)
+		} finally {
+			toggleLoading() // Stop loading
 		}
-		fetchBooks()
 	}, [])
+
+	useEffect(() => {
+		fetchBooksCallback()
+	}, [fetchBooksCallback])
 
 	const content = [
 		{
@@ -42,8 +49,16 @@ const HomePage = () => {
 			element: <SingleCarousel books={books} />,
 		},
 		{
+			id: 'showcase',
+			element: <ShowcaseList />,
+		},
+		{
 			id: 'popular',
 			element: <MultiCarousel books={books} />,
+		},
+		{
+			id: 'categories',
+			element: <CategoryList bookCategories={bookCategories} />,
 		},
 	]
 
