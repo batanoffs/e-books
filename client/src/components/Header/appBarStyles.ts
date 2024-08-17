@@ -6,6 +6,7 @@ export const searchStyles = () => {
 	return {
 		position: 'relative',
 		borderRadius: theme.shape.borderRadius,
+		border: `1px solid ${theme.palette.divider}`,
 		backgroundColor: alpha(theme.palette.common.white, 0.15),
 		'&:hover': {
 			backgroundColor: alpha(theme.palette.common.white, 0.25),
