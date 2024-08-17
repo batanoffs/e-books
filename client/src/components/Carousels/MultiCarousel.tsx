@@ -54,6 +54,7 @@ const MultiCarousel = ({ books }: BookProps) => {
 	}
 	return (
 		<div className='' style={{ marginTop: '5em' }}>
+			<h4 style={{ textAlign: 'center' }}> Популярни книги </h4>
 			<Slider {...settings}>
 				{books.map((book) => (
 					<ItemCard key={book._id} item={book} />
