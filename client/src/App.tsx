@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useSpinner } from './store/utils'
+import { useSpinner } from './store/spinner'
 import Spinner from './components/utils/Spinner'
 import HomePage from './pages/Home/HomePage'
 import LoginModal from './pages/Login/LoginPage'
@@ -20,6 +20,7 @@ import PopularPage from './pages/Popular/PopularPage'
 import CatalogPage from './pages/Catalog/CatalogPage'
 import ScrollTop from './components/ScrollTop/BackToTop'
 import Return from './pages/Checkout/Return'
+import WishlistPage from './pages/Wishlist/WishlistPage'
 
 const App = () => {
 	const [isAdmin, setIsAdmin] = useState(false)
@@ -36,7 +37,6 @@ const App = () => {
 			{!isAdmin && <Header />}
 			{!isAdmin && <ScrollTop />}
 			{isLoading && <Spinner />}
-
 			<LoginModal />
 			<Routes>
 				<Route path='/admin/*' element={<AdminPage />} />
@@ -54,6 +54,7 @@ const App = () => {
 				<Route path='/register' element={<Register />} />
 				<Route path='*' element={<NotFoundPage />} />
 				{/* <Route path="/profile" element={<ProfilePage />} /> */}
+				<Route path='/wishlist' element={<WishlistPage />} />
 			</Routes>
 
 			{!isAdmin && <Footer />}
