@@ -15,7 +15,7 @@ import CartButton from './CartButton'
 const settings = [
 	{ name: 'Начало', path: '/' },
 	{ name: 'Профил', path: '/profil' },
-	{ name: 'Любими', path: '/favourites' },
+	{ name: 'Харесани', path: '/wishlist' },
 ]
 
 const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handleLogout }) => {
