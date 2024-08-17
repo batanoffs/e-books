@@ -5,7 +5,7 @@ import { MainLayout } from '../../components/Layout/main/MainLayout'
 import { MultiCarousel } from '../../components/Carousels/MultiCarousel'
 import { SingleCarousel } from '../../components/Carousels/SingleCarousel'
 import { API } from '../../utils/constants/api'
-import { useSpinner } from '../../store/utils'
+import { useSpinner } from '../../store/spinner'
 
 interface Book {
 	id: string
