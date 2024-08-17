@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import App from './App'
 import './styles/index.scss'
+import GlobalAlert from './components/utils/GlobalAlert'
 
 const container = document.getElementById('root')
 
@@ -15,6 +16,7 @@ root.render(
 		<ThemeProvider theme={themeOptions}>
 			<Router>
 				<App />
+				<GlobalAlert />
 			</Router>
 		</ThemeProvider>
 	</React.StrictMode>
