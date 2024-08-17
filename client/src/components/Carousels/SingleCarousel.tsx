@@ -1,7 +1,7 @@
 import Slider from 'react-slick'
 
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+// import 'slick-carousel/slick/slick.css'
+// import 'slick-carousel/slick/slick-theme.css'
 
 import styles from './single-carousel.module.scss'
 import { CarouselCard } from '../Cards/CarouselCard'
@@ -37,7 +37,7 @@ export const SingleCarousel = ({ books }: BookProps) => {
 		speed: 1000,
 		autoplaySpeed: 10000,
 		arrows: true,
-		centerPadding: '60px',
+		centerPadding: '100px',
 		pauseOnHover: true,
 		swipeToSlide: true,
 		nextArrow: <SampleNextArrow />,

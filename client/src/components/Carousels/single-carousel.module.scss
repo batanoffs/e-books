@@ -1,8 +1,8 @@
 .container {
     display: flex;
-    gap: 20px;
     justify-content: space-between;
-    margin: 2em;
+    margin: 0.5em;
+    // gap: 2em;
 }
 
 .textContainer {
@@ -10,7 +10,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 40%;
+    max-width: 50%;
 
     h1 {
         font-size: 2rem;
@@ -22,6 +22,18 @@
         margin-bottom: 10px;
     }
 }
+
+.description {
+    font-size: 1rem;
+    margin-bottom: 2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    
+}
+
 
 .buttonsContainer {
     display: flex;
@@ -48,8 +60,8 @@
 }
 
 .image {
-    width: 400px;
-    height: auto;
+    width: auto;
+    height: 600px;
     border-radius: 2em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
