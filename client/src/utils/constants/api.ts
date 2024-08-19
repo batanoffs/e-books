@@ -1,6 +1,6 @@
 const baseURL = 'http://localhost:5001'
 
-export const API = {
+const API = {
 	LOGIN: baseURL + '/api/login/',
 	LOGOUT: baseURL + '/api/logout/',
 	REGISTER: baseURL + '/api/register/',
@@ -16,3 +16,5 @@ export const API = {
 	CHECKOUT: baseURL + '/api/checkout/',
 	WISHLIST: baseURL + '/api/wishlist/',
 }
+
+export default API

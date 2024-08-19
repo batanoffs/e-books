@@ -2,7 +2,7 @@ import Modal from '@mui/material/Modal'
 
 import { useTermsModal } from '../../store/helperModal'
 
-export const GeneralRulesModal = ({ styles }) => {
+const GeneralRulesModal = ({ styles }) => {
 	const open = useTermsModal((state) => state.open)
 	const toggleOpen = useTermsModal((state) => state.toggleOpen)
 
@@ -15,3 +15,4 @@ export const GeneralRulesModal = ({ styles }) => {
 		</Modal>
 	)
 }
+export default GeneralRulesModal

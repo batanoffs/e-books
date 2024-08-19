@@ -1,7 +1,7 @@
 import Modal from '@mui/material/Modal'
 import { usePrivacyModal } from '../../store/helperModal'
 
-export const PrivacyRulesModal = ({ styles }) => {
+const PrivacyRulesModal = ({ styles }) => {
 	const open = usePrivacyModal((state) => state.open)
 	const toggleOpen = usePrivacyModal((state) => state.toggleOpen)
 
@@ -18,3 +18,5 @@ export const PrivacyRulesModal = ({ styles }) => {
 		</Modal>
 	)
 }
+
+export default PrivacyRulesModal

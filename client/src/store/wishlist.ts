@@ -5,7 +5,9 @@ interface WishlistState {
 	setWishlist: (wishlist: any[]) => void
 }
 
-export const useWishlistStore = create<WishlistState>((set) => ({
+const useWishlistStore = create<WishlistState>((set) => ({
 	wishlist: [],
 	setWishlist: (wishlist: any[]) => set({ wishlist }),
 }))
+
+export default useWishlistStore

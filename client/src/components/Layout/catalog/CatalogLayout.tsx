@@ -7,7 +7,7 @@ type MainLayoutProps = {
 }
 
 //TODO improve dynamic pipelines for sidebar filters and header
-export const DashboardLayout = ({ children, header, aside, ...props }: MainLayoutProps) => {
+const DashboardLayout = ({ children, header, aside, ...props }: MainLayoutProps) => {
 	return (
 		<main className='main-wrapper'>
 			<header>{header}</header>
@@ -18,3 +18,5 @@ export const DashboardLayout = ({ children, header, aside, ...props }: MainLayou
 		</main>
 	)
 }
+
+export default DashboardLayout

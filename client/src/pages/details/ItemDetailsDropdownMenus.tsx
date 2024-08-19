@@ -3,7 +3,7 @@ import ReturnsDropdown from './ReturnsDropdown'
 import DeliveryInfoDropdown from './DeliveryDropdown'
 import DescriptionDropdown from './DescriptionDropdown'
 
-import { ProductDetailsProps } from '../../interfaces/ProductDetailsProps.interface'
+import ProductDetailsProps  from '../../interfaces/ProductDetailsProps.interface'
 
 interface ItemDetailsDropdownMenus extends ProductDetailsProps {
 	isDescriptionOpen: boolean
@@ -16,7 +16,8 @@ interface ItemDetailsDropdownMenus extends ProductDetailsProps {
 	setIsCommentsOpen: React.Dispatch<React.SetStateAction<boolean>>
 	styles: Record<string, string>
 }
-export const ItemDetailsDropdownMenus = (props: ItemDetailsDropdownMenus) => {
+
+const ItemDetailsDropdownMenus = (props: ItemDetailsDropdownMenus) => {
 	return (
 		<div className={props.styles.dropdownContainer}>
 			<DescriptionDropdown {...props} />
@@ -26,3 +27,5 @@ export const ItemDetailsDropdownMenus = (props: ItemDetailsDropdownMenus) => {
 		</div>
 	)
 }
+
+export default ItemDetailsDropdownMenus

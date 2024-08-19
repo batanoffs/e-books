@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useFiltersStore } from '../../../store/filters'
+import useFiltersStore from '../../../store/filters'
 
 import styles from './navigation.module.scss'
 
@@ -8,7 +8,7 @@ type Categories = {
 	categories: string[]
 }
 
-export const LayoutAside = ({ categories }: Categories) => {
+const LayoutAside = ({ categories }: Categories) => {
 	const navigate = useNavigate()
 	const setNavCategory = useFiltersStore((state) => state.setNavCategory)
 	if (!categories) {
@@ -105,3 +105,5 @@ export const LayoutAside = ({ categories }: Categories) => {
 		</nav>
 	)
 }
+
+export default LayoutAside

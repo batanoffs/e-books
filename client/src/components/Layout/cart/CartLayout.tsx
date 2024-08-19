@@ -7,7 +7,7 @@ type CartLayoutProps = {
 	[key: string]: any
 }
 
-export const CartLayout = ({ children, header, aside, ...props }: CartLayoutProps) => {
+const CartLayout = ({ children, header, aside, ...props }: CartLayoutProps) => {
 	return (
 		<main className='main-wrapper'>
 			{header && <header>{header}</header>}
@@ -18,3 +18,4 @@ export const CartLayout = ({ children, header, aside, ...props }: CartLayoutProp
 		</main>
 	)
 }
+export default CartLayout

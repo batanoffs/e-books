@@ -1,6 +1,6 @@
 import styles from './header.module.scss'
 
-export const LayoutHeader = ({ path, navCategory, title, hasSorting, resultCount }) => {
+const LayoutHeader = ({ path, navCategory, title, hasSorting, resultCount }) => {
 	return (
 		<div className={styles.container}>
 			{/* TODO extract this client navigation for future use */}
@@ -35,3 +35,5 @@ export const LayoutHeader = ({ path, navCategory, title, hasSorting, resultCount
 		</div>
 	)
 }
+
+export default LayoutHeader

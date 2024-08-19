@@ -3,13 +3,13 @@ interface Item {
 	[key: string]: unknown
 }
 
-interface CatalogItems {
+interface CatalogItemsInterface {
 	items: Item[]
 	CardComponent: React.ComponentType<React.PropsWithChildren<{ item: Item }>>
 	sx?: React.CSSProperties
 }
 
-export const CatalogItems = ({ items, CardComponent, sx }: CatalogItems) => (
+const CatalogItems = ({ items, CardComponent, sx }: CatalogItemsInterface) => (
 	<div style={sx}>
 		{items.length > 0 ? (
 			items.map((item) => <CardComponent key={item._id} item={item} />)
@@ -18,3 +18,5 @@ export const CatalogItems = ({ items, CardComponent, sx }: CatalogItems) => (
 		)}
 	</div>
 )
+
+export default CatalogItems

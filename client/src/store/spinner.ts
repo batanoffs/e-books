@@ -1,15 +1,16 @@
-import { create } from 'zustand';
+import { create } from 'zustand'
 
 type SpinnerState = {
-  isLoading: boolean;
-};
+	isLoading: boolean
+}
 
 type SpinnerAction = {
-  toggleLoading: () => void;
-};
+	toggleLoading: () => void
+}
 
-export const useSpinner = create<SpinnerState & SpinnerAction>((set) => ({
-  isLoading: false,
-  toggleLoading: () => set((state) => ({ isLoading: !state.isLoading })),
-}));
+const useSpinner = create<SpinnerState & SpinnerAction>((set) => ({
+	isLoading: false,
+	toggleLoading: () => set((state) => ({ isLoading: !state.isLoading })),
+}))
 
+export default useSpinner

@@ -1,6 +1,6 @@
 import styles from './imageviewer.module.scss'
 
-export const ImageViewer = ({ imageUrl }) => {
+const ImageViewer = ({ imageUrl }) => {
 	const images = [
 		{
 			src: imageUrl,
@@ -48,3 +48,5 @@ export const ImageViewer = ({ imageUrl }) => {
 		</div>
 	)
 }
+
+export default ImageViewer

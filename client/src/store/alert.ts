@@ -12,7 +12,7 @@ interface AlertState {
 }
 
 // Create the Zustand store
-export const useAlertStore = create<AlertState>((set) => ({
+const useAlertStore = create<AlertState>((set) => ({
 	message: '',
 	severity: 'info',
 	open: false,
@@ -21,3 +21,5 @@ export const useAlertStore = create<AlertState>((set) => ({
 		set({ message, severity, duration, open: true }),
 	hideAlert: () => set({ open: false }),
 }))
+
+export default useAlertStore

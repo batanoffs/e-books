@@ -1,4 +1,4 @@
-export interface ProductDetailsProps {
+interface ProductDetailsProps {
 	title: string
 	author: string
 	description: string
@@ -18,3 +18,5 @@ export interface ProductDetailsProps {
 	stock: number
 	_id: string
 }
+
+export default ProductDetailsProps
