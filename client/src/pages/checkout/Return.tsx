@@ -1,6 +1,8 @@
 import { Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
+
+//TODO update customer email with actual email of the user
 const Return = () => {
 	const [status, setStatus] = useState(null)
 	const [customerEmail, setCustomerEmail] = useState('')
@@ -26,8 +28,8 @@ const Return = () => {
 		return (
 			<section id='success'>
 				<p>
-					We appreciate your business! A confirmation email will be sent to{' '}
-					{customerEmail}. If you have any questions, please email{' '}
+					Ние ценим вашите покупки! Потвърждаващ имейл ще ви бъде изпратен на{' '}
+					{customerEmail}. Ако имате въпроси, моля, свържете се на имейл{' '}
 					<a href='mailto:orders@example.com'>orders@example.com</a>.
 				</p>
 			</section>
