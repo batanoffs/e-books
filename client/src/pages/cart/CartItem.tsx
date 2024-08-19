@@ -2,12 +2,14 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import DeleteIcon from '@mui/icons-material/Delete'
-import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
-import { getUserId } from '../../utils/helpers/auth'
-import QuantityInput from '../../components/QuantityInput/QuantityInput'
+
 import useConfirm from '../../hooks/useConfirm'
 import useCartStore from '../../store/cart'
-import { useAlertStore } from '../../store/alert'
+import useAlertStore from '../../store/alert'
+import cartService from '../../services/cartService'
+import authService from '../../services/authService'
+import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
+import QuantityInput from '../../components/QuantityInput/QuantityInput'
 
 const CartItem = ({ item, onChangeQuantity }) => {
 	const { dialog, confirm } = useConfirm()
@@ -16,15 +18,16 @@ const CartItem = ({ item, onChangeQuantity }) => {
 	const removeFromCart = useCartStore((state) => state.removeFromCart)
 
 	const handleRemoveProduct = async () => {
-		const userId = await getUserId()
+		const userId = await authService.getUserId()
 		const alert = await confirm(
 			'Изтриване',
 			'Сигурни ли сте, че искате да изтриете този продукт?'
 		)
 
 		if (alert) {
+			await cartService.removeOne(item.product.id, userId)
+			removeFromCart(item.product.id)
 			showAlert('Успешно изтрит продукт', 'success')
-			return removeFromCart(item.product.id, userId)
 		}
 	}
 
