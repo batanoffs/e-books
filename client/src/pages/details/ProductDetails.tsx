@@ -1,20 +1,18 @@
 import { useState } from 'react'
-import axios from 'axios'
 
-import { ProductDetailsProps } from '../../interfaces/ProductDetailsProps.interface'
-import { ItemDetailsDropdownMenus } from './ItemDetailsDropdownMenus'
-import { ItemDetailsTitle } from './ItemDetailsTitle'
-import { cartService } from '../../services/cartService'
-import { isAuth } from '../../middlewares/guards'
-import { API } from '../../utils/constants/api'
-
+import wishlistService from '../../services/wishlistService'
+import cartService from '../../services/cartService'
 import useCartStore from '../../store/cart'
-import { useAlertStore } from '../../store/alert'
+import useAlertStore from '../../store/alert'
 import { useLoginModal } from '../../store/helperModal'
+import authGuards from '../../middlewares/guards'
+import ProductDetailsProps from '../../interfaces/ProductDetailsProps.interface'
+import ItemDetailsDropdownMenus from './ItemDetailsDropdownMenus'
+import ItemDetailsTitle from './ItemDetailsTitle'
 
 import styles from './details.module.scss'
 
-export const ProductDetails = ({ item }: { props: ProductDetailsProps }) => {
+const ProductDetails = ({ item }: { props: ProductDetailsProps }) => {
 	const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(true)
 	const [isDeliveryInfoOpen, setIsDeliveryInfoOpen] = useState<boolean>(false)
 	const [isReturnsOpen, setIsReturnsOpen] = useState<boolean>(false)
@@ -26,7 +24,7 @@ export const ProductDetails = ({ item }: { props: ProductDetailsProps }) => {
 	const addToCart = useCartStore((state) => state.addToCart)
 
 	const handleAddToCart = async (e) => {
-		const isUserAuthenticated = isAuth()
+		const isUserAuthenticated = authGuards.isAuth()
 		if (!isUserAuthenticated) {
 			toggleOpen()
 			return showAlert('Моля, влезте в акаунта си, за да продължите', 'info')
@@ -44,25 +42,20 @@ export const ProductDetails = ({ item }: { props: ProductDetailsProps }) => {
 		const quantityInputElement = target.parentElement.querySelector('input')
 		const quantityValue = Number(quantityInputElement.value)
 		addToCart(currentItem)
-		await cartService.addToCart(item, quantityValue, 'book')
+		await cartService.addMany(item, quantityValue)
 		showAlert('Успешно добавен продукт', 'success')
 	}
 
 	const handleAddToWishlist = async () => {
 		const productId = item._id
-		if (!productId) return console.log('productId not found')
 
-		const response = await axios.post(
-			API.WISHLIST,
-			{ productId },
-			{
-				withCredentials: true,
-			}
-		)
+		const response = await wishlistService.add(productId)
 
-		if (response.status === 200) {
-			showAlert('Успешно добавен продукт', 'success')
-		}
+		console.log(response)
+
+		// if (response.status === 200) {
+		// 	showAlert('Успешно добавен продукт', 'success')
+		// }
 	}
 
 	return (
@@ -94,3 +87,5 @@ export const ProductDetails = ({ item }: { props: ProductDetailsProps }) => {
 		</>
 	)
 }
+
+export default ProductDetails
