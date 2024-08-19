@@ -1,7 +1,7 @@
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import { ItemCard } from '../Cards/ItemCard'
+import ItemCard from '../Cards/ItemCard'
 
 interface BookProps {
 	books: {
@@ -64,4 +64,4 @@ const MultiCarousel = ({ books }: BookProps) => {
 	)
 }
 
-export { MultiCarousel }
+export default MultiCarousel

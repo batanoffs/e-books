@@ -29,7 +29,7 @@ function SamplePrevArrow(props) {
 	return <div className={styles.prevArrow} onClick={onClick} />
 }
 
-export const SingleCarousel = ({ books }: BookProps) => {
+const SingleCarousel = ({ books }: BookProps) => {
 	const settings = {
 		dots: true,
 		infinite: true,
@@ -76,3 +76,5 @@ export const SingleCarousel = ({ books }: BookProps) => {
 		</Slider>
 	)
 }
+
+export default SingleCarousel
