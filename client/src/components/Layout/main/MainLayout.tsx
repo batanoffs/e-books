@@ -5,7 +5,7 @@ type MainLayoutProps = {
 	}>
 }
 
-export const MainLayout = ({ children }: MainLayoutProps) => {
+const MainLayout = ({ children }: MainLayoutProps) => {
 	return (
 		<main className='main-wrapper'>
 			{children &&
@@ -17,3 +17,5 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 		</main>
 	)
 }
+
+export default MainLayout
