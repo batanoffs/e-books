@@ -41,11 +41,11 @@ const BookCreate = (props) => {
             const response = await dataProvider.create('books', { data });
             console.log('response:', response);
 
-            notify('Book created successfully');
+            notify('Усшено създадна книга', { type: 'success' });
             redirect('/admin/books');
         } catch (error) {
             console.error(error);
-            notify('Error creating book', { type: 'error' });
+            notify('Грешка при създаване', { type: 'error' });
         }
     };
     return (
