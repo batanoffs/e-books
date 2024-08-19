@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
@@ -8,9 +9,10 @@ import Grid from '@mui/material/Grid'
 import CartItem from './CartItem'
 import useCartStore from '../../store/cart'
 import useConfirm from '../../hooks/useConfirm'
-import { getUserId } from '../../utils/helpers/auth'
+import cartService from '../../services/cartService'
+import authService from '../../services/authService'
 
-export const CartList = () => {
+const CartList = () => {
 	const [isUpdateButtonDisabled, setIsUpdateButtonDisabled] = useState(true)
 	const { dialog, confirm } = useConfirm()
 
@@ -21,12 +23,15 @@ export const CartList = () => {
 	const getTotalItems = () => cart.reduce((sum, item) => sum + item.quantity, 0)
 
 	const clearCartHandler = async () => {
-		const userId = await getUserId()
+		const userId = await authService.getUserId()
 		const result = await confirm(
 			'Изчистане на всички продукти',
 			'Сигурни ли сте, че искате да изчистите количката?'
 		)
-		if (result) return await clearCart(userId)
+		if (result) {
+			await cartService.removeAll(userId)
+			clearCart()
+		}
 	}
 
 	const updateCartHandler = async (e) => {
@@ -48,6 +53,9 @@ export const CartList = () => {
 		}
 	}
 
+	const onChangeQuantityHandler = () => {
+		setIsUpdateButtonDisabled(false)
+	}
 	return (
 		<Paper
 			sx={{
@@ -65,10 +73,7 @@ export const CartList = () => {
 				<Grid container spacing={0}>
 					{cart.map((item) => (
 						<Grid item xs={12} key={item.product.id}>
-							<CartItem
-								item={item}
-								onChangeQuantity={() => setIsUpdateButtonDisabled(false)}
-							/>
+							<CartItem item={item} onChangeQuantity={onChangeQuantityHandler} />
 						</Grid>
 					))}
 
@@ -101,3 +106,5 @@ export const CartList = () => {
 		</Paper>
 	)
 }
+
+export default CartList
