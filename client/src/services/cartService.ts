@@ -1,6 +1,7 @@
-import { API } from '../utils/constants/api'
-import { getToken, getUserId } from '../utils/helpers/auth'
+import API from '../utils/constants/api'
 import axios from 'axios'
+import { getToken } from '../utils/helpers/auth'
+import authService from './authService'
 
 const getCart = async (): Promise<any> => {
 	try {
@@ -23,13 +24,14 @@ const getCart = async (): Promise<any> => {
 	}
 }
 
-const addToCart = async (props: any, quantity: number, productType: string) => {
+const addMany = async (props: any, quantity: number) => {
+	// productType: string
 	try {
 		const { _id } = props
 		if (!_id) {
 			throw new Error('Missing product data')
 		}
-		const userId = await getUserId()
+		const userId = await authService.getUserId()
 		if (!userId) {
 			throw new Error('Missing userId')
 		}
@@ -47,6 +49,35 @@ const addToCart = async (props: any, quantity: number, productType: string) => {
 			// name: title,
 			// price,
 			// productType,
+		}
+		await axios.post(API.CART, data, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
+	} catch (error) {
+		console.error(error)
+		throw error
+	}
+}
+
+const addOne = async (productId: string) => {
+	try {
+		if (!productId) {
+			throw new Error('Missing product id')
+		}
+		const userId = await authService.getUserId()
+		if (!userId) {
+			throw new Error('Missing userId')
+		}
+		const token = getToken()
+		if (!token) {
+			throw new Error('Missing token')
+		}
+		const data = {
+			userId,
+			productId: productId,
+			quantity: 1,
 		}
 		await axios.post(API.CART, data, {
 			headers: {
@@ -108,4 +139,12 @@ const removeAll = async (userId: string) => {
 	}
 }
 
-export const cartService = { getCart, addToCart, removeOne, removeAll }
+const cartService = {
+	getCart,
+	addOne,
+	addMany,
+	removeOne,
+	removeAll,
+}
+
+export default cartService
