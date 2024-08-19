@@ -1,6 +1,40 @@
 import axios from 'axios'
-import { API } from '../utils/constants/api'
+import API from '../utils/constants/api'
 import { getToken } from '../utils/helpers/auth'
+
+const getUserId = async () => {
+	try {
+		const token = getToken()
+
+		const responseFromUser = await axios.get(API.USER_ID, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
+		const userId = responseFromUser.data.userId
+		if (!userId) return new Error('User ID not found')
+		return userId
+	} catch (error) {
+		console.error('Error fetching user ID:', error)
+	}
+}
+
+const getUserRole = async () => {
+	try {
+		const token = getToken()
+		const response = await axios.get(API.USERS, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
+		const userRole = response.data.role
+		if (!userRole) return new Error('User role not found')
+
+		return userRole
+	} catch (error) {
+		console.error('Error fetching user Role:', error)
+	}
+}
 
 const login = async (email: string, password: string) => {
 	if (!email || !password) {
@@ -68,8 +102,12 @@ const logout = async () => {
 	}
 }
 
-export const authService = {
+const authService = {
 	login,
 	register,
 	logout,
+	getUserId,
+	getUserRole,
 }
+
+export default authService
