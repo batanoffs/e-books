@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -14,11 +14,11 @@ import Skeleton from '@mui/material/Skeleton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
-import { useWishlistStore } from '../../store/wishlist'
-import { API } from '../../utils/constants/api'
-import { useAlertStore } from '../../store/alert'
-import { cartService } from '../../services/cartService'
+import useWishlistStore from '../../store/wishlist'
+import useAlertStore from '../../store/alert'
+import cartService from '../../services/cartService'
 import useCartStore from '../../store/cart'
+import wishlistService from '../../services/wishlistService'
 
 const WishlistPage = () => {
 	const { wishlist, setWishlist } = useWishlistStore((state) => ({
@@ -29,11 +29,12 @@ const WishlistPage = () => {
 	const [loading, setLoading] = useState(true)
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const addToCart = useCartStore((state) => state.addToCart)
+	const navigate = useNavigate()
 
 	const fetchWishlist = useCallback(async () => {
 		try {
-			const response = await axios.get(API.WISHLIST, { withCredentials: true })
-			const products = response.data.productRefs.map((item) => ({
+			const response = await wishlistService.getAll()
+			const products = response.productRefs.map((item) => ({
 				id: item._id,
 				coverImagePath: item.product.coverImagePath,
 				title: item.product.title,
@@ -43,6 +44,7 @@ const WishlistPage = () => {
 			setWishlist(products)
 		} catch (error) {
 			console.error('Failed to fetch wishlist', error)
+			showAlert('Възникна грешка при зареждане на списъка', 'error')
 		} finally {
 			setLoading(false)
 		}
@@ -53,28 +55,20 @@ const WishlistPage = () => {
 	}, [fetchWishlist])
 
 	const handleAddToCart = async (productId: string) => {
-		//TODO fix issues
-		// const product = wishlist.find((item) => item.id === productId)
-		// const props = {
-		// 	_id: productId,
-		// }
-		// if (product) {
-		// 	await cartService.addToCart(props, 1, 'book')
-		// 	const product = wishlist.find((item) => item._id === productId)
-		// 	const response = await cartService.addToCart(productId, 1, 'book')
-		// 	if (response) {
-		// 		addToCart(product)
-		// 		showAlert('Успешно добавен продукт', 'success')
-		// 	} else {
-		// 		showAlert('Възникна грешка', 'error')
-		// 	}
-		// }
+		// TODO fix issues
+		const product = wishlist.find((item) => item.id === productId)
+		if (product) {
+			await cartService.addOne(productId)
+			addToCart(product)
+			showAlert('Успешно добавен продукт', 'success')
+		}
+		showAlert('Продуктът не е намерен', 'error')
 	}
 
 	const removeFromWishlist = async (productId: string) => {
 		setIsRemoving(true)
 		try {
-			await axios.delete(API.WISHLIST + productId, { withCredentials: true })
+			await wishlistService.removeOne(productId)
 			const updatedWishlist = wishlist.filter((item) => item.id !== productId)
 			setWishlist(updatedWishlist)
 		} catch (error) {
@@ -112,18 +106,23 @@ const WishlistPage = () => {
 						flexDirection: 'column',
 						alignItems: 'center',
 						justifyContent: 'center',
-						height: '100vh',
+						height: '80vh',
 						textAlign: 'center',
 					}}
 				>
-					<Typography variant='h4' sx={{ mb: 2 }}>
-						Your Wishlist is Empty
+					<Typography variant='h3' sx={{ mb: 2 }}>
+						Няма добавени продукти в количката
 					</Typography>
 					<Typography variant='subtitle1'>
-						Start adding products to your wishlist and they'll appear here.
+						Харесай продукт и той ще се появи тук
 					</Typography>
-					<Button variant='contained' color='primary' sx={{ mt: 4 }}>
-						Continue Shopping
+					<Button
+						variant='contained'
+						onClick={() => navigate('/catalog')}
+						color='primary'
+						sx={{ mt: 4 }}
+					>
+						Обратно към каталога
 					</Button>
 				</Box>
 			) : (
