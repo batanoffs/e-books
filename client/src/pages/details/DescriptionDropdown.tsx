@@ -1,8 +1,8 @@
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 
-import { ProductDetailsProps } from '../../interfaces/ProductDetailsProps.interface'
-import { formatDate } from '../../utils/helpers/formatDate'
+import ProductDetailsProps  from '../../interfaces/ProductDetailsProps.interface'
+import formatDate from '../../utils/helpers/formatDate'
 
 interface DescriptionDropdownProps extends ProductDetailsProps {
 	setIsDescriptionOpen: (isDescriptionOpen: boolean) => void

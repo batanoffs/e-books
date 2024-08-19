@@ -4,12 +4,12 @@ import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined'
 import axios from 'axios'
 
 import { useTermsModal, usePrivacyModal } from '../../store/helperModal'
-import { PrivacyRulesModal } from './PrivacyRulesModal'
-import { GeneralRulesModal } from './GeneralRulesModal'
-import { authService } from '../../services/authService'
+import useAlertStore from '../../store/alert'
+import PrivacyRulesModal from './PrivacyRulesModal'
+import GeneralRulesModal from './GeneralRulesModal'
+import authService from '../../services/authService'
 
 import styles from './register.module.scss'
-import { useAlertStore } from '../../store/alert'
 
 type Inputs = {
 	email: string

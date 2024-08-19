@@ -1,9 +1,10 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useSpinner } from './store/spinner'
+
+import useSpinner from './store/spinner'
 import Spinner from './components/utils/Spinner'
 import HomePage from './pages/Home/HomePage'
-import LoginModal from './pages/Login/LoginPage'
+import LoginModal from './pages/Login/LoginModal'
 import Register from './pages/Register/RegisterPage'
 import AdminPage from './pages/ReactAdmin/Admin'
 import Header from './components/Header/Header'

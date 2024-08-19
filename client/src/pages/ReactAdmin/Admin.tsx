@@ -25,7 +25,7 @@ import FeaturedList from './featured/List';
 import FeaturedEdit from './featured/Edit';
 import FeaturedShow from './featured/Show';
 import FeaturedCreate from './featured/Create';
-import { API } from '../../utils/constants/api';
+import API from '../../utils/constants/api';
 import { theme } from '../../utils/helpers/theme';
 
 const dataProvider = restProvider(API.ADMIN);

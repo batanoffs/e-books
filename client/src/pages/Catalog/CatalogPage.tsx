@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react'
 import { Route, Routes, useParams } from 'react-router-dom'
 import axios from 'axios'
 
-import { DashboardLayout } from '../../components/Layout/catalog/CatalogLayout'
-import { LayoutHeader } from '../../components/Layout/catalog/LayoutHeader'
-import { LayoutAside } from '../../components/Layout/catalog/LayoutAside'
-import { CatalogItems } from '../../components/Layout/catalog/CatalogItems'
-import { ItemCard } from '../../components/Cards/ItemCard'
-import { DetailsPage } from '../Details/DetailsPage'
-import { useFiltersStore } from '../../store/filters'
-import { API } from '../../utils/constants/api'
+import DashboardLayout from '../../components/Layout/catalog/CatalogLayout'
+import LayoutHeader from '../../components/Layout/catalog/LayoutHeader'
+import LayoutAside from '../../components/Layout/catalog/LayoutAside'
+import CatalogItems from '../../components/Layout/catalog/CatalogItems'
+import ItemCard from '../../components/Cards/ItemCard'
+import DetailsPage from '../Details/DetailsPage'
+import useFiltersStore from '../../store/filters'
+import API from '../../utils/constants/api'
 
 const CatalogPage = () => {
 	const [items, setItems] = useState([])

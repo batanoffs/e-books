@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-import { LayoutHeader } from '../../components/Layout/catalog/LayoutHeader'
-import { DetailsLayout } from '../../components/Layout/detail/DetailsLayout'
+import LayoutHeader from '../../components/Layout/catalog/LayoutHeader'
+import DetailsLayout from '../../components/Layout/detail/DetailsLayout'
 import Spinner from '../../components/utils/Spinner'
-import { ImageViewer } from './ImageViewer'
-import { ProductDetails } from './ProductDetails'
-import { API } from '../../utils/constants/api'
+import ImageViewer from './ImageViewer'
+import ProductDetails from './ProductDetails'
+import API from '../../utils/constants/api'
 
 interface Item {
 	_id: string
@@ -19,7 +19,7 @@ interface Item {
 	coverImagePath: string
 }
 
-export const DetailsPage = ({ type, path }: { type: string | undefined; path: string }) => {
+const DetailsPage = ({ type, path }: { type: string | undefined; path: string }) => {
 	const productID = useParams().id
 	const [book, setBook] = useState<Item | null>(null)
 
@@ -53,3 +53,5 @@ export const DetailsPage = ({ type, path }: { type: string | undefined; path: st
 		</DetailsLayout>
 	)
 }
+
+export default DetailsPage

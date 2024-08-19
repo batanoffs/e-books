@@ -1,5 +1,5 @@
 import { Snackbar, Alert } from '@mui/material'
-import { useAlertStore } from '../../store/alert' // Adjust the path as needed
+import useAlertStore from '../../store/alert' // Adjust the path as needed
 
 const GlobalAlert = () => {
 	const { message, severity, open, duration, hideAlert } = useAlertStore((state) => ({

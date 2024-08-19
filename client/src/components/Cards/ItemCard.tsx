@@ -5,15 +5,15 @@ import ShoppingCart from '@mui/icons-material/ShoppingCart'
 
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import useCartStore from '../../store/cart'
-import { useAlertStore } from '../../store/alert'
+import useAlertStore from '../../store/alert'
 import { useLoginModal } from '../../store/helperModal'
-import { isAuth } from '../../middlewares/guards'
-import { cartService } from '../../services/cartService'
-import { API } from '../../utils/constants/api'
+import authGuards from '../../middlewares/guards'
+import cartService from '../../services/cartService'
+import API from '../../utils/constants/api'
 
 import styles from './itemcard.module.scss'
 
-export const ItemCard = ({ item }) => {
+const ItemCard = ({ item }) => {
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const addToCart = useCartStore((state) => state.addToCart)
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
@@ -23,7 +23,7 @@ export const ItemCard = ({ item }) => {
 	const formattedPrice = formatCurrencyToBGN(price)
 
 	const addToCartHandler = async () => {
-		const isUserAuthenticated = isAuth()
+		const isUserAuthenticated = authGuards.isAuth()
 		if (!isUserAuthenticated) {
 			toggleOpen()
 			return showAlert('Моля, влезте в акаунта си, за да продължите', 'info')
@@ -38,12 +38,12 @@ export const ItemCard = ({ item }) => {
 			quantity: 1,
 		}
 		addToCart(currentItem)
-		await cartService.addToCart(item, 1, 'book')
+		await cartService.addOne(_id)
 		showAlert('Успешно добавен продукт', 'success')
 	}
 
 	const addToWishlistHandler = async () => {
-		const isUserAuthenticated = isAuth()
+		const isUserAuthenticated = authGuards.isAuth()
 		if (!isUserAuthenticated) {
 			toggleOpen()
 			return showAlert('Моля, влезте в акаунта си, за да продължите', 'info')
@@ -73,7 +73,7 @@ export const ItemCard = ({ item }) => {
 	return (
 		<div className={styles.container} data-id={_id}>
 			<div className={styles.bookImageContainer} onClick={goToDetailsHandler}>
-				{isAuth() && (
+				{authGuards.isAuth() && (
 					<div className={styles.buttonContainer}>
 						<button onClick={addToWishlistHandler}>
 							<Favorite />
@@ -93,3 +93,5 @@ export const ItemCard = ({ item }) => {
 		</div>
 	)
 }
+
+export default ItemCard

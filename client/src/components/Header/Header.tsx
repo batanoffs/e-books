@@ -1,17 +1,18 @@
 import { useState, MouseEvent, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+
 import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
 import Toolbar from '@mui/material/Toolbar'
-import axios from 'axios'
 
-import { useFiltersStore } from '../../store/filters'
-import { API } from '../../utils/constants/api'
+import useFiltersStore from '../../store/filters'
+import useAlertStore from '../../store/alert'
+import API from '../../utils/constants/api'
 import Logo from '../Logo/Logo'
 import SearchBar from './SearchBar'
 import NavigationMenu from './NavMenu'
 import UserMenu from './UserMenu'
-import { useAlertStore } from '../../store/alert'
 
 const Header = () => {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)

@@ -5,8 +5,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 
-import { isAuth } from '../../middlewares/guards'
-import { ProductDetailsProps } from '../../interfaces/ProductDetailsProps.interface'
+import authGuards from '../../middlewares/guards'
+import ProductDetailsProps from '../../interfaces/ProductDetailsProps.interface'
 import QuantityInput from '../../components/QuantityInput/QuantityInput'
 
 interface ItemDetailsTitleProps extends ProductDetailsProps {
@@ -17,7 +17,7 @@ interface ItemDetailsTitleProps extends ProductDetailsProps {
 	styles: Record<string, string>
 }
 
-export const ItemDetailsTitle = ({
+const ItemDetailsTitle = ({
 	handleAddToCart,
 	handleAddToWishlist,
 	setQuantity,
@@ -35,7 +35,7 @@ ItemDetailsTitleProps) => {
 		<div className={styles.detailsContainer}>
 			<div className={styles.titleSection}>
 				<h3>{title}</h3>
-				{isAuth() && (
+				{authGuards.isAuth() && (
 					<Tooltip title='Добави в любими'>
 						<IconButton
 							className={styles.likeButton}
@@ -87,3 +87,5 @@ ItemDetailsTitleProps) => {
 		</div>
 	)
 }
+
+export default ItemDetailsTitle

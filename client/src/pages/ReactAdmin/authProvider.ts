@@ -1,5 +1,5 @@
 import { AuthProvider, HttpError } from 'react-admin';
-import { authService } from '../../services/authService';
+import authService from '../../services/authService';
 
 export const authProvider: AuthProvider = {
     login: async ({ username, password }) => {

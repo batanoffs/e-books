@@ -8,9 +8,9 @@ import Tooltip from '@mui/material/Tooltip'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 
-import { isAuth } from '../../utils/helpers/auth'
 import { useLoginModal } from '../../store/helperModal'
 import CartButton from './CartButton'
+import authGuards from '../../middlewares/guards'
 
 const settings = [
 	{ name: 'Начало', path: '/' },
@@ -22,7 +22,7 @@ const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handl
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
 	return (
 		<Box sx={{ flexGrow: 0, mr: 2, gap: 1 }}>
-			{isAuth() ? (
+			{authGuards.isAuth() ? (
 				<>
 					<Tooltip title='Open settings'>
 						<IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mr: 2 }}>

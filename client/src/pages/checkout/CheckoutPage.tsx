@@ -9,7 +9,7 @@ import { DeliveryForm } from './DeliveryForm'
 import { AddressForm } from './AddressForm'
 import { PaymentForm } from './PaymentForm'
 import useCartStore from '../../store/cart'
-import { API } from '../../utils/constants/api'
+import API from '../../utils/constants/api'
 // import { getToken } from '../../utils/helpers/auth'
 
 type CheckoutFormValues = {
