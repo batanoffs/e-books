@@ -6,15 +6,21 @@ const WishlistSchema = new Schema(
 		user: {
 			type: Schema.Types.ObjectId,
 			ref: 'User',
-			require: true,
+			required: true,
 		},
 		productRefs: [
 			{
-				product: { type: Schema.Types.ObjectId, ref: 'Book' },
+				type: Schema.Types.ObjectId,
+				ref: 'Book',
+				unique: true,
+				required: true,
 			},
 		],
 	},
-	{ timestamps: true, versionKey: false }
+	{
+		timestamps: true,
+		versionKey: false,
+	}
 )
 
 const Wishlist = model<IWishlistSchema>('Wishlist', WishlistSchema)
