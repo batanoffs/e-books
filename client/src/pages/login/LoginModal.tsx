@@ -8,8 +8,8 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 
 import { useLoginModal } from '../../store/helperModal'
-import { authService } from '../../services/authService'
-import { useAlertStore } from '../../store/alert'
+import authService from '../../services/authService'
+import useAlertStore from '../../store/alert'
 
 import styles from './login-page.module.scss'
 
