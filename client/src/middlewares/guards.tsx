@@ -1,4 +1,5 @@
 import { Navigate } from 'react-router-dom'
+
 import { checkIfUserIsAdmin, getToken } from '../utils/helpers/auth'
 import AdminPage from '../pages/ReactAdmin/Admin'
 
@@ -23,4 +24,10 @@ const isAuth = (): boolean => {
 	return !isGuest()
 }
 
-export { AdminGuard, isGuest, isAuth }
+const authGuards = {
+	AdminGuard,
+	isGuest,
+	isAuth,
+}
+
+export default authGuards
