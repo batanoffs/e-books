@@ -1,11 +1,11 @@
 import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
-import { useAlertStore } from '../../store/alert'
+import useAlertStore from '../../store/alert'
 import { useLoginModal } from '../../store/helperModal'
-import { isAuth } from '../../middlewares/guards'
+import authGuards from '../../middlewares/guards'
 import useCartStore from '../../store/cart'
-import { cartService } from '../../services/cartService'
+import cartService from '../../services/cartService'
 
 interface CarouselCard {
 	book: {
@@ -33,7 +33,7 @@ export const CarouselCard = ({ book, styles }: CarouselCard) => {
 	}
 
 	const onBuyNow = async () => {
-		const isUserAuthenticated = isAuth()
+		const isUserAuthenticated = authGuards.isAuth()
 		if (!isUserAuthenticated) {
 			toggleOpen()
 			return showAlert('Моля, влезте в акаунта си, за да продължите', 'info')
@@ -49,10 +49,10 @@ export const CarouselCard = ({ book, styles }: CarouselCard) => {
 			quantity: 1,
 		}
 		addToCart(currentItem)
-		await cartService.addToCart(book, 1, 'book')
+		await cartService.addOne(_id)
 
 		navigate(`/cart`)
-		showAlert(`Продуктът ${title} е добавен в количката`, 'success')
+		showAlert(`${title} е добавен в количката`, 'success')
 	}
 	return (
 		<div className={styles.container}>
