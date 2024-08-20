@@ -8,30 +8,33 @@ import API from '../../utils/constants/api'
 import useSpinner from '../../store/spinner'
 import CategoryList from '../../components/Categories/Categories'
 import ShowcaseList from '../../components/ShowCase/ShowCase'
-
-interface Book {
-	id: string
-	title: string
-	author: string
-	price: number
-	description: string
-	stock: number
-	imageUrl: string
-	category: string
-}
+import { Book } from '../../interfaces/book.interface'
 
 const HomePage = () => {
 	const [books, setBooks] = useState<Book[]>([])
 	const [bookCategories, setBookCategories] = useState<string[]>([])
 	const toggleLoading = useSpinner((state) => state.toggleLoading)
 
+	const fetchBookCategoriesCallback = useCallback(async () => {
+		try {
+			const response = await axios.get(API.CATEGORIES, { params: { type: 'books' } })
+
+			setBookCategories([...new Set(response.data)])
+		} catch (error) {
+			console.error(error)
+		} finally {
+			toggleLoading() // Stop loading
+		}
+	}, [])
+
+	useEffect(() => {
+		fetchBookCategoriesCallback()
+	}, [fetchBookCategoriesCallback])
+
 	const fetchBooksCallback = useCallback(async () => {
 		try {
 			const response = await axios.get(API.BOOKS)
-			const fetchedBooks = response.data
-
-			setBooks(fetchedBooks)
-			setBookCategories([...new Set(fetchedBooks.map((book: Book) => book.category))])
+			setBooks(response.data)
 		} catch (error) {
 			console.error(error)
 		} finally {
