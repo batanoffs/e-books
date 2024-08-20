@@ -10,7 +10,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
 		<main className='main-wrapper'>
 			{children &&
 				children.map((child) => (
-					<section key={child.id} style={{ padding: '0 60px', marginBottom: '2em' }}>
+					<section key={child.id} style={{ marginBottom: '2em' }}>
 						{child.element}
 					</section>
 				))}
