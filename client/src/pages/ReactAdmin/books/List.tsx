@@ -75,7 +75,7 @@ const BookList = (props: any) => {
                     style={{ maxWidth: '150px' }}
                 />
                 <TextField
-                    source="category"
+                    source="categories"
                     label="Категория"
                     sortable={true}
                     style={{ maxWidth: '300px' }}
