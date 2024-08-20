@@ -10,6 +10,7 @@ import cartRoutes from './cart'
 import featuredRoutes from './featured'
 import stripeRoutes from './stripe'
 import wishlistRoutes from './wishlist'
+import categoryRoutes from './category'
 
 const router = express.Router()
 
@@ -23,5 +24,6 @@ router.use('/cart', cartRoutes)
 router.use('/featured', featuredRoutes)
 router.use('/checkout', stripeRoutes)
 router.use('/wishlist', wishlistRoutes)
+router.use('/category', categoryRoutes)
 
 export default router
