@@ -3,28 +3,21 @@ import styles from './newsletter.module.scss'
 export default function Newsletter() {
 	return (
 		<div className={styles.container}>
-			<div className={styles.newsletterCont}>
-				<h2 className={styles.newsletterTitle}>Запиши се за бюлетина ни</h2>
-				{/* <img
+			<div className={styles.newsletterTop}>
+				<div className={styles.newsletterImageBlock}>
+					<img src='/postoffice.jpg' alt='promo image' loading='lazy' width='335' />
+					{/* <img
                             src=""
                             alt="leaf graphic"
                             loading="lazy"
                             className={`${styles.newsletterShapeBottom} ${styles.aNLShapeUp}`}
                         /> */}
-			</div>
-			<div className={styles.newsletterTop}>
-				<div className={styles.newsletterImageBlock}>
-					<img
-						src='/postoffice.jpg'
-						alt='promo image'
-						className={styles.newsletterImage}
-						loading='lazy'
-						width='335'
-						height='207'
-					/>
 				</div>
 
 				<div className={styles.newsletterBot}>
+					<div className={styles.newsletterCont}>
+						<h2 className={styles.newsletterTitle}>Запиши се за бюлетина ни</h2>
+					</div>
 					<div className={styles.newsletterBlock}>
 						<form
 							className={`${styles.newsletterForm} ${styles.jsNewsletterForm} ${styles.subscribe}`}
