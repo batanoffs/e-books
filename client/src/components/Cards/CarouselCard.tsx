@@ -6,18 +6,10 @@ import { useLoginModal } from '../../store/helperModal'
 import authGuards from '../../middlewares/guards'
 import useCartStore from '../../store/cart'
 import cartService from '../../services/cartService'
+import { Book } from '../../interfaces/book.interface'
 
 interface CarouselCard {
-	book: {
-		_id: string
-		title: string
-		author: string
-		coverImagePath: string
-		description: string
-		price: number
-		category: string
-		stock: number
-	}
+	book: Book
 	styles: Record<string, string>
 }
 
