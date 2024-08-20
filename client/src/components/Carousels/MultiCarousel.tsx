@@ -2,22 +2,9 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import ItemCard from '../Cards/ItemCard'
+import { Books } from '../../interfaces/book.interface'
 
-interface BookProps {
-	books: {
-		_id: string
-		title: string
-		author: string
-		imageUrl: string
-		description: string
-		coverImagePath: string
-		price: number
-		category: string
-		stock: number
-	}[]
-}
-
-const MultiCarousel = ({ books }: BookProps) => {
+const MultiCarousel = ({ books }: Books) => {
 	const settings = {
 		dots: true,
 		infinite: true,

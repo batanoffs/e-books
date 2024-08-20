@@ -5,20 +5,8 @@ import Slider from 'react-slick'
 
 import styles from './single-carousel.module.scss'
 import { CarouselCard } from '../Cards/CarouselCard'
+import { Book, Books } from '../../interfaces/book.interface'
 
-interface BookProps {
-	books: {
-		_id: string
-		title: string
-		author: string
-		imageUrl: string
-		description: string
-		coverImagePath: string
-		price: number
-		category: string
-		stock: number
-	}[]
-}
 function SampleNextArrow(props) {
 	const { onClick } = props
 	return <div className={styles.nextArrow} onClick={onClick} />
@@ -29,7 +17,7 @@ function SamplePrevArrow(props) {
 	return <div className={styles.prevArrow} onClick={onClick} />
 }
 
-const SingleCarousel = ({ books }: BookProps) => {
+const SingleCarousel = ({ books }: Books) => {
 	const settings = {
 		dots: true,
 		infinite: true,
@@ -70,7 +58,7 @@ const SingleCarousel = ({ books }: BookProps) => {
 	}
 	return (
 		<Slider className={styles.carousel} {...settings}>
-			{books.map((book) => (
+			{books.map((book: Book) => (
 				<CarouselCard key={book._id} book={book} styles={styles} />
 			))}
 		</Slider>
