@@ -12,8 +12,13 @@ import cartService from '../../services/cartService'
 import API from '../../utils/constants/api'
 
 import styles from './itemcard.module.scss'
+import { Book } from '../../interfaces/book.interface'
 
-const ItemCard = ({ item }) => {
+interface ItemProps {
+	item: Book //|| Textbook || Stationery
+}
+
+const ItemCard = ({ item }: ItemProps) => {
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const addToCart = useCartStore((state) => state.addToCart)
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
@@ -71,7 +76,7 @@ const ItemCard = ({ item }) => {
 	}
 
 	return (
-		<div className={styles.container} data-id={_id}>
+		<div key={_id} className={styles.container} data-id={_id}>
 			<div className={styles.bookImageContainer} onClick={goToDetailsHandler}>
 				{authGuards.isAuth() && (
 					<div className={styles.buttonContainer}>
