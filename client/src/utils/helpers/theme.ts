@@ -43,18 +43,38 @@ const themeOptions = createTheme({
 	},
 	typography: {
 		fontFamily: 'Montserrat Alternates, sans-serif',
+		fontWeightLight: 300,
+		fontWeightRegular: 400,
+		fontWeightMedium: 500,
+		fontWeightBold: 700,
+
 		h1: {
-			fontSize: '2.5rem',
+			fontSize: '2.8em',
 			fontWeight: 700,
 			letterSpacing: '-0.01562em',
 		},
 		h2: {
-			fontSize: '2rem',
+			fontSize: '2.2em',
 			fontWeight: 600,
 			letterSpacing: '-0.00833em',
 		},
 		h3: {
-			fontSize: '1.75rem',
+			fontSize: '1.8em',
+			fontWeight: 500,
+			letterSpacing: '0em',
+		},
+		h4: {
+			fontSize: '1.6em',
+			fontWeight: 500,
+			letterSpacing: '0em',
+		},
+		h5: {
+			fontSize: '1.2em',
+			fontWeight: 500,
+			letterSpacing: '0em',
+		},
+		h6: {
+			fontSize: '1em',
 			fontWeight: 500,
 			letterSpacing: '0em',
 		},
@@ -87,6 +107,31 @@ const themeOptions = createTheme({
 		borderRadius: 12, // Retain rounded corners
 	},
 	components: {
+		MuiTextField: {
+			defaultProps: {
+				variant: 'standard' as const,
+			},
+		},
+		MuiFormControl: {
+			defaultProps: {
+				variant: 'outlined' as const,
+			},
+		},
+		MuiList: {
+			defaultProps: {
+				dense: true,
+			},
+		},
+		MuiTable: {
+			defaultProps: {
+				size: 'small',
+			},
+		},
+		MuiSelect: {
+			defaultProps: {
+				variant: 'standard' as const,
+			},
+		},
 		MuiAppBar: {
 			styleOverrides: {
 				colorInherit: {
@@ -149,6 +194,13 @@ const themeOptions = createTheme({
 				},
 			},
 		},
+		MuiFormLabel: {
+			styleOverrides: {
+				root: {
+					color: '#6028c8',
+				},
+			},
+		},
 	},
 	breakpoints: {
 		values: {
@@ -178,26 +230,6 @@ export default themeOptions
 //         fontFamily: ['Montserrat Alternates', 'Arial', 'sans-serif'].join(','),
 //     },
 //     components: {
-//         ...defaultTheme.components,
-//         MuiTextField: {
-//             defaultProps: {
-//                 variant: 'outlined' as const,
-//             },
-//         },
-//         MuiFormControl: {
-//             defaultProps: {
-//                 variant: 'outlined' as const,
-//             },
-//         },
-//         MuiList: {
-//             defaultProps: {
-//                 dense: true,
-//             },
-//         },
-//         MuiTable: {
-//             defaultProps: {
-//                 size: 'small',
-//             },
-//         },
+//
 //     },
 // };
