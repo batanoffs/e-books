@@ -24,6 +24,6 @@ router.use('/cart', cartRoutes)
 router.use('/featured', featuredRoutes)
 router.use('/checkout', stripeRoutes)
 router.use('/wishlist', wishlistRoutes)
-router.use('/category', categoryRoutes)
+router.use('/categories', categoryRoutes)
 
 export default router
