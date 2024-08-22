@@ -1,6 +1,6 @@
 import { model, Schema, Types } from 'mongoose'
 import { IStationerySchema } from '../interfaces/stationery.interface'
-import Category from './Category'
+import Categories from './Category'
 
 const StationerySchema: Schema = new Schema({
 	title: {
@@ -30,7 +30,7 @@ const StationerySchema: Schema = new Schema({
 })
 
 StationerySchema.path('categories').validate(async function (value: Types.ObjectId[]) {
-    const categories = await Category.find({ _id: { $in: value }, categoryType: 'stationery' });
+    const categories = await Categories.find({ _id: { $in: value }, categoryType: 'stationery' });
   
     return categories.length === value.length;
   }, 'One or more categories are invalid or not of type stationery.');

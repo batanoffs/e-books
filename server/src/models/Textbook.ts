@@ -1,6 +1,6 @@
 import { model, Schema, Types } from 'mongoose'
 import { IBookSchema } from '../interfaces/book.interface'
-import Category from './Category'
+import Categories from './Category'
 
 const TextbookSchema: Schema = new Schema({
 	title: {
@@ -44,7 +44,7 @@ const TextbookSchema: Schema = new Schema({
 })
 
 TextbookSchema.path('categories').validate(async function (value: Types.ObjectId[]) {
-    const categories = await Category.find({ _id: { $in: value }, categoryType: 'textbook' });
+    const categories = await Categories.find({ _id: { $in: value }, categoryType: 'textbook' });
   
     return categories.length === value.length;
   }, 'One or more categories are invalid or not of type textbook.');
