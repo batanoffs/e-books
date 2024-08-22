@@ -9,7 +9,6 @@ html {
 	box-sizing: border-box;
 }
 
-
 /* Remove default font styles */
 body {
 	font-family: inherit;
@@ -52,8 +51,8 @@ ol {
 
 /* Remove default text selection styles */
 ::selection {
-	background-color: transparent;
+	background-color: cadetblue;
 }
 ::-moz-selection {
-	background-color: transparent;
+	background-color: cadetblue;
 }
