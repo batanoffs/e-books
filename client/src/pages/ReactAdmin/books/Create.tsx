@@ -40,12 +40,11 @@ const BookCreate = (props) => {
 				sort: { field: 'name', order: 'ASC' },
 			})
 
-			const books = response.data[0].books
-			const textbooks = response.data[0].textbooks
-			const stationery = response.data[0].stationery
+			const books = response.data[0].books.map((item) => ({ id: item, name: item }))
+			// const textbooks = response.data[0].textbooks
+			// const stationery = response.data[0].stationery
 			//TODO check if set is better option for this use case
-			const categoryMap = new Set([books])
-			setCategories(categoryMap)
+			setCategories(books)
 		} catch (error) {
 			console.error('Error fetching categories', error)
 		}
@@ -175,14 +174,13 @@ const BookCreate = (props) => {
 							<TextInput source='translator' label='Преводач' />
 							<TextInput source='dimensions' label='Размери' />
 							<TextInput source='coverPageType' label='Вид корица' />
-							<ReferenceArrayInput
+
+							<SelectArrayInput
 								source='categories'
-								reference='categories'
-								validate={[required()]}
-								label='Категория'
-							>
-								<SelectArrayInput optionText='name' />
-							</ReferenceArrayInput>
+								choices={categories}
+								optionText='name'
+							/>
+
 							<NumberInput source='pageCount' label='Брой страници' />
 
 							<NumberInput
