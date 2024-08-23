@@ -5,7 +5,16 @@ export interface ITextbookSchema {
 	author: string
 	price: number
 	description: string
-	imageUrl: string
+	coverImage: Buffer
+	coverImageType: String
 	stock: number
-	categories: Types.ObjectId[] // References only textbook category IDs
+	categories: Types.ObjectId[]
+	publisher?: string
+	language?: string
+	publishDate?: Date
+	pageCount?: number
+	translator?: string
+	dimensions?: string
+	coverPageType?: string
+	createdAt: Date
 }
