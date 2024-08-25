@@ -40,12 +40,12 @@ const App = () => {
 			{isLoading && <Spinner />}
 			<LoginModal />
 			<Routes>
-				<Route path='/admin/*' element={<AdminPage />} />
 				<Route path='/' element={<HomePage />} />
 				<Route path='/catalog/*' element={<CatalogPage />} />
+				<Route path='/admin/*' element={<AdminPage />} />
+				<Route path='/cart' element={<CartPage />} />
 				<Route path='/checkout' element={<CheckoutPage />} />
 				<Route path='/success' element={<Return />} />
-				<Route path='/cart' element={<CartPage />} />
 				<Route path='/contacts' element={<ContactsPage />} />
 				<Route path='/orders' element={<OrdersConfirmationPage />} />
 				<Route path='/orders/:id' element={<OrderDetailsPage />} />
