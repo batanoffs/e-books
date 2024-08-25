@@ -17,7 +17,8 @@ const HomePage = () => {
 
 	const fetchBookCategoriesCallback = useCallback(async () => {
 		try {
-			const response = await axios.get(API.CATEGORIES, { params: { type: 'books' } })
+			const response = await axios.get(API.CATEGORIES)
+			console.log('response:', response.data)
 
 			setBookCategories([...new Set(response.data)])
 		} catch (error) {
