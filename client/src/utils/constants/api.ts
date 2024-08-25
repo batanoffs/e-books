@@ -7,7 +7,7 @@ const API = {
 	BOOKS: baseURL + '/api/books/',
 	TEXTBOOKS: baseURL + '/api/textbooks/',
 	STATIONERY: baseURL + '/api/stationery/',
-	CATEGORIES: baseURL + '/api/category/',
+	CATEGORIES: baseURL + '/api/categories/',
 	ORDERS: baseURL + '/api/orders/',
 	USERS: baseURL + '/api/users/',
 	USER_ID: baseURL + '/api/users/user-id',
