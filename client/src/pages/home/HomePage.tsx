@@ -9,18 +9,18 @@ import useSpinner from '../../store/spinner'
 import CategoryList from '../../components/Categories/Categories'
 import ShowcaseList from '../../components/ShowCase/ShowCase'
 import { Book } from '../../interfaces/book.interface'
+import useCategoryStore from '../../store/categories'
+import ItemCard from '../../components/Cards/ItemCard'
 
 const HomePage = () => {
 	const [books, setBooks] = useState<Book[]>([])
-	const [bookCategories, setBookCategories] = useState<string[]>([])
 	const toggleLoading = useSpinner((state) => state.toggleLoading)
+	const setCategories = useCategoryStore((state) => state.setCategories)
 
 	const fetchBookCategoriesCallback = useCallback(async () => {
 		try {
 			const response = await axios.get(API.CATEGORIES)
-			console.log('response:', response.data)
-
-			setBookCategories([...new Set(response.data)])
+			setCategories(response.data)
 		} catch (error) {
 			console.error(error)
 		} finally {
@@ -58,11 +58,11 @@ const HomePage = () => {
 		},
 		{
 			id: 'popular',
-			element: <MultiCarousel books={books} />,
+			element: <MultiCarousel items={books} CardComponent={ItemCard} />,
 		},
 		{
 			id: 'categories',
-			element: <CategoryList bookCategories={bookCategories} />,
+			element: <CategoryList />,
 		},
 	]
 
