@@ -37,14 +37,16 @@ const BookCreate = (props) => {
 		try {
 			const response = await dataProvider.getList('categories', {
 				pagination: { page: 1, perPage: 100 },
-				sort: { field: 'name', order: 'ASC' },
+				sort: { field: 'categoryType', order: 'ASC' },
 			})
 
-			const books = response.data[0].books.map((item) => ({ id: item, name: item }))
+			const bookCategories = response.data.filter((item) => item.categoryType === 'book')
+
+			// const books = response.data[0].books.map((item) => ({ id: item, name: item }))
 			// const textbooks = response.data[0].textbooks
 			// const stationery = response.data[0].stationery
 			//TODO check if set is better option for this use case
-			setCategories(books)
+			setCategories(bookCategories)
 		} catch (error) {
 			console.error('Error fetching categories', error)
 		}
@@ -54,8 +56,6 @@ const BookCreate = (props) => {
 		fetchCategories()
 	}, [fetchCategories])
 
-	console.log('categories:', categories?.values())
-
 	const handleSave = async (values) => {
 		try {
 			const cover = files.map((file) => {
@@ -64,6 +64,8 @@ const BookCreate = (props) => {
 					type: file.source.type,
 				}
 			})
+
+			console.log(values)
 
 			const data = {
 				...values,
