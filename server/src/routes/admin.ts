@@ -9,7 +9,7 @@ import Featured from '../models/Featured'
 import Stationery from '../models/Stationery'
 import Textbook from '../models/Textbook'
 import saveCover from '../utils/saveCover'
-import Categories from '../models/Category'
+import Categories from '../models/Categories'
 
 const router = Router()
 
@@ -21,7 +21,7 @@ router.use('/users', raExpressMongoose(User, { q: ['email', 'role'], useLean: fa
 router.use(
 	'/categories',
 	raExpressMongoose(Categories, {
-		q: ['id', 'books', 'textbooks', 'stationery'],
+		q: ['_id', 'name', 'categoryType'],
 		useLean: false,
 	})
 )
@@ -35,7 +35,7 @@ router.use(
 			'coverImage',
 			'coverImageType',
 			'stock',
-			'category',
+			'categories',
 			'createdAt',
 		],
 	})

@@ -1,6 +1,6 @@
 import { model, Schema, Types } from 'mongoose'
 import { IStationerySchema } from '../interfaces/stationery.interface'
-import Categories from './Category'
+import Categories from './Categories'
 
 const StationerySchema: Schema = new Schema({
 	title: {
@@ -21,7 +21,7 @@ const StationerySchema: Schema = new Schema({
 	categories: [
 		{
 			type: Schema.Types.ObjectId,
-			ref: 'Category',
+			ref: 'Categories',
 			required: true,
 		},
 	],
@@ -29,11 +29,11 @@ const StationerySchema: Schema = new Schema({
 	createdAt: { type: Date, default: Date.now, required: true },
 })
 
-StationerySchema.path('categories').validate(async function (value: Types.ObjectId[]) {
-    const categories = await Categories.find({ _id: { $in: value }, categoryType: 'stationery' });
-  
-    return categories.length === value.length;
-  }, 'One or more categories are invalid or not of type stationery.');
+// StationerySchema.path('Categories').validate(async function (value: Types.ObjectId[]) {
+// 	const categories = await Categories.find({ _id: { $in: value }, categoryType: 'stationery' })
+
+// 	return categories.length === value.length
+// }, 'One or more categories are invalid or not of type stationery.')
 
 StationerySchema.virtual('coverImagePath').get(function () {
 	if (this.coverImage != null && this.coverImageType != null) {

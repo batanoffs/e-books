@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import Textbook from '../models/Textbook';
 
 export const createTextbook = async (req: Request, res: Response) => {
-    const { title, author, price, description, stock, category, imageUrl } = req.body;
+    const { title, author, price, description, stock, categories, imageUrl } = req.body;
     try {
-        const newTextBook = new Textbook({ title, author, price, description, stock, category, imageUrl });
+        const newTextBook = new Textbook({ title, author, price, description, stock, categories, imageUrl });
         await newTextBook.save();
         res.status(201).json(newTextBook);
     } catch (error) {
@@ -36,11 +36,11 @@ export const getTextbookById = async (req: Request, res: Response) => {
 
 export const updateTextbook = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { title, author, price, description, stock, category, imageUrl } = req.body;
+    const { title, author, price, description, stock, categories, imageUrl } = req.body;
     try {
         const textbook = await Textbook.findByIdAndUpdate(
             id,
-            { title, author, price, description, stock, category, imageUrl },
+            { title, author, price, description, stock, categories, imageUrl },
             { new: true }
         );
         if (!textbook) {

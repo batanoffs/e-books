@@ -1,6 +1,5 @@
-import { model, Schema, Types } from 'mongoose'
+import { model, Schema } from 'mongoose'
 import { IBookSchema } from '../interfaces/book.interface'
-import Categories from './Category'
 
 const BookSchema: Schema = new Schema({
 	title: {
@@ -37,7 +36,7 @@ const BookSchema: Schema = new Schema({
 	categories: [
 		{
 			type: Schema.Types.ObjectId,
-			ref: 'Category',
+			ref: 'Categories',
 			required: true,
 		},
 	],
@@ -50,15 +49,6 @@ const BookSchema: Schema = new Schema({
 	coverPageType: { type: String, trim: true },
 	createdAt: { type: Date, default: Date.now, required: true },
 })
-
-// Ensure the categories belong to 'book' type
-BookSchema.path('categories').validate(async function (value: Types.ObjectId[]) {
-	// Query the Category model to check if all provided categories exist and belong to 'book'
-	const categories = await Categories.find({ _id: { $in: value }, categoryType: 'book' })
-
-	// Return true if all categories exist and are of type 'book'
-	return categories.length === value.length
-}, 'One or more categories are invalid or not of type book.')
 
 BookSchema.virtual('coverImagePath').get(function () {
 	if (this.coverImage != null && this.coverImageType != null) {

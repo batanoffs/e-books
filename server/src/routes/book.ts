@@ -17,7 +17,7 @@ router.post(
         body('author').notEmpty().withMessage('Author is required'),
         body('price').isFloat({ gt: 0 }).withMessage('Price must be a positive number'),
         body('description').notEmpty().isLength({ min: 10 }).withMessage('Description min 10 characters'),
-        body('category').notEmpty().isLength({ min: 3 }).withMessage('Category is required'),
+        body('categories').notEmpty().isLength({ min: 3 }).withMessage('Categories are required'),
         body('coverPageType').notEmpty().withMessage('Cover page type is required'),
         body('dimensions').isLength({ min: 1 }).withMessage('Dimensions is required'),
         body('language').notEmpty().withMessage('Language is required'),
