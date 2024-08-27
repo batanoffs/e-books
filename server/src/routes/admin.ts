@@ -1,5 +1,5 @@
-import { Router } from 'express'
 import raExpressMongoose from 'express-mongoose-ra-json-server'
+import { Router } from 'express'
 
 import { isAdmin } from '../middlewares/guards'
 import Book from '../models/Book'
@@ -51,12 +51,6 @@ router.use(
 		if (req.method === 'PUT' && req.body.cover) {
 			saveCover(req.body, req.body.cover)
 		}
-		// try {
-		//     const books = await Book.find().lean().exec();
-		//     res.json(books);
-		// } catch (err) {
-		//     next(err);
-		// }
 		next()
 	},
 	raExpressMongoose(Book, {
