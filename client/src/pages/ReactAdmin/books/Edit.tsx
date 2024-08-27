@@ -13,6 +13,7 @@ import {
 	useDataProvider,
 	useGetRecordId,
 	DateInput,
+	SelectInput,
 } from 'react-admin'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -23,7 +24,8 @@ import { FilePond, registerPlugin } from 'react-filepond'
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import 'filepond/dist/filepond.min.css'
 
-import { CustomCoverImage } from './CustomCoverImage'
+import CustomCoverImage from './CustomCoverImage'
+import CreateCategory from './CreateCategory'
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginFileEncode, FilePondPluginImageResize)
 
@@ -49,39 +51,25 @@ const BookEdit = (props: EditProps) => {
 
 	const handleUpdate = async (values: any) => {
 		try {
-			const cover = files.map((file: any) => {
-				console.log('image uploaded:', file)
+			let cover
 
-				return {
-					data: file.getFileEncodeBase64String(),
-					type: file.source.type,
+			if (files[0]) {
+				const { source, getFileEncodeBase64String, file } = files[0]
+
+				cover = {
+					data: getFileEncodeBase64String(),
+					type: source.type,
 				}
-			})
-			console.log(values)
+			}
+			//Todo add file name to backend
+			console.log('values:', values)
 
-			const params = {
-				id,
-				data: {
-					title: values.title,
-					author: values.author,
-					price: values.price,
-					description: values.description,
-					stock: values.stock,
-					category: values.category,
-					publisher: values.publisher,
-					language: values.language,
-					publishDate: values.publishDate,
-					pageCount: values.pageCount,
-					translator: values.translator,
-					dimensions: values.dimensions,
-					coverPageType: values.coverPageType,
-					cover: JSON.stringify(cover[0]), // Ensure only one cover image is sent
-				},
+			const data = {
+				...values,
+				cover: JSON.stringify(cover),
 			}
 
-			console.log('sending params:', params)
-
-			const response = await dataProvider.update('books', params)
+			const response = await dataProvider.update('books', { id, data })
 			console.log('response:', response)
 
 			notify('Book updated successfully')
@@ -163,22 +151,7 @@ const BookEdit = (props: EditProps) => {
 								label='Брой на склад'
 							/>
 						</Box>
-						<Box
-							sx={{
-								width: '100%',
-								display: 'grid',
-								gridTemplateColumns: 'repeat(1, 1fr)',
-								columnGap: 2,
-							}}
-						>
-							<TextInput
-								multiline
-								rows={5}
-								source='description'
-								validate={[required()]}
-								label='Описание'
-							/>
-						</Box>
+
 						<Box
 							sx={{
 								width: '100%',
@@ -191,18 +164,53 @@ const BookEdit = (props: EditProps) => {
 							<TextInput source='language' label='Език' />
 							<TextInput source='translator' label='Преводач' />
 							<TextInput source='dimensions' label='Размери' />
-							<TextInput source='coverPageType' label='Вид корица' />
+							{/* <TextInput source='coverPageType' label='Вид корица' /> */}
+
+							<SelectInput
+								source='coverPageType'
+								label='Вид корица'
+								choices={[
+									{ id: 'твърда', name: 'твърда' },
+									{ id: 'мека', name: 'мека' },
+								]}
+								optionText='name'
+								resettable
+							/>
 							<ReferenceArrayInput
 								source='categories'
 								reference='categories'
 								validate={[required()]}
 								label='Категория'
 							>
-								<SelectArrayInput optionText='name' />
+								<SelectArrayInput
+									source='categories'
+									create={<CreateCategory categoryType={'book'} />}
+									label='Категории'
+									createLabel='Добави категория'
+									optionText='name'
+									optionValue='id'
+								/>
 							</ReferenceArrayInput>
 							<NumberInput source='pageCount' label='Брой страници' />
 
 							<DateInput source='publishDate' label='Год на издаване' />
+						</Box>
+
+						<Box
+							sx={{
+								width: '100%',
+								display: 'grid',
+								gridTemplateColumns: 'repeat(1, 1fr)',
+								columnGap: 2,
+							}}
+						>
+							<TextInput
+								multiline
+								rows={7}
+								source='description'
+								validate={[required()]}
+								label='Описание'
+							/>
 						</Box>
 					</Box>
 				</Box>
