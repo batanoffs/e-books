@@ -1,18 +1,44 @@
-import { useNavigate } from 'react-router-dom'
-import useCategoryStore from '../../store/categories'
+import { useCallback, useEffect } from 'react'
+import axios from 'axios'
+
 import Typography from '@mui/material/Typography'
+import useSpinner from '../../store/spinner'
+import useCategoryStore from '../../store/categories'
+import MultiCarousel from '../Carousels/MultiCarousel'
+import CategoryItem from './categoryItem'
+import API from '../../utils/constants/api'
 
 import styles from './categories.module.scss' // Import the SCSS module
-import CategoryItem from './categoryItem'
-import MultiCarousel from '../Carousels/MultiCarousel'
 
 const CategoryList = () => {
+	const setCategories = useCategoryStore((state) => state.setCategories)
 	const categoriesMap = useCategoryStore((state) => state.categoriesMap)
-	const navigate = useNavigate()
+	const toggleLoading = useSpinner((state) => state.toggleLoading)
 
-	const bookCategories = categoriesMap.get('books')
-	const textbooksCategories = categoriesMap.get('textbooks')
+	const fetchBookCategoriesCallback = useCallback(async () => {
+		try {
+			const response = await axios.get(API.CATEGORIES)
+			console.log(response.data)
+
+			setCategories(response.data)
+		} catch (error) {
+			console.error(error)
+		} finally {
+			toggleLoading() // Stop loading
+		}
+	}, [])
+
+	useEffect(() => {
+		fetchBookCategoriesCallback()
+	}, [fetchBookCategoriesCallback])
+	console.log('categoriesMap', categoriesMap)
+
+	const bookCategories = categoriesMap.get('book')
+	const textbooksCategories = categoriesMap.get('textbook')
 	const stationeryCategories = categoriesMap.get('stationery')
+
+	console.log('bookCategories', bookCategories);
+	
 
 	return (
 		<div className={styles.wrapper}>
