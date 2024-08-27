@@ -8,7 +8,7 @@ import {
 	TextInput,
 	useFieldValue,
 } from 'react-admin'
-import { CustomCoverImage } from './CustomCoverImage'
+import CustomCoverImage from './CustomCoverImage'
 
 const BookFilter = (props: any) => (
 	<Filter {...props}>
@@ -22,7 +22,7 @@ const BookList = (props: any) => {
 	return (
 		<List {...props} title='Книги' filters={<BookFilter />}>
 			<Datagrid rowClick='edit' style={{ overflow: 'auto' }}>
-				<CustomCoverImage />
+				<CustomCoverImage imgWidth='50px' />
 				<TextField
 					source='title'
 					label='Заглавие'
