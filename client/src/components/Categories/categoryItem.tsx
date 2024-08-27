@@ -6,14 +6,16 @@ interface CategoryItemProps {
 }
 
 const CategoryItem = ({ item }: CategoryItemProps) => {
+	console.log(item);
+	
 	const navigate = useNavigate()
 	return (
 		<div className={styles.categoryItemsWrapper}>
 			<div
 				className={styles.categoryItem}
-				onClick={() => navigate(`/catalog/books/${item.toLowerCase()}`)}
+				onClick={() => navigate(`/catalog/books/${item.name.toLowerCase()}`)}
 			>
-				<span className={styles.categoryText}>{item}</span>
+				<span className={styles.categoryText}>{item.name}</span>
 			</div>
 		</div>
 	)
