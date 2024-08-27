@@ -6,8 +6,6 @@ interface CategoryItemProps {
 }
 
 const CategoryItem = ({ item }: CategoryItemProps) => {
-	console.log(item);
-	
 	const navigate = useNavigate()
 	return (
 		<div className={styles.categoryItemsWrapper}>
