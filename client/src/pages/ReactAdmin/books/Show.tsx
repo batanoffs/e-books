@@ -1,17 +1,16 @@
-import { Show, ShowProps, Labeled, TextField, NumberField, DateField } from 'react-admin'
-import { CustomCoverImage } from './CustomCoverImage'
+import {
+	Show,
+	ShowProps,
+	Labeled,
+	TextField,
+	NumberField,
+	DateField,
+	ArrayField,
+	ChipField,
+} from 'react-admin'
+import CustomCoverImage from './CustomCoverImage'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-
-/**
- * A component that shows the details of a book.
- *
- * @param props - The props for the component.
- * @param props.id - The ID of the book to show.
- * @param props.resource - The resource to show.
- * @param props.basePath - The base path for the resource.
- * @returns The rendered component.
- */
 
 const BookShow = (props: ShowProps) => {
 	return (
@@ -41,7 +40,7 @@ const BookShow = (props: ShowProps) => {
 			>
 				<Box display={'block'} sx={{ flex: 0, flexBasis: '20%' }}>
 					<Labeled color='#6028c8'>
-						<CustomCoverImage imgWidth='' />
+						<CustomCoverImage imgWidth='200px' />
 					</Labeled>
 				</Box>
 				<Box sx={{ width: '100%', flex: 1 }}>
@@ -72,9 +71,8 @@ const BookShow = (props: ShowProps) => {
 						<Labeled color='#6028c8'>
 							<NumberField source='stock' label='Брой на склад' />
 						</Labeled>
-
 						<Labeled color='#6028c8'>
-							<TextField source='categories' label='Категория' />
+							<ChipField source='categories' label='Категорий' />
 						</Labeled>
 
 						<Labeled color='#6028c8'>
