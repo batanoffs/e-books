@@ -9,28 +9,11 @@ import useSpinner from '../../store/spinner'
 import CategoryList from '../../components/Categories/Categories'
 import ShowcaseList from '../../components/ShowCase/ShowCase'
 import { Book } from '../../interfaces/book.interface'
-import useCategoryStore from '../../store/categories'
 import ItemCard from '../../components/Cards/ItemCard'
 
 const HomePage = () => {
 	const [books, setBooks] = useState<Book[]>([])
 	const toggleLoading = useSpinner((state) => state.toggleLoading)
-	const setCategories = useCategoryStore((state) => state.setCategories)
-
-	const fetchBookCategoriesCallback = useCallback(async () => {
-		try {
-			const response = await axios.get(API.CATEGORIES)
-			setCategories(response.data)
-		} catch (error) {
-			console.error(error)
-		} finally {
-			toggleLoading() // Stop loading
-		}
-	}, [])
-
-	useEffect(() => {
-		fetchBookCategoriesCallback()
-	}, [fetchBookCategoriesCallback])
 
 	const fetchBooksCallback = useCallback(async () => {
 		try {
