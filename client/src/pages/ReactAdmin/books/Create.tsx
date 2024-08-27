@@ -7,8 +7,9 @@ import {
 	useNotify,
 	useRedirect,
 	useDataProvider,
-	ReferenceArrayInput,
+	SelectInput,
 	SelectArrayInput,
+	DateInput,
 } from 'react-admin'
 import { useState, useEffect, useCallback } from 'react'
 
@@ -21,14 +22,13 @@ import { FilePond, registerPlugin } from 'react-filepond'
 
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import 'filepond/dist/filepond.min.css'
+import CreateCategory from './CreateCategory'
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginFileEncode, FilePondPluginImageResize)
 
 const BookCreate = (props) => {
 	const [categories, setCategories] = useState<Set<any>>()
-
 	const [files, setFiles] = useState([])
-
 	const notify = useNotify()
 	const redirect = useRedirect()
 	const dataProvider = useDataProvider()
@@ -39,13 +39,7 @@ const BookCreate = (props) => {
 				pagination: { page: 1, perPage: 100 },
 				sort: { field: 'categoryType', order: 'ASC' },
 			})
-
 			const bookCategories = response.data.filter((item) => item.categoryType === 'book')
-
-			// const books = response.data[0].books.map((item) => ({ id: item, name: item }))
-			// const textbooks = response.data[0].textbooks
-			// const stationery = response.data[0].stationery
-			//TODO check if set is better option for this use case
 			setCategories(bookCategories)
 		} catch (error) {
 			console.error('Error fetching categories', error)
@@ -72,15 +66,16 @@ const BookCreate = (props) => {
 				cover: JSON.stringify(cover[0]), // Ensure only one cover image is sent
 			}
 
-			const response = await dataProvider.create('books', { data })
+			await dataProvider.create('books', { data })
 
-			notify('Усшено създадна книга', { type: 'success' })
+			notify('Успешно създадена книга', { type: 'success' })
 			redirect('/admin/books')
 		} catch (error) {
 			console.error(error)
 			notify('Грешка при създаване', { type: 'error' })
 		}
 	}
+
 	return (
 		<Create {...props} title={'Добавяне на нова книга'}>
 			<Typography
@@ -147,22 +142,7 @@ const BookCreate = (props) => {
 								label='Брой на склад'
 							/>
 						</Box>
-						<Box
-							sx={{
-								width: '100%',
-								display: 'grid',
-								gridTemplateColumns: 'repeat(1, 1fr)',
-								columnGap: 2,
-							}}
-						>
-							<TextInput
-								multiline
-								rows={3}
-								source='description'
-								validate={[required()]}
-								label='Описание'
-							/>
-						</Box>
+
 						<Box
 							sx={{
 								width: '100%',
@@ -175,21 +155,44 @@ const BookCreate = (props) => {
 							<TextInput source='language' label='Език' />
 							<TextInput source='translator' label='Преводач' />
 							<TextInput source='dimensions' label='Размери' />
-							<TextInput source='coverPageType' label='Вид корица' />
-
+							<SelectInput
+								source='coverPageType'
+								label='Корица'
+								choices={[
+									{ id: 'твърда', name: 'твърда' },
+									{ id: 'мека', name: 'мека' },
+								]}
+								optionText='name'
+								resettable
+							/>
 							<SelectArrayInput
 								source='categories'
 								choices={categories}
+								create={<CreateCategory categoryType={'book'} />}
+								label='Категории'
+								createLabel='Добави категория'
 								optionText='name'
+								optionValue='id'
 							/>
 
 							<NumberInput source='pageCount' label='Брой страници' />
 
-							<NumberInput
-								source='publishDate'
-								label='Год на издаване'
-								format={(v) => `${v}`}
-								parse={(v) => parseInt(v, 10)}
+							<DateInput source='publishDate' label='Год на издаване' />
+						</Box>
+						<Box
+							sx={{
+								width: '100%',
+								display: 'grid',
+								gridTemplateColumns: 'repeat(1, 1fr)',
+								columnGap: 2,
+							}}
+						>
+							<TextInput
+								multiline
+								rows={8}
+								source='description'
+								validate={[required()]}
+								label='Описание'
 							/>
 						</Box>
 					</Box>
