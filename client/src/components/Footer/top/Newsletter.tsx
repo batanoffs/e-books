@@ -5,7 +5,7 @@ export default function Newsletter() {
 		<div className={styles.container}>
 			<div className={styles.newsletterTop}>
 				<div className={styles.newsletterImageBlock}>
-					<img src='/postoffice.jpg' alt='promo image' loading='lazy' width='335' />
+					<img src='/postoffice.png' alt='promo image' loading='lazy' width='335' />
 					{/* <img
                             src=""
                             alt="leaf graphic"
