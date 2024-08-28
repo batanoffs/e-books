@@ -1,11 +1,9 @@
 import Slider from 'react-slick'
 
-// import 'slick-carousel/slick/slick.css'
-// import 'slick-carousel/slick/slick-theme.css'
-
-import styles from './single-carousel.module.scss'
 import { CarouselCard } from '../Cards/CarouselCard'
 import { Book, Books } from '../../interfaces/book.interface'
+
+import styles from './single-carousel.module.scss'
 
 function SampleNextArrow(props) {
 	const { onClick } = props
@@ -19,10 +17,10 @@ function SamplePrevArrow(props) {
 
 const SingleCarousel = ({ books }: Books) => {
 	const settings = {
-		dots: true,
 		infinite: true,
-		autoplay: true, //TODO edit autoplay
+		autoplay: true,
 		speed: 1000,
+		lazyLoad: true,
 		autoplaySpeed: 10000,
 		arrows: true,
 		centerPadding: '100px',
