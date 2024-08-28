@@ -1,31 +1,36 @@
 import styles from './showcase.module.scss' // Import the SCSS module
 
-const features = [
+interface Icon {
+	icon: string
+	text: string
+}
+
+const features: Icon[] = [
 	{
-		icon: '🚚', // Placeholder for actual icon (use an image or SVG in real application)
+		icon: '/delivery.png',
 		text: 'Бърза доставка',
 	},
 	{
-		icon: '🎁', // Placeholder for actual icon
+		icon: '/gift.png',
 		text: 'Безплатна доставка над 49,80 лв.',
 	},
 	{
-		icon: '📚', // Placeholder for actual icon
+		icon: '/book.png',
 		text: 'Над 500 световни бранда',
 	},
 	{
-		icon: '🏪', // Placeholder for actual icon
-		text: 'Купи онлайн, вземи от магазин.',
+		icon: '/shop.png',
+		text: 'Купи онлайн, вземи от магазин',
 	},
 ]
 
 const ShowcaseList = () => {
 	return (
 		<div className={styles.featureContainer}>
-			{features.map((feature, index) => (
+			{features.map(({ icon, text }, index) => (
 				<div key={index} className={styles.featureItem}>
-					<div className={styles.icon}>{feature.icon}</div>
-					<div className={styles.text}>{feature.text}</div>
+					<img className={styles.icon} src={icon} alt='icon' height={50} width={50} />
+					<div className={styles.text}>{text}</div>
 				</div>
 			))}
 		</div>
