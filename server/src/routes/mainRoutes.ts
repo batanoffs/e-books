@@ -10,7 +10,7 @@ import cartRoutes from './cart'
 import featuredRoutes from './featured'
 import stripeRoutes from './stripe'
 import wishlistRoutes from './wishlist'
-import categoryRoutes from './category'
+import categoryRoutes from './categories'
 
 const router = express.Router()
 
