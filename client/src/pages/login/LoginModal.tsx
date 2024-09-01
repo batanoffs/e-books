@@ -48,7 +48,7 @@ const LoginModal = () => {
 					<TextField
 						autoFocus
 						margin='dense'
-						id='name'
+						id='email'
 						label='Имейл'
 						type='email'
 						fullWidth
@@ -58,7 +58,7 @@ const LoginModal = () => {
 					/>
 					<TextField
 						margin='dense'
-						id='name'
+						id='password'
 						label='Парола'
 						type='password'
 						fullWidth
