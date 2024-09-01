@@ -1,5 +1,5 @@
-import raExpressMongoose from 'express-mongoose-ra-json-server'
 import { Router } from 'express'
+import raExpressMongoose from 'express-mongoose-ra-json-server'
 
 import { isAdmin } from '../middlewares/guards'
 import Book from '../models/Book'
@@ -9,7 +9,9 @@ import Featured from '../models/Featured'
 import Stationery from '../models/Stationery'
 import Textbook from '../models/Textbook'
 import saveCover from '../utils/saveCover'
-import Categories from '../models/Categories'
+import BookCategories from '../models/BookCategories'
+import TextbookCategories from '../models/TextbookCategories'
+import StationeryCategories from '../models/StationeryCategories'
 
 const router = Router()
 
@@ -19,12 +21,28 @@ router.use(isAdmin)
 router.use('/users', raExpressMongoose(User, { q: ['email', 'role'], useLean: false }))
 
 router.use(
-	'/categories',
-	raExpressMongoose(Categories, {
-		q: ['_id', 'name', 'categoryType'],
+	'/categories/books',
+	raExpressMongoose(BookCategories, {
+		q: ['_id', 'name', 'createdAt', 'updatedAt'],
 		useLean: false,
 	})
 )
+
+router.use(
+	'/categories/textbooks',
+	raExpressMongoose(TextbookCategories, {
+		q: ['_id', 'name', 'createdAt', 'updatedAt'],
+		useLean: false,
+	})
+)
+router.use(
+	'/categories/stationery',
+	raExpressMongoose(StationeryCategories, {
+		q: ['_id', 'name', 'createdAt', 'updatedAt'],
+		useLean: false,
+	})
+)
+
 router.use(
 	'/stationery',
 	raExpressMongoose(Stationery, {
