@@ -17,7 +17,6 @@ const MultiCarousel = ({ items, CardComponent }: MultiCarouselInterface) => {
 	const settings = {
 		className: 'centerPadding',
 		swipeToSlide: true,
-		centerMode: true,
 		infinite: true,
 		autoplay: true,
 		dots: false,
