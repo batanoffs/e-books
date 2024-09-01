@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose'
 import { IBookSchema } from '../interfaces/book.interface'
-import Categories from './Categories';
+// import Categories from './Categories'
 
 const BookSchema: Schema = new Schema({
 	title: {
@@ -41,7 +41,7 @@ const BookSchema: Schema = new Schema({
 	categories: [
 		{
 			type: Schema.Types.ObjectId,
-			ref: 'Categories',
+			ref: 'BookCategories',
 			required: true,
 		},
 	],
@@ -86,11 +86,10 @@ const BookSchema: Schema = new Schema({
 	},
 })
 
-BookSchema.virtual('categoryDetails').get(async function () {
-	const categories = await Categories.find({ _id: { $in: this.categories } }).select('name');
-	return categories;
-  });
-  
+// BookSchema.virtual('categoryDetails').get(async function () {
+// 	const categories = await Categories.find({ _id: { $in: this.categories } }).select('name')
+// 	return categories
+// })
 
 BookSchema.virtual('coverImagePath').get(function () {
 	if (this.coverImage != null && this.coverImageType != null) {
@@ -103,12 +102,11 @@ BookSchema.virtual('coverImagePath').get(function () {
 BookSchema.set('toJSON', {
 	virtuals: true,
 	transform: function (doc, ret) {
-	  // Optionally remove sensitive fields
-	  delete ret.coverImage;
-	  return ret;
-	}
-  });
-  
+		// Optionally remove sensitive fields
+		delete ret.coverImage
+		return ret
+	},
+})
 
 const Book = model<IBookSchema>('Book', BookSchema)
 
