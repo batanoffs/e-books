@@ -1,29 +1,29 @@
-import { Schema, model } from 'mongoose'
+// import { Schema, model } from 'mongoose'
 
-const categorySchema = new Schema(
-	{
-		name: {
-			type: String,
-			required: [true, 'Category name is required'],
-			unique: true, // Ensure the name is unique globally
-			trim: true,
-			minlength: 3,
-			lowercase: true,
-		},
-		categoryType: {
-			type: String,
-			required: [true, 'Category type is required'],
-			enum: ['book', 'textbook', 'stationery'],
-		},
-	},
-	{
-		versionKey: false,
-		timestamps: true,
-	}
-)
+// const categorySchema = new Schema(
+// 	{
+// 		name: {
+// 			type: String,
+// 			required: [true, 'Category name is required'],
+// 			unique: true, // Ensure the name is unique globally
+// 			trim: true,
+// 			minlength: 3,
+// 			lowercase: true,
+// 		},
+// 		categoryType: {
+// 			type: String,
+// 			required: [true, 'Category type is required'],
+// 			enum: ['book', 'textbook', 'stationery'],
+// 		},
+// 	},
+// 	{
+// 		versionKey: false,
+// 		timestamps: true,
+// 	}
+// )
 
-const Categories = model('Categories', categorySchema)
-export default Categories
+// const Categories = model('Categories', categorySchema)
+// export default Categories
 
 // import { Schema, model, Document } from 'mongoose'
 // import { ICategory } from '../interfaces/category.interface'
