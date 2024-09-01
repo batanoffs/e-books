@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Button, Dialog, DialogActions, DialogContent, TextField } from '@mui/material'
 
 type CategoryTypeInterface = {
-	categoryType: 'book' | 'textbook' | 'stationery'
+	categoryType: 'books' | 'textbooks' | 'stationery'
 }
 
 const CreateCategory = ({ categoryType }: CategoryTypeInterface) => {
@@ -11,21 +11,21 @@ const CreateCategory = ({ categoryType }: CategoryTypeInterface) => {
 	const [value, setValue] = useState('')
 	const dataProvider = useDataProvider()
 	const notify = useNotify()
-	
+
 	const handleSubmit = async () => {
 		try {
-			const response = await dataProvider.create('categories', {
-				data: { name: value, categoryType },
+			const response = await dataProvider.create(`categories/${categoryType}`, {
+				data: { name: value },
 			})
 
 			console.log(response.data)
 			// categories.push(response.data)
 			onCreate(value)
 			setValue('')
-			notify('Усшено създадна категория', { type: 'success' })
+			notify('Усшено добавихте нова категория', { type: 'success' })
 		} catch (error) {
 			console.error(error)
-			notify('Грешка при създаване', { type: 'error' })
+			notify('Грешка при създаване на категория', { type: 'error' })
 		}
 	}
 

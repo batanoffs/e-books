@@ -8,6 +8,11 @@ import {
 	NumberInput,
 	ReferenceArrayInput,
 	SelectArrayInput,
+	ArrayInput,
+	ReferenceManyField,
+	Datagrid,
+	TextField,
+	AutocompleteArrayInput,
 	useRedirect,
 	useNotify,
 	useDataProvider,
@@ -26,6 +31,7 @@ import 'filepond/dist/filepond.min.css'
 
 import CustomCoverImage from './CustomCoverImage'
 import CreateCategory from './CreateCategory'
+import useCategoryStore from '../../../store/categories'
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginFileEncode, FilePondPluginImageResize)
 
@@ -38,6 +44,8 @@ registerPlugin(FilePondPluginImagePreview, FilePondPluginFileEncode, FilePondPlu
 const BookEdit = (props: EditProps) => {
 	const [files, setFiles] = useState([])
 	const [newCover, setNewCover] = useState('')
+	// const setCategories = useCategoryStore((state) => state.setCategories)
+	// const categoriesMap = useCategoryStore((state) => state.categoriesMap)
 	const id = useGetRecordId()
 	const notify = useNotify()
 	const redirect = useRedirect()
@@ -88,7 +96,7 @@ const BookEdit = (props: EditProps) => {
 					fontSize: { xs: 'h6.fontSize', sm: 'h5.fontSize' },
 				}}
 			>
-				Добавяне на нова книга
+				Редактиране на книга
 			</Typography>
 
 			<div
@@ -176,21 +184,25 @@ const BookEdit = (props: EditProps) => {
 								optionText='name'
 								resettable
 							/>
+							{/* TODO get only book categories */}
 							<ReferenceArrayInput
-								source='categories'
-								reference='categories'
+								reference='categories/books'
+								source='name'
 								validate={[required()]}
-								label='Категория'
+								label='Tags'
 							>
-								<SelectArrayInput
-									source='categories'
-									create={<CreateCategory categoryType={'book'} />}
+								<AutocompleteArrayInput
+									debounce={500}
+									filterToQuery={(search) => ({ name: `%${search}%` })}
+									create={<CreateCategory categoryType={'books'} />}
 									label='Категории'
+									source='categories'
 									createLabel='Добави категория'
 									optionText='name'
 									optionValue='id'
 								/>
 							</ReferenceArrayInput>
+
 							<NumberInput source='pageCount' label='Брой страници' />
 
 							<DateInput source='publishDate' label='Год на издаване' />

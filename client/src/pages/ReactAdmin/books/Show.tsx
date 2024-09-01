@@ -5,7 +5,8 @@ import {
 	TextField,
 	NumberField,
 	DateField,
-	ArrayField,
+	ReferenceArrayField,
+	ReferenceManyField,
 	ChipField,
 } from 'react-admin'
 import CustomCoverImage from './CustomCoverImage'
@@ -71,9 +72,16 @@ const BookShow = (props: ShowProps) => {
 						<Labeled color='#6028c8'>
 							<NumberField source='stock' label='Брой на склад' />
 						</Labeled>
-						<Labeled color='#6028c8'>
-							<ChipField source='categories' label='Категорий' />
-						</Labeled>
+						<ReferenceManyField
+							label='Още категории'
+							reference='categories'
+							source='categoryId'
+							target='categoryType'
+						>
+							<Labeled color='#6028c8'>
+								<ChipField source='categories' label='Категорий' />
+							</Labeled>
+						</ReferenceManyField>
 
 						<Labeled color='#6028c8'>
 							<TextField source='publisher' label='Издателство' />

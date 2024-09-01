@@ -1,3 +1,10 @@
+import { useState, useEffect, useCallback } from 'react'
+import Typography from '@mui/material/Typography'
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
+import FilePondPluginImageResize from 'filepond-plugin-image-resize'
+import { FilePond, registerPlugin } from 'react-filepond'
+import Box from '@mui/material/Box'
 import {
 	Create,
 	SimpleForm,
@@ -8,47 +15,45 @@ import {
 	useRedirect,
 	useDataProvider,
 	SelectInput,
-	SelectArrayInput,
+	ReferenceArrayInput,
+	AutocompleteArrayInput,
 	DateInput,
 } from 'react-admin'
-import { useState, useEffect, useCallback } from 'react'
 
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
-import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
-import FilePondPluginImageResize from 'filepond-plugin-image-resize'
-import { FilePond, registerPlugin } from 'react-filepond'
+import CreateCategory from './CreateCategory'
+// import useCategoryStore from '../../../store/categories'
 
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import 'filepond/dist/filepond.min.css'
-import CreateCategory from './CreateCategory'
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginFileEncode, FilePondPluginImageResize)
 
 const BookCreate = (props) => {
-	const [categories, setCategories] = useState<Set<any>>()
+	// const setCategories = useCategoryStore((state) => state.setCategories)
+	// const categoriesMap = useCategoryStore((state) => state.categoriesMap)
 	const [files, setFiles] = useState([])
 	const notify = useNotify()
 	const redirect = useRedirect()
 	const dataProvider = useDataProvider()
 
-	const fetchCategories = useCallback(async () => {
-		try {
-			const response = await dataProvider.getList('categories', {
-				pagination: { page: 1, perPage: 100 },
-				sort: { field: 'categoryType', order: 'ASC' },
-			})
-			const bookCategories = response.data.filter((item) => item.categoryType === 'book')
-			setCategories(bookCategories)
-		} catch (error) {
-			console.error('Error fetching categories', error)
-		}
-	}, [dataProvider])
+	// const fetchCategories = useCallback(async () => {
+	// 	try {
+	// 		const response = await dataProvider.getList('categories/books', {
+	// 			pagination: { page: 1, perPage: 100 },
+	// 			sort: { field: 'name', order: 'ASC' },
+	// 		})
+	// 		const bookCategories = response.data
+	// 		console.log('bookCategories', bookCategories)
 
-	useEffect(() => {
-		fetchCategories()
-	}, [fetchCategories])
+	// 		setCategories(bookCategories)
+	// 	} catch (error) {
+	// 		console.error('Error fetching categories', error)
+	// 	}
+	// }, [dataProvider])
+
+	// useEffect(() => {
+	// 	fetchCategories()
+	// }, [fetchCategories])
 
 	const handleSave = async (values) => {
 		try {
@@ -63,7 +68,7 @@ const BookCreate = (props) => {
 
 			const data = {
 				...values,
-				cover: JSON.stringify(cover[0]), // Ensure only one cover image is sent
+				cover: JSON.stringify(cover),
 			}
 
 			await dataProvider.create('books', { data })
@@ -165,18 +170,25 @@ const BookCreate = (props) => {
 								optionText='name'
 								resettable
 							/>
-							<SelectArrayInput
-								source='categories'
-								choices={categories}
-								create={<CreateCategory categoryType={'book'} />}
-								label='Категории'
-								createLabel='Добави категория'
-								optionText='name'
-								optionValue='id'
-							/>
+							<ReferenceArrayInput
+								reference='categories/books'
+								source='id'
+								sort={{ field: 'name', order: 'ASC' }}
+								validate={[required()]}
+							>
+								<AutocompleteArrayInput
+									debounce={1000}
+									// filterToQuery={(search) => ({ name: `%${search}%` })}
+									// choices={categoriesMap.get('book')}
+									create={<CreateCategory categoryType={'books'} />}
+									label='Категории'
+									createLabel='Добави категория'
+									optionText='name'
+									optionValue='id'
+								/>
+							</ReferenceArrayInput>
 
 							<NumberInput source='pageCount' label='Брой страници' />
-
 							<DateInput source='publishDate' label='Год на издаване' />
 						</Box>
 						<Box
