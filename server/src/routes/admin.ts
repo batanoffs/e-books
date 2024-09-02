@@ -8,7 +8,6 @@ import Order from '../models/Order'
 import Featured from '../models/Featured'
 import Stationery from '../models/Stationery'
 import Textbook from '../models/Textbook'
-import saveCover from '../utils/saveCover'
 import BookCategories from '../models/BookCategories'
 import TextbookCategories from '../models/TextbookCategories'
 import StationeryCategories from '../models/StationeryCategories'
@@ -61,24 +60,13 @@ router.use(
 
 router.use(
 	'/books',
-	async (req, res, next) => {
-		if (req.method === 'POST' && req.body.cover) {
-			saveCover(req.body, req.body.cover)
-		}
-
-		if (req.method === 'PUT' && req.body.cover) {
-			saveCover(req.body, req.body.cover)
-		}
-		next()
-	},
 	raExpressMongoose(Book, {
 		q: [
 			'title',
 			'author',
 			'price',
 			'description',
-			'coverImage',
-			'coverImageType',
+			'picture',
 			'stock',
 			'categories',
 			'publisher',
@@ -87,7 +75,6 @@ router.use(
 			'pageCount',
 			'translator',
 			'dimensions',
-			'coverPageType',
 			'createdAt',
 		],
 		useLean: true,
