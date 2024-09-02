@@ -7,8 +7,8 @@ type CategoryTypeInterface = {
 }
 
 const CreateCategory = ({ categoryType }: CategoryTypeInterface) => {
-	const { onCancel, onCreate } = useCreateSuggestionContext()
-	const [value, setValue] = useState('')
+	const { filter, onCancel, onCreate } = useCreateSuggestionContext()
+	const [value, setValue] = useState(filter || '')
 	const dataProvider = useDataProvider()
 	const notify = useNotify()
 
