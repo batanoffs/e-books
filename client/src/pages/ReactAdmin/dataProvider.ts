@@ -21,13 +21,11 @@ export default (apiUrl: string): DataProvider => ({
 	//TODO updated for filepont json image (only one)
 	create: async (resource: string, params: { data: any }) => {
 		console.log('DataProvider create params: ', params.data)
-		const url = `${apiUrl}/${resource}`
-
-		console.log('create url: ', url)
 		console.log('apiUrl:', apiUrl)
+		console.log('create url: ', apiUrl + resource)
 		console.log('resource: ', resource)
 
-		const { json } = await httpClient(url, {
+		const { json } = await httpClient(apiUrl + resource, {
 			method: 'POST',
 			body: JSON.stringify(params.data),
 		})
@@ -52,8 +50,7 @@ export default (apiUrl: string): DataProvider => ({
 			_start: (page - 1) * perPage,
 			_end: page * perPage,
 		}
-		const url = `${apiUrl}${resource}?${stringify(query)}`
-
+		const url = apiUrl + resource + `/?` + stringify(query)
 		const { headers, json } = await httpClient(url)
 		if (!headers.has('x-total-count')) {
 			throw new Error(
@@ -73,7 +70,7 @@ export default (apiUrl: string): DataProvider => ({
 	},
 
 	getOne: async (resource: string, params: { id: string }) => {
-		const url = `${apiUrl}/${resource}/${params.id}`
+		const url = apiUrl + resource + '/' + params.id
 		const { json } = await httpClient(url)
 		return { data: json }
 	},
@@ -82,7 +79,7 @@ export default (apiUrl: string): DataProvider => ({
 		const query = {
 			filter: JSON.stringify({ id: params.ids }),
 		}
-		const url = `${apiUrl}/${resource}?${stringify(query)}`
+		const url = apiUrl + resource + `?` + stringify(query)
 		const { json } = await httpClient(url)
 		return { data: json }
 	},
@@ -107,8 +104,7 @@ export default (apiUrl: string): DataProvider => ({
 			[params.target]: params.id,
 			...fetchUtils.flattenObject(params.filter),
 		}
-		const url = `${apiUrl}/${resource}?${stringify(query)}`
-
+		const url = apiUrl + resource + `/?` + stringify(query)
 		const { headers, json } = await httpClient(url)
 		if (!headers.has('x-total-count')) {
 			throw new Error(
@@ -126,7 +122,8 @@ export default (apiUrl: string): DataProvider => ({
 	},
 
 	update: async (resource: string, params: { id: string; data: any }) => {
-		const url = `${apiUrl}/${resource}/${params.id}`
+		const url = apiUrl + resource + '/' + params.id
+
 		const { json } = await httpClient(url, {
 			method: 'PUT',
 			body: JSON.stringify(params.data),
@@ -138,7 +135,7 @@ export default (apiUrl: string): DataProvider => ({
 		const query = {
 			filter: JSON.stringify({ id: params.ids }),
 		}
-		const url = `${apiUrl}/${resource}?${stringify(query)}`
+		const url = apiUrl + resource + `/?` + stringify(query)
 		const { json } = await httpClient(url, {
 			method: 'PUT',
 			body: JSON.stringify(params.data),
@@ -147,7 +144,7 @@ export default (apiUrl: string): DataProvider => ({
 	},
 
 	delete: async (resource: string, params: { id: string }) => {
-		const url = `${apiUrl}/${resource}/${params.id}`
+		const url = apiUrl + resource + '/' + params.id
 		const { json } = await httpClient(url, {
 			method: 'DELETE',
 		})
@@ -158,7 +155,7 @@ export default (apiUrl: string): DataProvider => ({
 		const query = {
 			filter: JSON.stringify({ id: params.ids }),
 		}
-		const url = `${apiUrl}/${resource}?${stringify(query)}`
+		const url = apiUrl + resource + `/?` + stringify(query)
 		const { json } = await httpClient(url, {
 			method: 'DELETE',
 		})
