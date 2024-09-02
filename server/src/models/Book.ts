@@ -25,14 +25,24 @@ const BookSchema: Schema = new Schema({
 		trim: true,
 		default: 'липсва описание',
 	},
-	coverImage: {
-		type: Buffer,
-		required: true,
-	},
-	coverImageType: {
+	picture: {
 		type: String,
 		required: true,
 	},
+	// coverImage: {
+	// 	type: Buffer,
+	// 	required: true,
+	// },
+	// coverImageType: {
+	// 	type: String,
+	// 	required: true,
+	// },
+	// coverPageType: {
+	// 	type: String,
+	// 	trim: true,
+	// 	enum: ['мека', 'твърда'],
+	// 	default: 'мека',
+	// },
 	stock: {
 		type: Number,
 		required: [true, 'Stock is required'],
@@ -58,7 +68,6 @@ const BookSchema: Schema = new Schema({
 	publishDate: {
 		type: Date,
 	},
-
 	pageCount: {
 		type: Number,
 		min: 1,
@@ -73,12 +82,6 @@ const BookSchema: Schema = new Schema({
 		trim: true,
 		default: 'липсва информация',
 	},
-	coverPageType: {
-		type: String,
-		trim: true,
-		enum: ['мека', 'твърда'],
-		default: 'мека',
-	},
 	createdAt: {
 		type: Date,
 		default: Date.now,
@@ -91,13 +94,13 @@ const BookSchema: Schema = new Schema({
 // 	return categories
 // })
 
-BookSchema.virtual('coverImagePath').get(function () {
-	if (this.coverImage != null && this.coverImageType != null) {
-		return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString(
-			'base64'
-		)}`
-	}
-})
+// BookSchema.virtual('coverImagePath').get(function () {
+// 	if (this.coverImage != null && this.coverImageType != null) {
+// 		return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString(
+// 			'base64'
+// 		)}`
+// 	}
+// })
 
 BookSchema.set('toJSON', {
 	virtuals: true,
