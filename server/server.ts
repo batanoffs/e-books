@@ -1,27 +1,26 @@
-const express = require('express');
-const dotenv = require('dotenv');
-import { configDatabase } from './src/config/database';
-import { configExpress } from './src/config/express';
-import { configRoutes } from './src/config/routes';
+const express = require('express')
+require('dotenv').config()
+import { configDatabase } from './src/config/database'
+import { configExpress } from './src/config/express'
+import { configRoutes } from './src/config/routes'
 
 // import { registerUser } from './src/services/user';
 // import { createToken } from './src/services/jwt';
 
-dotenv.config();
-const app = express();
+const app = express()
 
 try {
-    configExpress(app);
-    configDatabase();
-    configRoutes(app);
-   
-    app.listen(process.env.PORT, () => {
-        console.log(`Server is running on port ${process.env.PORT}`);
-    });
+	configExpress(app)
+	configDatabase()
+	configRoutes(app)
 
-    // test();
+	app.listen(process.env.PORT, () => {
+		console.log(`Server is running on port ${process.env.PORT}`)
+	})
+
+	// test();
 } catch (error) {
-    console.error('Server connection error:', error);
+	console.error('Server connection error:', error)
 }
 
 // async function test() {
