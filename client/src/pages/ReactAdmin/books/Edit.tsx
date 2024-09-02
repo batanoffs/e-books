@@ -20,6 +20,7 @@ import {
 	DateInput,
 	SelectInput,
 } from 'react-admin'
+
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
@@ -44,12 +45,13 @@ registerPlugin(FilePondPluginImagePreview, FilePondPluginFileEncode, FilePondPlu
 const BookEdit = (props: EditProps) => {
 	const [files, setFiles] = useState([])
 	const [newCover, setNewCover] = useState('')
-	// const setCategories = useCategoryStore((state) => state.setCategories)
-	// const categoriesMap = useCategoryStore((state) => state.categoriesMap)
+	const dataProvider = useDataProvider()
 	const id = useGetRecordId()
 	const notify = useNotify()
 	const redirect = useRedirect()
-	const dataProvider = useDataProvider()
+
+	// const setCategories = useCategoryStore((state) => state.setCategories)
+	// const categoriesMap = useCategoryStore((state) => state.categoriesMap)
 
 	useEffect(() => {
 		if (files && files.length > 0) {
@@ -58,28 +60,23 @@ const BookEdit = (props: EditProps) => {
 	}, [files])
 
 	const handleUpdate = async (values: any) => {
+		let data
 		try {
-			let cover
-
+			console.log('handleUpdate: ', values)
 			if (files[0]) {
-				const { source, getFileEncodeBase64String, file } = files[0]
-
-				cover = {
-					data: getFileEncodeBase64String(),
-					type: source.type,
+				const { source, getFileEncodeBase64String } = files[0]
+				data = {
+					...values,
+					cover: JSON.stringify({
+						data: getFileEncodeBase64String(),
+						type: source.type,
+					}),
 				}
 			}
-			//Todo add file name to backend
-			console.log('values:', values)
 
-			const data = {
-				...values,
-				cover: JSON.stringify(cover),
-			}
+			if (!files[0]) data = { ...values }
 
-			const response = await dataProvider.update('books', { id, data })
-			console.log('response:', response)
-
+			await dataProvider.update('books', { id, data })
 			notify('Book updated successfully')
 			redirect(`/admin/books/${id}/show`)
 		} catch (error) {
@@ -87,6 +84,28 @@ const BookEdit = (props: EditProps) => {
 			notify('Error updating book', { type: 'error' })
 		}
 	}
+
+	// const handleCreateCategory = async (e) => {
+	// 	e.preventDefault()
+
+	// 	const { value } = e.target
+
+	// 	if (!value) return
+	// 	console.log('handleCreateCategory: ', value)
+
+	// 	// try {
+	// 	// 	const response = await dataProvider.create(`categories/books`, {
+	// 	// 		data: { name: value },
+	// 	// 	})
+
+	// 	// 	console.log(response.data)
+	// 	// 	notify('Усшено добавихте нова категория', { type: 'success' })
+	// 	// } catch (error) {
+	// 	// 	console.error(error)
+	// 	// 	notify('Грешка при създаване на категория', { type: 'error' })
+	// 	// }
+	// }
+
 	return (
 		<Edit {...props} title={'Редактиране на книга'}>
 			<Typography
@@ -184,22 +203,24 @@ const BookEdit = (props: EditProps) => {
 								optionText='name'
 								resettable
 							/>
-							{/* TODO get only book categories */}
+							{/* TODO show current categories*/}
 							<ReferenceArrayInput
 								reference='categories/books'
-								source='name'
+								source='id'
+								sort={{ field: 'name', order: 'ASC' }}
 								validate={[required()]}
-								label='Tags'
 							>
 								<AutocompleteArrayInput
 									debounce={500}
-									filterToQuery={(search) => ({ name: `%${search}%` })}
-									create={<CreateCategory categoryType={'books'} />}
+									// filterToQuery={(search) => ({ name: `%${search}%` })}
 									label='Категории'
-									source='categories'
-									createLabel='Добави категория'
 									optionText='name'
 									optionValue='id'
+									name='categories'
+									source='categories'
+									createLabel='Добави категория'
+									createItemLabel='Нова категория'
+									create={<CreateCategory categoryType={'books'} />}
 								/>
 							</ReferenceArrayInput>
 
