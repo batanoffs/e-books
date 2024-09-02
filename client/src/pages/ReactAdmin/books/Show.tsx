@@ -8,6 +8,7 @@ import {
 	ReferenceArrayField,
 	ReferenceManyField,
 	ChipField,
+	SingleFieldList,
 } from 'react-admin'
 import CustomCoverImage from './CustomCoverImage'
 import Box from '@mui/material/Box'
@@ -72,16 +73,18 @@ const BookShow = (props: ShowProps) => {
 						<Labeled color='#6028c8'>
 							<NumberField source='stock' label='Брой на склад' />
 						</Labeled>
-						<ReferenceManyField
-							label='Още категории'
-							reference='categories'
-							source='categoryId'
-							target='categoryType'
-						>
-							<Labeled color='#6028c8'>
-								<ChipField source='categories' label='Категорий' />
-							</Labeled>
-						</ReferenceManyField>
+						<Labeled color='#6028c8'>
+							<ReferenceManyField
+								label='Категории'
+								reference='categories/books' // Reference to the categories collection
+								source='categories' // Path to the array of category IDs
+								target='id'
+							>
+								<SingleFieldList>
+									<ChipField source='name' />
+								</SingleFieldList>
+							</ReferenceManyField>
+						</Labeled>
 
 						<Labeled color='#6028c8'>
 							<TextField source='publisher' label='Издателство' />
