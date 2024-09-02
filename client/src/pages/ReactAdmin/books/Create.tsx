@@ -1,9 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
 import Typography from '@mui/material/Typography'
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
-import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
-import FilePondPluginImageResize from 'filepond-plugin-image-resize'
-import { FilePond, registerPlugin } from 'react-filepond'
 import Box from '@mui/material/Box'
 import {
 	Create,
@@ -18,57 +14,33 @@ import {
 	ReferenceArrayInput,
 	AutocompleteArrayInput,
 	DateInput,
+	ImageInput,
+	ImageField,
 } from 'react-admin'
 
 import CreateCategory from './CreateCategory'
-// import useCategoryStore from '../../../store/categories'
 
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
-import 'filepond/dist/filepond.min.css'
-
-registerPlugin(FilePondPluginImagePreview, FilePondPluginFileEncode, FilePondPluginImageResize)
+// import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+// import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
+// import FilePondPluginImageResize from 'filepond-plugin-image-resize'
+// import { FilePond, registerPlugin } from 'react-filepond'
+// import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
+// import 'filepond/dist/filepond.min.css'
+// registerPlugin(FilePondPluginImagePreview, FilePondPluginFileEncode, FilePondPluginImageResize)
 
 const BookCreate = (props) => {
-	// const setCategories = useCategoryStore((state) => state.setCategories)
-	// const categoriesMap = useCategoryStore((state) => state.categoriesMap)
-	const [files, setFiles] = useState([])
+	// const [files, setFiles] = useState([])
 	const notify = useNotify()
 	const redirect = useRedirect()
 	const dataProvider = useDataProvider()
 
-	// const fetchCategories = useCallback(async () => {
-	// 	try {
-	// 		const response = await dataProvider.getList('categories/books', {
-	// 			pagination: { page: 1, perPage: 100 },
-	// 			sort: { field: 'name', order: 'ASC' },
-	// 		})
-	// 		const bookCategories = response.data
-	// 		console.log('bookCategories', bookCategories)
-
-	// 		setCategories(bookCategories)
-	// 	} catch (error) {
-	// 		console.error('Error fetching categories', error)
-	// 	}
-	// }, [dataProvider])
-
-	// useEffect(() => {
-	// 	fetchCategories()
-	// }, [fetchCategories])
-
 	const handleSave = async (values) => {
 		try {
-			const cover = files.map((file) => {
-				return {
-					data: file.getFileEncodeBase64String(),
-					type: file.source.type,
-				}
-			})
-
+			console.log(values.picture)
 			console.log(values)
 
 			const data = {
 				...values,
-				cover: JSON.stringify(cover),
 			}
 
 			await dataProvider.create('books', { data })
@@ -80,6 +52,31 @@ const BookCreate = (props) => {
 			notify('Грешка при създаване', { type: 'error' })
 		}
 	}
+	// const handleSave = async (values) => {
+	// 	try {
+	// 		const cover = files.map((file) => {
+	// 			return {
+	// 				data: file.getFileEncodeBase64String(),
+	// 				type: file.source.type,
+	// 			}
+	// 		})
+
+	// 		console.log(values)
+
+	// 		const data = {
+	// 			...values,
+	// 			cover: JSON.stringify(cover),
+	// 		}
+
+	// 		await dataProvider.create('books', { data })
+
+	// 		notify('Успешно създадена книга', { type: 'success' })
+	// 		redirect('/admin/books')
+	// 	} catch (error) {
+	// 		console.error(error)
+	// 		notify('Грешка при създаване', { type: 'error' })
+	// 	}
+	// }
 
 	return (
 		<Create {...props} title={'Добавяне на нова книга'}>
@@ -108,7 +105,11 @@ const BookCreate = (props) => {
 					sx={{ width: '100%', paddingX: 10 }}
 				>
 					<Box display={'block'} sx={{ flex: 1, flexBasis: '60%' }}>
-						<FilePond
+						<ImageInput source='file' label='Related pictures'>
+							<ImageField source='src' title='title' />
+						</ImageInput>
+
+						{/* <FilePond
 							files={files}
 							onupdatefiles={setFiles}
 							allowMultiple={false}
@@ -126,7 +127,7 @@ const BookCreate = (props) => {
 							storeAsFile={true}
 							maxFileSize='5MB'
 							imagePreviewMaxFileSize='5MB'
-						/>
+						/> */}
 					</Box>
 
 					<Box sx={{ width: '100%' }}>
@@ -172,7 +173,7 @@ const BookCreate = (props) => {
 							/>
 							<ReferenceArrayInput
 								reference='categories/books'
-								source='id'
+								source='categories'
 								sort={{ field: 'name', order: 'ASC' }}
 								validate={[required()]}
 							>
