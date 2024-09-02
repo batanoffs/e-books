@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
 import Book from '../models/Book'
 import { validationResult } from 'express-validator'
-import saveCover from '../utils/saveCover'
 
 // Create a book with image handling
 export const createBook = async (req: Request, res: Response) => {
@@ -22,9 +21,8 @@ export const createBook = async (req: Request, res: Response) => {
 		pageCount: req.body.pages,
 		translator: req.body.translator,
 		dimensions: req.body.dimensions,
-		coverPageType: req.body.coverPageType,
+		picture: req.body.picture,
 	})
-	saveCover(newBook, req.body.cover)
 
 	console.log(newBook)
 
@@ -61,6 +59,12 @@ export const getBookById = async (req: Request, res: Response) => {
 // Update a book by ID
 export const updateBook = async (req: Request, res: Response) => {
 	const { id } = req.params
+	console.log('categories', req.body.categories)
+
+	if (!id) {
+		return res.status(400).json({ message: 'Book ID is required' })
+	}
+
 	const newBook = new Book({
 		title: req.body.title,
 		author: req.body.author,
@@ -74,15 +78,16 @@ export const updateBook = async (req: Request, res: Response) => {
 		pageCount: req.body.pages,
 		translator: req.body.translator,
 		dimensions: req.body.dimensions,
-		coverPageType: req.body.coverPageType,
+		picture: req.body.picture,
 	})
-	saveCover(newBook, req.body.cover)
 
 	try {
-		const updatedBook = await Book.findByIdAndUpdate(id, { newBook }, { new: true })
+		const updatedBook = await Book.findByIdAndUpdate(id, { $set: newBook }, { new: true })
+
 		if (!updatedBook) {
 			return res.status(404).json({ message: 'Book not found' })
 		}
+
 		res.status(200).json(updatedBook)
 	} catch (error) {
 		res.status(500).json({ message: 'Error updating book', error })
