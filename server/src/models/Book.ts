@@ -29,14 +29,6 @@ const BookSchema: Schema = new Schema({
 		type: String,
 		required: true,
 	},
-	// coverImage: {
-	// 	type: Buffer,
-	// 	required: true,
-	// },
-	// coverImageType: {
-	// 	type: String,
-	// 	required: true,
-	// },
 	coverPageType: {
 		type: String,
 		trim: true,
@@ -88,19 +80,6 @@ const BookSchema: Schema = new Schema({
 		required: true,
 	},
 })
-
-// BookSchema.virtual('categoryDetails').get(async function () {
-// 	const categories = await Categories.find({ _id: { $in: this.categories } }).select('name')
-// 	return categories
-// })
-
-// BookSchema.virtual('coverImagePath').get(function () {
-// 	if (this.coverImage != null && this.coverImageType != null) {
-// 		return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString(
-// 			'base64'
-// 		)}`
-// 	}
-// })
 
 BookSchema.set('toJSON', {
 	virtuals: true,
