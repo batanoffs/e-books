@@ -1,25 +1,14 @@
 import Typography from '@mui/material/Typography'
 import { useFieldValue } from 'react-admin'
-import formatImageBase64 from '../../../utils/helpers/formatImageBase64'
 
 type Props = {
 	sx?: object
 	imgWidth?: string
 	imageTitle?: boolean
-	newCover?: string
 }
 
-const CustomCoverImage = ({
-	sx = {},
-	imgWidth = '100px',
-	imageTitle = false,
-	newCover,
-	...props
-}: Props) => {
-	const imageData = useFieldValue({ source: 'coverImage' })
-	const imageType = useFieldValue({ source: 'coverImageType' })
-	const title = useFieldValue({ source: 'title' })
-	const img = formatImageBase64(imageType, imageData)
+const CustomCoverImage = ({ sx = {}, imgWidth = '100px', imageTitle = false }: Props) => {
+	const coverUrl = useFieldValue({ source: 'picture' })
 
 	return (
 		<Typography component='div' sx={{ ...sx }}>
@@ -28,7 +17,7 @@ const CustomCoverImage = ({
 					alt='Липсва Корица'
 					id='cover'
 					title={imageTitle ? title : undefined}
-					src={img}
+					src={coverUrl}
 					style={{ overflow: 'hidden', aspectRatio: '2/3', width: imgWidth }}
 				/>
 			</li>
