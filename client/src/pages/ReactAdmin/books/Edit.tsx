@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import {
 	EditProps,
 	Edit,
@@ -7,11 +6,8 @@ import {
 	required,
 	NumberInput,
 	ReferenceArrayInput,
-	SelectArrayInput,
-	ArrayInput,
-	ReferenceManyField,
-	Datagrid,
-	TextField,
+	ImageInput,
+	ImageField,
 	AutocompleteArrayInput,
 	useRedirect,
 	useNotify,
@@ -23,18 +19,10 @@ import {
 
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
-import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
-import FilePondPluginImageResize from 'filepond-plugin-image-resize'
-import { FilePond, registerPlugin } from 'react-filepond'
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
-import 'filepond/dist/filepond.min.css'
 
 import CustomCoverImage from './CustomCoverImage'
 import CreateCategory from './CreateCategory'
-import useCategoryStore from '../../../store/categories'
-
-registerPlugin(FilePondPluginImagePreview, FilePondPluginFileEncode, FilePondPluginImageResize)
+import { imageService } from '../../../services/imageService'
 
 /**
  * Book edit params.
@@ -43,68 +31,29 @@ registerPlugin(FilePondPluginImagePreview, FilePondPluginFileEncode, FilePondPlu
  */
 
 const BookEdit = (props: EditProps) => {
-	const [files, setFiles] = useState([])
-	const [newCover, setNewCover] = useState('')
 	const dataProvider = useDataProvider()
 	const id = useGetRecordId()
 	const notify = useNotify()
 	const redirect = useRedirect()
 
-	// const setCategories = useCategoryStore((state) => state.setCategories)
-	// const categoriesMap = useCategoryStore((state) => state.categoriesMap)
-
-	useEffect(() => {
-		if (files && files.length > 0) {
-			setNewCover(files[0].getFileEncodeDataURL())
-		}
-	}, [files])
-
 	const handleUpdate = async (values: any) => {
-		let data
+		const { picture, ...restValues } = values
+
 		try {
-			console.log('handleUpdate: ', values)
-			if (files[0]) {
-				const { source, getFileEncodeBase64String } = files[0]
-				data = {
-					...values,
-					cover: JSON.stringify({
-						data: getFileEncodeBase64String(),
-						type: source.type,
-					}),
-				}
+			const uploadResponse = await imageService.uploadImage(values.picture.rawFile)
+			const data = {
+				picture: uploadResponse,
+				...restValues,
 			}
 
-			if (!files[0]) data = { ...values }
-
 			await dataProvider.update('books', { id, data })
-			notify('Book updated successfully')
+			notify('Успешно обновена книга', { type: 'success' })
 			redirect(`/admin/books/${id}/show`)
 		} catch (error) {
 			console.error(error)
-			notify('Error updating book', { type: 'error' })
+			notify('Грешка при обновяване', { type: 'error' })
 		}
 	}
-
-	// const handleCreateCategory = async (e) => {
-	// 	e.preventDefault()
-
-	// 	const { value } = e.target
-
-	// 	if (!value) return
-	// 	console.log('handleCreateCategory: ', value)
-
-	// 	// try {
-	// 	// 	const response = await dataProvider.create(`categories/books`, {
-	// 	// 		data: { name: value },
-	// 	// 	})
-
-	// 	// 	console.log(response.data)
-	// 	// 	notify('Усшено добавихте нова категория', { type: 'success' })
-	// 	// } catch (error) {
-	// 	// 	console.error(error)
-	// 	// 	notify('Грешка при създаване на категория', { type: 'error' })
-	// 	// }
-	// }
 
 	return (
 		<Edit {...props} title={'Редактиране на книга'}>
@@ -133,31 +82,10 @@ const BookEdit = (props: EditProps) => {
 					sx={{ width: '100%', paddingX: 10 }}
 				>
 					<Box display={'block'} sx={{ flex: 1, flexBasis: '60%' }}>
-						<CustomCoverImage
-							imageTitle={true}
-							newCover={newCover}
-							setNewCover={setNewCover}
-							imgWidth='50%'
-						/>
-						<FilePond
-							files={files}
-							onupdatefiles={setFiles}
-							allowMultiple={false}
-							name='cover'
-							stylePanelLayout={'compact'}
-							className='filepond'
-							imageResizeTargetWidth={150}
-							imageResizeTargetHeight={100}
-							labelIdle='Провлачете снимка или <span class="filepond--label-action">Потърсете</span>'
-							allowReorder={true}
-							allowDrop={true}
-							allowReplace={true}
-							allowFileEncode={true}
-							allowImageResize={true}
-							storeAsFile={true}
-							maxFileSize='5MB'
-							imagePreviewMaxFileSize='5MB'
-						/>
+						<ImageInput source='picture' label='Related pictures'>
+							<ImageField source='src' title='title' />
+						</ImageInput>
+						<CustomCoverImage imgWidth='200px' />
 					</Box>
 
 					<Box sx={{ width: '100%' }}>
@@ -191,7 +119,6 @@ const BookEdit = (props: EditProps) => {
 							<TextInput source='language' label='Език' />
 							<TextInput source='translator' label='Преводач' />
 							<TextInput source='dimensions' label='Размери' />
-							{/* <TextInput source='coverPageType' label='Вид корица' /> */}
 
 							<SelectInput
 								source='coverPageType'
@@ -203,7 +130,6 @@ const BookEdit = (props: EditProps) => {
 								optionText='name'
 								resettable
 							/>
-							{/* TODO show current categories*/}
 							<ReferenceArrayInput
 								reference='categories/books'
 								source='id'
