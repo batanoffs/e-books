@@ -37,12 +37,12 @@ const BookSchema: Schema = new Schema({
 	// 	type: String,
 	// 	required: true,
 	// },
-	// coverPageType: {
-	// 	type: String,
-	// 	trim: true,
-	// 	enum: ['мека', 'твърда'],
-	// 	default: 'мека',
-	// },
+	coverPageType: {
+		type: String,
+		trim: true,
+		enum: ['мека', 'твърда'],
+		default: 'мека',
+	},
 	stock: {
 		type: Number,
 		required: [true, 'Stock is required'],
