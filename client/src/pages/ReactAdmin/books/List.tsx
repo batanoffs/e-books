@@ -7,6 +7,9 @@ import {
 	Filter,
 	TextInput,
 	useFieldValue,
+	ReferenceManyField,
+	SingleFieldList,
+	ChipField,
 } from 'react-admin'
 import CustomCoverImage from './CustomCoverImage'
 
@@ -74,12 +77,16 @@ const BookList = (props: any) => {
 					sortable={true}
 					style={{ maxWidth: '150px' }}
 				/>
-				<TextField
-					source='categories'
-					label='Категория'
-					sortable={true}
-					style={{ maxWidth: '300px' }}
-				/>
+				<ReferenceManyField
+					label='Категории'
+					reference='categories/books' // Reference to the categories collection
+					source='categories' // Path to the array of category IDs
+					target='id'
+				>
+					<SingleFieldList>
+						<ChipField source='name' />
+					</SingleFieldList>
+				</ReferenceManyField>
 				<TextField
 					source='publisher'
 					label='Издателство'
