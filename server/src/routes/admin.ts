@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import raExpressMongoose from 'express-mongoose-ra-json-server'
 
-import { isAdmin } from '../middlewares/guards'
 import Book from '../models/Book'
 import User from '../models/User'
 import Order from '../models/Order'
@@ -14,36 +13,30 @@ import StationeryCategories from '../models/StationeryCategories'
 
 const router = Router()
 
-//TODO fix admin guard
-router.use(isAdmin)
+router.use('/users', 
+	raExpressMongoose(User, { q: ['email', 'role'], useLean: false }))
 
-router.use('/users', raExpressMongoose(User, { q: ['email', 'role'], useLean: false }))
-
-router.use(
-	'/categories/books',
+router.use('/categories/books',
 	raExpressMongoose(BookCategories, {
 		q: ['_id', 'name', 'createdAt', 'updatedAt'],
-		useLean: false,
+		useLean: true,
 	})
 )
 
-router.use(
-	'/categories/textbooks',
+router.use('/categories/textbooks',
 	raExpressMongoose(TextbookCategories, {
 		q: ['_id', 'name', 'createdAt', 'updatedAt'],
 		useLean: false,
 	})
 )
-router.use(
-	'/categories/stationery',
+router.use('/categories/stationery',
 	raExpressMongoose(StationeryCategories, {
 		q: ['_id', 'name', 'createdAt', 'updatedAt'],
 		useLean: false,
 	})
 )
 
-router.use(
-	'/stationery',
+router.use('/stationery',
 	raExpressMongoose(Stationery, {
 		q: [
 			'title',
@@ -58,8 +51,7 @@ router.use(
 	})
 )
 
-router.use(
-	'/books',
+router.use('/books',
 	raExpressMongoose(Book, {
 		q: [
 			'title',
@@ -81,8 +73,7 @@ router.use(
 	})
 )
 
-router.use(
-	'/textbooks',
+router.use('/textbooks',
 	raExpressMongoose(Textbook, {
 		q: [
 			'title',
@@ -105,13 +96,13 @@ router.use(
 	})
 )
 
-router.use(
-	'/featured',
+router.use('/featured',
 	raExpressMongoose(Featured, {
 		q: ['title', 'title', 'author', 'price', 'description', 'imageUrl', 'stock', 'category'],
 	})
 )
 
-router.use('/orders', raExpressMongoose(Order, { q: ['userId', 'products', 'total', 'status'] }))
+router.use('/orders',
+	raExpressMongoose(Order, { q: ['userId', 'products', 'total', 'status'] }))
 
 export default router
