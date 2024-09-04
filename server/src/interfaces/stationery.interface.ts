@@ -4,9 +4,8 @@ export interface IStationerySchema {
 	title: string
 	price: number
 	description: string
-	coverImage: Buffer
-	coverImageType: String
+	picture: string
 	categories: Types.ObjectId[]
 	stock: number
-	createdAt: Date 
+	createdAt: Date
 }
