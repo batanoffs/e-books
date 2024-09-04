@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 
 import { getCategoryModel } from '../utils/checkCategoryType'
+import BookCategories from '../models/BookCategories'
 
 /**
  * Adds a new category item to the database.
@@ -47,26 +48,65 @@ export const getAll = async (req: Request, res: Response) => {
 	}
 }
 
-//TODO add validation if user is admin, if not reject status 401 Not Authorized
+export const fetchAllTypesOfCategories = async (req: Request, res: Response) => {
+	try {
+		const categories = await BookCategories.aggregate([
+			// Add a category type to the documents from the BookCategories collection
+			{
+				$addFields: { categoryType: 'books' }
+			},
+			// Union with the TextbookCategories collection
+			{
+				$unionWith: {
+					coll: 'textbookcategories',
+					pipeline: [
+						{ $addFields: { categoryType: 'textbooks' } }
+					]
+				}
+			},
+			// Union with the StationeryCategories collection
+			{
+				$unionWith: {
+					coll: 'stationerycategories',
+					pipeline: [
+						{ $addFields: { categoryType: 'stationeries' } }
+					]
+				}
+			},
+			// Group the results by category type and aggregate them into arrays
+			{
+				$group: {
+					_id: null,
+					books: {
+						$push: {
+							$cond: [{ $eq: ["$categoryType", "books"] }, "$$ROOT", null]
+						}
+					},
+					textbooks: {
+						$push: {
+							$cond: [{ $eq: ["$categoryType", "textbooks"] }, "$$ROOT", null]
+						}
+					},
+					stationeries: {
+						$push: {
+							$cond: [{ $eq: ["$categoryType", "stationeries"] }, "$$ROOT", null]
+						}
+					}
+				}
+			},
+			// Remove null values from the arrays
+			{
+				$project: {
+					books: { $filter: { input: "$books", as: "item", cond: { $ne: ["$$item", null] } } },
+					textbooks: { $filter: { input: "$textbooks", as: "item", cond: { $ne: ["$$item", null] } } },
+					stationeries: { $filter: { input: "$stationeries", as: "item", cond: { $ne: ["$$item", null] } } }
+				}
+			}
+		])
 
-// export const getCategoriesByType = async (req: Request, res: Response) => {
-// 	const { type } = req.params
-
-// 	// Check if the type is valid
-// 	if (!['book', 'textbook', 'stationery'].includes(type)) {
-// 		return res.status(400).json({ message: 'Invalid category type' })
-// 	}
-
-// 	try {
-// 		// Fetch categories by type
-// 		const categories = await BookCategories.find({ categoryType: type }).lean().exec()
-
-// 		if (categories.length > 0) {
-// 			res.json(categories)
-// 		} else {
-// 			res.status(404).json({ message: 'No categories found for this type' })
-// 		}
-// 	} catch (error) {
-// 		res.status(500).json({ message: 'Error fetching categories', error })
-// 	}
-// }
+		// Since $group results in an array with one document, access it
+		res.json(categories[0] || { books: [], textbooks: [], stationeries: [] })
+	} catch (error) {
+		res.status(500).json({ error: 'Error fetching categories' })
+	}
+}
