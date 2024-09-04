@@ -1,19 +1,20 @@
-import styles from './categories.module.scss' // Import the SCSS module
+import { Category } from '../../interfaces/categories.interface'
 import { useNavigate } from 'react-router-dom'
 
-interface CategoryItemProps {
-	item: string
-}
+import styles from './categories.module.scss'
 
-const CategoryItem = ({ item }: CategoryItemProps) => {
+const CategoryItem = ({ category }: Category) => {
 	const navigate = useNavigate()
+
 	return (
 		<div className={styles.categoryItemsWrapper}>
 			<div
 				className={styles.categoryItem}
-				onClick={() => navigate(`/catalog/books/${item.name.toLowerCase()}`)}
+				onClick={() =>
+					navigate(`/catalog/${category.categoryType}/${category.name.toLowerCase()}`)
+				}
 			>
-				<span className={styles.categoryText}>{item.name}</span>
+				<span className={styles.categoryText}>{category.name}</span>
 			</div>
 		</div>
 	)
