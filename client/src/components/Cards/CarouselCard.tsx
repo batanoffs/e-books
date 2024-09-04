@@ -6,15 +6,15 @@ import { useLoginModal } from '../../store/helperModal'
 import authGuards from '../../middlewares/guards'
 import useCartStore from '../../store/cart'
 import cartService from '../../services/cartService'
-import { Book } from '../../interfaces/book.interface'
+import { Product } from '../../interfaces/product.interface'
 
 interface CarouselCard {
-	book: Book
+	product: Product
 	styles: Record<string, string>
 }
 
-export const CarouselCard = ({ book, styles }: CarouselCard) => {
-	const { coverImagePath, title, author, price, description, _id } = book
+export const CarouselCard = ({ product, styles }: CarouselCard) => {
+	const { picture, title, author, price, description, _id } = product
 	const formatCurrency = formatCurrencyToBGN(price)
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const navigate = useNavigate()
@@ -24,7 +24,7 @@ export const CarouselCard = ({ book, styles }: CarouselCard) => {
 		navigate(`/catalog/books/all/${_id}`)
 	}
 
-	const onBuyNow = async () => {
+	const onAddToCart = async () => {
 		const isUserAuthenticated = authGuards.isAuth()
 		if (!isUserAuthenticated) {
 			toggleOpen()
@@ -34,7 +34,7 @@ export const CarouselCard = ({ book, styles }: CarouselCard) => {
 		const currentItem = {
 			product: {
 				id: _id,
-				coverImagePath: coverImagePath,
+				picture: picture,
 				title: title,
 				price: price,
 			},
@@ -58,7 +58,7 @@ export const CarouselCard = ({ book, styles }: CarouselCard) => {
 						variant='contained'
 						color='secondary'
 						className={styles.button}
-						onClick={onBuyNow}
+						onClick={onAddToCart}
 					>
 						Купи
 					</Button>
@@ -68,7 +68,7 @@ export const CarouselCard = ({ book, styles }: CarouselCard) => {
 				</div>
 			</div>
 			<div>
-				<img className={styles.image} src={coverImagePath} alt={title} />
+				<img className={styles.image} src={picture} alt={title} />
 			</div>
 		</div>
 	)
