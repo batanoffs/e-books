@@ -1,9 +1,4 @@
-type MainLayoutProps = {
-	children: Array<{
-		id: string
-		element: JSX.Element
-	}>
-}
+import { MainLayoutProps } from '../../../interfaces/layout.interface'
 
 const MainLayout = ({ children }: MainLayoutProps) => {
 	return (
