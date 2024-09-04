@@ -1,40 +1,39 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Route, Routes, useParams } from 'react-router-dom'
 import axios from 'axios'
 
-import DashboardLayout from '../../components/Layout/catalog/CatalogLayout'
+import CatalogLayout from '../../components/Layout/catalog/CatalogLayout'
 import LayoutHeader from '../../components/Layout/catalog/LayoutHeader'
 import LayoutAside from '../../components/Layout/catalog/LayoutAside'
 import CatalogItems from '../../components/Layout/catalog/CatalogItems'
 import ItemCard from '../../components/Cards/ItemCard'
 import DetailsPage from '../Details/DetailsPage'
-import useFiltersStore from '../../store/filters'
+import useCategoryStore from '../../store/categories'
+import useSpinner from '../../store/spinner'
 import API from '../../utils/constants/api'
 
 const CatalogPage = () => {
-	const [items, setItems] = useState([])
-	const [categories, setCategories] = useState([])
-	const navCategory = useFiltersStore((state) => state.navCategory)
+	const [products, setProducts] = useState([])
+	const toggleLoading = useSpinner((state) => state.toggleLoading)
+	const categoriesMap = useCategoryStore((state) => state.categoriesMap)
 	const params = useParams()
 	const type = Object.values(params)[0]?.split('/')[0]
+	const navCategory = Object.values(params)[0]?.split('/')[1]
 
-	const setCategoriesForType = useFiltersStore(
-		(state) => state[`set${type.charAt(0).toUpperCase() + type.slice(1)}Categories`]
-	)
+	const fetchBooksCallback = useCallback(async () => {
+		try {
+			const response = await axios.get(API.BOOKS)
+			setProducts(response.data)
+		} catch (error) {
+			console.error(error)
+		} finally {
+			toggleLoading()
+		}
+	}, [])
 
 	useEffect(() => {
-		const fetchItems = async () => {
-			const apiUrl = API[type.toUpperCase()]
-			const response = await axios.get(apiUrl)
-			const items = response.data
-			setItems(items)
-			const categories = Array.from(new Set(items.map((item) => item.category)))
-			setCategories(categories)
-			setCategoriesForType && setCategoriesForType(categories)
-		}
-
-		fetchItems()
-	}, [type, setCategoriesForType])
+		fetchBooksCallback()
+	}, [fetchBooksCallback])
 
 	const headerText = {
 		books: 'книги',
@@ -43,21 +42,21 @@ const CatalogPage = () => {
 	}[type]
 
 	const Layout = (
-		<DashboardLayout
+		<CatalogLayout
 			header={
 				<LayoutHeader
 					navCategory={navCategory}
 					path={`книжарница / ${headerText} / ${navCategory}`}
 					hasSorting={true}
-					resultCount={items.length}
+					resultCount={products.length}
 					title
 				/>
 			}
-			aside={<LayoutAside categories={categories} />}
+			aside={<LayoutAside categories={categoriesMap.books} />}
 		>
 			<CatalogItems
-				items={items}
-				CardComponent={ItemCard}
+				products={products}
+				Component={ItemCard}
 				sx={{
 					display: 'flex',
 					flexWrap: 'wrap',
@@ -66,7 +65,7 @@ const CatalogPage = () => {
 				}}
 			/>
 			{/* TODO add children for maybe promotions discounts etc*/}
-		</DashboardLayout>
+		</CatalogLayout>
 	)
 
 	return (
