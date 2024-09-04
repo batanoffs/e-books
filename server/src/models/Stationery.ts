@@ -1,4 +1,4 @@
-import { model, Schema, Types } from 'mongoose'
+import { model, Schema } from 'mongoose'
 import { IStationerySchema } from '../interfaces/stationery.interface'
 
 const StationerySchema: Schema = new Schema({
@@ -18,11 +18,7 @@ const StationerySchema: Schema = new Schema({
 		type: String,
 		required: true,
 	},
-	coverImage: {
-		type: Buffer,
-		required: true,
-	}, //TODO update logic for multiple images
-	coverImageType: {
+	picture: {
 		type: String,
 		required: true,
 	},
@@ -42,20 +38,6 @@ const StationerySchema: Schema = new Schema({
 		default: Date.now,
 		required: true,
 	},
-})
-
-// StationerySchema.path('Categories').validate(async function (value: Types.ObjectId[]) {
-// 	const categories = await Categories.find({ _id: { $in: value }, categoryType: 'stationery' })
-
-// 	return categories.length === value.length
-// }, 'One or more categories are invalid or not of type stationery.')
-
-StationerySchema.virtual('coverImagePath').get(function () {
-	if (this.coverImage != null && this.coverImageType != null) {
-		return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString(
-			'base64'
-		)}`
-	}
 })
 
 const Stationery = model<IStationerySchema>('Stationery', StationerySchema)
