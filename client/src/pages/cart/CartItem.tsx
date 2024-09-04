@@ -11,23 +11,31 @@ import authService from '../../services/authService'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import QuantityInput from '../../components/QuantityInput/QuantityInput'
 
-const CartItem = ({ item, onChangeQuantity }) => {
-	const { dialog, confirm } = useConfirm()
-
+interface CartProductProps {
+	product: any
+	onChangeQuantity: any
+	quantity: number
+}
+const CartItem = ({ product, onChangeQuantity, quantity }: CartProductProps) => {
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const removeFromCart = useCartStore((state) => state.removeFromCart)
+	const { dialog, confirm } = useConfirm()
 
 	const handleRemoveProduct = async () => {
-		const userId = await authService.getUserId()
-		const alert = await confirm(
-			'Изтриване',
-			'Сигурни ли сте, че искате да изтриете този продукт?'
-		)
+		try {
+			const userId = await authService.getUserId()
+			const alert = await confirm(
+				'Изтриване',
+				'Сигурни ли сте, че искате да изтриете този продукт?'
+			)
 
-		if (alert) {
-			await cartService.removeOne(item.product.id, userId)
-			removeFromCart(item.product.id)
-			showAlert('Успешно изтрит продукт', 'success')
+			if (alert) {
+				await cartService.removeOne(product._id, userId)
+				removeFromCart(product._id)
+				showAlert('Успешно изтрит продукт', 'success')
+			}
+		} catch (error) {
+			showAlert('Грешка при изтриване', 'error')
 		}
 	}
 
@@ -40,26 +48,22 @@ const CartItem = ({ item, onChangeQuantity }) => {
 			{dialog}
 
 			<Box sx={{ width: '10%', marginRight: 2 }}>
-				<img
-					src={item.product.coverImagePath}
-					alt={item.product.title}
-					style={{ width: '80px' }}
-				/>
+				<img src={product.picture} alt={product.title} style={{ width: '80px' }} />
 			</Box>
 			<Box sx={{ width: '30%' }}>
 				<Typography variant='h6' component='h2'>
-					{item.product.title}
+					{product.title}
 				</Typography>
 			</Box>
 
 			<Box sx={{ width: '15%' }}>
-				<QuantityInput quantity={item.quantity} onChangeQuantity={onChangeQuantity} />
-				{/* onChange={(e) => updateQuantity(item.product.id, parseInt(e.target.value))} */}
+				<QuantityInput quantity={quantity} onChangeQuantity={onChangeQuantity} />
+				{/* onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))} */}
 			</Box>
 
 			<Box sx={{ width: '20%' }}>
 				<Typography variant='body1' component='p'>
-					Цена: {formatCurrencyToBGN(item.product.price * item.quantity)}
+					Цена: {formatCurrencyToBGN(product.price * quantity)}
 				</Typography>
 			</Box>
 			<Box sx={{ width: '5%' }}>

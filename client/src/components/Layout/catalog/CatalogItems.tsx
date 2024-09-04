@@ -1,18 +1,15 @@
-interface Item {
-	_id: string
-	[key: string]: unknown
-}
+import { Product } from '../../../interfaces/product.interface'
 
 interface CatalogItemsInterface {
-	items: Item[]
-	CardComponent: React.ComponentType<React.PropsWithChildren<{ item: Item }>>
+	products: Product[]
+	Component: React.ComponentType<React.PropsWithChildren<{ product: Product }>>
 	sx?: React.CSSProperties
 }
 
-const CatalogItems = ({ items, CardComponent, sx }: CatalogItemsInterface) => (
+const CatalogItems = ({ products, Component, sx }: CatalogItemsInterface) => (
 	<div style={sx}>
-		{items.length > 0 ? (
-			items.map((item) => <CardComponent key={item._id} item={item} />)
+		{products.length > 0 ? (
+			products.map((product) => <Component key={product._id} product={product} />)
 		) : (
 			<p>Няма намерени книги</p>
 		)}

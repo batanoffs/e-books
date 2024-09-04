@@ -4,25 +4,24 @@ import axios from 'axios'
 import MainLayout from '../../components/Layout/main/MainLayout'
 import MultiCarousel from '../../components/Carousels/MultiCarousel'
 import SingleCarousel from '../../components/Carousels/SingleCarousel'
-import API from '../../utils/constants/api'
-import useSpinner from '../../store/spinner'
 import CategoryList from '../../components/Categories/Categories'
 import ShowcaseList from '../../components/ShowCase/ShowCase'
-import { Book } from '../../interfaces/book.interface'
 import ItemCard from '../../components/Cards/ItemCard'
+import API from '../../utils/constants/api'
+import useSpinner from '../../store/spinner'
 
 const HomePage = () => {
-	const [books, setBooks] = useState<Book[]>([])
+	const [products, setProducts] = useState([])
 	const toggleLoading = useSpinner((state) => state.toggleLoading)
 
 	const fetchBooksCallback = useCallback(async () => {
 		try {
 			const response = await axios.get(API.BOOKS)
-			setBooks(response.data)
+			setProducts(response.data)
 		} catch (error) {
 			console.error(error)
 		} finally {
-			toggleLoading() // Stop loading
+			toggleLoading()
 		}
 	}, [])
 
@@ -33,7 +32,7 @@ const HomePage = () => {
 	const content = [
 		{
 			id: 'featured',
-			element: <SingleCarousel books={books} />,
+			element: <SingleCarousel products={products} />,
 		},
 		{
 			id: 'showcase',
@@ -41,7 +40,7 @@ const HomePage = () => {
 		},
 		{
 			id: 'popular',
-			element: <MultiCarousel items={books} CardComponent={ItemCard} />,
+			element: <MultiCarousel products={products} Component={ItemCard} />,
 		},
 		{
 			id: 'categories',

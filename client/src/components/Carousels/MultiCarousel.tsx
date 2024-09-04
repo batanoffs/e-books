@@ -1,24 +1,20 @@
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-
-interface Item {
-	_id?: string
-	[key: string]: unknown
-}
+import { Product } from '../../interfaces/product.interface'
 
 interface MultiCarouselInterface {
-	items: Item[]
-	CardComponent: React.ComponentType<React.PropsWithChildren<{ item: Item }>>
+	products: Product[]
+	Component: React.ComponentType<React.PropsWithChildren<{ product: Product }>>
 	sx?: React.CSSProperties
 }
 
-const MultiCarousel = ({ items, CardComponent }: MultiCarouselInterface) => {
+const MultiCarousel = ({ products, Component, sx = {} }: MultiCarouselInterface) => {
 	const settings = {
 		className: 'centerPadding',
 		swipeToSlide: true,
 		infinite: true,
-		autoplay: true,
+		autoplay: false,
 		dots: false,
 		centerPadding: '0px',
 		slidesToScroll: 5,
@@ -26,13 +22,13 @@ const MultiCarousel = ({ items, CardComponent }: MultiCarouselInterface) => {
 		speed: 500,
 		rows: 1,
 	}
+
 	return (
 		<Slider {...settings}>
-			{items?.length > 0 ? (
-				items.map((item) => <CardComponent key={item._id} item={item} />)
-			) : (
-				<p>Няма намерени</p>
-			)}
+			{products &&
+				products.map((product: Product) => (
+					<Component key={product._id} product={product} />
+				))}
 		</Slider>
 	)
 }

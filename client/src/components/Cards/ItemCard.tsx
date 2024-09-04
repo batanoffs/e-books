@@ -10,20 +10,17 @@ import { useLoginModal } from '../../store/helperModal'
 import authGuards from '../../middlewares/guards'
 import cartService from '../../services/cartService'
 import API from '../../utils/constants/api'
+import { Product } from '../../interfaces/product.interface'
 
 import styles from './itemcard.module.scss'
-import { Book } from '../../interfaces/book.interface'
 
-interface ItemProps {
-	item: Book //|| Textbook || Stationery
-}
-
-const ItemCard = ({ item }: ItemProps) => {
+const ItemCard = ({ product }: { product: Product }) => {
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const addToCart = useCartStore((state) => state.addToCart)
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
-	const { _id, title, author, price, coverImagePath } = item
 	const navigate = useNavigate()
+
+	const { _id, title, author, price, picture } = product
 
 	const formattedPrice = formatCurrencyToBGN(price)
 
@@ -36,7 +33,7 @@ const ItemCard = ({ item }: ItemProps) => {
 		const currentItem = {
 			product: {
 				id: _id,
-				coverImagePath: coverImagePath,
+				picture: picture,
 				title: title,
 				price: price,
 			},
@@ -88,7 +85,7 @@ const ItemCard = ({ item }: ItemProps) => {
 						</button>
 					</div>
 				)}
-				<img src={coverImagePath} alt={title} />
+				<img src={picture} alt={title} />
 			</div>
 			<div className={styles.bookInfo}>
 				<h6>{title}</h6>

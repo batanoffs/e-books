@@ -1,21 +1,21 @@
 import Slider from 'react-slick'
 
 import { CarouselCard } from '../Cards/CarouselCard'
-import { Book, Books } from '../../interfaces/book.interface'
+import { Product, Products } from '../../interfaces/product.interface'
 
 import styles from './single-carousel.module.scss'
 
-function SampleNextArrow(props) {
+const SampleNextArrow = (props) => {
 	const { onClick } = props
 	return <div className={styles.nextArrow} onClick={onClick} />
 }
 
-function SamplePrevArrow(props) {
+const SamplePrevArrow = (props) => {
 	const { onClick } = props
 	return <div className={styles.prevArrow} onClick={onClick} />
 }
 
-const SingleCarousel = ({ books }: Books) => {
+const SingleCarousel = ({ products }: Products) => {
 	const settings = {
 		infinite: true,
 		autoplay: true,
@@ -56,8 +56,8 @@ const SingleCarousel = ({ books }: Books) => {
 	}
 	return (
 		<Slider className={styles.carousel} {...settings}>
-			{books.map((book: Book) => (
-				<CarouselCard key={book._id} book={book} styles={styles} />
+			{products.map((product: Product) => (
+				<CarouselCard key={product.id} product={product} styles={styles} />
 			))}
 		</Slider>
 	)

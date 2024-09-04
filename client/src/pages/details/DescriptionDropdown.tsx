@@ -1,30 +1,22 @@
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 
-import ProductDetailsProps  from '../../interfaces/ProductDetailsProps.interface'
+import ProductDetailsProps from '../../interfaces/ProductDetailsProps.interface'
 import formatDate from '../../utils/helpers/formatDate'
+import { Product } from '../../interfaces/product.interface'
 
 interface DescriptionDropdownProps extends ProductDetailsProps {
 	setIsDescriptionOpen: (isDescriptionOpen: boolean) => void
 	isDescriptionOpen: boolean
 	styles: Record<string, string>
+	product: Product
 }
 
 const DescriptionDropdown = ({
-	isDescriptionOpen,
 	setIsDescriptionOpen,
+	isDescriptionOpen,
 	styles,
-	author,
-	publisher,
-	translator,
-	sku,
-	isbn,
-	language,
-	publishDate,
-	pageCount,
-	dimensions,
-	coverPageType,
-	description,
+	product,
 }: DescriptionDropdownProps) => {
 	return (
 		<div className={styles.dropdown} onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}>
@@ -37,41 +29,42 @@ const DescriptionDropdown = ({
 					<div className={styles.metaData}>
 						<div className={styles.col}>
 							<p>
-								<strong>Автор:</strong> {author}
+								<strong>Автор:</strong> {product.author}
 							</p>
 							<p>
-								<strong>Издателство:</strong> {publisher}
+								<strong>Издателство:</strong> {product.publisher}
 							</p>
 							<p>
-								<strong>Преводач:</strong> {translator}
+								<strong>Преводач:</strong> {product.translator}
 							</p>
 							<p>
-								<strong>SKU:</strong> {sku}
+								<strong>SKU:</strong> {product.sku}
 							</p>
 
 							<p>
-								<strong>ISBN:</strong> {isbn}
+								<strong>ISBN:</strong> {product.isbn}
 							</p>
 						</div>
 						<div className={styles.col}>
 							<p>
-								<strong>Език:</strong> {language}
+								<strong>Език:</strong> {product.language}
 							</p>
 							<p>
-								<strong>Година на издаване:</strong> {formatDate(publishDate)}
+								<strong>Година на издаване:</strong>{' '}
+								{formatDate(product.publishDate)}
 							</p>
 							<p>
-								<strong>Страници брой:</strong> {pageCount}
+								<strong>Страници брой:</strong> {product.pageCount}
 							</p>
 							<p>
-								<strong>Размер см:</strong> {dimensions}
+								<strong>Размер см:</strong> {product.dimensions}
 							</p>
 							<p>
-								<strong>Вид корица:</strong> {coverPageType}
+								<strong>Вид корица:</strong> {product.coverPageType}
 							</p>
 						</div>
 					</div>
-					<p>{description}</p>
+					<p>{product.description}</p>
 				</div>
 			)}
 		</div>
@@ -79,54 +72,3 @@ const DescriptionDropdown = ({
 }
 
 export default DescriptionDropdown
-
-{
-	/* <div className={styles.dropdown} onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}>
-	<h3>
-		Описание
-		{isDescriptionOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
-	</h3>
-	{isDescriptionOpen && (
-		<div>
-			<div className={styles.metaData}>
-				<div className={styles.col}>
-					<p>
-						<strong>Автор:</strong> {author}
-					</p>
-					<p>
-						<strong>Издателство:</strong> {publisher}
-					</p>
-					<p>
-						<strong>Преводач:</strong> {translator}
-					</p>
-					<p>
-						<strong>SKU:</strong> {sku}
-					</p>
-
-					<p>
-						<strong>ISBN:</strong> {isbn}
-					</p>
-				</div>
-				<div className={styles.col}>
-					<p>
-						<strong>Език:</strong> {language}
-					</p>
-					<p>
-						<strong>Година на издаване:</strong> {new Date(publishDate).getFullYear()}
-					</p>
-					<p>
-						<strong>Страници брой:</strong> {pageCount}
-					</p>
-					<p>
-						<strong>Размер см:</strong> {dimensions}
-					</p>
-					<p>
-						<strong>Вид корица:</strong> {coverPageType}
-					</p>
-				</div>
-			</div>
-			<p>{description}</p>
-		</div>
-	)}
-</div> */
-}

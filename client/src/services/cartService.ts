@@ -43,12 +43,6 @@ const addMany = async (props: any, quantity: number) => {
 			userId,
 			productId: _id,
 			quantity,
-			// productId: _id,
-			// productImage: coverImage,
-			// productImageType: coverImageType,
-			// name: title,
-			// price,
-			// productType,
 		}
 		await axios.post(API.CART, data, {
 			headers: {

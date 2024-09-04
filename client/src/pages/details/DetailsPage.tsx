@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
@@ -8,48 +8,48 @@ import Spinner from '../../components/utils/Spinner'
 import ImageViewer from './ImageViewer'
 import ProductDetails from './ProductDetails'
 import API from '../../utils/constants/api'
-
-interface Item {
-	_id: string
-	title: string
-	author: string
-	price: number
-	description: string
-	stock: number
-	coverImagePath: string
-}
+import { Product } from '../../interfaces/product.interface'
+import useSpinner from '../../store/spinner'
 
 const DetailsPage = ({ type, path }: { type: string | undefined; path: string }) => {
+	const [product, setProduct] = useState<Product | null>(null)
+	const toggleLoading = useSpinner((state) => state.toggleLoading)
 	const productID = useParams().id
-	const [book, setBook] = useState<Item | null>(null)
 
 	const detailsApi =
 		type === 'books' ? API.BOOKS : type === 'textbooks' ? API.TEXTBOOKS : API.STATIONERY
 
-	useEffect(() => {
-		const fetchBook = async () => {
+	const fetchProductCallback = useCallback(async () => {
+		try {
 			const response = await axios.get(`${detailsApi}/${productID}`)
-			setBook(response.data)
+			setProduct(response.data)
+		} catch (error) {
+			console.error(error)
+		} finally {
+			toggleLoading()
 		}
-		fetchBook()
 	}, [productID])
 
-	if (!book) return <Spinner />
+	useEffect(() => {
+		fetchProductCallback()
+	}, [fetchProductCallback])
+
+	if (!product) return <Spinner />
 
 	return (
 		<DetailsLayout
 			header={
 				<LayoutHeader
 					path={path}
-					title={book.title}
+					title={product.title}
 					navCategory
 					resultCount
 					hasSorting={false}
 				/>
 			}
-			aside={<ImageViewer imageUrl={book.coverImagePath} />}
+			aside={<ImageViewer imageUrl={product.picture} />}
 		>
-			<ProductDetails item={book} />
+			<ProductDetails product={product} />
 		</DetailsLayout>
 	)
 }
