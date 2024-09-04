@@ -8,33 +8,66 @@ import Button from '@mui/material/Button'
 import authGuards from '../../middlewares/guards'
 import ProductDetailsProps from '../../interfaces/ProductDetailsProps.interface'
 import QuantityInput from '../../components/QuantityInput/QuantityInput'
+import { Product } from '../../interfaces/product.interface'
+import { useLoginModal } from '../../store/helperModal'
+import useAlertStore from '../../store/alert'
+import useCartStore from '../../store/cart'
+import cartService from '../../services/cartService'
+import wishlistService from '../../services/wishlistService'
 
 interface ItemDetailsTitleProps extends ProductDetailsProps {
-	handleAddToCart: () => void
-	handleAddToWishlist: () => void
-	quantity: number
 	setQuantity: (quantity: number) => void
 	styles: Record<string, string>
+	quantity: number
+	product: Product
 }
 
-const ItemDetailsTitle = ({
-	handleAddToCart,
-	handleAddToWishlist,
-	setQuantity,
-	quantity,
-	styles,
-	title,
-	author,
-	availability,
-	price,
-	publisher,
-	stock,
-}: // deliveryPrice,
-ItemDetailsTitleProps) => {
+const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetailsTitleProps) => {
+	const toggleOpen = useLoginModal((state) => state.toggleOpen)
+	const showAlert = useAlertStore((state) => state.showAlert)
+	const addToCart = useCartStore((state) => state.addToCart)
+
+	const handleAddToCart = async (event: Event) => {
+		try {
+			const isUserAuthenticated = authGuards.isAuth()
+			if (!isUserAuthenticated) {
+				toggleOpen()
+				return showAlert('Моля, влезте в акаунта си, за да продължите', 'info')
+			}
+			const target = event.target
+			const currentItem = {
+				product: {
+					_id: product._id,
+					picture: product.picture,
+					title: product.title,
+					price: product.price,
+				},
+				quantity: quantity,
+			}
+			const quantityInputElement = target?.parentElement.querySelector('input')
+			const quantityValue = Number(quantityInputElement.value)
+			await cartService.addMany(currentItem.product, quantityValue)
+			addToCart(currentItem)
+			showAlert('Успешно добавен продукт', 'success')
+		} catch (error) {
+			showAlert('Грешка при добавяне', 'error')
+		}
+	}
+
+	const handleAddToWishlist = async () => {
+		const productId = product._id
+		try {
+			await wishlistService.add(productId)
+			showAlert('Успешно добавен продукт в любими', 'success')
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
 	return (
 		<div className={styles.detailsContainer}>
 			<div className={styles.titleSection}>
-				<h3>{title}</h3>
+				<h3>{product.title}</h3>
 				{authGuards.isAuth() && (
 					<Tooltip title='Добави в любими'>
 						<IconButton
@@ -48,29 +81,21 @@ ItemDetailsTitleProps) => {
 				)}
 			</div>
 			<div className={styles.authorDetails}>
-				<span>{author}</span>
-				<span>{publisher}</span>
+				<span>{product.author}</span>
+				<span>{product.publisher}</span>
 			</div>
-			<div className={styles.availability}>{availability}</div>
+			<div className={styles.availability}>{product.availability}</div>
 			<div className={styles.priceSection}>
-				<div className={styles.price}>{price} лв.</div>
+				<div className={styles.price}>{product.price} лв.</div>
 				{/* <div className={styles.deliveryPrice}>Доставка: {deliveryPrice}</div> */}
 				<Box
 					component={'p'}
-					sx={{ color: `${stock > 0 ? 'green' : 'red'}`, fontWeight: 'bold' }}
+					sx={{ color: `${product.stock > 0 ? 'green' : 'red'}`, fontWeight: 'bold' }}
 				>
-					{stock > 0 ? 'В наличност' : 'Изчерпани количества'}
+					{product.stock > 0 ? 'В наличност' : 'Изчерпани количества'}
 				</Box>
 			</div>
 			<div className={styles.actions}>
-				{/* <IconButton
-					className={styles.cartButton}
-					onClick={handleBuyNow}
-					aria-label='buy now'
-				>
-					Купи сега
-				</IconButton> */}
-
 				<div className={styles.cartContainer}>
 					<Button
 						onClick={handleAddToCart}
@@ -81,7 +106,7 @@ ItemDetailsTitleProps) => {
 						<ShoppingCartIcon /> Добави в количка
 					</Button>
 
-					<QuantityInput quantity={quantity} setQuantity={setQuantity} />
+					<QuantityInput quantity={quantity} onChangeQuantity={setQuantity} />
 				</div>
 			</div>
 		</div>
