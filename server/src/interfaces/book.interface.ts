@@ -5,9 +5,8 @@ export interface IBookSchema extends Document {
 	author: string
 	price: number
 	description: string
-	// coverImage: Buffer //TODO update logic for multiple images
-	// coverImageType: String
 	picture: string
+	coverPageType: string
 	stock: number
 	categories: Types.ObjectId[] // References only book category IDs
 	publisher?: string
@@ -16,6 +15,5 @@ export interface IBookSchema extends Document {
 	pageCount?: number
 	translator?: string
 	dimensions?: string
-	// coverPageType?: string
 	createdAt: Date
 }
