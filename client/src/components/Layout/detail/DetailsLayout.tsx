@@ -1,13 +1,7 @@
+import { DetailsLayoutProps } from '../../../interfaces/layout.interface'
 import styles from './details.module.scss'
 
-type MainLayoutProps = {
-	header: JSX.Element
-	aside: JSX.Element
-	[key: string]: any
-}
-
-//TODO improve dynamic pipelines for sidebar filters and header
-const DetailsLayout = ({ children, header, aside, ...props }: MainLayoutProps) => {
+const DetailsLayout = ({ children, header, aside, ...props }: DetailsLayoutProps) => {
 	return (
 		<main className='main-wrapper'>
 			<header>{header}</header>
