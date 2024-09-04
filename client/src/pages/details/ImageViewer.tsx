@@ -1,6 +1,6 @@
 import styles from './imageviewer.module.scss'
 
-const ImageViewer = ({ imageUrl }) => {
+const ImageViewer = ({ imageUrl }: { imageUrl: string }) => {
 	const images = [
 		{
 			src: imageUrl,
