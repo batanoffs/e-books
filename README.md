@@ -1,6 +1,6 @@
 # E-commerce Bookstore "Книги бг"
 
-"Книги бг" is an e-commerce full stack project. I built this demo project as my final project to "React" module in Software University. The goal of this project was to practice handling payments, research providers, validations both front and backend, user roles, authentication, delivery APIs, backend architecture and controllers, routes and many more. 
+"Книги бг" is an e-commerce full stack project. The goal of this project was to practice handling payments, research providers, validations both front and backend, user roles, authentication, delivery APIs, backend architecture and controllers, routes and many more. 
 
 During development I've learned a lot about how to fully utilize the features that React Admin framework provides, how Stripe payments work, how to build functional backend API and provide data to the client. Also working with cookies, tokens, guards, interfaces for typescript, cors, encription methods(salting) and many more.
 
