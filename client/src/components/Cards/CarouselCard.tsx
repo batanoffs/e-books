@@ -17,9 +17,10 @@ export const CarouselCard = ({ product, styles }: CarouselCard) => {
 	const { picture, title, author, price, description, _id } = product
 	const formatCurrency = formatCurrencyToBGN(price)
 	const showAlert = useAlertStore((state) => state.showAlert)
-	const navigate = useNavigate()
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
 	const addToCart = useCartStore((state) => state.addToCart)
+	const navigate = useNavigate()
+	
 	const onGoToDetails = () => {
 		navigate(`/catalog/books/all/${_id}`)
 	}
