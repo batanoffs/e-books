@@ -59,20 +59,21 @@ const Register = () => {
 	}
 
 	const handleFacebookLogin = async () => {
-		try {
-			const response = await axios.post('/api/auth/facebook')
-			const { token } = response.data
-			document.cookie = `token=${token}; Max-Age=31536000; Path=/`
-			navigate('/')
-		} catch (error) {
-			console.error('Facebook login failed', error)
-		}
+		//TODO integrate facebook
+		// try {
+		// 	const response = await axios.post('/api/auth/facebook')
+		// 	const { token } = response.data
+		// 	document.cookie = `token=${token}; Max-Age=31536000; Path=/`
+		// 	navigate('/')
+		// } catch (error) {
+		// 	console.error('Facebook login failed', error)
+		// }
 	}
 
 	return (
 		<div className={styles.paper}>
-			<GeneralRulesModal styles={styles} />
-			<PrivacyRulesModal styles={styles} />
+			<GeneralRulesModal />
+			<PrivacyRulesModal />
 			<h2>Създай нов профил</h2>
 			<p>
 				Чрез създаване на профил в нашия магазин, ще можете да пазарувате по-бързо, да

@@ -1,197 +1,155 @@
 .container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    max-width: 1140px;
-    margin: 0 auto;
-}
+	display: flex;
+	justify-content: center;
+	max-width: 1140px;
+	margin: 0 auto;
+	gap: max(5em);
+	align-items: center;
 
-.newsletterCont {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
+	h2 {
+		color: #6f42c1;
+		font-weight: 600;
+		margin: 0.5em 0;
+	}
 
-    h2 {
-        color: #6f42c1;
-        font-weight: 600;
-        margin: 1em 0;
-    }
-}
+	.newsletterImageBlock {
+		display: flex;
+		align-items: center;
 
-.newsletterTop {
-    display: flex;
-    justify-content: space-evenly;
+		img:first-child {
+			width: max(170px);
+			height: auto;
+		}
+	}
 
-    .newsletterImageBlock {
-        display: flex;
-        align-items: center;
-    }
+	.newsletterForm {
+		display: flex;
+		flex-direction: column;
+		align-items: left;
+		margin-bottom: 10px;
 
-    .newsletterImageBlock img:first-child {
-        width: 170px;
-        height: auto;
-    }
-}
+		.inputButtonWrapper {
+			.error {
+				font-size: 0.8em;
+				margin-bottom: 0.25em;
+				width: 100%;
+				color: rgb(255, 0, 0);
+				transition: color 0.3s ease;
+				align-self: flex-start;
+				text-align: left;
+			}
 
-.privacyPolicy {
-    color: #6f42c1;
-    font-style: italic;
-}
+			.newsletterInputCont {
+				display: flex;
+				align-items: left;
+				gap: 2em;
+				margin-bottom: 10px;
+			}
 
-.wrapperInner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 850px;
-    margin: 0 auto;
-}
+			.newsletterInputCont input {
+				border: 1px solid #6f42c1;
+				padding-left: 0.5em;
+				border-radius: 0.4em;
+				flex-grow: 1;
+			}
 
+			.newsletterInputCont button {
+				padding: 10px;
+				padding-right: 30px;
+				background-color: #6f42c1;
+				color: white;
+				border: none;
+				border-radius: 0.4em;
+				cursor: pointer;
+			}
 
+			.spinner {
+				display: inline-block;
+				width: 14px;
+				height: 14px;
+				border: 2px solid #fff;
+				border-top-color: transparent;
+				border-radius: 50%;
+				animation: rotate 0.5s linear infinite;
+			}
+		}
 
+		.newsletterFormBlock {
+			display: inline-flex;
 
+			.checkRadioCheck {
+				height: 20px;
+				width: 20px;
+				border: 1px solid #6f42c1;
+				border-color: #6f42c1;
+				border-radius: 0.5em;
+			}
 
-.newsletterForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-}
+			.checkRadio {
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+			}
 
-.newsletterInputCont {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
+			.termsLabel {
+				font-size: 12px;
+				line-height: 1.5;
+				color: #000000;
+			}
 
-.newsletterInputCont input {
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #6f42c1;
-    border-radius: 5px;
-    flex-grow: 1;
-}
+			.checkRadioElement {
+				display: flex;
+				align-items: center;
+				position: relative;
+				cursor: pointer;
+			}
 
-.newsletterInputCont button {
-    padding: 10px 20px;
-    background-color: #6f42c1;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+			.privacyPolicy {
+				color: #6f42c1;
+				font-weight: 500;
+				font-style: italic;
+				margin-left: 0.5em;
+			}
+		}
+	}
 
-.newsletterMessage {
-    display: none;
-    padding: 10px;
-    background-color: #6f42c1;
-    color: white;
-    border-radius: 5px;
-    text-align: center;
-    margin-top: 10px;
-}
+	.newsletterMessage {
+		display: none;
+		background-color: #6f42c1;
+		color: white;
+		border-radius: 5px;
+		text-align: center;
 
-.newsletterFormBlock {
-    margin-bottom: 10px;
-}
+		.newsletterMessageLabel {
+			font-size: 14px;
+			line-height: 1.5;
+			color: #fff;
+		}
+	}
 
-.checkRadio {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
+	@keyframes rotate {
+		0% {
+			transform: rotate(0deg);
+		}
 
-.checkRadioInput {
-    display: none;
-}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
 
-.checkRadioElement {
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding-left: 30px;
-    cursor: pointer;
-}
+	@keyframes ripple {
+		0% {
+			transform: scale(0);
+			opacity: 1;
+		}
 
-.checkRadioCheck {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    border: 1px solid #6f42c1;
-    border-radius: 3px;
-}
+		50% {
+			opacity: 1;
+		}
 
-.checkRadioRipple {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    background-color: rgba(111, 66, 193, 0.3);
-    transform: scale(0);
-    animation: ripple 0.6s ease-out;
-}
-
-.termsLabel {
-    font-size: 12px;
-    line-height: 1.5;
-    color: #000000;
-}
-
-.newsletterMessageLabel {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #fff;
-}
-
-.newsletterShapeRight {
-    width: 100%;
-    height: auto;
-}
-
-.aNLShapeDown {
-    position: absolute;
-    right: -10px;
-    top: 0;
-}
-
-.spinner {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 2px solid #fff;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: rotate 0.5s linear infinite;
-}
-
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes ripple {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
+		100% {
+			transform: scale(2);
+			opacity: 0;
+		}
+	}
 }
