@@ -61,11 +61,11 @@ export default function Newsletter() {
 									{...register('email', { required: true })}
 								/>
 
-								<button>
+								<button type='submit'>
 									Запиши ме <span className={styles.spinner}></span>
 								</button>
 							</div>
-							{errors && (
+							{(errors.email || errors.privacyPolicy) && (
 								<span className={styles.error}>
 									Невалиден имейл или неприети условия
 								</span>
