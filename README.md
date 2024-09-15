@@ -62,8 +62,8 @@ username `pesho@abv.bg` password `qweasd123`
 -   [ ] fix catalog hover buttons issues and functionality
 -   [ ] fix issues with Menu component from Material UI for anchorEl property
 -   [x] update cart logic and think about state management issues for items and quantity
--   [ ] updated carousels functionality buttons etc
--   [ ] update theme and reuseable code for scss and maybe react
+-   [x] update carousels functionality buttons etc
+-   [x] update theme and reuseable code for scss and maybe react
 -   [ ] update filters for catalog Pages
 -   [ ] update logic for checkout page
 -   [ ] add property for product type to each model schema of items/products
@@ -72,14 +72,12 @@ username `pesho@abv.bg` password `qweasd123`
 
 Here are some examples of how to use this project:
 
-1. Browse catalog
 1. Register and login
+1. Browse products in the Catalog page
 1. Login as user or admin
 1. Add to cart
-1. Checkout
-1. View profile
-1. Edit profile
 1. Add to wishlist
+1. Checkout
 1. Manage products, users, orders, etc from Admin panel
 
 ## Installation
@@ -141,50 +139,18 @@ git clone https://github.com/batanoffs/e-books.git
 
 ## FUTURE Development:
 
-1. Create the logic for the rest of the products (sanitary and textbooks)
-2. Create more components in home page for example blog or categories
-3. Update the featured logic based on model and integrate it with admin panel
-4. Update how the server handle files/images and upload them in Backblaze B2 + Cloudflare CDN
-
-    #### Backblaze B2:
-
-    Pros:
-
-    - Very cost-effective storage solution, cheaper than Amazon S3.
-    - Simple pricing model.
-    - S3-compatible API for easy integration.
-
-    Cons:
-
-    - Fewer features compared to AWS S3.
-    - May require additional tools or services for a comprehensive solution.
-
-    #### Cloudflare CDN
-
-    Pros:
-
-    - Free tier available with generous limits.
-    - Fast content delivery with global edge locations.
-    - Provides additional security features like DDoS protection.
-
-    Cons:
-
-    - Free tier might have limitations on advanced features.
-    - Can require some configuration for optimal performance.
-
-5. Research and integrate Speedy and Econt APIs
-6. Research and integrate location API of some sort for smooth user experience
-7. Integrate payment logic for ePay, card, EasyPay, PayPal, cash, bank-transfer
-8. Create pages mentioned in the footer common questions about etc
-9. Maybe add blog articles functionality for admin panel
-10. Implement vouchers and promotions discounts etc. Discuss the business logic with the client
-11. Implement testing unit with JEST, end-to-end Playwright. Discuss coverage
-12. Create search logic
-13. Header nav bar update is needed
-14. Implement newsletter logic
-15. Research and implement forgotten password logic
-16. Decide on how much material ui components will be used (performance issues)
-17. Redesign discuss business logic for buy now button and authentication
+1. Update the featured logic based on model and integrate it with admin panel
+1. Research and integrate Speedy and Econt APIs for delivery
+1. Research and integrate location API of some sort for smooth user experience
+1. Create pages mentioned in the footer common questions about etc
+1. Maybe add blog articles functionality
+1. Implement vouchers and promotions discounts etc.
+1. Implement testing unit with ViTest, Playwright. Discuss coverage
+1. Create search logic
+1. Implement newsletter logic
+1. Research and implement forgotten password logic
+1. Decide on how much material ui components will be used (performance issues)
+1. Redesign/discuss business logic for buy now button and authentication
 
 ## Design and Architecture
 
