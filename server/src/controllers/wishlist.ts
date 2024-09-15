@@ -9,23 +9,32 @@ export const createOrUpdateWishlist = async (req: Request, res: Response) => {
 	}
 
 	const { productId } = req.body
-
+	//productId type string
 	if (!productId) {
 		return res.status(400).json({ message: 'Product ID is required' })
 	}
 
 	try {
 		// Find and update the wishlist, or create a new one if it doesn't exist
-		const updatedWishlist = await Wishlist.findOneAndUpdate(
-			{ user: userId },
-			{ $addToSet: { productRefs: { product: productId } } },
-			{ new: true, upsert: true }
-		)
+		const filter = { user: userId }
+		const update = {
+			$addToSet: {
+				productRefs: [productId],
+			},
+		}
+
+		const updatedWishlist = await Wishlist.findOneAndUpdate(filter, update, {
+			new: true,
+			upsert: true,
+		})
+		console.log(updatedWishlist)
 
 		// Respond with the updated or newly created wishlist
 		return res.status(200).json(updatedWishlist)
 	} catch (error) {
-		return res.status(500).json({ message: 'Error creating or updating wishlist', error })
+		return res
+			.status(500)
+			.json({ message: 'Error creating or updating wishlist', error: error })
 	}
 }
 
@@ -38,8 +47,8 @@ export const getWishlist = async (req: Request, res: Response) => {
 		}
 
 		const wishlistWithProducts = await Wishlist.findOne({ user: userId }).populate({
-			path: 'productRefs.product',
-			select: 'title price coverImagePath coverImageType coverImage',
+			path: 'productRefs',
+			select: 'title price picture',
 		})
 
 		if (!wishlistWithProducts) {
