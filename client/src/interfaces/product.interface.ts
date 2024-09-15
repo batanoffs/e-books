@@ -1,5 +1,5 @@
 export interface Book {
-	_id: string
+	id: string
 	title: string
 	author: string
 	price: number
@@ -18,7 +18,7 @@ export interface Book {
 }
 
 export interface Textbook {
-	_id: string
+	id: string
 	title: string
 	author: string
 	price: number
@@ -37,7 +37,7 @@ export interface Textbook {
 }
 
 export interface Stationery {
-	_id: string
+	id: string
 	title: string
 	price: number
 	description: string
