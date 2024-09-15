@@ -38,11 +38,10 @@ During development I've learned a lot about how to fully utilize the features th
     - [**Back-end architecture**](#back-end-architecture)
       - [Express config](#express-config)
       - [Models](#models)
+      - [Routes](#routes)
       - [Controllers](#controllers)
       - [Services](#services-1)
       - [Middlewares](#middlewares)
-      - [Routes](#routes)
-      - [Interfaces](#interfaces)
       - [Utils](#utils-1)
 
 ## Test account
@@ -172,29 +171,31 @@ git clone https://github.com/batanoffs/e-books.git
 
 ## Design and Architecture
 
-Server build on express and mongodb for backend and mongoose for mongodb schema. Client build on vite and react for frontend.
+Server built on `express` and `mongodb` with `mongoose`. Client built with `vite`, `react`, `typescript` and `sass`.
 
 ### **Front-end architecture**
 
 #### Context Providers with Zustand Store
 
--   **Alert Store** is a helper store that provides state if the alert is open or not
+-   **Alert Store** is a helper store that provides state if the alert is open or not and what is the message.
 
--   **Cart Store** stores and provides data from the server to the cart of the authenticated user.
+-   **Cart Store** stores and provides data for the cart of the authenticated user.
+  
+-   **Categories Store** stores and provides data for categories in the catalog.
 
--   **Filter Store** provides and stores data for the filter section in the catalog page
+-   **Filter Store** provides and stores data for the filter section in the catalog page (not yet implemented)
 
 -   **Modal Store** is a helper store that provides state if the modal is open or not
 
--   **Location Store** saves the current location and provides it to the header component and footer component for the admin panel
+-   **Location Store** is a helper store that provides state for `window.location.pathname` used for better UX and site navigation
 
 -   **User Data Store** holds information about the currently authenticated user. It provides getters and setters for the user's data, including the user's username, whether the user is logged in, and whether the user is an admin.
 
--   **Wishlist Store** stores and provides data from the server to the wishlist of the authenticated user.
+-   **Wishlist Store** stores and provides data for the wishlist of the authenticated user.
 
 #### Custom Hooks
 
--   **useConfirm()** is a hook opens modal to ask the user for confirmation
+-   **useConfirm()** is a hook that opens modal to ask the user for confirmation of his action.
 
 #### Routers
 
@@ -232,67 +233,71 @@ Server build on express and mongodb for backend and mongoose for mongodb schema.
 -   **express.ts** contains express middleware
 -   **database.ts** contains mongoose middleware
 -   **routes.ts** contains express routes
-
+  
 #### Models
 
 -   **Book** for Books
+-   **BookCategories** for Book categories
 -   **Cart** for Cart
 -   **Featured** for Featured
 -   **Order** for Orders
 -   **Stationery** for bookstore stationeries
+-   **StationeryCategories** for Stationery categories
 -   **Textbook** for Textbooks
+-   **TextbookCategories** for Textbook categories
 -   **User** for Users
 -   **Wishlist** for users Wishlist
+ 
+#### Routes
 
+-   **admin** for the Admin panel and management of products, users, orders, featured items. It uses `raExpressMongoose` library to handle the database operations for `react-admin`.
+-   **auth** for Authentication routes
+-   **book** for book product routes
+-   **cart** for user cart routes
+-   **categories** for categories routes
+    -   **categoriesType** for categories type routes and controllers for getting all types of categories
+-   **featured** (todo) for Featured products routes
+-   **order** for Orders routes
+-   **stationery** for Stationeries routes
+-   **stripe** for stripe routes
+-   **textbook** for Textbooks routes
+-   **user** for Users routes
+-   **wishlist** for Wishlists routes
+-   **mainRoutes** combines all routes under `/api`
+  
 #### Controllers
 
 -   **auth** for Authentication contains `logic` `register` and `logout`
--   **cart** for handling cart data contains logic `addToCart`, `getCart`, `removeProductFromCart`, `clearCart`
--   **featured** for handling featured data contains logic `getFeaturedProducts`, `markAsFeatured`, `removeFromFeatured`
--   **order** for handling order data contains logic `createOrder`, `getOrderById`, `getOrders`, `updateOrderStatus`, `deleteOrder`
--   **stationery** for handling stationery data contains logic `createStationery`, `getStationeries`, `updateStationery`, `deleteStationery`
--   **textbook** for handling textbook data contains logic `createTextbook`, `getTextbooks`, `updateTextbook`, `deleteTextbook`
--   **user** for handling user data contains logic `getUsers`, `getUserByIdFromToken`, `getUserById`, `updateUser`, `deleteUser`
--   **wishlist**(todo) for handling wishlist data contains logic `createWishlist`, `getWishlist`, `updateWishlist`, `deleteWishlist`
+-   **book** for handling products of type books. Contains logic for delete, update, create, get all or get one book
+-   **cart** for handling cart data. Contains logic for `addToCart`, `getCart`, `removeProductFromCart`, `clearCart`
+-   **categories** for handling categories data, contains logic for `addCategory` and `getAll` categories of every type.
+-   **featured** for handling featured data, contains logic `getFeaturedProducts`, `markAsFeatured`, `removeFromFeatured`
+-   **images** for handling image uploads to Cloudinary. Contains logic `uploadCoverImage`
+-   **order** for handling order data, contains logic `createOrder`, `getOrderById`, `getOrders`, `updateOrderStatus`, `deleteOrder`
+-   **stationery** for handling stationery data, contains logic `createStationery`, `getStationeries`, `updateStationery`, `deleteStationery`
+-   **textbook** for handling textbook data, contains logic `createTextbook`, `getTextbooks`, `updateTextbook`, `deleteTextbook`
+-   **stripe** for handling payment data, contains logic `checkoutSession`
+-   **user** for handling user data, contains logic `getUsers`, `getUserByIdFromToken`, `getUserById`, `updateUser`, `deleteUser`
+-   **wishlist**(todo) for handling wishlist data, contains logic `createWishlist`, `getWishlist`, `updateWishlist`, `deleteWishlist`
 
 #### Services
 
 -   **user** for Authentication (register, login, logout)
 -   **jwt** for creating and verifying tokens
+-   **image** for uploading image to Cloudinary
 
 #### Middlewares
 
 -   **cors** for cors setup for the express server
+-   **filters** to be updated (todo), contains logic for catalog filters and sorting
 -   **guards** isUser, isAdmin, isGuest - checks if user is authenticated and roles
+-   **multer** for file upload
 -   **session** validates the session. If token is present, sets the user in the request object
 -   **validateRequest** validates the requests
 
-#### Routes
-
--   **auth** for Authentication routes
--   **admin** for the Admin panel and management of products, users, orders, featured items. It uses `raExpressMongoose` library to handle the database operations for `react-admin`.
--   **cart** for user cart routes
--   **featured** (todo) for Featured products routes
--   **order** for Orders routes
--   **stationery** for Stationeries routes
--   **textbook** for Textbooks routes
--   **user** for Users routes
--   **wishlist** for Wishlists routes
--   **mainRoutes** combines all routes
-
-#### Interfaces
-
--   **IBookSchema** for Books
--   **ICartSchema** for Cart
--   **IFeaturedSchema** for Featured
--   **IOrderSchema** for Orders
--   **IStationerySchema** for Stationeries
--   **ITextbookSchema** for Textbooks
--   **IUserSchema** for Users
--   **IWishlistSchema** for Wishlists
-
 #### Utils
 
+-   **getCategoryModel(categoryType)**: This function returns the category model based on the category type.
+-   **cloudinaryConfig()**: This function returns the configuration for Cloudinary.
+-   **errorHandler(error, res)**: This function handles errors in the server.
 -   **parseError(error)**: This function takes in an `error` object and returns a new error object with a consistent structure. It is designed to handle different types of errors that can occur in an application.
-
--   **saveCover(newBook, coverEncoded)**: This function converts a base64 encoded image into a Buffer and saves it to the `newBook` object as `coverImage`.
