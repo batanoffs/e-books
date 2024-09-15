@@ -9,25 +9,41 @@ During development I've learned a lot about how to fully utilize the features th
 
 ## Table of Contents
 
--   [Test account](#test-account)
--   [Technologies](#technologies)
--   [Usage](#usage)
--   [Installation](#installation)
--   [UX/UI](#ux-ui)
--   [Project content](#project-content)
-    -   [Login Register](#login-register)
-    -   [About](#about)
-    -   [Catalog](#catalog)
-    -   [Product details](#product-details)
-    -   [Cart](#cart)
-    -   [Checkout](#checkout)
-    -   [Profile menu](#profile-menu)
-    -   [Admin panel](#admin-panel)
--   [Design and Architecture](#design-and-architecture)
--   [Fixes and updates](#fixes-and-updates)
--   [FUTURE Development](#future-development)
--   [Contributing](#contributing)
--   [License](#license)
+- [E-commerce Bookstore "Книги бг"](#e-commerce-bookstore-книги-бг)
+  - [Table of Contents](#table-of-contents)
+  - [Test account](#test-account)
+  - [Technologies](#technologies)
+  - [Fixes and updates:](#fixes-and-updates)
+  - [Usage](#usage)
+  - [Installation](#installation)
+  - [UX UI](#ux-ui)
+  - [Project content](#project-content)
+    - [Login Register](#login-register)
+    - [About](#about)
+    - [Catalog](#catalog)
+    - [Product details](#product-details)
+    - [Cart](#cart)
+    - [Wishlist](#wishlist)
+    - [Checkout](#checkout)
+    - [Profile menu](#profile-menu)
+    - [Admin panel](#admin-panel)
+  - [FUTURE Development:](#future-development)
+  - [Design and Architecture](#design-and-architecture)
+    - [**Front-end architecture**](#front-end-architecture)
+      - [Context Providers with Zustand Store](#context-providers-with-zustand-store)
+      - [Custom Hooks](#custom-hooks)
+      - [Routers](#routers)
+      - [Utils](#utils)
+      - [Services](#services)
+    - [**Back-end architecture**](#back-end-architecture)
+      - [Express config](#express-config)
+      - [Models](#models)
+      - [Controllers](#controllers)
+      - [Services](#services-1)
+      - [Middlewares](#middlewares)
+      - [Routes](#routes)
+      - [Interfaces](#interfaces)
+      - [Utils](#utils-1)
 
 ## Test account
 
@@ -132,6 +148,8 @@ git clone https://github.com/batanoffs/e-books.git
 ### Product details
 
 ### Cart
+
+### Wishlist
 
 ### Checkout
 
