@@ -19,14 +19,13 @@ import useAlertStore from '../../store/alert'
 import cartService from '../../services/cartService'
 import useCartStore from '../../store/cart'
 import wishlistService from '../../services/wishlistService'
+import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 
 const WishlistPage = () => {
-	const { wishlist, setWishlist } = useWishlistStore((state) => ({
-		wishlist: state.wishlist,
-		setWishlist: state.setWishlist,
-	}))
 	const [isRemoving, setIsRemoving] = useState(false)
 	const [loading, setLoading] = useState(true)
+	const wishlist = useWishlistStore((state) => state.wishlist)
+	const setWishlist = useWishlistStore((state) => state.setWishlist)
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const addToCart = useCartStore((state) => state.addToCart)
 	const navigate = useNavigate()
@@ -34,16 +33,15 @@ const WishlistPage = () => {
 	const fetchWishlist = useCallback(async () => {
 		try {
 			const response = await wishlistService.getAll()
-			const products = response.productRefs.map((item) => ({
-				id: item._id,
-				coverImagePath: item.product.coverImagePath,
-				title: item.product.title,
-				price: item.product.price,
+			const products = response.productRefs.map((product) => ({
+				id: product.id,
+				picture: product.picture,
+				title: product.title,
+				price: product.price,
 			}))
 
 			setWishlist(products)
 		} catch (error) {
-			console.error('Failed to fetch wishlist', error)
 			showAlert('Възникна грешка при зареждане на списъка', 'error')
 		} finally {
 			setLoading(false)
@@ -55,14 +53,14 @@ const WishlistPage = () => {
 	}, [fetchWishlist])
 
 	const handleAddToCart = async (productId: string) => {
-		// TODO fix issues
-		const product = wishlist.find((item) => item.id === productId)
+		const product = wishlist.find((product) => product.id === productId)
 		if (product) {
 			await cartService.addOne(productId)
 			addToCart(product)
 			showAlert('Успешно добавен продукт', 'success')
+		} else {
+			showAlert('Продуктът не е намерен', 'error')
 		}
-		showAlert('Продуктът не е намерен', 'error')
 	}
 
 	const removeFromWishlist = async (productId: string) => {
@@ -127,8 +125,8 @@ const WishlistPage = () => {
 				</Box>
 			) : (
 				<List>
-					{wishlist?.map((item) => (
-						<React.Fragment key={item.id}>
+					{wishlist?.map((product) => (
+						<React.Fragment key={product.id}>
 							<ListItem
 								sx={{
 									'&:hover': {
@@ -139,20 +137,20 @@ const WishlistPage = () => {
 								<ListItemAvatar>
 									<Avatar
 										variant='square'
-										src={item.coverImagePath}
-										alt={item.title}
+										src={product.picture}
+										alt={product.title}
 										sx={{ width: 60, height: 60, borderRadius: 1 }}
 									/>
 								</ListItemAvatar>
 								<ListItemText
 									primary={
 										<Typography variant='h6' sx={{ fontWeight: 'bold' }}>
-											{item.title}
+											{product.title}
 										</Typography>
 									}
 									secondary={
 										<Typography variant='body2' color='text.secondary'>
-											${item.price}
+											{formatCurrencyToBGN(product.price)}
 										</Typography>
 									}
 								/>
@@ -160,7 +158,7 @@ const WishlistPage = () => {
 									<Button
 										variant='outlined'
 										startIcon={<ShoppingCartIcon />}
-										onClick={() => handleAddToCart(item.id)}
+										onClick={() => handleAddToCart(product.id)}
 										sx={{ mr: 2 }}
 									>
 										Добави
@@ -170,7 +168,7 @@ const WishlistPage = () => {
 										color='error'
 										startIcon={<DeleteIcon />}
 										disabled={isRemoving}
-										onClick={() => removeFromWishlist(item.id)}
+										onClick={() => removeFromWishlist(product.id)}
 									>
 										Премахни
 									</Button>
