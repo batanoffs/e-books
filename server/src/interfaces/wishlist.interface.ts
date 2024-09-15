@@ -1,8 +1,8 @@
-import { Types } from 'mongoose'
+import { Document, Types } from 'mongoose'
 
-export interface IWishlistSchema {
+export interface IWishlistSchema extends Document {
 	user: Types.ObjectId
-	productRefs: {
-		product: Types.ObjectId
-	}[]
+	productRefs: Types.ObjectId[]
 }
+
+
