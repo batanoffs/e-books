@@ -11,15 +11,13 @@ import useSpinner from '../../store/spinner'
 
 const CartPage = () => {
 	const toggleLoading = useSpinner((state) => state.toggleLoading)
+	const setCart = useCartStore((state) => state.setCart)
 
-	//TODO fetch images or store them in state
 	const fetchUserCart = useCallback(async () => {
 		try {
 			const userId = await authService.getUserId()
 			const response = await axios.get(API.CART + userId)
-			if (response.data) {
-				useCartStore.setState({ cart: response.data })
-			}
+			setCart(response.data)
 		} catch (error) {
 			console.error(error)
 		} finally {
