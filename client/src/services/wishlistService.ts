@@ -12,16 +12,14 @@ const getAll = async () => {
 
 const add = async (productId: string) => {
 	if (!productId) throw new Error('Missing product id')
-
+	const data = {
+		productId: productId,
+	}
 	try {
-		const response = await axios.post(
-			API.WISHLIST,
-			{ productId },
-			{
-				withCredentials: true,
-			}
-		)
-
+		const response = await axios.post(API.WISHLIST, data, {
+			withCredentials: true,
+		})
+		if (response.status !== 200) throw new Error('Error adding product to wishlist')
 		return response.data
 	} catch (error) {
 		console.error(error as Error)
