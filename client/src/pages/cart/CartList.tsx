@@ -78,7 +78,7 @@ const CartList = () => {
 			) : (
 				<Grid container spacing={0}>
 					{cart.map((item) => (
-						<Grid item xs={12} key={item.product._id}>
+						<Grid item xs={12} key={item.product.id}>
 							<CartItem
 								product={item.product}
 								quantity={item.quantity}

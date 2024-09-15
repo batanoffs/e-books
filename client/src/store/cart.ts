@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 interface CartItem {
 	product: {
-		_id: string
+		id: string
 		picture: string
 		title: string
 		price: number
@@ -12,6 +12,7 @@ interface CartItem {
 
 interface CartState {
 	cart: CartItem[]
+	setCart: (items: CartItem[]) => void
 	updateQuantity: (id: string, quantity: number) => void
 	addToCart: (item: CartItem) => void
 	removeFromCart: (productId: string) => void
@@ -20,17 +21,18 @@ interface CartState {
 
 const useCartStore = create<CartState>((set) => ({
 	cart: [],
+	setCart: (items) => set({ cart: items }),
 	addToCart: (item) => {
 		//This weird set of the object is because temporary testing Stripe API
 		set((state) => {
 			const existingProduct = state.cart.find(
-				(product) => product.product._id === item.product._id
+				(current) => current.product.id === item.product.id
 			)
 			if (existingProduct) {
 				return {
 					...state,
 					cart: state.cart.map((product) =>
-						product.product._id === item.product._id
+						product.product.id === item.product.id
 							? { ...product, quantity: product.quantity + item.quantity }
 							: product
 					),
@@ -49,7 +51,7 @@ const useCartStore = create<CartState>((set) => ({
 	updateQuantity: (id, quantity) =>
 		set((state) => {
 			const updatedCart = state.cart.map((item) =>
-				item.product._id === id ? { ...item, quantity } : item
+				item.product.id === id ? { ...item, quantity } : item
 			)
 			return { cart: updatedCart }
 		}),

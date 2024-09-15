@@ -12,7 +12,12 @@ import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import QuantityInput from '../../components/QuantityInput/QuantityInput'
 
 interface CartProductProps {
-	product: any
+	product: {
+		id: string
+		picture: string
+		title: string
+		price: number
+	}
 	onChangeQuantity: any
 	quantity: number
 }
@@ -30,8 +35,8 @@ const CartItem = ({ product, onChangeQuantity, quantity }: CartProductProps) => 
 			)
 
 			if (alert) {
-				await cartService.removeOne(product._id, userId)
-				removeFromCart(product._id)
+				await cartService.removeOne(product.id, userId)
+				removeFromCart(product.id)
 				showAlert('Успешно изтрит продукт', 'success')
 			}
 		} catch (error) {
