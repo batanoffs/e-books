@@ -29,38 +29,35 @@ const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetail
 
 	const handleAddToCart = async (event: Event) => {
 		try {
-			const isUserAuthenticated = authGuards.isAuth()
-			if (!isUserAuthenticated) {
+			if (!authGuards.isAuth()) {
 				toggleOpen()
-				return showAlert('Моля, влезте в акаунта си, за да продължите', 'info')
+				return showAlert('Моля, влезте в акаунта си, за да продължите', 'error')
 			}
-			const target = event.target
 			const currentItem = {
 				product: {
-					_id: product._id,
+					id: product.id,
 					picture: product.picture,
 					title: product.title,
 					price: product.price,
 				},
 				quantity: quantity,
 			}
-			const quantityInputElement = target?.parentElement.querySelector('input')
+			const quantityInputElement = event.target?.parentElement.querySelector('input')
 			const quantityValue = Number(quantityInputElement.value)
 			await cartService.addMany(currentItem.product, quantityValue)
 			addToCart(currentItem)
 			showAlert('Успешно добавен продукт', 'success')
 		} catch (error) {
-			showAlert('Грешка при добавяне', 'error')
+			showAlert(`Грешка при добавяне в количката`, 'error')
 		}
 	}
 
 	const handleAddToWishlist = async () => {
-		const productId = product._id
 		try {
-			await wishlistService.add(productId)
+			await wishlistService.add(product.id)
 			showAlert('Успешно добавен продукт в любими', 'success')
 		} catch (error) {
-			console.error(error)
+			showAlert(`Възникна грешка при добавяне в любими`, 'error')
 		}
 	}
 
