@@ -9,7 +9,7 @@ import { usePrivacyModal } from '../../../store/helperModal'
 import styles from './newsletter.module.scss'
 
 type Input = {
-	email: string
+	newsLetterEmail: string
 	privacyPolicy: boolean
 }
 
@@ -25,8 +25,8 @@ export default function Newsletter() {
 
 	const onSubmit: SubmitHandler<Input> = async (data) => {
 		//TODO implement email subs
-		const { email, privacyPolicy } = data
-		if (!email) {
+		const { newsLetterEmail, privacyPolicy } = data
+		if (!newsLetterEmail) {
 			return showAlert('Не сте въвели имейл', 'error')
 		}
 		if (!privacyPolicy) {
@@ -50,22 +50,21 @@ export default function Newsletter() {
 						className={styles.newsletterForm}
 						onSubmit={handleSubmit(onSubmit)}
 						method='post'
-						id='newsletter-validate-detail'
 					>
 						<div className={styles.inputButtonWrapper}>
 							<div className={styles.newsletterInputCont}>
 								<input
 									type='email'
 									placeholder='Твоят имейл адрес'
-									id='email'
-									{...register('email', { required: true })}
+									id='newsLetterEmail'
+									{...register('newsLetterEmail', { required: true })}
 								/>
 
 								<button type='submit'>
 									Запиши ме <span className={styles.spinner}></span>
 								</button>
 							</div>
-							{(errors.email || errors.privacyPolicy) && (
+							{(errors.newsLetterEmail || errors.privacyPolicy) && (
 								<span className={styles.error}>
 									Невалиден имейл или неприети условия
 								</span>
