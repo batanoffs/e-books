@@ -1,12 +1,13 @@
 import styles from './checkout.module.scss'
 import Box from '@mui/material/Box'
+import { DevTool } from '@hookform/devtools'
 
 type propsType = {
 	aside: JSX.Element
 	[key: string]: any
 }
 
-export const CheckoutLayout = ({ children, aside, onSubmitForm }: propsType) => {
+export const CheckoutLayout = ({ children, aside, onSubmitForm, control }: propsType) => {
 	return (
 		<main className='main-wrapper'>
 			<Box
@@ -16,9 +17,10 @@ export const CheckoutLayout = ({ children, aside, onSubmitForm }: propsType) => 
 				noValidate
 				autoComplete='off'
 			>
-				<article>{children}</article>
+				<article style={{ display: 'flex', gap: '5em' }}>{children}</article>
 				<aside>{aside}</aside>
 			</Box>
+			<DevTool control={control}/>
 		</main>
 	)
 }
