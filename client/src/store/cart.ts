@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 interface CartItem {
 	product: {
-		id: string
+		_id: string
 		picture: string
 		title: string
 		price: number
@@ -21,21 +21,26 @@ interface CartState {
 
 const useCartStore = create<CartState>((set) => ({
 	cart: [],
-	setCart: (items) => set({ cart: items }),
+	setCart: (items) => {
+		set({ cart: items })
+	},
 	addToCart: (item) => {
 		//This weird set of the object is because temporary testing Stripe API
+		//TODO update for better performance the models or implement improvements
 		set((state) => {
 			const existingProduct = state.cart.find(
-				(current) => current.product.id === item.product.id
+				(currentProduct) => currentProduct.product._id === item.product._id
 			)
 			if (existingProduct) {
 				return {
 					...state,
-					cart: state.cart.map((product) =>
-						product.product.id === item.product.id
-							? { ...product, quantity: product.quantity + item.quantity }
-							: product
-					),
+					cart: state.cart.map((current) => {
+						if (current.product._id === item.product._id) {
+							return { ...current, quantity: current.quantity + item.quantity }
+						} else {
+							return current
+						}
+					}),
 				}
 			} else {
 				return { ...state, cart: [...state.cart, { ...item, quantity: item.quantity }] }
@@ -44,14 +49,14 @@ const useCartStore = create<CartState>((set) => ({
 	},
 	removeFromCart: (productId) => {
 		set((state) => {
-			const updatedCart = state.cart.filter((item) => item.product.id !== productId)
+			const updatedCart = state.cart.filter((item) => item.product._id !== productId)
 			return { cart: updatedCart }
 		})
 	},
 	updateQuantity: (id, quantity) =>
 		set((state) => {
 			const updatedCart = state.cart.map((item) =>
-				item.product.id === id ? { ...item, quantity } : item
+				item.product._id === id ? { ...item, quantity } : item
 			)
 			return { cart: updatedCart }
 		}),
