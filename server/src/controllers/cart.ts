@@ -2,35 +2,14 @@ import { Request, Response } from 'express'
 import Cart from '../models/Cart'
 
 export const addToCart = async (req: Request, res: Response) => {
-	// const {
-	// 	userId,
-	// 	productId,
-	// 	quantity,
-	// 	name,
-	// 	price,
-	// 	productType,
-	// 	productImage,
-	// 	productImageType,
-	// } = req.body
 	const { userId, productId, quantity } = req.body
 
 	try {
-		// let cart = await Cart.findOne({ userId })
-		// let cart = await Cart.findOne({ userId }).populate('products.product')
-		let cart = await Cart.findOne({ userId }).populate('products.product', '_id')
+		let cart = await Cart.findOne({ userId }).populate('products.product')
 		if (!cart) {
 			cart = new Cart({
 				userId,
 				products: [
-					// {
-					// 	productType,
-					// 	productImage,
-					// 	productImageType,
-					// 	productId,
-					// 	quantity,
-					// 	name,
-					// 	price,
-					// },
 					{
 						product: productId,
 						quantity,
@@ -38,11 +17,8 @@ export const addToCart = async (req: Request, res: Response) => {
 				],
 			})
 		} else {
-			// const existingProduct = cart.products.find(
-			// 	product => product.productId.toString() === productId.toString()
-			// )
 			const existingProduct = cart.products.find(
-				product => product.product._id.toString() === productId.toString()
+				product => product.product.id.toString() === productId.toString()
 			)
 			if (existingProduct) {
 				existingProduct.quantity += quantity
@@ -50,16 +26,10 @@ export const addToCart = async (req: Request, res: Response) => {
 				cart.products.push({
 					product: productId,
 					quantity,
-					// productType,
-					// productImage,
-					// productImageType,
-					// productId,
-					// quantity,
-					// name,
-					// price,
 				})
 			}
 		}
+		console.log('cart:', cart)
 
 		await cart.save()
 		res.status(200).json(cart)
@@ -70,25 +40,25 @@ export const addToCart = async (req: Request, res: Response) => {
 
 export const getCart = async (req: Request, res: Response) => {
 	const { userId } = req.params
-  
+
 	try {
-	  const cart = await Cart.findOne({ userId })
-	  if (!cart) {
-		return res.status(404).json({ message: 'Cart not found' })
-	  }
-	  const products = await cart.populate({
-		path: 'products.product',
-		select: 'title price coverImagePath coverImage coverImageType',
-		options: {
-			
+		const cart = await Cart.findOne({ userId })
+		if (!cart) {
+			return res.status(404).json({ message: 'Cart not found' })
 		}
-	  })
-  
-	  res.status(200).json(products.products) // Returns only the products
+		const products = await cart.populate({
+			path: 'products.product',
+			select: 'title price picture',
+			options: {
+				lean: true,
+			},
+		})
+
+		res.status(200).json(products.products) // Returns only the products
 	} catch (error) {
-	  res.status(500).json({ message: 'Error fetching cart', error })
+		res.status(500).json({ message: 'Error fetching cart', error })
 	}
-  }
+}
 
 export const removeProductFromCart = async (req: Request, res: Response) => {
 	const { userId, productId } = req.query
