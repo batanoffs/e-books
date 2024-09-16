@@ -10,7 +10,6 @@ import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 const CartInfo = () => {
 	const cart = useCartStore((state) => state.cart)
 	const totalProductsPrice = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
-
 	const formattedTotal = formatCurrencyToBGN(totalProductsPrice)
 	const navigate = useNavigate()
 
