@@ -1,20 +1,21 @@
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+
 import { CheckoutLayout } from '../../components/Layout/checkout/CheckoutLayout'
 import { CheckoutOverview } from './CheckoutAsideOverview'
-import { CommentForOrder } from './CommentForOrder'
-import { DiscountCode } from './DiscountCode'
-
 import { DeliveryForm } from './DeliveryForm'
 import { AddressForm } from './AddressForm'
-import { PaymentForm } from './PaymentForm'
-import useCartStore from '../../store/cart'
 import API from '../../utils/constants/api'
+
+// import { PaymentForm } from './PaymentForm'
+// import { DiscountCode } from './DiscountCode'
+// import { CommentForOrder } from './CommentForOrder'
+// import useCartStore from '../../store/cart'
 // import { getToken } from '../../utils/helpers/auth'
 
 type CheckoutFormValues = {
-	firstname: string
-	lastname: string
+	firstName: string
+	lastName: string
 	telephone: string
 	postcode: string
 	region_id: string
@@ -28,22 +29,23 @@ type CheckoutFormValues = {
 		shiping_delivery_data: string
 	}
 }
+let renderTime = 0
 
 const CheckoutPage = () => {
 	// const placeOrder = useCartStore((state) => state.placeOrder)
-	const { control, handleSubmit, formState, reset } = useForm<CheckoutFormValues>({
+	const { control, handleSubmit, formState, reset, register } = useForm<CheckoutFormValues>({
 		defaultValues: {
+			firstName: '',
+			lastName: '',
+			telephone: '',
+			region_id: '',
+			city: '',
+			street: '',
 			shippingMethod: '',
 			paymentMethod: '',
 			discountCode: '',
 			comment: '',
-			firstname: '',
-			lastname: '',
-			telephone: '',
 			postcode: '',
-			region_id: '',
-			city: '',
-			street: '',
 			custom_attributes: {
 				shiping_delivery_data: '',
 			},
@@ -77,7 +79,6 @@ const CheckoutPage = () => {
 			})
 			.then(({ url }) => {
 				window.location = url
-				// console.log(url)
 			})
 			.catch((error) => {
 				console.error(error.error)
@@ -87,15 +88,16 @@ const CheckoutPage = () => {
 	const handleBackToCart = () => {
 		navigate('/cart')
 	}
-
+	renderTime++
 	return (
 		<CheckoutLayout
-			aside={<CheckoutOverview handleBackToCart={handleBackToCart} />}
+			aside={<CheckoutOverview handleBackToCart={handleBackToCart} renderTime={renderTime} />}
 			onSubmitForm={handleSubmit(handlePlaceOrder)}
+			control={control}
 		>
-			<AddressForm errors={errors} control={control} />
 			<DeliveryForm errors={errors} control={control} />
-			<PaymentForm control={control} errors={errors} />
+			<AddressForm errors={errors} control={control} register={register} />
+			{/* <PaymentForm control={control} errors={errors} /> */}
 			{/* <DiscountCode control={control} reset={reset} errors={errors} /> */}
 			{/* <CommentForOrder control={control} Controller={Controller} /> */}
 		</CheckoutLayout>
