@@ -11,10 +11,11 @@ import useConfirm from '../../hooks/useConfirm'
 import cartService from '../../services/cartService'
 import authService from '../../services/authService'
 import useAlertStore from '../../store/alert'
+import { ListIsEmpty } from '../../components/ListIsEmpty'
 
 const CartList = () => {
 	const [isUpdateButtonDisabled, setIsUpdateButtonDisabled] = useState(true)
-	const updateQuantity = useCartStore((state) => state.updateQuantity)
+	// const updateQuantity = useCartStore((state) => state.updateQuantity)
 	const clearCart = useCartStore((state) => state.clearCart)
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const cart = useCartStore((state) => state.cart)
@@ -71,14 +72,11 @@ const CartList = () => {
 			}}
 		>
 			{dialog}
-			{cart.length === 0 ? (
-				<Typography variant='body1' component='p' align='center'>
-					Вашата количка е празна
-				</Typography>
-			) : (
+			{cart.length === 0 && <ListIsEmpty />}
+			{cart.length > 0 && (
 				<Grid container spacing={0}>
 					{cart.map((item) => (
-						<Grid item xs={12} key={item.product.id}>
+						<Grid item xs={12} key={item.product._id}>
 							<CartItem
 								product={item.product}
 								quantity={item.quantity}
