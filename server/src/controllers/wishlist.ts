@@ -27,8 +27,6 @@ export const createOrUpdateWishlist = async (req: Request, res: Response) => {
 			new: true,
 			upsert: true,
 		})
-		console.log(updatedWishlist)
-
 		// Respond with the updated or newly created wishlist
 		return res.status(200).json(updatedWishlist)
 	} catch (error) {
@@ -49,6 +47,9 @@ export const getWishlist = async (req: Request, res: Response) => {
 		const wishlistWithProducts = await Wishlist.findOne({ user: userId }).populate({
 			path: 'productRefs',
 			select: 'title price picture',
+			options: {
+				lean: true,
+			},
 		})
 
 		if (!wishlistWithProducts) {
@@ -85,8 +86,6 @@ export const deleteWishlist = async (req: Request, res: Response) => {
 		if (result.modifiedCount === 0) {
 			return res.status(404).json({ message: 'Product not found in wishlist' })
 		}
-
-		console.log('result', result)
 
 		res.status(200).json({ message: 'Product removed from wishlist successfully' })
 	} catch (error) {
