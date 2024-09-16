@@ -12,7 +12,7 @@ import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import { useEffect, useState } from 'react'
 import useCartStore from '../../store/cart'
 
-export const CheckoutOverview = ({ handleBackToCart }) => {
+export const CheckoutOverview = ({ handleBackToCart, renderTime }) => {
 	const cart = useCartStore((state) => state.cart)
 	const [totalSum, setTotalSum] = useState(0)
 
@@ -29,14 +29,14 @@ export const CheckoutOverview = ({ handleBackToCart }) => {
 
 	return (
 		<Paper sx={{ padding: '1rem' }}>
-			<Typography variant='h6' align='center'>
-				Обобщение на поръчката
+			<Typography variant='h5' align='center'>
+				Обобщение на поръчката ({renderTime / 2})
 			</Typography>
 			<TableContainer sx={{ marginTop: '1rem' }}>
 				<Table>
 					<TableHead>
 						<TableRow>
-							<TableCell>Продукт</TableCell>
+							<TableCell>Продукти</TableCell>
 							<TableCell>Име</TableCell>
 							<TableCell>Цена</TableCell>
 							<TableCell>Брой</TableCell>
@@ -44,12 +44,9 @@ export const CheckoutOverview = ({ handleBackToCart }) => {
 					</TableHead>
 					<TableBody>
 						{cart.map((item) => (
-							<TableRow key={item.product.id}>
+							<TableRow key={item.product._id}>
 								<TableCell>
-									<img
-										style={{ width: '50px' }}
-										src={item.product.coverImagePath}
-									/>
+									<img style={{ width: '50px' }} src={item.product.picture} />
 								</TableCell>
 								<TableCell
 									sx={{
@@ -71,16 +68,16 @@ export const CheckoutOverview = ({ handleBackToCart }) => {
 				</Table>
 			</TableContainer>
 
-			<Typography align='center' variant='h6' sx={{ marginTop: '1rem' }}>
+			<Typography align='center' variant='h6' sx={{ marginTop: '1em' }}>
 				Обща стойност: {formatCurrencyToBGN(totalSum)}
 			</Typography>
 
-			<Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
+			<Box sx={{ display: 'flex', justifyContent: 'space-evenly', marginTop: '1em' }}>
 				<Button onClick={handleBackToCart} variant='contained' color='primary'>
-					Количка
+					Назад
 				</Button>
 				<Button type='submit' variant='contained' color='secondary'>
-					Завършване на поръчката
+					Плащане
 				</Button>
 			</Box>
 		</Paper>
