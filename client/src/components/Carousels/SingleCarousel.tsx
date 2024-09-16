@@ -57,7 +57,7 @@ const SingleCarousel = ({ products }: Products) => {
 	return (
 		<Slider className={styles.carousel} {...settings}>
 			{products.map((product: Product) => (
-				<CarouselCard key={product.id} product={product} styles={styles} />
+				<CarouselCard key={product._id} product={product} styles={styles} />
 			))}
 		</Slider>
 	)

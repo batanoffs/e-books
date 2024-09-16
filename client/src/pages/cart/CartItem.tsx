@@ -13,7 +13,7 @@ import QuantityInput from '../../components/QuantityInput/QuantityInput'
 
 interface CartProductProps {
 	product: {
-		id: string
+		_id: string
 		picture: string
 		title: string
 		price: number
@@ -35,8 +35,8 @@ const CartItem = ({ product, onChangeQuantity, quantity }: CartProductProps) => 
 			)
 
 			if (alert) {
-				await cartService.removeOne(product.id, userId)
-				removeFromCart(product.id)
+				await cartService.removeOne(product._id, userId)
+				removeFromCart(product._id)
 				showAlert('Успешно изтрит продукт', 'success')
 			}
 		} catch (error) {

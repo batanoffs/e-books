@@ -27,7 +27,7 @@ const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetail
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const addToCart = useCartStore((state) => state.addToCart)
 
-	const handleAddToCart = async (event: Event) => {
+	const handleAddToCart = async (event: React.MouseEvent) => {
 		try {
 			if (!authGuards.isAuth()) {
 				toggleOpen()
@@ -35,7 +35,7 @@ const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetail
 			}
 			const currentItem = {
 				product: {
-					id: product.id,
+					_id: product._id,
 					picture: product.picture,
 					title: product.title,
 					price: product.price,
@@ -44,7 +44,7 @@ const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetail
 			}
 			const quantityInputElement = event.target?.parentElement.querySelector('input')
 			const quantityValue = Number(quantityInputElement.value)
-			await cartService.addMany(currentItem.product, quantityValue)
+			await cartService.addMany(product._id, quantityValue)
 			addToCart(currentItem)
 			showAlert('Успешно добавен продукт', 'success')
 		} catch (error) {
@@ -54,7 +54,7 @@ const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetail
 
 	const handleAddToWishlist = async () => {
 		try {
-			await wishlistService.add(product.id)
+			await wishlistService.add(product._id)
 			showAlert('Успешно добавен продукт в любими', 'success')
 		} catch (error) {
 			showAlert(`Възникна грешка при добавяне в любими`, 'error')
@@ -94,12 +94,7 @@ const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetail
 			</div>
 			<div className={styles.actions}>
 				<div className={styles.cartContainer}>
-					<Button
-						onClick={handleAddToCart}
-						aria-label='add to cart'
-						color='secondary'
-						variant='contained'
-					>
+					<Button onClick={handleAddToCart} color='secondary' variant='contained'>
 						<ShoppingCartIcon /> Добави в количка
 					</Button>
 

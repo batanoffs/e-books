@@ -34,7 +34,7 @@ export const CarouselCard = ({ product, styles }: CarouselCard) => {
 
 		const currentItem = {
 			product: {
-				id: _id,
+				_id: _id,
 				picture: picture,
 				title: title,
 				price: price,
