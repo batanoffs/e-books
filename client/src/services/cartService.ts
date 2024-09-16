@@ -24,12 +24,10 @@ const getCart = async (): Promise<any> => {
 	}
 }
 
-const addMany = async (props: any, quantity: number) => {
-	// productType: string
+const addMany = async (productId: string, quantity: number) => {
 	try {
-		const { _id } = props
-		if (!_id) {
-			throw new Error('Missing product data')
+		if (!productId) {
+			throw new Error('Missing product ID')
 		}
 		const userId = await authService.getUserId()
 		if (!userId) {
@@ -41,7 +39,7 @@ const addMany = async (props: any, quantity: number) => {
 		}
 		const data = {
 			userId,
-			productId: _id,
+			productId,
 			quantity,
 		}
 		await axios.post(API.CART, data, {
@@ -62,7 +60,7 @@ const addOne = async (productId: string) => {
 		}
 		const userId = await authService.getUserId()
 		if (!userId) {
-			throw new Error('Missing userId')
+			throw new Error('Missing user id')
 		}
 		const token = getToken()
 		if (!token) {
@@ -70,9 +68,10 @@ const addOne = async (productId: string) => {
 		}
 		const data = {
 			userId,
-			productId: productId,
+			productId,
 			quantity: 1,
 		}
+
 		await axios.post(API.CART, data, {
 			headers: {
 				Authorization: `Bearer ${token}`,
