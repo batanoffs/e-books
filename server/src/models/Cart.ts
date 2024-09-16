@@ -5,7 +5,7 @@ const CartProductSchema: Schema = new Schema(
 	{
 		product: {
 			type: Schema.Types.ObjectId,
-			ref: 'Book', //TODO find a way to ref other schemas as well
+			ref: 'Book', //TODO find a way to ref other products as well
 			required: true,
 		},
 		quantity: {
