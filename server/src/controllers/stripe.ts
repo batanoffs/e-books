@@ -1,21 +1,16 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
+import Book from '../models/Book'
 
-interface CartItem {
-	id: number
+export interface CartItem {
+	id: string
 	quantity: number
 }
 
 const Stripe = require('stripe')
 
-const storeItems = new Map<number, { priceInStotinki: number; name: string }>([
-	[1, { priceInStotinki: 10000, name: 'Kniga 1' }],
-	[2, { priceInStotinki: 15000, name: 'Kniga 2' }],
-])
-
 export const checkoutSession = async (req: Request, res: Response) => {
 	const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY)
-
 	const validationErrors = validationResult(req)
 
 	if (!validationErrors.isEmpty()) {
@@ -23,24 +18,36 @@ export const checkoutSession = async (req: Request, res: Response) => {
 	}
 
 	try {
+		const products = await Promise.all(
+			req.body.products.map(async (product: CartItem) => {
+				const item = await Book.findById(product.id).lean().exec()
+				return {
+					data: item,
+					quantity: product.quantity,
+				}
+			})
+		)
+
+		const stripeInput = await products.map((product: any) => {
+			return {
+				price_data: {
+					currency: 'bgn',
+					product_data: {
+						name: product.data.title ?? '',
+						images: [product.data.picture],
+					},
+					unit_amount: product.data.price * 100 ?? 0,
+				},
+				quantity: product.quantity,
+			}
+		})
+
 		const session = await stripe.checkout.sessions.create({
 			payment_method_types: ['card'],
 			mode: 'payment',
 			success_url: `${process.env.CLIENT_URL}/success`,
 			cancel_url: `${process.env.CLIENT_URL}/checkout`,
-			line_items: req.body.items.map((item: CartItem) => {
-				const storeItem = storeItems.get(item.id)
-				return {
-					price_data: {
-						currency: 'bgn',
-						product_data: {
-							name: storeItem?.name ?? '',
-						},
-						unit_amount: storeItem?.priceInStotinki ?? 0,
-					},
-					quantity: item.quantity,
-				}
-			}),
+			line_items: stripeInput,
 		})
 
 		res.json({ url: session.url })
