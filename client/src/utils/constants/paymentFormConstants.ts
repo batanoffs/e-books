@@ -29,53 +29,52 @@ export const regionOptions = [
 	{ value: '593', label: 'Враца' },
 	{ value: '615', label: 'Ямбол' },
 ]
-
-export const paymentOptions = [
-	{
-		value: 'cash',
-		provider: 'чрез Econt или Speedy',
-		method: 'Наложен платеж',
-	},
-	{
-		value: 'bank',
-		provider: 'dsk',
-		method: 'Банков превод',
-	},
-	{
-		value: 'EasyPay',
-		provider: 'EasyPay',
-		method: 'онлайн плащане',
-	},
-
-	{
-		value: 'Epay',
-		provider: 'Epay',
-		method: 'онлайн плащане',
-	},
-	{
-		value: 'card',
-		provider: 'Visa Master Card',
-		method: 'онлайн плащане',
-	},
-]
-
 export const deliveryOptions = [
-	// {
-	// 	value: 'boxnow',
-	// 	price: '3.99 лв.',
-	// 	provider: 'BoxNow',
-	// 	method: 'BoxNow',
-	// },
 	{
 		value: 'econt',
-		price: '5.99 лв.',
-		provider: 'Econt Express',
-		method: 'до офис или EcontATM 24/7',
+		price: {
+			office: '3.99 лв.',
+			address: '6.99 лв.',
+		},
+		provider: 'Econt',
+		method: 'до офис',
 	},
 	{
 		value: 'speedy',
-		price: '5.99 лв.',
+		price: {
+			office: '3.99 лв.',
+			address: '6.99 лв.',
+		},
 		provider: 'Speedy',
 		method: 'до офис',
 	},
 ]
+
+// export const paymentOptions = [
+// 	{
+// 		value: 'cash',
+// 		provider: 'чрез Econt или Speedy',
+// 		method: 'Наложен платеж',
+// 	},
+// 	{
+// 		value: 'bank',
+// 		provider: 'dsk',
+// 		method: 'Банков превод',
+// 	},
+// 	{
+// 		value: 'EasyPay',
+// 		provider: 'EasyPay',
+// 		method: 'онлайн плащане',
+// 	},
+
+// 	{
+// 		value: 'Epay',
+// 		provider: 'Epay',
+// 		method: 'онлайн плащане',
+// 	},
+// 	{
+// 		value: 'card',
+// 		provider: 'Visa Master Card',
+// 		method: 'онлайн плащане',
+// 	},
+// ]
