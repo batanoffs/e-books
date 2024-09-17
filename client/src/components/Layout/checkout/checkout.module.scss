@@ -1,6 +1,6 @@
 .checkoutContainer {
 	display: flex;
-	gap: 2em;
+	gap: 6em;
 	margin-bottom: 2em;
 
 	aside {
@@ -10,10 +10,6 @@
 		flex-direction: column;
 		align-items: stretch;
 		transition: 0.3s;
-
-		button {
-			cursor: pointer;
-		}
 	}
 
 	article {
@@ -23,9 +19,5 @@
 		color: inherit;
 		font-family: inherit;
 		max-width: 100%;
-
-		button {
-			cursor: pointer;
-		}
 	}
 }
