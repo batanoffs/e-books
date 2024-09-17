@@ -14,10 +14,9 @@ export const CheckoutLayout = ({ children, aside, onSubmitForm, control }: props
 				component='form'
 				onSubmit={onSubmitForm}
 				className={styles.checkoutContainer}
-				noValidate
 				autoComplete='off'
 			>
-				<article style={{ display: 'flex', gap: '5em' }}>{children}</article>
+				<article style={{ display: 'flex', gap: '2em' }}>{children}</article>
 				<aside>{aside}</aside>
 			</Box>
 			<DevTool control={control}/>
