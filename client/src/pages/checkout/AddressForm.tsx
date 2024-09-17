@@ -103,12 +103,12 @@ export const AddressForm = ({ control, errors, register }) => {
 				<Grid item xs={11}>
 					<InputFormField
 						label='Допълнителна информация за доставка'
-						name='custom_attributes.shiping_delivery_data'
+						name='custom_attributes.shipping_delivery_data'
 						multiline={true}
 						type='text'
 						rows={3}
 						control={control}
-						{...register('custom_attributes.shiping_delivery_data')}
+						{...register('custom_attributes.shipping_delivery_data')}
 						errors={errors?.street}
 					/>
 				</Grid>

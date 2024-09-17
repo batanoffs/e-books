@@ -26,7 +26,7 @@ type CheckoutFormValues = {
 	discountCode: string
 	comment: string
 	custom_attributes: {
-		shiping_delivery_data: string
+		shipping_delivery_data: string
 	}
 }
 let renderTime = 0
@@ -47,7 +47,7 @@ const CheckoutPage = () => {
 			comment: '',
 			postcode: '',
 			custom_attributes: {
-				shiping_delivery_data: '',
+				shipping_delivery_data: '',
 			},
 		},
 	})
