@@ -20,8 +20,8 @@ import AboutPage from './pages/About/AboutPage'
 import PopularPage from './pages/Popular/PopularPage'
 import CatalogPage from './pages/Catalog/CatalogPage'
 import ScrollTop from './components/ScrollTop/BackToTop'
-import Return from './pages/Checkout/Return'
 import WishlistPage from './pages/Wishlist/WishlistPage'
+import PaymentSuccessful from './pages/Checkout/PaymentSuccessful'
 
 const App = () => {
 	const [isAdmin, setIsAdmin] = useState(false)
@@ -45,7 +45,7 @@ const App = () => {
 				<Route path='/admin/*' element={<AdminPage />} />
 				<Route path='/cart' element={<CartPage />} />
 				<Route path='/checkout' element={<CheckoutPage />} />
-				<Route path='/success' element={<Return />} />
+				<Route path='/success' element={<PaymentSuccessful />} />
 				<Route path='/contacts' element={<ContactsPage />} />
 				<Route path='/orders' element={<OrdersConfirmationPage />} />
 				<Route path='/orders/:id' element={<OrderDetailsPage />} />
