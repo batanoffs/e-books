@@ -7,5 +7,6 @@ export interface IOrderSchema extends Document {
 	}[]
 	total: number
 	status: 'pending' | 'completed' | 'cancelled'
+	shippingStatus: string
 	createdAt: Date
 }
