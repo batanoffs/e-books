@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import Book from '../models/Book'
+import Order from '../models/Order'
 
 export interface CartItem {
 	id: string
@@ -8,9 +9,9 @@ export interface CartItem {
 }
 
 const Stripe = require('stripe')
+const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY)
 
 export const checkoutSession = async (req: Request, res: Response) => {
-	const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY)
 	const validationErrors = validationResult(req)
 
 	if (!validationErrors.isEmpty()) {
@@ -27,16 +28,21 @@ export const checkoutSession = async (req: Request, res: Response) => {
 				}
 			})
 		)
+		const productIds = products.map((product: any) => product.data._id)
+		console.log('productIds', productIds)
 
 		const stripeInput = await products.map((product: any) => {
 			return {
 				price_data: {
 					currency: 'bgn',
 					product_data: {
-						name: product.data.title ?? '',
+						name: product.data.title,
 						images: [product.data.picture],
+						metadata: {
+							productId: product.data._id,
+						},
 					},
-					unit_amount: product.data.price * 100 ?? 0,
+					unit_amount: product.data.price * 100,
 				},
 				quantity: product.quantity,
 			}
@@ -45,63 +51,77 @@ export const checkoutSession = async (req: Request, res: Response) => {
 		const session = await stripe.checkout.sessions.create({
 			payment_method_types: ['card'],
 			mode: 'payment',
-			success_url: `${process.env.CLIENT_URL}/success`,
+			success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: `${process.env.CLIENT_URL}/checkout`,
 			line_items: stripeInput,
+			metadata: {
+				productIds: productIds,
+			},
+			client_reference_id: req.body.userId,
+			customer_email: 'pesho@abv.bg', //TODO save userdata state and provide email here
+			locale: 'bg',
+			shipping_address_collection: {
+				allowed_countries: ['BG'],
+			},
 		})
 
 		res.json({ url: session.url })
+		// res.send({ clientSecret: session.client_secret })
 	} catch (e) {
 		res.status(500).json({ error: (e as Error).message })
 	}
 }
-// import { Request, Response } from 'express'
-// import { validationResult } from 'express-validator'
 
-// const stripe = require('stripe')(process.env.STRIPE_TEST_API)
-// const storeItems = new Map ([
-// 	[1, {priceInStotinki: 10000, name: 'Kniga 1'}],
-// 	[2, {priceInStotinki: 15000, name: 'Kniga 2'}],
-// ])
-// export const checkoutSession = async (req: Request, res: Response) => {
-// 	const validationErrors = validationResult(req)
-// 	if (!validationErrors.isEmpty()) return res.status(400).json({ errors: errors.array() })
+//TODO research how to link this logic
+export const getPaymentSessionAndCreateOrder = async (req: Request, res: Response) => {
+	const { session_id } = req.query
 
-// 	try {
-// 		const session = await stripe.checkout.sessions.create({
-// 			payment_method_types: ['card'],
-// 			mode: 'payment',
-// 			success_url: `${process.env.CLIENT_URL}/success`,
-// 			cancel_url: `${process.env.CLIENT_URL}/checkout`,
-// 			line_items: req.body.items.map(item => {
-// 				const storeItem = storeItems.get(item.id)
-// 				return {
-// 					price_data: {
-// 						currency: 'bgn',
-// 						product_data: {
-// 							name: storeItem.name,
-// 						},
-// 						unit_amount: storeItem.priceInStotinki,
-// 					},
-// 					quantity: item.quantity,
-// 				}
-// 			}),
-// 		})
+	if (!session_id) return res.status(400).json({ message: 'Invalid session_id' })
 
-// 		res.json({ url: session.url })
+	try {
+		const result = Promise.all([
+			stripe.checkout.sessions.retrieve(session_id, {
+				expand: ['payment_intent.payment_method'],
+			}),
+			stripe.checkout.sessions.listLineItems(session_id),
+		])
 
-// 	} catch (e) {
-// 		res.status(500).json({ error: e.message })
-// 	}
-// }
+		const token = await result
+		const tokenString = JSON.stringify(await result)
 
-// res.send({ clientSecret: session.client_secret })
+		console.log(tokenString)
 
-// export const getPaymentSessionStatus = async (req: Request, res: Response) => {
-// 	const session = await stripe.checkout.sessions.retrieve(req.query.session_id)
+		// const userId = token[0].client_reference_id
+		// const products = token[1].data.map((item: any) => item.metadata._id) //TODO fix or item.price.metadata._id
+		// const status = token[0].status
+		// const total = token[0].amount_total
 
-// 	res.send({
-// 		status: session.status,
-// 		customer_email: session.customer_details.email,
-// 	})
-// }
+		// console.log('orderData', { userId, products, total, status })
+
+		// const newOrder = new Order({ userId, products, total, status })
+
+		// console.log('newOrder', newOrder)
+
+		// await newOrder.save()
+
+		// res.status(201).json(newOrder)
+
+		// const { userId, items, total, status } = req.body
+		// try {
+		// 	const newOrder = new Order({ userId, items, total, status })
+		// 	await newOrder.save()
+		// 	res.status(201).json(newOrder)
+		// } catch (error) {
+		// 	res.status(500).json({ message: 'Error creating order', error })
+		// }
+
+		// res.send({
+		// 	status: session.status,
+		// 	customer_email: session.customer_details.email,
+		// })
+		// res.redirect(process.env.CLIENT_URL + '/success?session_id=' + req.query.session_id)
+		console.log('Payment successfully processed.')
+	} catch (error) {
+		console.log(error)
+	}
+}
