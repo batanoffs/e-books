@@ -8,7 +8,7 @@ import { AddressForm } from './AddressForm'
 import API from '../../utils/constants/api'
 import axios from 'axios'
 import useCartStore from '../../store/cart'
-import { useEffect } from 'react'
+import authService from '../../services/authService'
 
 // import { PaymentForm } from './PaymentForm'
 // import { DiscountCode } from './DiscountCode'
@@ -70,10 +70,13 @@ const CheckoutPage = () => {
 				quantity: item.quantity,
 			}
 		})
-		const data = {
-			products,
-		}
+
 		try {
+			const userId = await authService.getUserId()
+			const data = {
+				products,
+				userId,
+			}
 			const response = await axios.post(API.CHECKOUT + 'create-checkout-session', data)
 			if (response.status === 400) return Promise.reject(response)
 			if (response.status === 401) return Promise.reject(response)
