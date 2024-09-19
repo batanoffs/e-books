@@ -12,20 +12,11 @@ During development, I've learned a lot about fully utilizing the features that R
     <h2> 📝Table of Contents</h2>
   </summary> 
 
-- [🔬Technologies](#technologies)
+- [🔬Technologies used](#technologies-used)
 - [🎬 Usage](#-usage)
 - [🔧 Installation](#-installation)
 - [💫UX UI](#ux-ui)
 - [📁 Project content](#-project-content)
-  - [Login Register](#login-register)
-  - [About](#about)
-  - [Catalog](#catalog)
-  - [Product details](#product-details)
-  - [Cart](#cart)
-  - [Wishlist](#wishlist)
-  - [Checkout](#checkout)
-  - [Profile menu](#profile-menu)
-  - [Admin panel](#admin-panel)
 - [🎨 Design and Architecture](#-design-and-architecture)
   - [⚙️ **Front-end architecture**](#️-front-end-architecture)
   - [⚙️ **Back-end architecture**](#️-back-end-architecture)
@@ -34,21 +25,21 @@ During development, I've learned a lot about fully utilizing the features that R
 
 </details>
 
-## 🔬Technologies
+## 🔬Technologies used
 
-| Department          | Technologies                                                        |
-| ------------------- | ------------------------------------------------------------------- |
-| Frontend            | React, TypeScript                                                   |
-| Server              | Node, Express, Cors, Cookie-parser, Express-Mongoose-RA-JSON-Server |
-| UI                  | Material UI, SASS, Slick-Carousel, React-Slick, FilePond            |
-| Forms               | React Hook Form                                                     |
-| State management    | Zustand                                                             |
-| Admin panel manager | React Admin                                                         |
-| Database            | MongoDB, Mongoose                                                   |
-| Encryption          | Bcrypt                                                              |
-| Authentication      | JsonWebToken                                                        |
-| Handling requests   | Axios                                                               |
-| Tools               | Git, Vite, ESLint, Prettier, Yarn, Nodemon                          |
+| Department          | Technologies                                                                  |
+| ------------------- | ----------------------------------------------------------------------------- |
+| Frontend            | `React`, `TypeScript`                                                         |
+| Server              | `Node`, `Express`, `Cors`, `Cookie-parser`, `Express-Mongoose-RA-JSON-Server` |
+| UI                  | `Material UI`, `SASS`, `Slick-Carousel`, `React-Slick`, `FilePond`            |
+| Forms               | `React Hook Form`                                                             |
+| State management    | `Zustand`                                                                     |
+| Admin panel manager | `React Admin`                                                                 |
+| Database            | `MongoDB`, `Mongoose`                                                         |
+| Encryption          | `Bcrypt`                                                                      |
+| Authentication      | `JsonWebToken`                                                                |
+| Handling requests   | `Axios`                                                                       |
+| Tools               | `Git`, `Vite`, `ESLint`, `Prettier`, `Yarn`, `Nodemon`                        |
 
 ## 🎬 Usage
 
@@ -106,23 +97,23 @@ To get started with this project you need `mongodb` installed for handling the d
 
 ## 📁 Project content
 
-### Login Register
+- ### Login Register
 
-### About
+- ### About
 
-### Catalog
+- ### Catalog
 
-### Product details
+- ### Product details
 
-### Cart
+- ### Cart
 
-### Wishlist
+- ### Wishlist
 
-### Checkout
+- ### Checkout
 
-### Profile menu
+- ### Profile menu
 
-### Admin panel
+- ### Admin panel
 
 ## 🎨 Design and Architecture
 
@@ -130,7 +121,7 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 
 ### ⚙️ **Front-end architecture**
 
-- #### 💾 Context Providers with Zustand Store
+- #### 💾 Context Providers with `Zustand` Store
 
   -   **Alert Store** - a helper store that provides state if the alert is open or not and what is the message.
 
@@ -154,7 +145,7 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 
 - #### 🛫 Routers
 
-  -   Main Router is located in **App** component
+  -   Main Router is located in `App` component
 
 - #### 🧮 Utils
 
@@ -172,7 +163,7 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
         -   **isAuth()** - checks if user is authenticated
         -   **isGuest()** - checks if user is not authenticated
         -   **themeOptions** - provides theme options for the MUI theme
-        -   **formatDate(date)**  -formats the date
+        -   **formatDate(date)** - formats the date
         -   **currencyFormatterToBGN(value)** - formats the value to BGN currency
 
 - #### 🙋‍♀️ Services
@@ -191,39 +182,38 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
   
 - #### 📮 Models
 
-  | Model                | Fields                                                                     |
-  | -------------------- | -------------------------------------------------------------------------- |
-  | Book                 | id, title, price, description, image, author, category, featured, quantity |
-  | BookCategories       | id, name                                                                   |
-  | Cart                 | id, userId, items                                                          |
-  | Featured             | id, bookId, category                                                       |
-  | Order                | id, userId, items, total, status                                           |
-  | Stationery           | id, name, price, description, image, category, featured, quantity          |
-  | StationeryCategories | id, name                                                                   |
-  | Textbook             | id, title, price, description, image, author, category, featured, quantity |
-  | TextbookCategories   | id, name                                                                   |
-  | User                 | id, username, email, password, role                                        |
-  | Wishlist             | id, userId, items                                                          |
+  | Model                | Fields                                                                                                                                                                                           |
+  | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  | Book, Textbook       | `id`,`title`, `author`, `price`, `description`, `picture`, `coverPageType`, `stock`, `categories`, `publisher`, `language`, `publishDate`, `pageCount`, `translator`, `dimensions`, `createdAt`, |
+  | BookCategories       | `id`, `name`                                                                                                                                                                                     |
+  | Cart                 | `id`, `products`, `modifiedAt`, `active`                                                                                                                                                         |
+  | Featured             | `productId`, `productType`,`featuredAt`                                                                                                                                                          |
+  | Order                | `id`, `userId`, `products[{productId, productType, quantity}]`, `total`, `orderStatus`, `shippingStatus`                                                                                         |
+  | Stationery           | `id`, `title`, `price`, `description`, `picture`, `categories`, `stock`, `createdAt`                                                                                                             |
+  | StationeryCategories | `id`, `name`                                                                                                                                                                                     |
+  | TextbookCategories   | `id`, `name`                                                                                                                                                                                     |
+  | User                 | `id`, `email`, `password`, `register_date`, `role`                                                                                                                                               |
+  | Wishlist             | `id`, `user`, `productRefs`                                                                                                                                                                      |
 
 
 - #### 🛫 Routes
 
-  | Route Type     | Route Name                   | Description                                                                                                    |
-  | -------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |
-  | Main           | /api/**                      | Main router that combines all routes under `/api`                                                              |
-  | Admin          | /api/admin/**                | Admin router combining all routes under `/api/admin` for management of products, users, orders, featured items |
-  | Auth           | /api/(register,login,logout) | Authentication routes                                                                                          |
-  | Book           | /api/book                    | Book product routes                                                                                            |
-  | Cart           | /api/cart                    | User cart routes                                                                                               |
-  | Categories     | /api/categories              | Categories routes                                                                                              |
-  | CategoriesType | /api/categoriesType          | Categories type routes and controllers for getting all types of categories                                     |
-  | Featured       | /api/featured                | Featured products routes (todo)                                                                                |
-  | Order          | /api/order                   | Orders routes                                                                                                  |
-  | Stationery     | /api/stationery              | Stationeries routes                                                                                            |
-  | Stripe         | /api/stripe                  | Stripe routes                                                                                                  |
-  | Textbook       | /api/textbook                | Textbooks routes                                                                                               |
-  | User           | /api/user                    | Users routes                                                                                                   |
-  | Wishlist       | /api/wishlist                | Wishlists routes                                                                                               |
+  | Route Type     | Route Name                     | Description                                                                                                    |
+  | -------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+  | Main           | `/api/**`                      | Main router that combines all routes under `/api`                                                              |
+  | Admin          | `/api/admin/** `               | Admin router combining all routes under `/api/admin` for management of products, users, orders, featured items |
+  | Auth           | `/api/(register,login,logout)` | Authentication routes                                                                                          |
+  | Book           | `/api/book`                    | Book product routes                                                                                            |
+  | Cart           | `/api/cart`                    | User cart routes                                                                                               |
+  | Categories     | `/api/categories`              | Categories routes                                                                                              |
+  | CategoriesType | `/api/categoriesType`          | Categories type routes and controllers for getting all types of categories                                     |
+  | Featured       | `/api/featured`                | Featured products routes (todo)                                                                                |
+  | Order          | `/api/order`                   | Orders routes                                                                                                  |
+  | Stationery     | `/api/stationery`              | Stationeries routes                                                                                            |
+  | Stripe         | `/api/stripe`                  | Stripe routes                                                                                                  |
+  | Textbook       | `/api/textbook`                | Textbooks routes                                                                                               |
+  | User           | `/api/user`                    | Users routes                                                                                                   |
+  | Wishlist       | `/api/wishlist`                | Wishlists routes                                                                                               |
 
   
 - #### 📡 Controllers
@@ -245,7 +235,7 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 
   -   **user** for Authentication (register, login, logout)
   -   **jwt** for creating and verifying tokens
-  -   **image** for uploading image to Cloudinary
+  -   **image** for uploading image to `Cloudinary`
 
 - #### ⌨️ Middlewares
 
@@ -259,19 +249,19 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 - #### 🧮 Utils
 
   -   **getCategoryModel(categoryType)**: This function returns the category model based on the category type.
-  -   **cloudinaryConfig()**: This function returns the configuration for Cloudinary.
+  -   **cloudinaryConfig()**: This function returns the configuration for `Cloudinary`.
   -   **errorHandler(error, res)**: This function handles errors in the server.
   -   **parseError(error)**: This function takes in an `error` object and returns a new error object with a consistent structure. It is designed to handle different types of errors that can occur in an application.
 
 ## 🚀 FUTURE Development:
 
 1. Update the featured logic based on model and integrate it with admin panel
-1. Research and integrate Speedy and Econt APIs for delivery
+1. Research and integrate `Speedy` and `Econt` APIs for delivery
 1. Research and integrate location API of some sort for smooth user experience
 1. Create pages mentioned in the footer common questions about etc
 1. Maybe add blog articles functionality
 1. Implement vouchers and promotions discounts etc.
-1. Implement testing unit with ViTest, Playwright. Discuss coverage
+1. Implement testing unit with `ViTest`, `Playwright`. Discuss coverage
 1. Create search logic
 1. Implement newsletter logic
 1. Research and implement forgotten password logic
