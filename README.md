@@ -1,58 +1,53 @@
-# E-commerce Bookstore "Knigi.bg"
+<h1> E-commerce Bookstore "Knigi.bg" </h1>
 
-The goal of this e-commerce full stack project was to practice handling payments, research providers, validations both front and backend, user roles, authentication, delivery APIs, backend architecture and controllers, routes and many more. 
+The goal of this e-commerce full stack project is to design and implement a fully functional online bookstore, practice the integration of payment methods, implement user roles and authentication, integrate delivery APIs such as Econt and Speedy, and build a scalable backend architecture. The project also aims to provide a seamless user experience, with features such as filtering and sorting, a functional cart, and a responsive design.
 
-During development I've learned a lot about how to fully utilize the features that React Admin framework provides, how Stripe payments work, how to build functional backend API and provide data to the client. Also working with cookies, tokens, guards, interfaces for typescript, cors, encryption methods(salting) and many more.
+During development, I've learned a lot about fully utilizing the features that React Admin framework provides, how integrate Stripe payments, how to build a functional backend API and provide data to the client, how to store tokens with cookies, implement guards, providing interfaces for TypeScript, manage state with Zustand, configuring CORS, encryption methods (salting) and more.
 
 [![License: MIT](https://img.shields.io/badge/Licence-MIT-teal)](https://opensource.org/licenses/MIT)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-teal)](https://github.com/prettier/prettier)
 
-## 📝Table of Contents
 
-- [E-commerce Bookstore "Knigi.bg"](#e-commerce-bookstore-knigibg)
-  - [📝Table of Contents](#table-of-contents)
-  - [➺ Test account](#-test-account)
-  - [🔬Technologies](#technologies)
-  - [📐Fixes and updates:](#fixes-and-updates)
-  - [🎬▶️Usage](#️usage)
-  - [🔧 Installation](#-installation)
-  - [💫UX UI](#ux-ui)
-  - [📁 Project content](#-project-content)
-    - [Login Register](#login-register)
-    - [About](#about)
-    - [Catalog](#catalog)
-    - [Product details](#product-details)
-    - [Cart](#cart)
-    - [Wishlist](#wishlist)
-    - [Checkout](#checkout)
-    - [Profile menu](#profile-menu)
-    - [Admin panel](#admin-panel)
-  - [🚀 FUTURE Development:](#-future-development)
-  - [🎨 Design and Architecture](#-design-and-architecture)
-    - [⚙️ **Front-end architecture**](#️-front-end-architecture)
-      - [💾 Context Providers with Zustand Store](#-context-providers-with-zustand-store)
-      - [🎣 Custom Hooks](#-custom-hooks)
-      - [🛫 Routers](#-routers)
-      - [🧮 Utils](#-utils)
-      - [🙋‍♀️ Services](#️-services)
-    - [⚙️ **Back-end architecture**](#️-back-end-architecture)
-      - [🛠 Express config](#-express-config)
-      - [📮 Models](#-models)
-      - [🛫 Routes](#-routes)
-      - [📡 Controllers](#-controllers)
-      - [🙋‍♀️ Services](#️-services-1)
-      - [⌨️ Middlewares](#️-middlewares)
-      - [🧮 Utils](#-utils-1)
 
-## ➺ Test account
 
-```bash
-username `test@abv.bg` password `qweasd123`
-```
+<details close>
+  <summary>
+    <h2> 📝Table of Contents</h2>
+  </summary> 
 
-```bash
-username `pesho@abv.bg` password `qweasd123`
-```
+- [🔬Technologies](#technologies)
+- [🎬▶️Usage](#️usage)
+- [🔧 Installation](#-installation)
+- [💫UX UI](#ux-ui)
+- [📁 Project content](#-project-content)
+  - [Login Register](#login-register)
+  - [About](#about)
+  - [Catalog](#catalog)
+  - [Product details](#product-details)
+  - [Cart](#cart)
+  - [Wishlist](#wishlist)
+  - [Checkout](#checkout)
+  - [Profile menu](#profile-menu)
+  - [Admin panel](#admin-panel)
+- [🎨 Design and Architecture](#-design-and-architecture)
+  - [⚙️ **Front-end architecture**](#️-front-end-architecture)
+    - [💾 Context Providers with Zustand Store](#-context-providers-with-zustand-store)
+    - [🎣 Custom Hooks](#-custom-hooks)
+    - [🛫 Routers](#-routers)
+    - [🧮 Utils](#-utils)
+    - [🙋‍♀️ Services](#️-services)
+  - [⚙️ **Back-end architecture**](#️-back-end-architecture)
+    - [🛠 Express config](#-express-config)
+    - [📮 Models](#-models)
+    - [🛫 Routes](#-routes)
+    - [📡 Controllers](#-controllers)
+    - [🙋‍♀️ Services](#️-services-1)
+    - [⌨️ Middlewares](#️-middlewares)
+    - [🧮 Utils](#-utils-1)
+- [🚀 FUTURE Development:](#-future-development)
+- [📐Fixes and updates:](#fixes-and-updates)
+
+</details>
 
 ## 🔬Technologies
 
@@ -67,21 +62,6 @@ username `pesho@abv.bg` password `qweasd123`
 -   Authentication - `JsonWebToken`
 -   Handling requests - `Axios`
 -   Tools - `Git` `Vite` `ESLint` `Prettier` `Yarn` `Nodemon`
-
-## 📐Fixes and updates:
-
--   [ ] fix issues with session expire and users
--   [x] fix issues with cookies token for admins validation
--   [x] fix server duplicate code - replace with already created utils
--   [x] fix css warnings (low priority)
--   [ ] fix issues with catalog items hover buttons
--   [ ] fix issues with Menu component from Material UI for anchorEl property
--   [x] update cart logic and think about state management issues for items and quantity
--   [x] update carousels functionality buttons etc
--   [x] update theme and reuseable code for scss and maybe react
--   [ ] implement filters for Catalog Page
--   [ ] update logic for checkout page
--   [ ] add property for product type to each model schema of items/products
 
 ## 🎬▶️Usage
 
@@ -155,21 +135,6 @@ git clone https://github.com/batanoffs/e-books.git
 ### Profile menu
 
 ### Admin panel
-
-## 🚀 FUTURE Development:
-
-1. Update the featured logic based on model and integrate it with admin panel
-1. Research and integrate Speedy and Econt APIs for delivery
-1. Research and integrate location API of some sort for smooth user experience
-1. Create pages mentioned in the footer common questions about etc
-1. Maybe add blog articles functionality
-1. Implement vouchers and promotions discounts etc.
-1. Implement testing unit with ViTest, Playwright. Discuss coverage
-1. Create search logic
-1. Implement newsletter logic
-1. Research and implement forgotten password logic
-1. Decide on how much material ui components will be used (performance issues)
-1. Redesign/discuss business logic for buy now button and authentication
 
 ## 🎨 Design and Architecture
 
@@ -303,3 +268,33 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 -   **cloudinaryConfig()**: This function returns the configuration for Cloudinary.
 -   **errorHandler(error, res)**: This function handles errors in the server.
 -   **parseError(error)**: This function takes in an `error` object and returns a new error object with a consistent structure. It is designed to handle different types of errors that can occur in an application.
+
+## 🚀 FUTURE Development:
+
+1. Update the featured logic based on model and integrate it with admin panel
+1. Research and integrate Speedy and Econt APIs for delivery
+1. Research and integrate location API of some sort for smooth user experience
+1. Create pages mentioned in the footer common questions about etc
+1. Maybe add blog articles functionality
+1. Implement vouchers and promotions discounts etc.
+1. Implement testing unit with ViTest, Playwright. Discuss coverage
+1. Create search logic
+1. Implement newsletter logic
+1. Research and implement forgotten password logic
+1. Decide on how much material ui components will be used (performance issues)
+1. Redesign/discuss business logic for buy now button and authentication
+  
+## 📐Fixes and updates:
+
+-   [ ] fix issues with session expire and users
+-   [x] fix issues with cookies token for admins validation
+-   [x] fix server duplicate code - replace with already created utils
+-   [x] fix css warnings (low priority)
+-   [ ] fix issues with catalog items hover buttons
+-   [ ] fix issues with Menu component from Material UI for anchorEl property
+-   [x] update cart logic and think about state management issues for items and quantity
+-   [x] update carousels functionality buttons etc
+-   [x] update theme and reuseable code for scss and maybe react
+-   [ ] implement filters for Catalog Page
+-   [ ] update logic for checkout page
+-   [ ] add property for product type to each model schema of items/products
