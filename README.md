@@ -73,13 +73,13 @@ username `pesho@abv.bg` password `qweasd123`
 -   [ ] fix issues with session expire and users
 -   [x] fix issues with cookies token for admins validation
 -   [x] fix server duplicate code - replace with already created utils
--   [ ] fix css warnings (low priority)
--   [ ] fix catalog hover buttons issues and functionality
+-   [x] fix css warnings (low priority)
+-   [ ] fix issues with catalog items hover buttons
 -   [ ] fix issues with Menu component from Material UI for anchorEl property
 -   [x] update cart logic and think about state management issues for items and quantity
 -   [x] update carousels functionality buttons etc
 -   [x] update theme and reuseable code for scss and maybe react
--   [ ] update filters for catalog Pages
+-   [ ] implement filters for Catalog Page
 -   [ ] update logic for checkout page
 -   [ ] add property for product type to each model schema of items/products
 
@@ -87,13 +87,13 @@ username `pesho@abv.bg` password `qweasd123`
 
 Here are some examples of how to use this project:
 
-1. Register and login
-1. Browse products in the Catalog page
-1. Login as user or admin
-1. Add to cart
-1. Add to wishlist
-1. Checkout
-1. Manage products, users, orders, etc from Admin panel
+1. Register and login as user or admin
+2. Browse products in the Catalog page - also filtering and sorting are available for the users
+3. Add items to the Cart. The cart page is for authenticated users only. There are options to remove items, change the quantity and checkout. 
+4. Add items to the Wishlist. In the page, there are options to remove items or add them to the cart.
+5. Check each product details in the Details Page where only authenticated users can add comments or see the button for add to wishlist.
+6. Finally checkout your items in the Checkout page which is for authenticated users. It shows all the info about the order with the total price and options for delivery methods, forms for contact info and payment button that redirects the user to the payment gateway - stripe.
+7. Manage products, users, orders, etc from Admin panel
 
 ## 🔧 Installation
 
@@ -131,6 +131,8 @@ git clone https://github.com/batanoffs/e-books.git
 6. Register new account and login
 
 ## 💫UX UI
+
+- Logo creation and design are loosely done with the help of [excalidraw](https://excalidraw.com/). 
 
 ![knigibguxui](https://github.com/user-attachments/assets/7efc6120-09a9-41da-b374-cd6b99ab5cb5)
 
