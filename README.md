@@ -1,23 +1,23 @@
-# E-commerce Bookstore "Книги бг"
+# E-commerce Bookstore "Knigi.bg"
 
-"Книги бг" is an e-commerce full stack project. The goal of this project was to practice handling payments, research providers, validations both front and backend, user roles, authentication, delivery APIs, backend architecture and controllers, routes and many more. 
+The goal of this e-commerce full stack project was to practice handling payments, research providers, validations both front and backend, user roles, authentication, delivery APIs, backend architecture and controllers, routes and many more. 
 
-During development I've learned a lot about how to fully utilize the features that React Admin framework provides, how Stripe payments work, how to build functional backend API and provide data to the client. Also working with cookies, tokens, guards, interfaces for typescript, cors, encription methods(salting) and many more.
+During development I've learned a lot about how to fully utilize the features that React Admin framework provides, how Stripe payments work, how to build functional backend API and provide data to the client. Also working with cookies, tokens, guards, interfaces for typescript, cors, encryption methods(salting) and many more.
 
 [![License: MIT](https://img.shields.io/badge/Licence-MIT-teal)](https://opensource.org/licenses/MIT)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-teal)](https://github.com/prettier/prettier)
 
-## Table of Contents
+## 📝Table of Contents
 
-- [E-commerce Bookstore "Книги бг"](#e-commerce-bookstore-книги-бг)
-  - [Table of Contents](#table-of-contents)
-  - [Test account](#test-account)
-  - [Technologies](#technologies)
-  - [Fixes and updates:](#fixes-and-updates)
-  - [Usage](#usage)
-  - [Installation](#installation)
-  - [UX UI](#ux-ui)
-  - [Project content](#project-content)
+- [E-commerce Bookstore "Knigi.bg"](#e-commerce-bookstore-knigibg)
+  - [📝Table of Contents](#table-of-contents)
+  - [➺ Test account](#-test-account)
+  - [🔬Technologies](#technologies)
+  - [📐Fixes and updates:](#fixes-and-updates)
+  - [🎬▶️Usage](#️usage)
+  - [🔧 Installation](#-installation)
+  - [💫UX UI](#ux-ui)
+  - [📁 Project content](#-project-content)
     - [Login Register](#login-register)
     - [About](#about)
     - [Catalog](#catalog)
@@ -27,24 +27,24 @@ During development I've learned a lot about how to fully utilize the features th
     - [Checkout](#checkout)
     - [Profile menu](#profile-menu)
     - [Admin panel](#admin-panel)
-  - [FUTURE Development:](#future-development)
-  - [Design and Architecture](#design-and-architecture)
-    - [**Front-end architecture**](#front-end-architecture)
-      - [Context Providers with Zustand Store](#context-providers-with-zustand-store)
-      - [Custom Hooks](#custom-hooks)
-      - [Routers](#routers)
-      - [Utils](#utils)
-      - [Services](#services)
-    - [**Back-end architecture**](#back-end-architecture)
-      - [Express config](#express-config)
-      - [Models](#models)
-      - [Routes](#routes)
-      - [Controllers](#controllers)
-      - [Services](#services-1)
-      - [Middlewares](#middlewares)
-      - [Utils](#utils-1)
+  - [🚀 FUTURE Development:](#-future-development)
+  - [🎨 Design and Architecture](#-design-and-architecture)
+    - [⚙️ **Front-end architecture**](#️-front-end-architecture)
+      - [💾 Context Providers with Zustand Store](#-context-providers-with-zustand-store)
+      - [🎣 Custom Hooks](#-custom-hooks)
+      - [🛫 Routers](#-routers)
+      - [🧮 Utils](#-utils)
+      - [🙋‍♀️ Services](#️-services)
+    - [⚙️ **Back-end architecture**](#️-back-end-architecture)
+      - [🛠 Express config](#-express-config)
+      - [📮 Models](#-models)
+      - [🛫 Routes](#-routes)
+      - [📡 Controllers](#-controllers)
+      - [🙋‍♀️ Services](#️-services-1)
+      - [⌨️ Middlewares](#️-middlewares)
+      - [🧮 Utils](#-utils-1)
 
-## Test account
+## ➺ Test account
 
 ```bash
 username `test@abv.bg` password `qweasd123`
@@ -54,7 +54,7 @@ username `test@abv.bg` password `qweasd123`
 username `pesho@abv.bg` password `qweasd123`
 ```
 
-## Technologies
+## 🔬Technologies
 
 -   Frontend - `React` `TypeScript`
 -   UI - `Material UI` `SASS` `Slick-Carousel` `React-Slick` `FilePond`
@@ -68,7 +68,7 @@ username `pesho@abv.bg` password `qweasd123`
 -   Handling requests - `Axios`
 -   Tools - `Git` `Vite` `ESLint` `Prettier` `Yarn` `Nodemon`
 
-## Fixes and updates:
+## 📐Fixes and updates:
 
 -   [ ] fix issues with session expire and users
 -   [x] fix issues with cookies token for admins validation
@@ -83,7 +83,7 @@ username `pesho@abv.bg` password `qweasd123`
 -   [ ] update logic for checkout page
 -   [ ] add property for product type to each model schema of items/products
 
-## Usage
+## 🎬▶️Usage
 
 Here are some examples of how to use this project:
 
@@ -95,7 +95,7 @@ Here are some examples of how to use this project:
 1. Checkout
 1. Manage products, users, orders, etc from Admin panel
 
-## Installation
+## 🔧 Installation
 
 To get started with this project you need `mongodb` installed for handling the database then:
 
@@ -130,11 +130,11 @@ git clone https://github.com/batanoffs/e-books.git
 5. Open your browser and go to [http://localhost:5173/](http://localhost:5173/) to view the app.
 6. Register new account and login
 
-## UX UI
+## 💫UX UI
 
 ![knigibguxui](https://github.com/user-attachments/assets/7efc6120-09a9-41da-b374-cd6b99ab5cb5)
 
-## Project content
+## 📁 Project content
 
 ### Login Register
 
@@ -154,7 +154,7 @@ git clone https://github.com/batanoffs/e-books.git
 
 ### Admin panel
 
-## FUTURE Development:
+## 🚀 FUTURE Development:
 
 1. Update the featured logic based on model and integrate it with admin panel
 1. Research and integrate Speedy and Econt APIs for delivery
@@ -169,13 +169,13 @@ git clone https://github.com/batanoffs/e-books.git
 1. Decide on how much material ui components will be used (performance issues)
 1. Redesign/discuss business logic for buy now button and authentication
 
-## Design and Architecture
+## 🎨 Design and Architecture
 
 Server built on `express` and `mongodb` with `mongoose`. Client built with `vite`, `react`, `typescript` and `sass`.
 
-### **Front-end architecture**
+### ⚙️ **Front-end architecture**
 
-#### Context Providers with Zustand Store
+#### 💾 Context Providers with Zustand Store
 
 -   **Alert Store** is a helper store that provides state if the alert is open or not and what is the message.
 
@@ -193,15 +193,15 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 
 -   **Wishlist Store** stores and provides data for the wishlist of the authenticated user.
 
-#### Custom Hooks
+#### 🎣 Custom Hooks
 
 -   **useConfirm()** is a hook that opens modal to ask the user for confirmation of his action.
 
-#### Routers
+#### 🛫 Routers
 
 -   Main Router is located in **App** component
 
-#### Utils
+#### 🧮 Utils
 
 -   Constants
 
@@ -220,21 +220,21 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
     -   **formatDate(date)** formats the date
     -   **currencyFormatterToBGN(value)** formats the value to BGN currency
 
-#### Services
+#### 🙋‍♀️ Services
 
 -   **authService** for Authentication
 -   **cartService** for handling cart data
 -   **productService** for handling products data (todo)
 
-### **Back-end architecture**
+### ⚙️ **Back-end architecture**
 
-#### Express config
+#### 🛠 Express config
 
 -   **express.ts** contains express middleware
 -   **database.ts** contains mongoose middleware
 -   **routes.ts** contains express routes
   
-#### Models
+#### 📮 Models
 
 -   **Book** for Books
 -   **BookCategories** for Book categories
@@ -248,7 +248,7 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 -   **User** for Users
 -   **Wishlist** for users Wishlist
  
-#### Routes
+#### 🛫 Routes
 
 -   **admin** for the Admin panel and management of products, users, orders, featured items. It uses `raExpressMongoose` library to handle the database operations for `react-admin`.
 -   **auth** for Authentication routes
@@ -265,7 +265,7 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 -   **wishlist** for Wishlists routes
 -   **mainRoutes** combines all routes under `/api`
   
-#### Controllers
+#### 📡 Controllers
 
 -   **auth** for Authentication contains `logic` `register` and `logout`
 -   **book** for handling products of type books. Contains logic for delete, update, create, get all or get one book
@@ -280,13 +280,13 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 -   **user** for handling user data, contains logic `getUsers`, `getUserByIdFromToken`, `getUserById`, `updateUser`, `deleteUser`
 -   **wishlist**(todo) for handling wishlist data, contains logic `createWishlist`, `getWishlist`, `updateWishlist`, `deleteWishlist`
 
-#### Services
+#### 🙋‍♀️ Services
 
 -   **user** for Authentication (register, login, logout)
 -   **jwt** for creating and verifying tokens
 -   **image** for uploading image to Cloudinary
 
-#### Middlewares
+#### ⌨️ Middlewares
 
 -   **cors** for cors setup for the express server
 -   **filters** to be updated (todo), contains logic for catalog filters and sorting
@@ -295,7 +295,7 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 -   **session** validates the session. If token is present, sets the user in the request object
 -   **validateRequest** validates the requests
 
-#### Utils
+#### 🧮 Utils
 
 -   **getCategoryModel(categoryType)**: This function returns the category model based on the category type.
 -   **cloudinaryConfig()**: This function returns the configuration for Cloudinary.
