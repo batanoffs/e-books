@@ -12,8 +12,6 @@ import Footer from './components/Footer/Footer'
 import NotFoundPage from './components/utils/404'
 import CartPage from './pages/Cart/CartPage'
 import CheckoutPage from './pages/Checkout/CheckoutPage'
-import OrdersConfirmationPage from './pages/Orders/OrdersConfirmationPage'
-import OrderDetailsPage from './pages/Orders/OrderDetailsPage'
 import FaqPage from './pages/Faq/FaqPage'
 import ContactsPage from './pages/Contacts/ContactsPage'
 import AboutPage from './pages/About/AboutPage'
@@ -22,6 +20,9 @@ import CatalogPage from './pages/Catalog/CatalogPage'
 import ScrollTop from './components/ScrollTop/BackToTop'
 import WishlistPage from './pages/Wishlist/WishlistPage'
 import PaymentSuccessful from './pages/Checkout/PaymentSuccessful'
+
+// import OrdersConfirmationPage from './pages/Orders/OrdersConfirmationPage'
+// import OrderDetailsPage from './pages/Orders/OrderDetailsPage'
 
 const App = () => {
 	const [isAdmin, setIsAdmin] = useState(false)
@@ -47,8 +48,8 @@ const App = () => {
 				<Route path='/checkout' element={<CheckoutPage />} />
 				<Route path='/success' element={<PaymentSuccessful />} />
 				<Route path='/contacts' element={<ContactsPage />} />
-				<Route path='/orders' element={<OrdersConfirmationPage />} />
-				<Route path='/orders/:id' element={<OrderDetailsPage />} />
+				{/* <Route path='/orders' element={<OrdersConfirmationPage />} /> */}
+				{/* <Route path='/orders/:id' element={<OrderDetailsPage />} /> */}
 				<Route path='/popular' element={<PopularPage />} />
 				<Route path='/about' element={<AboutPage />} />
 				<Route path='/faq' element={<FaqPage />} />

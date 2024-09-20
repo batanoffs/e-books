@@ -38,6 +38,7 @@ export const checkoutSession = async (req: Request, res: Response) => {
 					product_data: {
 						name: product.data.title,
 						images: [product.data.picture],
+						//TODO this metadata is not working the way i expect -test different ways to pass product IDs
 						metadata: {
 							productId: product.data._id,
 						},
@@ -86,7 +87,7 @@ export const getPaymentSessionAndCreateOrder = async (req: Request, res: Respons
 			stripe.checkout.sessions.listLineItems(session_id),
 		])
 
-		const token = await result
+		const tokens = await result
 		const tokenString = JSON.stringify(await result)
 
 		console.log(tokenString)
