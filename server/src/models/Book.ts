@@ -1,6 +1,5 @@
 import { model, Schema } from 'mongoose'
 import { IBookSchema } from '../interfaces/book.interface'
-// import Categories from './Categories'
 
 const BookSchema: Schema = new Schema({
 	title: {
