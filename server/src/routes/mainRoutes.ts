@@ -11,6 +11,7 @@ import featuredRoutes from './featured'
 import stripeRoutes from './stripe'
 import wishlistRoutes from './wishlist'
 import categoryRoutes from './categories'
+import newsLetterRoutes from './newsletter'
 
 const router = express.Router()
 
@@ -25,5 +26,7 @@ router.use('/featured', featuredRoutes)
 router.use('/checkout', stripeRoutes)
 router.use('/wishlist', wishlistRoutes)
 router.use('/categories', categoryRoutes)
+router.use(newsLetterRoutes)
+
 
 export default router
