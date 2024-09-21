@@ -15,6 +15,7 @@ const API = {
 	ADMIN: baseURL + '/api/admin/',
 	CHECKOUT: baseURL + '/api/checkout/',
 	WISHLIST: baseURL + '/api/wishlist/',
+	NEWSLETTER: baseURL + '/api/newsletter',
 }
 
 export default API
