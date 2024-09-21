@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import axios from 'axios'
 
@@ -7,6 +6,7 @@ import useAlertStore from '../../../store/alert'
 import { usePrivacyModal } from '../../../store/helperModal'
 
 import styles from './newsletter.module.scss'
+import API from '../../../utils/constants/api'
 
 type Input = {
 	newsLetterEmail: string
@@ -25,6 +25,9 @@ export default function Newsletter() {
 
 	const onSubmit: SubmitHandler<Input> = async (data) => {
 		//TODO implement email subs
+		console.log('click')
+		console.log(data)
+
 		const { newsLetterEmail, privacyPolicy } = data
 		if (!newsLetterEmail) {
 			return showAlert('Не сте въвели имейл', 'error')
@@ -32,6 +35,11 @@ export default function Newsletter() {
 		if (!privacyPolicy) {
 			return showAlert('Моля приемете условията и политиката за поверителност', 'error')
 		}
+
+		const response = await axios.post(API.NEWSLETTER, { newsLetterEmail })
+
+		console.log(response)
+
 		showAlert('Регистрацията е неуспешна', 'error')
 	}
 
