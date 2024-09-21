@@ -1,4 +1,4 @@
-import { Request, Response } from 'express-serve-static-core';
+import { Request, Response } from 'express'
 import Order from '../models/Order';
 
 export const createOrder = async (req: Request, res: Response) => {
