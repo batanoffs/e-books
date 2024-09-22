@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import MenuIcon from '@mui/icons-material/Menu'
 
-const pages = ['Най-продавани', 'Книги', 'Учебници', 'Канцелария']
+const pages = ['Книги', 'Учебници', 'Канцелария']
 
 const NavigationMenu = ({
 	anchorElNav,
