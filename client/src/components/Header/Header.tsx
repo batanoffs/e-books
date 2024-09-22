@@ -39,11 +39,12 @@ const Header = () => {
 
 	const handleLogout = async (e: FormEvent) => {
 		e.preventDefault()
+		handleCloseUserMenu()
+
 		try {
 			const response = await axios.get(API.LOGOUT)
-			const { redirectUrl, message } = response.data
-			document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-			showAlert(message, 'success')
+			const { redirectUrl } = response.data
+			document.cookie = 'token=; expires=; path=/;'
 			navigate(redirectUrl)
 		} catch (error) {
 			showAlert('Възникна грешка!', 'error')

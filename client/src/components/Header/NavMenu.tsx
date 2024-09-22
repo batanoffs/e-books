@@ -35,7 +35,6 @@ const NavigationMenu = ({
 					transformOrigin={{ vertical: 'top', horizontal: 'left' }}
 					open={Boolean(anchorElNav)}
 					onClose={handleCloseNavMenu}
-					sx={{ display: { xs: 'block', md: 'none' } }}
 				>
 					{pages.map((page) => (
 						<MenuItem key={page} onClick={() => navigationHandler(page)}>

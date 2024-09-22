@@ -11,6 +11,7 @@ import Button from '@mui/material/Button'
 import { useLoginModal } from '../../store/helperModal'
 import CartButton from './CartButton'
 import authGuards from '../../middlewares/guards'
+import { useRef } from 'react'
 
 const settings = [
 	{ name: 'Начало', path: '/' },
@@ -31,26 +32,6 @@ const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handl
 					</Tooltip>
 
 					<CartButton />
-
-					<Menu
-						sx={{ mt: '45px' }}
-						id='menu-appbar'
-						anchorEl={anchorElUser}
-						anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-						keepMounted
-						transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-						open={Boolean(anchorElUser)}
-						onClose={handleCloseUserMenu}
-					>
-						{settings.map((setting) => (
-							<MenuItem key={setting.name} component={Link} to={setting.path}>
-								<Typography textAlign='center'>{setting.name}</Typography>
-							</MenuItem>
-						))}
-						<MenuItem key='logout' onClick={handleLogout}>
-							<Typography textAlign='center'>Изход</Typography>
-						</MenuItem>
-					</Menu>
 				</>
 			) : (
 				<Box sx={{ display: 'flex', gap: 1 }}>
@@ -59,6 +40,26 @@ const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handl
 					</Button>
 				</Box>
 			)}
+
+			<Menu
+				sx={{ mt: '45px' }}
+				id='menu-appbar'
+				anchorEl={anchorElUser}
+				anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+				keepMounted
+				transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+				open={Boolean(anchorElUser)}
+				onClose={handleCloseUserMenu}
+			>
+				{settings.map((setting) => (
+					<MenuItem key={setting.name} component={Link} to={setting.path}>
+						<Typography textAlign='center'>{setting.name}</Typography>
+					</MenuItem>
+				))}
+				<MenuItem key='logout' onClick={handleLogout}>
+					<Typography textAlign='center'>Изход</Typography>
+				</MenuItem>
+			</Menu>
 		</Box>
 	)
 }
