@@ -263,7 +263,6 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 1. Implement vouchers and promotions discounts etc.
 1. Implement testing unit with `ViTest`, `Playwright`. Discuss coverage
 1. Create search logic
-1. Implement newsletter logic
 1. Research and implement forgotten password logic
 1. Decide on how much material ui components will be used (performance issues)
 1. Redesign/discuss business logic for buy now button and authentication
@@ -275,7 +274,7 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 -   [x] fix server duplicate code - replace with already created utils
 -   [x] fix css warnings (low priority)
 -   [ ] fix issues with catalog items hover buttons
--   [ ] fix issues with Menu component from Material UI for anchorEl property
+-   [x] fix issues with Menu component from Material UI for anchorEl property
 -   [x] update cart logic and think about state management issues for items and quantity
 -   [x] update carousels functionality buttons etc
 -   [x] update theme and reuseable code for scss and maybe react

@@ -14,20 +14,11 @@ type Input = {
 }
 
 export default function Newsletter() {
-	const {
-		handleSubmit,
-		register,
-		formState: { errors },
-	} = useForm<Input>()
-
+	const { handleSubmit, register, formState: { errors }} = useForm<Input>()
 	const toggleOpenPrivacy = usePrivacyModal((state) => state.toggleOpen)
 	const showAlert = useAlertStore((state) => state.showAlert)
 
 	const onSubmit: SubmitHandler<Input> = async (data) => {
-		//TODO implement email subs
-		console.log('click')
-		console.log(data)
-
 		const { newsLetterEmail, privacyPolicy } = data
 		if (!newsLetterEmail) {
 			return showAlert('Не сте въвели имейл', 'error')
@@ -38,9 +29,11 @@ export default function Newsletter() {
 
 		const response = await axios.post(API.NEWSLETTER, { newsLetterEmail })
 
-		console.log(response)
-
-		showAlert('Регистрацията е неуспешна', 'error')
+		if (response.status === 200) {
+			showAlert(response.data, 'success')
+		} else {
+			showAlert(response.data, 'error')
+		}
 	}
 
 	return (

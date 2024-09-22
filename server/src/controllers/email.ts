@@ -8,61 +8,29 @@ const mailerlite = new MailerLite({
 
 type Status = 'unconfirmed' | 'active' | 'unsubscribed' | 'bounced' | 'junk' | undefined
 
-export const GetNewsletterSubscriber = async (req: Request, res: Response) => {
+export const AddSubscriberToNewsLetter = async (req: Request, res: Response) => {
 	const { newsLetterEmail } = req.body
 
-	const info = {
-		limit: 25,
-		page: 1,
-		filter: {
-			name: 'newsletter',
-		},
-		sort: 'name' as const,
-	}
-
 	try {
-		const getGroup = await mailerlite.groups.get(info)
-		const groupId = getGroup.data.data[0].id
-		if (!groupId) {
-			res.status(404).json({ message: 'Group not found' })
-		}
+		const myNewsLetterGroupId = '133087498496640175'
 		const params = {
 			email: newsLetterEmail,
-			groups: [groupId],
-			status: 'unconfirmed' as Status,
+			groups: [myNewsLetterGroupId],
+			status: 'active' as Status,
 			subscribed_at: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
-			unsubscribed_at: undefined, // yyyy-MM-dd HH:mm:ss
+			unsubscribed_at: undefined,
 		}
-		const response = await mailerlite.subscribers.createOrUpdate(params)
-		console.log(response)
 
-		// res.send()
+		const response = await mailerlite.subscribers.createOrUpdate(params)
+
+		console.log('response', response.data)
+		if (response.status !== 200) {
+			res.status(response.status).send(response.statusText)
+		}
+		res.status(200).send('Успешно се абонирахте за нашия бюлетин')
 	} catch (error) {
 		if (error instanceof AxiosError) {
 			console.log(error.response?.data)
 		}
 	}
 }
-
-//example params
-
-// const params = {
-// 	email: 'dummy@example.com',
-// 	fields: {
-// 		name: 'Dummy',
-// 		last_name: 'Testerson',
-// 		company: 'MailerLite',
-// 		country: 'Best country',
-// 		city: 'Best city',
-// 		phone: '37060677606',
-// 		state: 'Best state',
-// 		z_i_p: '99999',
-// 	},
-// 	groups: ['4243829086487936'],
-// 	status: 'active', // possible statuses: active, unsubscribed, unconfirmed, bounced or junk.
-// 	subscribed_at: '2021-08-31 14:22:08',
-// 	ip_address: null,
-// 	opted_in_at: null, // yyyy-MM-dd HH:mm:ss
-// 	optin_ip: null,
-// 	unsubscribed_at: null, // yyyy-MM-dd HH:mm:ss
-// }
