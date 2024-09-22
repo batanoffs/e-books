@@ -111,10 +111,10 @@ const PrivacyRulesModal = () => {
 									hover: 'white',
 								},
 							}}
+							defaultValue='knigibg@gmail.com'
 						>
 							knigibg@gmail.com
 						</Link>
-						<text type='email'> </text>
 					</li>
 					<li>
 						<Link
@@ -126,6 +126,7 @@ const PrivacyRulesModal = () => {
 									hover: 'white',
 								},
 							}}
+							defaultValue='0888 888 888'
 						>
 							0888 888 888
 						</Link>
