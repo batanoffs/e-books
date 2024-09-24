@@ -1,69 +1,63 @@
-import { Navigate } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import API from '../../utils/constants/api'
-import authService from '../../services/authService'
+import useCartStore from '../../store/cart'
 
-//TODO update customer email with actual email of the user
 const PaymentSuccessful = () => {
-	const [status, setStatus] = useState(null)
-	const [customerEmail, setCustomerEmail] = useState('')
+	const [orderData, setOrderData] = useState<any | null>(null)
+	const setCart = useCartStore((state) => state.setCart)
 
-	const createOrder = useCallback(async () => {
-		const queryString = window.location.search
-		const urlParams = new URLSearchParams(queryString)
-		const sessionId = urlParams.get('session_id')
-		console.log('sessionId', sessionId)
-		console.log('queryString', queryString)
+	const fetchOrder = useCallback(async (sessionId: string | null) => {
+		if (!sessionId) return
 
 		try {
-			const userId = await authService.getUserId()
-			console.log('userId', userId)
 			const response = await axios.get(API.CHECKOUT + 'session-status', {
 				params: {
 					session_id: sessionId,
 				},
 			})
 
-			console.log('response', response.data)
-
-			// const data = await response.data
-			// console.log('data', data)
-			// const createOrder = await axios.post(API.CHECKOUT + 'create-order', {
-			// 	userId,
-			// 	products: response.data.products,
-			// 	total: response.data.total,
-			// 	status: response.data.status,
-			// })
-			// console.log('createOrder', createOrder)
-			// setStatus(data.status)
-			// setCustomerEmail(data.customer_email)
+			setOrderData(response.data.createdOrder)
 		} catch (error) {
 			console.log(error)
 		}
 	}, [])
 
 	useEffect(() => {
-		createOrder()
-	}, [createOrder])
+		const queryString = window.location.search
+		const urlParams = new URLSearchParams(queryString)
+		const sessionId = urlParams.get('session_id')
 
-	if (status === 'open') {
-		return <Navigate to='/checkout' />
-	}
+		fetchOrder(sessionId)
+	}, [fetchOrder])
 
-	if (status === 'complete') {
-		return (
-			<section id='success'>
-				<p>
-					Ние ценим вашите покупки! Потвърждаващ имейл ще ви бъде изпратен на{' '}
-					{customerEmail}. Ако имате въпроси, моля, свържете се на имейл{' '}
-					<a href='mailto:orders@example.com'>orders@example.com</a>.
-				</p>
-			</section>
-		)
-	}
-
-	return null
+	return (
+		<section id='success'>
+			{orderData && (
+				<>
+					<h1> Благодарим ви за Вашата поръчка! </h1>
+					<p>
+						Номер на поръчката: <strong>{orderData.id}</strong>
+					</p>
+					<ul>
+						{orderData?.products?.map((product) => (
+							<li key={product.id}>
+								<img src={product.picture} alt={product.title} />
+								<p>{product.title}</p>
+								<p>{product.price}</p>
+							</li>
+						))}
+					</ul>
+					<p>
+						Ние ценим вашите покупки! Потвърждаващ имейл ще ви бъде изпратен на. Ако имате
+						въпроси, моля, свържете се на имейл{' '}
+						<a href='mailto:orders@example.com'>orders@example.com</a>.
+					</p>
+				</>
+			)}
+		</section>
+	)
 }
 
 export default PaymentSuccessful
+
