@@ -60,10 +60,9 @@ const CheckoutPage = () => {
 	const { errors } = formState // Extract the errors from formState
 
 	const handlePlaceOrder = async (input: CheckoutFormValues) => {
-		console.table(input)
-		console.log('formState', formState)
-
-		// const token = getToken()
+		// console.table(input)
+		// console.log('formState', formState)
+		
 		const products = cart.map((item) => {
 			return {
 				id: item.product._id,
@@ -73,45 +72,14 @@ const CheckoutPage = () => {
 
 		try {
 			const userId = await authService.getUserId()
-			const data = {
-				products,
-				userId,
-			}
-			const response = await axios.post(API.CHECKOUT + 'create-checkout-session', data)
+			const response = await axios.post(API.CHECKOUT + 'create-checkout-session', { products, userId })
 			if (response.status === 400) return Promise.reject(response)
 			if (response.status === 401) return Promise.reject(response)
 			if (response.status === 500) return Promise.reject(response)
-			if (response.status === 200) {
-				console.log('response', response.data)
-				window.location = response.data.url
-			}
+			if (response.status === 200) return window.location = response.data.url
 		} catch (error) {
 			console.error(error)
 		}
-
-		// fetch(API.CHECKOUT + 'create-checkout-session', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 		// 'Authorization': `Bearer: ${token}`,
-		// 	},
-		// 	body: JSON.stringify({
-		// 		items: [
-		// 			{ id: 1, quantity: 1 },
-		// 			{ id: 2, quantity: 2 },
-		// 		],
-		// 	}),
-		// })
-		// 	.then((res) => {
-		// 		if (res.ok) return res.json()
-		// 		return res.json().then((json) => Promise.reject(json))
-		// 	})
-		// 	.then(({ url }) => {
-		// 		window.location = url
-		// 	})
-		// 	.catch((error) => {
-		// 		console.error(error.error)
-		// 	})
 	}
 
 	const handleBackToCart = () => {
