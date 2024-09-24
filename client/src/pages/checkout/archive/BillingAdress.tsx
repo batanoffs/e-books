@@ -197,7 +197,7 @@ export const BillingAddress = () => {
 
 								<div className='field fc-dirty'>
 									<label className='label' htmlFor='QV528RF'>
-										<span>Област / Провинция</span>
+										<span>Област</span>
 									</label>
 
 									<div className='control'>
@@ -206,7 +206,7 @@ export const BillingAddress = () => {
 											name='region_id'
 											id='QV528RF'
 											aria-invalid='false'
-											aria-placeholder='Област / Провинция'
+											aria-placeholder='Област'
 										>
 											<option value='' selected={true}>
 												Моля изберете регион.
@@ -232,7 +232,7 @@ export const BillingAddress = () => {
 											name='region'
 											aria-invalid='false'
 											id='QAWBBIP'
-											aria-placeholder='Област / Провинция'
+											aria-placeholder='Област'
 										/>
 									</div>
 								</div>
