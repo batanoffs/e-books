@@ -1,12 +1,13 @@
+import { Types } from 'mongoose'
+
 export interface IOrderSchema extends Document {
-	userId: string
+	userId: String
 	products: {
-		productId: string
+		productId: Types.ObjectId
 		productType: 'Book' | 'Textbook' | 'Stationery'
 		quantity: number
 	}[]
 	total: number
-	status: 'pending' | 'completed' | 'cancelled'
-	shippingStatus: string
+	shippingStatus: 'pending' | 'shipped' | 'delivered'
 	createdAt: Date
 }
