@@ -14,9 +14,10 @@ export const AddressForm = ({ control, errors, register }) => {
 		<Box component='div' id='address-form'>
 			<Typography variant='h5'>Адрес за доставка</Typography>
 
-			<Grid container sx={{ color: 'red' }}>
+			<Grid container columnSpacing={2} sx={{ color: 'red' }}>
 				<Grid item xs={12} sm={6}>
 					<TextField
+						fullWidth
 						label='Име'
 						name='firstName'
 						type='text'
@@ -27,6 +28,7 @@ export const AddressForm = ({ control, errors, register }) => {
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<TextField
+						fullWidth
 						label='Фамилия'
 						name='lastName'
 						type='text'
@@ -37,6 +39,7 @@ export const AddressForm = ({ control, errors, register }) => {
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<TextField
+						fullWidth
 						label='Телефон'
 						type='number'
 						name='telephone'
@@ -47,6 +50,7 @@ export const AddressForm = ({ control, errors, register }) => {
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<TextField
+						fullWidth
 						label='Пощенски код'
 						type='number'
 						name='postcode'
@@ -55,9 +59,33 @@ export const AddressForm = ({ control, errors, register }) => {
 						helperText={errors.postcode?.message}
 					/>
 				</Grid>
+
 				<Grid item xs={12} sm={6}>
-					<FormControl fullWidth margin='normal' error={!!errors.postcode}>
-						<InputLabel>Област / Провинция</InputLabel>
+					<TextField
+						fullWidth
+						label='Населено място'
+						name='city'
+						type='text'
+						{...register('city')} //{ required: 'Полето е задължителено' }
+						error={!!errors.city}
+						helperText={errors.city?.message}
+					/>
+				</Grid>
+
+				<Grid item xs={12} sm={6}>
+					<TextField
+						fullWidth
+						label='Адрес'
+						name='address'
+						type='text'
+						{...register('address')} //{ required: 'Полето е задължителено' }
+						error={!!errors.address}
+						helperText={errors.address?.message}
+					/>
+				</Grid>
+				<Grid item xs={12}>
+					<FormControl fullWidth margin='normal' error={!!errors.regionId}>
+						<InputLabel>Област</InputLabel>
 						<Controller
 							name='regionId'
 							control={control}
@@ -74,38 +102,20 @@ export const AddressForm = ({ control, errors, register }) => {
 						/>
 					</FormControl>
 				</Grid>
-				<Grid item xs={12} sm={6}>
-					<TextField
-						label='Населено място'
-						name='city'
-						type='text'
-						{...register('city')} //{ required: 'Полето е задължителено' }
-						error={!!errors.city}
-						helperText={errors.city?.message}
-					/>
-				</Grid>
 				<Grid item xs={12}>
-					<TextField
-						label='Адрес'
-						name='address'
-						type='text'
-						{...register('address')} //{ required: 'Полето е задължителено' }
-						error={!!errors.address}
-						helperText={errors.address?.message}
-					/>
-				</Grid>
-				<Grid item xs={12}>
-					<TextField
-						label='Допълнителна информация за доставка'
-						name='deliveryData'
-						id='deliveryData'
-						multiline={true}
-						type='text'
-						rows={3}
-						{...register('deliveryData')} //{ required: 'Полето е задължителено' }
-						error={!!errors.customAttributes}
-						helperText={errors.customAttributes?.message}
-					/>
+					<FormControl fullWidth margin='normal'>
+						<TextField
+							label='Допълнителна информация за доставка'
+							name='deliveryData'
+							id='deliveryData'
+							multiline={true}
+							type='text'
+							rows={3}
+							{...register('deliveryData')} //{ required: 'Полето е задължителено' }
+							error={!!errors.customAttributes}
+							helperText={errors.customAttributes?.message}
+						/>
+					</FormControl>
 				</Grid>
 			</Grid>
 		</Box>
