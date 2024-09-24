@@ -76,9 +76,9 @@ const login = async (req: Request, res: Response) => {
 
 		const redirectUrl = user.role === 'admin' ? '/admin' : '/'
 
-		res.status(200).json({ message: 'Успешно влизане в профила си!', token, redirectUrl })
+		res.status(200).json({ message: 'Успешно влязохте в профила си!', token, redirectUrl })
 	} catch (error) {
-		res.status(500).json({ message: 'Възникна грешка при вход', error })
+		res.status(500).json({ message: 'Възникна грешка при аутентикация', error })
 	}
 }
 
@@ -92,7 +92,7 @@ const logout = (req: Request, res: Response) => {
 		path: '/', // restrict cookie to specific path
 	})
 
-	res.status(200).json({ message: 'Усшено излязохте от профила', redirectUrl })
+	res.status(200).json({ message: 'Усшено излязохте от профила си', redirectUrl })
 }
 
 export { register, login, logout }
