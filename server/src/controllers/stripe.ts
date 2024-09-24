@@ -1,9 +1,10 @@
-import { Request, Response } from 'express'
+import { query, Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import Book from '../models/Book'
 import Order from '../models/Order'
+import Cart from '../models/Cart'
 
-export interface CartItem {
+export interface Product {
 	id: string
 	quantity: number
 }
@@ -13,116 +14,233 @@ const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY)
 
 export const checkoutSession = async (req: Request, res: Response) => {
 	const validationErrors = validationResult(req)
-
-	if (!validationErrors.isEmpty()) {
+	if (!validationErrors.isEmpty())
 		return res.status(400).json({ errors: validationErrors.array() })
-	}
+
+	const { products, userId } = req.body
+
+	if (!products) return res.status(404).json({ message: 'No products found!' })
+	if (!userId) return res.status(404).json({ message: 'No user id found!' })
 
 	try {
-		const products = await Promise.all(
-			req.body.products.map(async (product: CartItem) => {
-				const item = await Book.findById(product.id).lean().exec()
-				return {
-					data: item,
-					quantity: product.quantity,
+		let notFoundProducts: string[] = []
+
+		const StripeProducts = await Promise.all(
+			products.map(async (product: Product) => {
+				const current = await stripe.products.retrieve(product.id)
+				//TODO implement check for not found
+				console.log(current)
+
+				if (!current) {
+					notFoundProducts.push(product.id)
+				} else {
+					return current
 				}
 			})
 		)
-		const productIds = products.map((product: any) => product.data._id)
-		console.log('productIds', productIds)
 
-		const stripeInput = await products.map((product: any) => {
-			return {
-				price_data: {
-					currency: 'bgn',
-					product_data: {
-						name: product.data.title,
-						images: [product.data.picture],
-						//TODO this metadata is not working the way i expect -test different ways to pass product IDs
-						metadata: {
-							productId: product.data._id,
+		if (notFoundProducts.length > 0) {
+			const productsToCreate = await Promise.all(
+				notFoundProducts.map(async (id: string) => {
+					const item = await Book.findById(id).lean().exec()
+
+					if (!item)
+						return res
+							.status(400)
+							.json({ message: `No product found in the database!` })
+
+					return {
+						name: item.title,
+						active: true,
+						description: item.description,
+						id: item._id.toHexString(),
+						images: [item.picture],
+						default_price_data: {
+							currency: 'bgn',
+							unit_amount: item.price * 100,
 						},
-					},
-					unit_amount: product.data.price * 100,
-				},
-				quantity: product.quantity,
+						metadata: {
+							author: item.author,
+							cover_page: item.coverPageType,
+							publisher: item.publisher,
+							page_count: item.pageCount,
+							dimensions: item.dimensions,
+						},
+					}
+				})
+			)
+
+			if (!productsToCreate)
+				return res
+					.status(400)
+					.json({ message: 'No products with those ids found in the database!' })
+
+			await Promise.all(
+				productsToCreate.map(async (product: any) => {
+					const response = await stripe.products.create(product)
+					if (response.status === 200) {
+						StripeProducts.push(response)
+					}
+				})
+			)
+		}
+
+		const productPriceIds = StripeProducts.map(product => {
+			return {
+				price: product.default_price,
+				quantity: 1, //TODO get actual quantity
 			}
 		})
 
 		const session = await stripe.checkout.sessions.create({
-			payment_method_types: ['card'],
+			client_reference_id: userId,
+			customer_email: 'mixrays@mailfence.com', //TODO save userdata state and provide email here
+			line_items: productPriceIds,
 			mode: 'payment',
 			success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: `${process.env.CLIENT_URL}/checkout`,
-			line_items: stripeInput,
-			metadata: {
-				productIds: productIds,
-			},
-			client_reference_id: req.body.userId,
-			customer_email: 'pesho@abv.bg', //TODO save userdata state and provide email here
+			payment_method_types: ['card'],
 			locale: 'bg',
+			custom_text: {
+				after_submit: {
+					message: 'Благодарим!',
+				},
+				shipping_address: {
+					message: 'Вашият адрес за доставка е този тук :)',
+				},
+				submit: {
+					message: 'Вашата поръчка е защитена благодарение на Stripe!',
+				},
+				// terms_of_service_acceptance: {
+				// 	message: '',
+				// },
+			},
 			shipping_address_collection: {
 				allowed_countries: ['BG'],
 			},
+			shipping_options: [
+				{
+					shipping_rate_data: {
+						display_name: 'Econt',
+						delivery_estimate: {
+							maximum: {
+								unit: `business_day`,
+								value: 3,
+							},
+							minimum: {
+								unit: `business_day`,
+								value: 1,
+							},
+						},
+						fixed_amount: {
+							amount: 500,
+							currency: 'BGN',
+						},
+						type: 'fixed_amount',
+					},
+				},
+				{
+					shipping_rate_data: {
+						display_name: 'Speedy',
+						delivery_estimate: {
+							maximum: {
+								unit: `business_day`,
+								value: 3,
+							},
+							minimum: {
+								unit: `business_day`,
+								value: 1,
+							},
+						},
+						fixed_amount: {
+							amount: 500,
+							currency: 'BGN',
+						},
+						type: 'fixed_amount',
+					},
+				},
+			],
+			invoice_creation: {
+				enabled: true,
+			},
+			after_expiration: {
+				recovery: {
+					enabled: true,
+					// allow_promotion_codes: true,
+				},
+			},
+			// allow_promotion_codes: true,
+			// discounts: [
+			// 	{
+			// 		coupon: '',
+			// 		promotion_code: '',
+			// 	},
+			// ],
 		})
 
 		res.json({ url: session.url })
-		// res.send({ clientSecret: session.client_secret })
 	} catch (e) {
 		res.status(500).json({ error: (e as Error).message })
 	}
 }
 
-//TODO research how to link this logic
 export const getPaymentSessionAndCreateOrder = async (req: Request, res: Response) => {
 	const { session_id } = req.query
 
 	if (!session_id) return res.status(400).json({ message: 'Invalid session_id' })
 
 	try {
-		const result = Promise.all([
-			stripe.checkout.sessions.retrieve(session_id, {
-				expand: ['payment_intent.payment_method'],
-			}),
-			stripe.checkout.sessions.listLineItems(session_id),
-		])
+		const getSession = await stripe.checkout.sessions.retrieve(session_id, {
+			expand: ['line_items'], //'payment_intent.payment_method'
+		})
 
-		const tokens = await result
-		const tokenString = JSON.stringify(await result)
+		const userId = getSession.client_reference_id
+		const boughtProducts = getSession.line_items.data.map((item: any) => {
+			return {
+				productId: item.price.product,
+				productType: 'Book', //TODO update for diff product types
+				quantity: item.quantity,
+			}
+		})
+		const status = getSession.status
+		const total = getSession.amount_total / 100
 
-		console.log(tokenString)
+		console.log('data', status, total, userId, boughtProducts)
 
-		// const userId = token[0].client_reference_id
-		// const products = token[1].data.map((item: any) => item.metadata._id) //TODO fix or item.price.metadata._id
-		// const status = token[0].status
-		// const total = token[0].amount_total
+		if (status === 'complete') {
+			const existingOrder = await Order.findOne({
+				userId,
+				'products.productId': { $in: boughtProducts.map((bp: any) => bp.productId) },
+			})
 
-		// console.log('orderData', { userId, products, total, status })
+			if (existingOrder) {
+				return res.status(200).json({
+					message: 'Order already exists',
+					createdOrder: existingOrder.populate('products.productId'),
+				})
+			}
 
-		// const newOrder = new Order({ userId, products, total, status })
+			const newOrder = new Order({ userId, products: boughtProducts, total })
 
-		// console.log('newOrder', newOrder)
+			await newOrder.save()
 
-		// await newOrder.save()
+			const cart = await Cart.findOneAndUpdate({ userId }, { products: [] }, { new: true })
+			console.log('cart', cart)
 
-		// res.status(201).json(newOrder)
+			if (!cart) {
+				return res.status(404).json({ message: 'Cart not found' })
+			}
 
-		// const { userId, items, total, status } = req.body
-		// try {
-		// 	const newOrder = new Order({ userId, items, total, status })
-		// 	await newOrder.save()
-		// 	res.status(201).json(newOrder)
-		// } catch (error) {
-		// 	res.status(500).json({ message: 'Error creating order', error })
-		// }
-
-		// res.send({
-		// 	status: session.status,
-		// 	customer_email: session.customer_details.email,
-		// })
-		// res.redirect(process.env.CLIENT_URL + '/success?session_id=' + req.query.session_id)
-		console.log('Payment successfully processed.')
+			res.status(201).json({
+				message: `Successful payment, new order created`,
+				createdOrder: newOrder.populate('products.productId'),
+			})
+		} else {
+			res.status(401).json({
+				message: `Order status: ${status}`,
+			})
+		}
 	} catch (error) {
-		console.log(error)
+		res.status(500).json({ message: 'Error creating order', error })
 	}
 }
