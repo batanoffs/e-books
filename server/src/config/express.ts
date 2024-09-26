@@ -10,8 +10,6 @@ function configExpress(app: Express): void {
 	app.use(cookieParser(process.env.JWT_SECRET))
 	app.use(session())
 	app.use(cors());
-	app.use(bodyParser.json({ limit: '5mb' }))
-	app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }))
 	app.use(express.json())
 }
 
