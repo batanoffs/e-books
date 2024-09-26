@@ -89,9 +89,8 @@ export const AddressForm = ({ control, errors, register }) => {
 						<Controller
 							name='regionId'
 							control={control}
-							{...register('regionId')} //{ required: 'Полето е задължителено' }
 							render={({ field }) => (
-								<Select {...field}>
+								<Select {...field} label='Област'>
 									{regionOptions.map((option) => (
 										<MenuItem key={option.value} value={option.value}>
 											{option.label}
