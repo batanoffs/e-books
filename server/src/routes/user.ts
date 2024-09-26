@@ -10,7 +10,7 @@ import {
 const router = Router()
 
 router.get('/', getUsers)
-router.get('/user-id', getUserByIdFromToken)
+router.get('/verify-user', getUserByIdFromToken)
 router.get('/:id', getUserById)
 router.put('/:id', updateUser)
 router.delete('/:id', deleteUser)
