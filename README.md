@@ -1,9 +1,9 @@
-<h1> E-commerce Bookstore "Knigi.bg" </h1>
+# E-commerce Bookstore "Knigi.bg"
 
 [![License: MIT](https://img.shields.io/badge/Licence-MIT-teal)](https://opensource.org/licenses/MIT)
 [![styled with: Prettier](https://img.shields.io/badge/styled_with-prettier-purple)](https://github.com/prettier/prettier)
 
-The goal of this e-commerce full stack project is to design and implement a fully functional online bookstore connected to payment APIs, delivery service APIs, and cloud storage. The project also aims to provide a seamless user experience, with features such as filtering and sorting, purchase history, buying, a functional cart, and data management through the admin panel.
+The goal of this full stack project is to design and implement a fully functional online e-commerce website connected to payment APIs, delivery service APIs, cloud storage and database and provide a seamless user experience.
 
 During development, I've learned a lot about:
 - fully utilizing the features that the React Admin framework provides to build the admin panel
@@ -22,16 +22,17 @@ During development, I've learned a lot about:
     <h2> 📝 Table of Contents</h2>
   </summary>
 
-- [🔬 Technologies used](#-technologies-used)
-- [🎬 App Usage](#-app-usage)
-- [🔧 Installation](#-installation)
-- [💫 UX UI](#-ux-ui)
-- [📁 Project content](#-project-content)
-- [🎨 Design and Architecture](#-design-and-architecture)
-  - [⚙️ **Front-end architecture**](#️-front-end-architecture)
-  - [⚙️ **Back-end architecture**](#️-back-end-architecture)
-- [🚀 FUTURE Development:](#-future-development)
-- [📐Fixes and updates:](#fixes-and-updates)
+- [E-commerce Bookstore "Knigi.bg"](#e-commerce-bookstore-knigibg)
+  - [🔬 Technologies used](#-technologies-used)
+  - [🎬 App Usage](#-app-usage)
+  - [🔧 Installation](#-installation)
+  - [💫 UX UI](#-ux-ui)
+  - [📁 Project content](#-project-content)
+  - [🎨 Design and Architecture](#-design-and-architecture)
+    - [⚙️ **Front-end architecture**](#️-front-end-architecture)
+    - [⚙️ **Back-end architecture**](#️-back-end-architecture)
+  - [🚀 FUTURE Development:](#-future-development)
+  - [📐Fixes and updates:](#fixes-and-updates)
 
 </details>
 
