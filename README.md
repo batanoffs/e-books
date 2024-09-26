@@ -1,11 +1,21 @@
 <h1> E-commerce Bookstore "Knigi.bg" </h1>
 
 [![License: MIT](https://img.shields.io/badge/Licence-MIT-teal)](https://opensource.org/licenses/MIT)
-[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-teal)](https://github.com/prettier/prettier)
+[![styled with: Prettier](https://img.shields.io/badge/styled_with-prettier-purple)](https://github.com/prettier/prettier)
 
-The goal of this e-commerce full stack project is to design and implement a fully functional online bookstore, practice the integration of payment methods, implement user roles and authentication, integrate delivery APIs such as Econt and Speedy, and build a scalable backend architecture. The project also aims to provide a seamless user experience, with features such as filtering and sorting, a functional cart, and a responsive design.
+The goal of this e-commerce full stack project is to design and implement a fully functional online bookstore connected to payment APIs, delivery service APIs, and cloud storage. The project also aims to provide a seamless user experience, with features such as filtering and sorting, purchase history, buying, a functional cart, and data management through the admin panel.
 
-During development, I've learned a lot about fully utilizing the features that React Admin framework provides, how integrate Stripe payments, how to build a functional backend API and provide data to the client, how to store tokens with cookies, implement guards, providing interfaces for TypeScript, manage state with Zustand, configuring CORS, encryption methods (salting) and more.
+During development, I've learned a lot about:
+- fully utilizing the features that the React Admin framework provides to build the admin panel
+- how to integrate the Stripe Payments API
+- how to store my data in a database and images to the cloud provider
+- how to build a functional backend API and provide data to the client
+- how to store tokens with cookies
+- implementing guards to prevent unauthorized access
+- manage state with Zustand
+- implement ACID transactions with Mongoose and MongoDB for seamless data management
+- configuring CORS for local development
+- encryption methods (salting) and many more.
 
 <details close>
   <summary>
@@ -45,17 +55,19 @@ During development, I've learned a lot about fully utilizing the features that R
 
 Here are some examples of how to use this project:
 
-1. Register and login as user or admin
-2. Browse products in the Catalog page - also filtering and sorting are available for the users
-3. Add items to the Cart. The cart page is for authenticated users only. There are options to remove items, change the quantity and checkout.
-4. Add items to the Wishlist. In the page, there are options to remove items or add them to the cart.
-5. Check each product details in the Details Page where only authenticated users can add comments or see the button for add to wishlist.
-6. Finally checkout your items in the Checkout page which is for authenticated users. It shows all the info about the order with the total price and options for delivery methods, forms for contact info and payment button that redirects the user to the payment gateway - stripe.
-7. Manage products, users, orders, etc from Admin panel
+- Register and login as a user
+- Browse products in the catalog page
+- Filter and sort the products (not fully implemented)
+- Add and manage items to the cart
+- Add or remove items to/from the wishlist
+- Check each product details in the Details Page, where only authenticated users can add comments or add to wishlist.
+- Manage application data from the admin panel only for admins
+- Checkout your cart and pay
+- Preview order
 
 ## 🔧 Installation
 
-To get started with this project you need `mongodb` installed for handling the database then it should start automatically the server and the client. If it does not work follow the steps below.
+Follow the instructions below:
 
 1. Clone the repository
 
@@ -64,7 +76,6 @@ To get started with this project you need `mongodb` installed for handling the d
     ```
 
 2. Navigate to the project directory: `cd your-project-directory`
-
 3. Install dependencies for the server and the client:
 
     ```bash
@@ -74,8 +85,8 @@ To get started with this project you need `mongodb` installed for handling the d
     ```bash
     ./cd server && yarn install
     ```
-
-4. Start the development server:
+4. **The application should start automatically because of the `vscode config` file.**
+5. If it does not, you can manually run the development server and the client cd to the main directory and:
 
     ```bash
     ./cd server && yarn run start-server
@@ -85,8 +96,8 @@ To get started with this project you need `mongodb` installed for handling the d
     ./cd client && yarn run dev
     ```
 
-5. Open your browser and go to [http://localhost:5173/](http://localhost:5173/) to view the app.
-6. Register new account and login
+6. Open your browser and go to [http://localhost:5173/](http://localhost:5173/) to view the app.
+7. Register a new account and login
 
 ## 💫 UX UI
 
@@ -122,7 +133,7 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 
 -   #### 💾 Context Providers with `Zustand` Store
 
-    -   **Alert Store** - a helper store that provides state if the alert is open or not and what is the message.
+    -   **Alert Store** - a helper store that provides state if the alert is open or not and what is the alert message.
 
     -   **Cart Store** - stores and provides data for the cart of the authenticated user.
 
