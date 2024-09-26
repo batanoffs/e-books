@@ -32,25 +32,22 @@ const CategoryList = () => {
 
 	return (
 		<div className={styles.wrapper}>
-			<Typography variant='h5' className={styles.mainTitle}>
-				Пазарувай по категории
-			</Typography>
 			<div className={styles.categoryContainer}>
-				<Typography variant='h5' className={styles.categoryTitle}>
-					Категории "Книги"
+				<Typography variant='h5' className={styles.mainTitle}>
+					Книги
 				</Typography>
 				<CategoriesCarousel categories={categoriesMap.books} Component={CategoryItem} />
 			</div>
 			<div className={styles.categoryContainer}>
-				<Typography variant='h5' className={styles.categoryTitle}>
-					Категории "Учебници"
+				<Typography variant='h5' className={styles.mainTitle}>
+					Учебници
 				</Typography>
 				<CategoriesCarousel categories={categoriesMap.textbooks} Component={CategoryItem} />
 			</div>
 
 			<div className={styles.categoryContainer}>
-				<Typography variant='h5' className={styles.categoryTitle}>
-					Категории "Канцелария"
+				<Typography variant='h5' className={styles.mainTitle}>
+					Канцелария
 				</Typography>
 				<CategoriesCarousel
 					categories={categoriesMap.stationeries}
