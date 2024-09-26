@@ -1,10 +1,9 @@
-import { Document, Types } from 'mongoose'
-
-export interface IOrderSchema extends Document {
+export interface Order {
+	_id: string
 	userId: string
 	products: {
 		productType: 'Book' | 'Textbook' | 'Stationery'
-		productId: Types.ObjectId
+		productId: String
 		quantity: number
 	}[]
 	total: number
