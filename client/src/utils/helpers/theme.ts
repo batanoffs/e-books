@@ -21,7 +21,7 @@ const themeOptions = createTheme({
 			primary: '#071108', // Primary text color
 			secondary: '#bfb1c1', // Secondary text color
 			disabled: '#5c5959', // Disabled text color
-			hint: '#6028c8', // Hint color
+			
 		},
 		background: {
 			default: '#fff', // Slightly off-white background for better readability
@@ -90,7 +90,7 @@ const themeOptions = createTheme({
 		},
 		button: {
 			textTransform: 'none', // Ensure no capitalization in buttons
-			fontWeight: 600,
+			fontWeight: 500,
 		},
 		caption: {
 			fontSize: '0.75rem',
@@ -149,7 +149,8 @@ const themeOptions = createTheme({
 			},
 			styleOverrides: {
 				root: {
-					borderRadius: 8, // Slightly more rounded buttons
+					borderRadius: 20, // Slightly more rounded buttons
+					height: 36,
 				},
 				containedPrimary: {
 					color: '#ffffff',
