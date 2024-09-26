@@ -7,7 +7,7 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemText from '@mui/material/ListItemText'
-import { ListItemButton } from '@mui/material'
+import { CardMedia, Grid, ListItemButton } from '@mui/material'
 import Skeleton from '@mui/material/Skeleton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
@@ -110,65 +110,67 @@ const WishlistPage = () => {
 	}
 
 	return (
-		<Box sx={{ p: 3, maxWidth: 1000, marginLeft: 'auto', marginRight: 'auto' }}>
+		<Box sx={{ flexGrow: 1 }}>
+			<Typography variant='h5' gutterBottom>
+				Харесани продукти
+			</Typography>
 			{wishlist?.length === 0 ? (
 				<ListIsEmpty />
 			) : (
-				<Paper
-					sx={{
-						width: '100%',
-						minWidth: 400,
-					}}
-				>
-					<List>
-						{wishlist?.map((product) => (
-							<ListItem
-								key={product._id}
-								sx={{
-									'&:hover': { backgroundColor: 'white' },
-								}}
-							>
-								<Box sx={{ width: '10%', marginRight: 2 }}>
-									<img
-										src={product.picture}
-										alt={product.title}
-										style={{ width: '80px' }}
-									/>
-								</Box>
-								<ListItemText
-									primary={
-										<Typography variant='h6' sx={{ fontWeight: 'bold' }}>
-											{product.title}
-										</Typography>
-									}
-									secondary={
-										<Typography variant='body2' color='text.secondary'>
-											{formatCurrencyToBGN(product.price)}
-										</Typography>
-									}
+				<Grid item xs={12} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+					{wishlist?.map((product) => (
+						<Paper
+							key={product._id}
+							elevation={1}
+							sx={{
+								padding: 2,
+								display: 'flex',
+								justifyContent: 'space-between',
+								alignItems: 'center',
+							}}
+						>
+							<Box sx={{ display: 'flex', alignItems: 'center' }}>
+								<CardMedia
+									component='img'
+									image={product.picture}
+									alt={product.title}
+									sx={{
+										width: 120,
+										height: 120,
+										marginRight: 2,
+										objectFit: 'cover',
+									}}
 								/>
-								<Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
-									<Button
-										variant='outlined'
-										startIcon={<ShoppingCartIcon />}
-										onClick={() => handleAddToCart(product._id)}
-										sx={{ mr: 1 }}
-									>
-										Добави
-									</Button>
-									<Button
-										variant='contained'
-										color='error'
-										onClick={() => removeFromWishlist(product._id)}
-										disabled={isRemoving}
-									>
-										<DeleteIcon />
-									</Button>
+								<Box>
+									<Typography variant='h6'>{product.title}</Typography>
+									<Typography variant='body1' color='textPrimary'>
+										Цена: {formatCurrencyToBGN(product.price)}
+									</Typography>
 								</Box>
-							</ListItem>
-						))}
-					</List>
-				</Paper>
+							</Box>
+
+							<Box sx={{ textAlign: 'right' }}>
+								<Button
+									variant='contained'
+									color='warning'
+									startIcon={<ShoppingCartIcon />}
+									onClick={() => handleAddToCart(product._id)}
+									sx={{ marginTop: 1 }}
+								>
+									Добави в количката
+								</Button>
+								<Button
+									variant='outlined'
+									color='secondary'
+									onClick={() => removeFromWishlist(product._id)}
+									sx={{ marginTop: 1, marginLeft: 1 }}
+								>
+									<DeleteIcon />
+								</Button>
+							</Box>
+						</Paper>
+					))}
+				</Grid>
 			)}
 		</Box>
 	)

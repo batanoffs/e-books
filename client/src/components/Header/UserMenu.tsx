@@ -11,12 +11,12 @@ import Button from '@mui/material/Button'
 import { useLoginModal } from '../../store/helperModal'
 import CartButton from './CartButton'
 import authGuards from '../../middlewares/guards'
-import { useRef } from 'react'
 
-const settings = [
+const menuItems = [
 	{ name: 'Начало', path: '/' },
-	{ name: 'Профил', path: '/profil' },
-	{ name: 'Харесани', path: '/wishlist' },
+	{ name: 'Профил', path: '/profile/settings' },
+	{ name: 'Харесани', path: '/profile/wishlist' },
+	{ name: 'Поръчки', path: '/profile/orders' },
 ]
 
 const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handleLogout }) => {
@@ -51,7 +51,7 @@ const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handl
 				open={Boolean(anchorElUser)}
 				onClose={handleCloseUserMenu}
 			>
-				{settings.map((setting) => (
+				{menuItems.map((setting) => (
 					<MenuItem key={setting.name} component={Link} to={setting.path}>
 						<Typography textAlign='center'>{setting.name}</Typography>
 					</MenuItem>

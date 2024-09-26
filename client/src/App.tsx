@@ -18,8 +18,10 @@ import AboutPage from './pages/About/AboutPage'
 import PopularPage from './pages/Popular/PopularPage'
 import CatalogPage from './pages/Catalog/CatalogPage'
 import ScrollTop from './components/ScrollTop/BackToTop'
-import WishlistPage from './pages/Wishlist/WishlistPage'
+import WishlistPage from './pages/ProfileSettings/WishlistPage'
 import PaymentSuccessful from './pages/Checkout/PaymentSuccessful'
+import UserOrders from './pages/ProfileSettings/ProfilePage'
+import ProfilePage from './pages/ProfileSettings/ProfilePage'
 
 // import OrdersConfirmationPage from './pages/Orders/OrdersConfirmationPage'
 // import OrderDetailsPage from './pages/Orders/OrderDetailsPage'
@@ -55,7 +57,7 @@ const App = () => {
 				<Route path='/faq' element={<FaqPage />} />
 				<Route path='/register' element={<Register />} />
 				<Route path='*' element={<NotFoundPage />} />
-				{/* <Route path="/profile" element={<ProfilePage />} /> */}
+				<Route path='/profile/*' element={<ProfilePage />} />
 				<Route path='/wishlist' element={<WishlistPage />} />
 			</Routes>
 
