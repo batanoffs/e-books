@@ -3,19 +3,22 @@
 [![License: MIT](https://img.shields.io/badge/Licence-MIT-teal)](https://opensource.org/licenses/MIT)
 [![styled with: Prettier](https://img.shields.io/badge/styled_with-prettier-purple)](https://github.com/prettier/prettier)
 
-The goal of this full stack project is to design and implement a fully functional online e-commerce website connected to payment APIs, delivery service APIs, cloud storage and database and provide a seamless user experience.
+The goal of this full stack project is to design and implement a fully functional online e-commerce website connected to payment API Stripe, delivery service APIs - Econd and Speed, cloud storage database Cloudinary and provide a seamless user experience.
+
+*Note: The website is not responsive yet. Recommended screen resolution 1920:1080 with aspect ratio of 16:9*
 
 During development, I've learned a lot about:
 - fully utilizing the features that the React Admin framework provides to build the admin panel
-- how to integrate the Stripe Payments API
-- how to store my data in a database and images to the cloud provider
-- how to build a functional backend API and provide data to the client
-- how to store tokens with cookies
+- integrate the Stripe Payments
+- configure database in MongoDB and store images to a cloud provider - Cloudinary
+- build a functional backend API and provide data to the client
+- store tokens with cookies
 - implementing guards to prevent unauthorized access
-- manage state with Zustand
-- implement ACID transactions with Mongoose and MongoDB for seamless data management
+- manage client state with Zustand
+- implement ACID transactions with Mongoose and MongoDB for seamless data management in the DB
 - configuring CORS for local development
 - encryption methods (salting) and many more.
+
 
 <details close>
   <summary>
