@@ -1,66 +1,76 @@
 import { Request, Response } from 'express'
-import Order from '../models/Order';
+import Order from '../models/Order'
 
 export const createOrder = async (req: Request, res: Response) => {
-    const { userId, items, total, status } = req.body;
-    try {
-        const newOrder = new Order({ userId, items, total, status });
-        await newOrder.save();
-        res.status(201).json(newOrder);
-    } catch (error) {
-        res.status(500).json({ message: 'Error creating order', error });
-    }
-};
+	const { userId, items, total, status } = req.body
+	try {
+		const newOrder = new Order({ userId, items, total, status })
+		await newOrder.save()
+		res.status(201).json(newOrder)
+	} catch (error) {
+		res.status(500).json({ message: 'Error creating order', error })
+	}
+}
 
 export const getOrders = async (req: Request, res: Response) => {
-    try {
-        const orders = await Order.find();
-        res.status(200).json(orders);
-    } catch (error) {
-        res.status(500).json({ message: 'Error fetching orders', error });
-    }
-};
+	console.log('user id:', req.user?.id)
+
+	try {
+		const orders = await Order.find({ userId: req.user?.id })
+			.populate('products.productId')
+			.lean()
+		console.log('found orders', orders)
+
+		res.status(200).json(orders)
+	} catch (error) {
+		res.status(500).json({ message: 'Error fetching orders', error })
+	}
+}
 
 export const getOrderById = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    try {
-        const order = await Order.findById(id);
-        if (!order) {
-            return res.status(404).json({ message: 'Order not found' });
-        }
-        res.status(200).json(order);
-    } catch (error) {
-        res.status(500).json({ message: 'Error fetching order', error });
-    }
-};
+	const { id } = req.params
+	const token = req.headers['authorization']?.split(' ')[1]
+	if (!token) {
+		return res.status(401).json({ message: 'Unauthorized' })
+	}
+	try {
+		const order = await Order.findById(id)
+		if (!order) {
+			return res.status(404).json({ message: 'Order not found' })
+		}
+		res.status(200).json(order)
+	} catch (error) {
+		res.status(500).json({ message: 'Error fetching order', error })
+	}
+}
 
 export const updateOrder = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const { userId, items, total, status } = req.body;
-    try {
-        const order = await Order.findByIdAndUpdate(
-            id,
-            { userId, items, total, status },
-            { new: true }
-        );
-        if (!order) {
-            return res.status(404).json({ message: 'Order not found' });
-        }
-        res.status(200).json(order);
-    } catch (error) {
-        res.status(500).json({ message: 'Error updating order', error });
-    }
-};
+	const { id } = req.params
+	const { userId, items, total, status } = req.body
+	try {
+		const order = await Order.findByIdAndUpdate(
+			id,
+			{ userId, items, total, status },
+			{ new: true }
+		)
+		if (!order) {
+			return res.status(404).json({ message: 'Order not found' })
+		}
+		res.status(200).json(order)
+	} catch (error) {
+		res.status(500).json({ message: 'Error updating order', error })
+	}
+}
 
 export const deleteOrder = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    try {
-        const order = await Order.findByIdAndDelete(id);
-        if (!order) {
-            return res.status(404).json({ message: 'Order not found' });
-        }
-        res.status(200).json({ message: 'Order deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ message: 'Error deleting order', error });
-    }
-};
+	const { id } = req.params
+	try {
+		const order = await Order.findByIdAndDelete(id)
+		if (!order) {
+			return res.status(404).json({ message: 'Order not found' })
+		}
+		res.status(200).json({ message: 'Order deleted successfully' })
+	} catch (error) {
+		res.status(500).json({ message: 'Error deleting order', error })
+	}
+}
