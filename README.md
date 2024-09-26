@@ -9,13 +9,13 @@ During development, I've learned a lot about fully utilizing the features that R
 
 <details close>
   <summary>
-    <h2> 📝Table of Contents</h2>
-  </summary> 
+    <h2> 📝 Table of Contents</h2>
+  </summary>
 
-- [🔬Technologies used](#technologies-used)
-- [🎬 Usage](#-usage)
+- [🔬 Technologies used](#-technologies-used)
+- [🎬 App Usage](#-app-usage)
 - [🔧 Installation](#-installation)
-- [💫UX UI](#ux-ui)
+- [💫 UX UI](#-ux-ui)
 - [📁 Project content](#-project-content)
 - [🎨 Design and Architecture](#-design-and-architecture)
   - [⚙️ **Front-end architecture**](#️-front-end-architecture)
@@ -25,7 +25,7 @@ During development, I've learned a lot about fully utilizing the features that R
 
 </details>
 
-## 🔬Technologies used
+## 🔬 Technologies used
 
 | Department          | Technologies                                                                  |
 | ------------------- | ----------------------------------------------------------------------------- |
@@ -41,13 +41,13 @@ During development, I've learned a lot about fully utilizing the features that R
 | Handling requests   | `Axios`                                                                       |
 | Tools               | `Git`, `Vite`, `ESLint`, `Prettier`, `Yarn`, `Nodemon`                        |
 
-## 🎬 Usage
+## 🎬 App Usage
 
 Here are some examples of how to use this project:
 
 1. Register and login as user or admin
 2. Browse products in the Catalog page - also filtering and sorting are available for the users
-3. Add items to the Cart. The cart page is for authenticated users only. There are options to remove items, change the quantity and checkout. 
+3. Add items to the Cart. The cart page is for authenticated users only. There are options to remove items, change the quantity and checkout.
 4. Add items to the Wishlist. In the page, there are options to remove items or add them to the cart.
 5. Check each product details in the Details Page where only authenticated users can add comments or see the button for add to wishlist.
 6. Finally checkout your items in the Checkout page which is for authenticated users. It shows all the info about the order with the total price and options for delivery methods, forms for contact info and payment button that redirects the user to the payment gateway - stripe.
@@ -55,8 +55,7 @@ Here are some examples of how to use this project:
 
 ## 🔧 Installation
 
-To get started with this project you need `mongodb` installed for handling the database then it should start automatically the server and the client. If it does not work follow the steps below. 
-
+To get started with this project you need `mongodb` installed for handling the database then it should start automatically the server and the client. If it does not work follow the steps below.
 
 1. Clone the repository
 
@@ -89,31 +88,31 @@ To get started with this project you need `mongodb` installed for handling the d
 5. Open your browser and go to [http://localhost:5173/](http://localhost:5173/) to view the app.
 6. Register new account and login
 
-## 💫UX UI
+## 💫 UX UI
 
-- Logo creation and design are loosely done with the help of [excalidraw](https://excalidraw.com/). 
+-   Logo creation and design are loosely done with [www.excalidraw.com](https://excalidraw.com/).
 
-![knigibguxui](https://github.com/user-attachments/assets/7efc6120-09a9-41da-b374-cd6b99ab5cb5)
+    ![knigibguxui](https://github.com/user-attachments/assets/7efc6120-09a9-41da-b374-cd6b99ab5cb5)
 
 ## 📁 Project content
 
-- ### Login Register
+-   ### Login Register
 
-- ### About
+-   ### About
 
-- ### Catalog
+-   ### Catalog
 
-- ### Product details
+-   ### Product details
 
-- ### Cart
+-   ### Cart
 
-- ### Wishlist
+-   ### Wishlist
 
-- ### Checkout
+-   ### Checkout
 
-- ### Profile menu
+-   ### Profile menu
 
-- ### Admin panel
+-   ### Admin panel
 
 ## 🎨 Design and Architecture
 
@@ -121,40 +120,40 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 
 ### ⚙️ **Front-end architecture**
 
-- #### 💾 Context Providers with `Zustand` Store
+-   #### 💾 Context Providers with `Zustand` Store
 
-  -   **Alert Store** - a helper store that provides state if the alert is open or not and what is the message.
+    -   **Alert Store** - a helper store that provides state if the alert is open or not and what is the message.
 
-  -   **Cart Store** - stores and provides data for the cart of the authenticated user.
-    
-  -   **Categories Store** - stores and provides data for categories in the catalog.
+    -   **Cart Store** - stores and provides data for the cart of the authenticated user.
 
-  -   **Filter Store** - provides and stores data for the filter section in the catalog page (not yet implemented)
+    -   **Categories Store** - stores and provides data for categories in the catalog.
 
-  -   **Modal Store** - a helper store that provides state if the modal is open or not
+    -   **Filter Store** - provides and stores data for the filter section in the catalog page (not yet implemented)
 
-  -   **Location Store** - a helper store that provides state for `window.location.pathname` used for better UX and site navigation
+    -   **Modal Store** - a helper store that provides state if the modal is open or not
 
-  -   **User Data Store** - holds information about the currently authenticated user. It provides getters and setters for the user's data, including the user's username, whether the user is logged in, and whether the user is an admin.
+    -   **Location Store** - a helper store that provides state for `window.location.pathname` used for better UX and site navigation
 
-  -   **Wishlist Store** - stores and provides data for the wishlist of the authenticated user.
+    -   **User Data Store** - holds information about the currently authenticated user. It provides getters and setters for the user's data, including the user's username, whether the user is logged in, and whether the user is an admin.
 
-- #### 🎣 Custom Hooks
+    -   **Wishlist Store** - stores and provides data for the wishlist of the authenticated user.
 
-  -  **useConfirm()** is a hook that opens modal to ask the user for confirmation of his action.
+-   #### 🎣 Custom Hooks
 
-- #### 🛫 Routers
+    -   **useConfirm()** is a hook that opens modal to ask the user for confirmation of his action.
 
-  -   Main Router is located in `App` component
+-   #### 🛫 Routers
 
-- #### 🧮 Utils
+    -   Main Router is located in `App` component
 
-  -   Constants
+-   #### 🧮 Utils
+
+    -   Constants
 
         -   **api.ts** - stores base URL and endpoints to be used in all services
         -   **location.ts** - stores array of regions and countries to be used in the location dropdown
 
-  -   Helpers
+    -   Helpers
 
         -   **getToken()** - gets user token
         -   **getUserRole()** - gets user role
@@ -166,92 +165,88 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
         -   **formatDate(date)** - formats the date
         -   **currencyFormatterToBGN(value)** - formats the value to BGN currency
 
-- #### 🙋‍♀️ Services
+-   #### 🙋‍♀️ Services
 
-  -   **authService** for Authentication
-  -   **cartService** for handling cart data
-  -   **productService** for handling products data (todo)
+    -   **authService** for Authentication
+    -   **cartService** for handling cart data
+    -   **productService** for handling products data (todo)
 
 ### ⚙️ **Back-end architecture**
 
-- #### 🛠 Express config
+-   #### 🛠 Express config
 
-  -   **express.ts** contains express middleware
-  -   **database.ts** contains mongoose middleware
-  -   **routes.ts** contains express routes
-  
-- #### 📮 Models
+    -   **express.ts** contains express middleware
+    -   **database.ts** contains mongoose middleware
+    -   **routes.ts** contains express routes
 
-  | Model                | Fields                                                                                                                                                                                           |
-  | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-  | Book, Textbook       | `id`,`title`, `author`, `price`, `description`, `picture`, `coverPageType`, `stock`, `categories`, `publisher`, `language`, `publishDate`, `pageCount`, `translator`, `dimensions`, `createdAt`, |
-  | BookCategories       | `id`, `name`                                                                                                                                                                                     |
-  | Cart                 | `id`, `products`, `modifiedAt`, `active`                                                                                                                                                         |
-  | Featured             | `productId`, `productType`,`featuredAt`                                                                                                                                                          |
-  | Order                | `id`, `userId`, `products[{productId, productType, quantity}]`, `total`, `orderStatus`, `shippingStatus`                                                                                         |
-  | Stationery           | `id`, `title`, `price`, `description`, `picture`, `categories`, `stock`, `createdAt`                                                                                                             |
-  | StationeryCategories | `id`, `name`                                                                                                                                                                                     |
-  | TextbookCategories   | `id`, `name`                                                                                                                                                                                     |
-  | User                 | `id`, `email`, `password`, `register_date`, `role`                                                                                                                                               |
-  | Wishlist             | `id`, `user`, `productRefs`                                                                                                                                                                      |
+-   #### 📮 Models
 
+    | Model                | Fields                                                                                                                                                                                           |
+    | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+    | Book, Textbook       | `id`,`title`, `author`, `price`, `description`, `picture`, `coverPageType`, `stock`, `categories`, `publisher`, `language`, `publishDate`, `pageCount`, `translator`, `dimensions`, `createdAt`, |
+    | BookCategories       | `id`, `name`                                                                                                                                                                                     |
+    | Cart                 | `id`, `products`, `modifiedAt`, `active`                                                                                                                                                         |
+    | Featured             | `productId`, `productType`,`featuredAt`                                                                                                                                                          |
+    | Order                | `id`, `userId`, `products[{productId, productType, quantity}]`, `total`, `orderStatus`, `shippingStatus`                                                                                         |
+    | Stationery           | `id`, `title`, `price`, `description`, `picture`, `categories`, `stock`, `createdAt`                                                                                                             |
+    | StationeryCategories | `id`, `name`                                                                                                                                                                                     |
+    | TextbookCategories   | `id`, `name`                                                                                                                                                                                     |
+    | User                 | `id`, `email`, `password`, `register_date`, `role`                                                                                                                                               |
+    | Wishlist             | `id`, `user`, `productRefs`                                                                                                                                                                      |
 
-- #### 🛫 Routes
+-   #### 🛫 Routes 
 
-  | Route Type     | Route Name                     | Description                                                                                                    |
-  | -------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-  | Main           | `/api/**`                      | Main router that combines all routes under `/api`                                                              |
-  | Admin          | `/api/admin/** `               | Admin router combining all routes under `/api/admin` for management of products, users, orders, featured items |
-  | Auth           | `/api/(register,login,logout)` | Authentication routes                                                                                          |
-  | Book           | `/api/book`                    | Book product routes                                                                                            |
-  | Cart           | `/api/cart`                    | User cart routes                                                                                               |
-  | Categories     | `/api/categories`              | Categories routes                                                                                              |
-  | CategoriesType | `/api/categoriesType`          | Categories type routes and controllers for getting all types of categories                                     |
-  | Featured       | `/api/featured`                | Featured products routes (todo)                                                                                |
-  | Order          | `/api/order`                   | Orders routes                                                                                                  |
-  | Stationery     | `/api/stationery`              | Stationeries routes                                                                                            |
-  | Stripe         | `/api/stripe`                  | Stripe routes                                                                                                  |
-  | Textbook       | `/api/textbook`                | Textbooks routes                                                                                               |
-  | User           | `/api/user`                    | Users routes                                                                                                   |
-  | Wishlist       | `/api/wishlist`                | Wishlists routes                                                                                               |
+    | Route Type | Route Name           | Description                                                                                                                                                                                                                                                            |
+    | ---------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | Main       | `/api/**`            | Main router that combines all routes under `/api`                                                                                                                                                                                                                      |
+    | Admin      | `/api/admin/**`      | Admin router combining all routes for management of products, categories, users, orders, featured etc. `/users` \| `/categories/books` \| `/categories/textbooks` \| `/categories/stationery` \| `/stationery` \| `/books` \| `/textbooks` \| `/featured` \| `/orders` |
+    | Auth       | `/api/`              | Authentication for `register` \| `login` \| `logout`                                                                                                                                                                                                                   |
+    | Book       | `/api/books/**`      | Available routes to get all `/`, get by id `/:id` and `/upload` a product image to Cloudinary `/upload`                                                                                                                                                                |
+    | Cart       | `/api/cart/**`       | Available routes for POST, GET and DELETE - `/` to add or remove product from cart, `/:userId` to get cart by userId, `/:productId` to remove product from cart                                                                                                        |
+    | Categories | `/api/categories/**` | Available routes `/` to get all categories for each type. And for each type `/books/`, `/textbooks/` and `/stationery/` to get all or post a new one.                                                                                                                  |
+    | Order      | `/api/orders/**`     | Available routes `/` to get all, `/:id` to get/update one by id or delete routes                                                                                                                                                                                       |
+    | Stationery | `/api/stationery/**` | Available routes to get all `/`, get by id `/:id` and `/upload` a product image to Cloudinary `/upload`                                                                                                                                                                |
+    | Checkout   | `/api/checkout/**`   | For the checkout and payment I use Stripe to create a new session `/create-checkout-session` and retrieve it `/session-status`                                                                                                                                         |
+    | Textbook   | `/api/textbooks`     | Available routes to get all `/`, get by id `/:id` and `/upload` a product image to Cloudinary `/upload`                                                                                                                                                                |
+    | User       | `/api/user`          | Available routes `/verify-user` to get user by token, `/:id` to get, update or delete a user by id                                                                                                                                                                     |
+    | Wishlist   | `/api/wishlist`      | GET, POST, DELETE a list of products from wishlist. Available routes `/` to get all or create and update one, `/:productId` to delete one by id                                                                                                                        |
 
-  
-- #### 📡 Controllers
+-   #### 📡 Controllers
 
-  -   **auth** for Authentication contains `logic` `register` and `logout`
-  -   **book** for handling products of type books. Contains logic for delete, update, create, get all or get one book
-  -   **cart** for handling cart data. Contains logic for `addToCart`, `getCart`, `removeProductFromCart`, `clearCart`
-  -   **categories** for handling categories data, contains logic for `addCategory` and `getAll` categories of every type.
-  -   **featured** for handling featured data, contains logic `getFeaturedProducts`, `markAsFeatured`, `removeFromFeatured`
-  -   **images** for handling image uploads to Cloudinary. Contains logic `uploadCoverImage`
-  -   **order** for handling order data, contains logic `createOrder`, `getOrderById`, `getOrders`, `updateOrderStatus`, `deleteOrder`
-  -   **stationery** for handling stationery data, contains logic `createStationery`, `getStationeries`, `updateStationery`, `deleteStationery`
-  -   **textbook** for handling textbook data, contains logic `createTextbook`, `getTextbooks`, `updateTextbook`, `deleteTextbook`
-  -   **stripe** for handling payment data, contains logic `checkoutSession`
-  -   **user** for handling user data, contains logic `getUsers`, `getUserByIdFromToken`, `getUserById`, `updateUser`, `deleteUser`
-  -   **wishlist**(todo) for handling wishlist data, contains logic `createWishlist`, `getWishlist`, `updateWishlist`, `deleteWishlist`
+    -   **auth** for authenticating the users. Contains logic for `login`, `register` and `logout`
+    -   **book** for handling products of type books. Contains logic for delete, update, create, get all or get one book
+    -   **cart** for handling cart data. Contains logic for `addToCart`, `getCart`, `removeProductFromCart`, `clearCart`
+    -   **categories** for handling categories data, contains logic for `addCategory` and `getAll` categories of every type.
+    -   **featured** for handling featured data, contains logic `getFeaturedProducts`, `markAsFeatured`, `removeFromFeatured`
+    -   **images** for handling image uploads to Cloudinary. Contains logic `uploadCoverImage`
+    -   **order** for handling order data, contains logic `createOrder`, `getOrderById`, `getOrders`, `updateOrderStatus`, `deleteOrder`
+    -   **stationery** for handling stationery data, contains logic `createStationery`, `getStationeries`, `updateStationery`, `deleteStationery`
+    -   **textbook** for handling textbook data, contains logic `createTextbook`, `getTextbooks`, `updateTextbook`, `deleteTextbook`
+    -   **stripe** for handling payment data, contains logic `checkoutSession`
+    -   **user** for handling user data, contains logic `getUsers`, `getUserByIdFromToken`, `getUserById`, `updateUser`, `deleteUser`
+    -   **wishlist**(todo) for handling wishlist data, contains logic `createWishlist`, `getWishlist`, `updateWishlist`, `deleteWishlist`
 
-- #### 🙋‍♀️ Services
+-   #### 🙋‍♀️ Services
 
-  -   **user** for Authentication (register, login, logout)
-  -   **jwt** for creating and verifying tokens
-  -   **image** for uploading image to `Cloudinary`
+    -   **user** for Authentication (register, login, logout)
+    -   **jwt** for creating and verifying tokens
+    -   **image** for uploading image to `Cloudinary`
 
-- #### ⌨️ Middlewares
+-   #### ⌨️ Middlewares
 
-  -   **cors** for cors setup for the express server
-  -   **filters** to be updated (todo), contains logic for catalog filters and sorting
-  -   **guards** isUser, isAdmin, isGuest - checks if user is authenticated and roles
-  -   **multer** for file upload
-  -   **session** validates the session. If token is present, sets the user in the request object
-  -   **validateRequest** validates the requests
+    -   **cors** for cors setup for the express server
+    -   **filters** to be updated (todo), contains logic for catalog filters and sorting
+    -   **guards** isUser, isAdmin, isGuest - checks if user is authenticated and roles
+    -   **multer** for file upload
+    -   **session** validates the session. If token is present, sets the user in the request object
+    -   **validateRequest** validates the requests
 
-- #### 🧮 Utils
+-   #### 🧮 Utils
 
-  -   **getCategoryModel(categoryType)**: This function returns the category model based on the category type.
-  -   **cloudinaryConfig()**: This function returns the configuration for `Cloudinary`.
-  -   **errorHandler(error, res)**: This function handles errors in the server.
-  -   **parseError(error)**: This function takes in an `error` object and returns a new error object with a consistent structure. It is designed to handle different types of errors that can occur in an application.
+    -   **getCategoryModel(categoryType)**: This function returns the category model based on the category type.
+    -   **cloudinaryConfig()**: This function returns the configuration for `Cloudinary`.
+    -   **errorHandler(error, res)**: This function handles errors in the server.
+    -   **parseError(error)**: This function takes in an `error` object and returns a new error object with a consistent structure. It is designed to handle different types of errors that can occur in an application.
 
 ## 🚀 FUTURE Development:
 
@@ -279,5 +274,5 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 -   [x] update carousels functionality buttons etc
 -   [x] update theme and reuseable code for scss and maybe react
 -   [ ] implement filters for Catalog Page
--   [ ] update logic for checkout page
--   [ ] add property for product type to each model schema of items/products
+-   [x] update logic for checkout page
+-   [ ] add property `productType` to each type of products
