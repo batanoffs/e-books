@@ -13,31 +13,30 @@ import StationeryCategories from '../models/StationeryCategories'
 
 const router = Router()
 
-router.use('/users', 
-	raExpressMongoose(User, { q: ['email', 'role'], useLean: false }))
+router.use('/users', raExpressMongoose(User, {
+		q: ['email', 'role'], 
+		useLean: false 
+	})
+)
 
-router.use('/categories/books',
-	raExpressMongoose(BookCategories, {
+router.use('/categories/books', raExpressMongoose(BookCategories, {
 		q: ['_id', 'name', 'createdAt', 'updatedAt'],
 		useLean: true,
 	})
 )
 
-router.use('/categories/textbooks',
-	raExpressMongoose(TextbookCategories, {
+router.use('/categories/textbooks', raExpressMongoose(TextbookCategories, {
 		q: ['_id', 'name', 'createdAt', 'updatedAt'],
 		useLean: false,
 	})
 )
-router.use('/categories/stationery',
-	raExpressMongoose(StationeryCategories, {
+router.use('/categories/stationery', raExpressMongoose(StationeryCategories, {
 		q: ['_id', 'name', 'createdAt', 'updatedAt'],
 		useLean: false,
 	})
 )
 
-router.use('/stationery',
-	raExpressMongoose(Stationery, {
+router.use('/stationery', raExpressMongoose(Stationery, {
 		q: [
 			'title',
 			'price',
@@ -48,11 +47,11 @@ router.use('/stationery',
 			'categories',
 			'createdAt',
 		],
+		useLean: true,
 	})
 )
 
-router.use('/books',
-	raExpressMongoose(Book, {
+router.use('/books', raExpressMongoose(Book, {
 		q: [
 			'title',
 			'author',
@@ -73,15 +72,13 @@ router.use('/books',
 	})
 )
 
-router.use('/textbooks',
-	raExpressMongoose(Textbook, {
+router.use('/textbooks', raExpressMongoose(Textbook, {
 		q: [
 			'title',
 			'author',
 			'price',
 			'description',
-			'coverImage',
-			'coverImageType',
+			'picture',
 			'stock',
 			'categories',
 			'publisher',
@@ -90,19 +87,30 @@ router.use('/textbooks',
 			'pageCount',
 			'translator',
 			'dimensions',
-			'coverPageType',
 			'createdAt',
 		],
+		useLean: true,
 	})
 )
 
-router.use('/featured',
-	raExpressMongoose(Featured, {
-		q: ['title', 'title', 'author', 'price', 'description', 'imageUrl', 'stock', 'category'],
+router.use('/featured', raExpressMongoose(Featured, {
+		q: [
+			'title', 
+			'author', 
+			'price', 
+			'description', 
+			'imageUrl', 
+			'stock', 
+			'category'
+		],
+		useLean: true,
 	})
 )
 
-router.use('/orders',
-	raExpressMongoose(Order, { q: ['userId', 'products', 'total', 'status'] }))
+router.use('/orders', raExpressMongoose(Order, {
+		q: ['userId', 'products', 'total', 'status'],
+		useLean: true,
+ })
+)
 
 export default router
