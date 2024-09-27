@@ -8,13 +8,15 @@ const CategoryItem = ({ category }: Category) => {
 
 	return (
 		<div className={styles.categoryItemsWrapper}>
-			<div
-				className={styles.categoryItem}
-				onClick={() =>
-					navigate(`/catalog/${category.categoryType}/${category.name.toLowerCase()}`)
-				}
-			>
-				<span className={styles.categoryText}>{category.name}</span>
+			<div className={styles.categoryItem}>
+				<span
+					className={styles.categoryText}
+					onClick={() =>
+						navigate(`/catalog/${category.categoryType}/${category.name.toLowerCase()}`)
+					}
+				>
+					{category.name}
+				</span>
 			</div>
 		</div>
 	)
