@@ -1,4 +1,3 @@
-import bodyParser from 'body-parser'
 import { Express } from 'express'
 import { session } from '../middlewares/session'
 import { cors } from '../middlewares/cors'
