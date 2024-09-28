@@ -2,6 +2,8 @@ import { stringify } from 'query-string'
 import { fetchUtils, DataProvider } from 'ra-core'
 import { getToken } from '../../utils/helpers/auth'
 
+type Identifier = string | number
+
 const httpClient = async (
 	url: string,
 	options: { headers?: Record<string, string>; method?: string; body?: any } = {}
@@ -18,7 +20,6 @@ const httpClient = async (
 }
 
 export default (apiUrl: string): DataProvider => ({
-	//TODO updated for filepont json image (only one)
 	create: async (resource: string, params: { data: any }) => {
 		console.log('DataProvider create params: ', params.data)
 		console.log('apiUrl:', apiUrl)
@@ -36,13 +37,13 @@ export default (apiUrl: string): DataProvider => ({
 	getList: async (
 		resource: string,
 		params: {
-			pagination: { page: number; perPage: number }
-			sort: { field: string; order: string }
-			filter: Record<string, any>
+			pagination?: { page: number; perPage: number }
+			sort?: { field: string; order: string }
+			filter?: Record<string, any>
 		}
 	) => {
-		const { page, perPage } = params.pagination
-		const { field, order } = params.sort
+		const { page, perPage } = params.pagination || { page: 0, perPage: 0 }
+		const { field = '', order = '' } = params.sort || {}
 		const query = {
 			...fetchUtils.flattenObject(params.filter),
 			_sort: field,
@@ -69,13 +70,13 @@ export default (apiUrl: string): DataProvider => ({
 		}
 	},
 
-	getOne: async (resource: string, params: { id: string }) => {
+	getOne: async (resource: string, params: { id: Identifier }) => {
 		const url = apiUrl + resource + '/' + params.id
 		const { json } = await httpClient(url)
 		return { data: json }
 	},
 
-	getMany: async (resource: string, params: { ids: string[] }) => {
+	getMany: async (resource: string, params: { ids: Identifier[] }) => {
 		const query = {
 			filter: JSON.stringify({ id: params.ids }),
 		}
@@ -90,12 +91,12 @@ export default (apiUrl: string): DataProvider => ({
 			pagination: { page: number; perPage: number }
 			sort: { field: string; order: string }
 			target: string
-			id: string
+			id: Identifier
 			filter: Record<string, any>
 		}
 	) => {
 		const { page, perPage } = params.pagination
-		const { field, order } = params.sort
+		const { field = '', order = '' } = params.sort || {}
 		const query = {
 			_sort: field,
 			_order: order,
@@ -131,7 +132,7 @@ export default (apiUrl: string): DataProvider => ({
 		return { data: json }
 	},
 
-	updateMany: async (resource: string, params: { ids: string[]; data: any }) => {
+	updateMany: async (resource: string, params: { ids: Identifier[]; data: any }) => {
 		const query = {
 			filter: JSON.stringify({ id: params.ids }),
 		}
@@ -143,7 +144,7 @@ export default (apiUrl: string): DataProvider => ({
 		return { data: json }
 	},
 
-	delete: async (resource: string, params: { id: string }) => {
+	delete: async (resource: string, params: { id: Identifier }) => {
 		const url = apiUrl + resource + '/' + params.id
 		const { json } = await httpClient(url, {
 			method: 'DELETE',
@@ -151,7 +152,7 @@ export default (apiUrl: string): DataProvider => ({
 		return { data: json }
 	},
 
-	deleteMany: async (resource: string, params: { ids: string[] }) => {
+	deleteMany: async (resource: string, params: { ids: Identifier[] }) => {
 		const query = {
 			filter: JSON.stringify({ id: params.ids }),
 		}
