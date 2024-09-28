@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose'
 import { NewsLetterSchemaTypes } from '../interfaces/newsletter.interface'
 
-const NewsLetterSchema: NewsLetterSchemaTypes = new Schema({
+const NewsLetterSchema = new Schema<NewsLetterSchemaTypes>({
 	email: {
 		type: String,
 		required: [true, 'Email is required'],
