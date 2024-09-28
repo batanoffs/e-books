@@ -9,7 +9,7 @@ import App from './App'
 import './styles/index.scss'
 import GlobalAlert from './components/utils/GlobalAlert'
 
-if (process.env.NODE_ENV === 'production') disableReactDevTools()
+if (import.meta.env.PROD === true) disableReactDevTools()
 
 const container = document.getElementById('root')
 

@@ -1,4 +1,4 @@
-const baseURL = process.env.SERVER_BASE_URL
+const baseURL = import.meta.env.VITE_SERVER_BASE_URL
 
 const API = {
 	LOGIN: baseURL + '/api/login/',
