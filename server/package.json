@@ -6,9 +6,10 @@
   "type": "module",
   "scripts": {
     "start-server": "nodemon --exec ts-node server.ts",
-    "start": "node server.ts",
+    "start": "ts-node-dev server.ts",
     "build": "tsc"
   },
+   
   "dependencies": {
     "@mailerlite/mailerlite-nodejs": "^1.3.0",
     "bcrypt": "^5.0.1",
