@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:5001'
+const baseURL = process.env.SERVER_BASE_URL
 
 const API = {
 	LOGIN: baseURL + '/api/login/',
