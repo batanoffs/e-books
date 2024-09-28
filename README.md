@@ -5,7 +5,7 @@
 
 The goal of this full stack project is to design and implement a fully functional online e-commerce website connected to payment API Stripe, delivery service APIs - Econd and Speed, cloud storage database Cloudinary and provide a seamless user experience.
 
-*Note: The website is not responsive yet. Recommended screen resolution 1920:1080 with aspect ratio of 16:9*
+*Note: **The website is not responsive yet**. Recommended screen resolution 1920:1080 with aspect ratio of 16:9*
 
 During development, I've learned a lot about:
 - fully utilizing the features that the React Admin framework provides to build the admin panel
@@ -27,10 +27,11 @@ During development, I've learned a lot about:
 
 - [E-commerce Bookstore "Knigi.bg"](#e-commerce-bookstore-knigibg)
   - [🔬 Technologies used](#-technologies-used)
-  - [🎬 App Usage](#-app-usage)
+  - [🎬 Features](#-features)
   - [🔧 Installation](#-installation)
   - [💫 UX UI](#-ux-ui)
   - [📁 Project content](#-project-content)
+  - [📁 Folder Structure](folder_structure.md)
   - [🎨 Design and Architecture](#-design-and-architecture)
     - [⚙️ **Front-end architecture**](#️-front-end-architecture)
     - [⚙️ **Back-end architecture**](#️-back-end-architecture)
@@ -38,6 +39,9 @@ During development, I've learned a lot about:
   - [📐Fixes and updates:](#fixes-and-updates)
 
 </details>
+
+
+
 
 ## 🔬 Technologies used
 
@@ -55,7 +59,7 @@ During development, I've learned a lot about:
 | Handling requests   | `Axios`                                                                       |
 | Tools               | `Git`, `Vite`, `ESLint`, `Prettier`, `Yarn`, `Nodemon`                        |
 
-## 🎬 App Usage
+## 🎬 Features
 
 Here are some examples of how to use this project:
 
@@ -63,11 +67,13 @@ Here are some examples of how to use this project:
 - Browse products in the catalog page
 - Filter and sort the products (not fully implemented)
 - Add and manage items to the cart
-- Add or remove items to/from the wishlist
-- Check each product details in the Details Page, where only authenticated users can add comments or add to wishlist.
+- Add and manage items to the wishlist
+- Check each product details in the Details Page, where only authenticated users can comment, add products to cart or wishlist.
 - Manage application data from the admin panel only for admins
 - Checkout your cart and pay
 - Preview order
+- Manage profile settings
+- Check order history and details
 
 ## 🔧 Installation
 
