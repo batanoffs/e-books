@@ -8,10 +8,10 @@
 		"skipLibCheck": true,
 		"moduleResolution": "node",
 		"sourceMap": true,
-		"rootDir": "./src",
+		"rootDir": "./",
 		"outDir": "./dist",
 		"typeRoots": ["./types", "./node_modules/@types"]
 	},
-	"include": ["src/**/*.ts", "types", "server.ts"], //"server/**/*.ts"
+	"include": ["/**/*.ts", "src/**/*.ts", "types", "server.ts"],
 	"exclude": ["node_modules"]
 }
