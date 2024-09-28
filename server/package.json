@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "src/server.ts",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "start-server": "nodemon --exec ts-node server.ts",
     "start": "node server.ts",
