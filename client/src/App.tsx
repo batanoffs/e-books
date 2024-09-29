@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import useSpinner from './store/spinner'
 import Spinner from './components/utils/Spinner'
-import HomePage from './pages/Home/HomePage'
+import { HomePage } from './pages/Home/HomePage'
 import LoginModal from './pages/Login/LoginModal'
 import Register from './pages/Register/RegisterPage'
 import AdminPage from './pages/ReactAdmin/Admin'
@@ -20,11 +20,7 @@ import CatalogPage from './pages/Catalog/CatalogPage'
 import ScrollTop from './components/ScrollTop/BackToTop'
 import WishlistPage from './pages/ProfileSettings/WishlistPage'
 import PaymentSuccessful from './pages/Checkout/PaymentSuccessful'
-import UserOrders from './pages/ProfileSettings/ProfilePage'
 import ProfilePage from './pages/ProfileSettings/ProfilePage'
-
-// import OrdersConfirmationPage from './pages/Orders/OrdersConfirmationPage'
-// import OrderDetailsPage from './pages/Orders/OrderDetailsPage'
 
 const App = () => {
 	const [isAdmin, setIsAdmin] = useState(false)
@@ -50,8 +46,6 @@ const App = () => {
 				<Route path='/checkout' element={<CheckoutPage />} />
 				<Route path='/success' element={<PaymentSuccessful />} />
 				<Route path='/contacts' element={<ContactsPage />} />
-				{/* <Route path='/orders' element={<OrdersConfirmationPage />} /> */}
-				{/* <Route path='/orders/:id' element={<OrderDetailsPage />} /> */}
 				<Route path='/popular' element={<PopularPage />} />
 				<Route path='/about' element={<AboutPage />} />
 				<Route path='/faq' element={<FaqPage />} />

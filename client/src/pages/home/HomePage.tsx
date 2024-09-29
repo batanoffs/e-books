@@ -10,7 +10,7 @@ import ItemCard from '../../components/Cards/ItemCard'
 import API from '../../utils/constants/api'
 import useSpinner from '../../store/spinner'
 
-const HomePage = () => {
+export const HomePage = () => {
 	const [products, setProducts] = useState([])
 	const toggleLoading = useSpinner((state) => state.toggleLoading)
 
@@ -50,5 +50,3 @@ const HomePage = () => {
 
 	return <MainLayout children={content} />
 }
-
-export default HomePage
