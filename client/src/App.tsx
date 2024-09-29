@@ -1,8 +1,6 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
-import useSpinner from './store/spinner'
-import Spinner from './components/utils/Spinner'
 import LoginModal from './pages/login/LoginModal'
 import Register from './pages/register/RegisterPage'
 import AdminPage from './pages/ReactAdmin/Admin'
@@ -21,10 +19,10 @@ import WishlistPage from './pages/ProfileSettings/WishlistPage'
 import PaymentSuccessful from './pages/checkout/PaymentSuccessful'
 import ProfilePage from './pages/ProfileSettings/ProfilePage'
 import { HomePage } from './pages/home/HomePage'
+import GlobalSpinner from './components/utils/Spinner'
 
 const App = () => {
 	const [isAdmin, setIsAdmin] = useState(false)
-	const { isLoading } = useSpinner()
 	let location = useLocation()
 
 	useEffect(() => {
@@ -36,8 +34,8 @@ const App = () => {
 		<>
 			{!isAdmin && <Header />}
 			{!isAdmin && <ScrollTop />}
-			{isLoading && <Spinner />}
 			<LoginModal />
+			<GlobalSpinner />
 			<Routes>
 				<Route path='/' element={<HomePage />} />
 				<Route path='/catalog/*' element={<CatalogPage />} />
