@@ -19,7 +19,7 @@ export const CheckoutLayout = ({ children, aside, onSubmitForm, control }: props
 				<article style={{ display: 'flex', gap: '2em' }}>{children}</article>
 				<aside>{aside}</aside>
 			</Box>
-			<DevTool control={control}/>
+			{!import.meta.env.PROD && <DevTool control={control} />}
 		</main>
 	)
 }
