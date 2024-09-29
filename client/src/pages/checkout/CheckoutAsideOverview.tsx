@@ -12,7 +12,7 @@ import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import { useEffect, useState } from 'react'
 import useCartStore from '../../store/cart'
 
-export const CheckoutOverview = ({ handleBackToCart, renderTime }) => {
+export const CheckoutOverview = ({ handleBackToCart }) => {
 	const cart = useCartStore((state) => state.cart)
 	const [totalSum, setTotalSum] = useState(0)
 
@@ -30,7 +30,7 @@ export const CheckoutOverview = ({ handleBackToCart, renderTime }) => {
 	return (
 		<Paper sx={{ padding: '1rem' }}>
 			<Typography variant='h5' align='center'>
-				Обобщение на поръчката ({renderTime / 2})
+				Обобщение на поръчката
 			</Typography>
 			<TableContainer sx={{ marginTop: '1rem' }}>
 				<Table>
