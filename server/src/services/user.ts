@@ -1,6 +1,6 @@
 import { IUserSchema } from '../interfaces/user.interface'
 import User from '../models/User'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs';
 
 async function registerUser(
 	identity: string,
