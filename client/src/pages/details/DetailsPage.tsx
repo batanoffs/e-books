@@ -13,7 +13,7 @@ import useSpinner from '../../store/spinner'
 
 const DetailsPage = ({ type, path }: { type: string | undefined; path: string }) => {
 	const [product, setProduct] = useState<Product | null>(null)
-	const toggleLoading = useSpinner((state) => state.toggleLoading)
+	const { hideSpinner, showSpinner } = useSpinner()
 	const productID = useParams().id
 
 	const detailsApi =
@@ -21,12 +21,13 @@ const DetailsPage = ({ type, path }: { type: string | undefined; path: string })
 
 	const fetchProductCallback = useCallback(async () => {
 		try {
+			showSpinner()
 			const response = await axios.get(`${detailsApi}/${productID}`)
 			setProduct(response.data)
 		} catch (error) {
 			console.error(error)
 		} finally {
-			toggleLoading()
+			hideSpinner()
 		}
 	}, [productID])
 

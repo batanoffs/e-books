@@ -11,23 +11,24 @@ import DetailsPage from '../details/DetailsPage'
 import useCategoryStore from '../../store/categories'
 import useSpinner from '../../store/spinner'
 import API from '../../utils/constants/api'
+import { getNavigationParams } from '../../utils/helpers/getNavigationParams'
 
 const CatalogPage = () => {
 	const [products, setProducts] = useState([])
-	const toggleLoading = useSpinner((state) => state.toggleLoading)
+	const { hideSpinner, showSpinner } = useSpinner()
 	const categoriesMap = useCategoryStore((state) => state.categoriesMap)
 	const params = useParams()
-	const type = Object.values(params)[0]?.split('/')[0]
-	const navCategory = Object.values(params)[0]?.split('/')[1]
+	const navParams = getNavigationParams(params)
 
 	const fetchBooksCallback = useCallback(async () => {
 		try {
+			showSpinner()
 			const response = await axios.get(API.BOOKS)
 			setProducts(response.data)
 		} catch (error) {
 			console.error(error)
 		} finally {
-			toggleLoading()
+			hideSpinner()
 		}
 	}, [])
 
@@ -35,21 +36,15 @@ const CatalogPage = () => {
 		fetchBooksCallback()
 	}, [fetchBooksCallback])
 
-	const headerText = {
-		books: 'книги',
-		textbooks: 'учебници',
-		stationery: 'канцелария',
-	}[type]
-
 	const Layout = (
 		<CatalogLayout
 			header={
 				<LayoutHeader
-					navCategory={navCategory}
-					path={`книжарница / ${headerText} / ${navCategory}`}
+					navCategory={navParams.navCategory}
+					path={navParams.navString}
 					hasSorting={true}
 					resultCount={products.length}
-					title
+					title=''
 				/>
 			}
 			aside={<LayoutAside categories={categoriesMap.books} />}
@@ -70,12 +65,10 @@ const CatalogPage = () => {
 
 	return (
 		<Routes>
-			<Route path={`/${type}/${navCategory}`} element={Layout} />
+			<Route path={`/${navParams.type}/${navParams.navCategory}`} element={Layout} />
 			<Route
-				path={`/${type}/${navCategory}/:id`}
-				element={
-					<DetailsPage path={`книжарница / ${headerText} / ${navCategory}`} type={type} />
-				}
+				path={`/${navParams.type}/${navParams.navCategory}/:id`}
+				element={<DetailsPage path={navParams.navString} type={navParams.type} />}
 			/>
 		</Routes>
 	)

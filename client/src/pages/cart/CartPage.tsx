@@ -10,7 +10,7 @@ import authService from '../../services/authService'
 import useSpinner from '../../store/spinner'
 
 const CartPage = () => {
-	const toggleLoading = useSpinner((state) => state.toggleLoading)
+	const { hideSpinner, showSpinner } = useSpinner()
 	const setCart = useCartStore((state) => state.setCart)
 
 	const fetchUserCart = useCallback(async () => {

@@ -1,12 +1,20 @@
+import React from 'react'
+import useSpinner from '../../store/spinner'
 import styles from './spinner.module.scss'
 
-const Spinner = () => {
+const GlobalSpinner: React.FC = () => {
+	const isLoading = useSpinner((state) => state.isLoading)
+
+	if (!isLoading) return null
+
 	return (
-		<div className={styles.loading}>
-			<h1>Зареждане на садържание...</h1>
-			<div className={styles.spinner} />
+		<div className={styles.spinnerOverlay}>
+			<div className={styles.loading}>
+				<h1>Зареждане на садържание...</h1>
+				<div className={styles.spinner} />
+			</div>
 		</div>
 	)
 }
 
-export default Spinner
+export default GlobalSpinner

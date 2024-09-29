@@ -12,16 +12,17 @@ import useSpinner from '../../store/spinner'
 
 export const HomePage = () => {
 	const [products, setProducts] = useState([])
-	const toggleLoading = useSpinner((state) => state.toggleLoading)
+	const { hideSpinner, showSpinner } = useSpinner()
 
 	const fetchBooksCallback = useCallback(async () => {
 		try {
+			showSpinner()
 			const response = await axios.get(API.BOOKS)
 			setProducts(response.data)
 		} catch (error) {
 			console.error(error)
 		} finally {
-			toggleLoading()
+			hideSpinner()
 		}
 	}, [])
 
