@@ -41,7 +41,7 @@ const register = async (req: Request, res: Response) => {
 		res.cookie('token', token, {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
-			sameSite: 'strict',
+			sameSite: 'none',
 			maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
 			path: user.role === 'admin' ? '/admin' : '/', // restrict cookie to specific path
 		})
@@ -69,7 +69,7 @@ const login = async (req: Request, res: Response) => {
 		res.cookie('token', token, {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
-			sameSite: 'strict',
+			sameSite: 'none',
 			maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
 			path: user.role === 'admin' ? '/admin' : '/', // restrict cookie to specific path
 		})
@@ -88,7 +88,7 @@ const logout = (req: Request, res: Response) => {
 	res.clearCookie('token', {
 		httpOnly: true,
 		secure: process.env.NODE_ENV === 'production',
-		sameSite: 'strict',
+		sameSite: 'none',
 		path: '/', // restrict cookie to specific path
 	})
 
