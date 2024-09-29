@@ -19,7 +19,7 @@ root.render(
 		<ThemeProvider theme={themeOptions}>
 			<Router>
 				<App />
-				<GlobalAlert />
+				{/* <GlobalAlert /> */}
 			</Router>
 		</ThemeProvider>
 	</React.StrictMode>
