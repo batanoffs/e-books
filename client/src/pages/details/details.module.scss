@@ -1,4 +1,5 @@
-@use '../../styles/base/colors' as colors;
+@use 'src/styles/base/_colors' as colors;
+@use 'sass:color';
 
 .detailsContainer {
 	.titleSection {
@@ -35,7 +36,7 @@
 
 		.deliveryPrice {
 			font-size: 1em;
-			color: colors.$gray;
+			color: colors.$light-gray;
 		}
 	}
 
@@ -53,15 +54,15 @@
 		cursor: pointer;
 		transition: background-color 0.3s ease;
 
-		&:hover {
-		}
+		// &:hover {
+		// }
 	}
 
 	.actions .wishlistButton {
-		background-color: colors.$gray;
+		background-color: colors.$light-gray;
 
 		&:hover {
-			background-color: darken(colors.$purple, 10%);
+			background-color: color.adjust(colors.$purple, $lightness: 15%);
 		}
 	}
 
@@ -70,7 +71,7 @@
 			background-color: colors.$orange;
 		}
 		&:hover {
-			background-color: darken(colors.$orange, 10%);
+			background-color: color.adjust(colors.$orange, $lightness: 10%);
 		}
 	}
 
@@ -87,7 +88,7 @@
 			transition: background-color 0.3s ease;
 
 			&:hover {
-				background-color: darken(colors.$orange, 10%);
+				background-color: color.adjust(colors.$orange, $lightness: 10%);
 			}
 		}
 
