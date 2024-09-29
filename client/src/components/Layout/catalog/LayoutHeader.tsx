@@ -1,6 +1,14 @@
 import styles from './header.module.scss'
 
-const LayoutHeader = ({ path, navCategory, title, hasSorting, resultCount }) => {
+type LayoutHeaderProps = {
+	title: string
+	path: string
+	navCategory?: string
+	hasSorting?: boolean
+	resultCount?: number
+}
+
+const LayoutHeader = ({ title, path, navCategory, hasSorting, resultCount }: LayoutHeaderProps) => {
 	return (
 		<div className={styles.container}>
 			{/* TODO extract this client navigation for future use */}
