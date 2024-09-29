@@ -1,8 +1,8 @@
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import User from '../models/User'
 import { verifyToken } from '../services/jwt'
 
-const getUsers = async (req: Request, res: Response) => {
+const getUsers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 	try {
 		const users = await User.find()
 		res.status(200).json(users)
@@ -11,11 +11,16 @@ const getUsers = async (req: Request, res: Response) => {
 	}
 }
 
-const getUserByIdFromToken = async (req: Request, res: Response) => {
+const getUserByIdFromToken = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	const token = req.headers.authorization?.split(' ')[1]
 
 	if (!token) {
-		return res.status(401).json({ message: 'No token provided' })
+		res.status(401).json({ message: 'No token provided' })
+		return
 	}
 
 	try {
@@ -27,12 +32,13 @@ const getUserByIdFromToken = async (req: Request, res: Response) => {
 	}
 }
 
-const getUserById = async (req: Request, res: Response) => {
+const getUserById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 	const { id } = req.params
 	try {
 		const user = await User.findById(id)
 		if (!user) {
-			return res.status(404).json({ message: 'User not found' })
+			res.status(404).json({ message: 'User not found' })
+			return
 		}
 		res.status(200).json(user)
 	} catch (error) {
@@ -40,13 +46,14 @@ const getUserById = async (req: Request, res: Response) => {
 	}
 }
 
-const updateUser = async (req: Request, res: Response) => {
+const updateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 	const { id } = req.params
 	const { username, role } = req.body
 	try {
 		const user = await User.findByIdAndUpdate(id, { username, role }, { new: true })
 		if (!user) {
-			return res.status(404).json({ message: 'User not found' })
+			res.status(404).json({ message: 'User not found' })
+			return
 		}
 		res.status(200).json(user)
 	} catch (error) {
@@ -54,12 +61,13 @@ const updateUser = async (req: Request, res: Response) => {
 	}
 }
 
-const deleteUser = async (req: Request, res: Response) => {
+const deleteUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 	const { id } = req.params
 	try {
 		const user = await User.findByIdAndDelete(id)
 		if (!user) {
-			return res.status(404).json({ message: 'User not found' })
+			res.status(404).json({ message: 'User not found' })
+			return
 		}
 		res.status(200).json({ message: 'User deleted successfully' })
 	} catch (error) {

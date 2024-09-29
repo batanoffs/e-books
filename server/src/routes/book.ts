@@ -13,7 +13,10 @@ router.post(
 		body('title').notEmpty().isLength({ min: 2 }).withMessage('Title is required'),
 		body('author').notEmpty().withMessage('Author is required'),
 		body('price').isFloat({ gt: 0 }).withMessage('Price must be a positive number'),
-		body('description').notEmpty().isLength({ min: 10 }).withMessage('Description min 10 characters'),
+		body('description')
+			.notEmpty()
+			.isLength({ min: 10 })
+			.withMessage('Description min 10 characters'),
 		body('categories').notEmpty().isLength({ min: 3 }).withMessage('Categories are required'),
 		body('coverPageType').notEmpty().withMessage('Cover page type is required'),
 		body('dimensions').isLength({ min: 1 }).withMessage('Dimensions is required'),

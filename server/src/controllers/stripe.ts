@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import Book from '../models/Book'
 import Order from '../models/Order'
@@ -13,14 +13,21 @@ export interface Product {
 const Stripe = require('stripe')
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY)
 
-export const checkoutSession = async (req: Request, res: Response) => {
+export const checkoutSession = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	const { products } = req.body
 
 	const user = req.user
 
 	console.log('User:', user)
 
-	if (!user) return res.status(401).json({ message: 'Not authorized' })
+	if (!user) {
+		res.status(401).json({ message: 'Not authorized' })
+		return
+	}
 
 	const { id: userId, email } = user
 
@@ -34,12 +41,14 @@ export const checkoutSession = async (req: Request, res: Response) => {
 
 		if (!validationErrors.isEmpty()) {
 			await newSession.abortTransaction()
-			return res.status(400).json({ errors: validationErrors.array() })
+			res.status(400).json({ errors: validationErrors.array() })
+			return
 		}
 
 		if (!products && !userId && !email) {
 			await newSession.abortTransaction()
-			return res.status(404).json({ message: 'No products or user found!' })
+			res.status(404).json({ message: 'No products or user found!' })
+			return
 		}
 
 		const orderedProducts = await Promise.all(
@@ -182,7 +191,7 @@ export const checkoutSession = async (req: Request, res: Response) => {
 			// ],
 		})
 		await newSession.commitTransaction()
-		return res.json({ url: session.url, message: 'Checkout session created successfully' })
+		res.json({ url: session.url, message: 'Checkout session created successfully' })
 	} catch (error) {
 		await newSession.abortTransaction()
 		res.status(500).json({ error: (error as Error).message })
@@ -191,7 +200,11 @@ export const checkoutSession = async (req: Request, res: Response) => {
 	}
 }
 
-export const getPaymentSessionAndCreateOrder = async (req: Request, res: Response) => {
+export const getPaymentSessionAndCreateOrder = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	const { session_id } = req.query
 	const validationErrors = validationResult(req)
 	const transactionSession = await mongoose.startSession()
@@ -201,11 +214,13 @@ export const getPaymentSessionAndCreateOrder = async (req: Request, res: Respons
 
 		if (!validationErrors.isEmpty()) {
 			await transactionSession.abortTransaction()
-			return res.status(400).json({ errors: validationErrors.array() })
+			res.status(400).json({ errors: validationErrors.array() })
+			return
 		}
 		if (!session_id) {
 			await transactionSession.abortTransaction()
-			return res.status(404).json({ message: 'Missing session id' })
+			res.status(404).json({ message: 'Missing session id' })
+			return
 		}
 
 		const existingOrder = await Order.findOne({ sessionId: session_id }).populate(
@@ -214,7 +229,8 @@ export const getPaymentSessionAndCreateOrder = async (req: Request, res: Respons
 		if (existingOrder) {
 			// If order exists, return it without creating a new one
 			await transactionSession.commitTransaction()
-			return res.status(200).json(existingOrder) // Send the existing order
+			res.status(200).json(existingOrder) // Send the existing order
+			return
 		}
 		const stripeSessionResponse = await stripe.checkout.sessions.retrieve(session_id, {
 			expand: ['line_items'], //'payment_intent.payment_method'
@@ -222,9 +238,10 @@ export const getPaymentSessionAndCreateOrder = async (req: Request, res: Respons
 
 		if (stripeSessionResponse.status !== 'complete') {
 			await transactionSession.abortTransaction()
-			return res.status(404).json({
+			res.status(404).json({
 				message: `Stripe session with id ${session_id} status is not complete ${stripeSessionResponse.status}`,
 			})
+			return
 		}
 
 		const userId = stripeSessionResponse.client_reference_id
@@ -253,9 +270,8 @@ export const getPaymentSessionAndCreateOrder = async (req: Request, res: Respons
 
 		if (!cart) {
 			await transactionSession.abortTransaction()
-			return res
-				.status(404)
-				.json({ message: 'Cart not found for user with id ' + userId + '!' })
+			res.status(404).json({ message: 'Cart not found for user with id ' + userId + '!' })
+			return
 		}
 
 		await transactionSession.commitTransaction()
@@ -263,7 +279,8 @@ export const getPaymentSessionAndCreateOrder = async (req: Request, res: Respons
 		res.status(201).json(populatedOrder)
 	} catch (error) {
 		await transactionSession.abortTransaction()
-		return res.status(500).json({ error: (error as Error).message })
+		res.status(500).json({ error: (error as Error).message })
+		return
 	} finally {
 		await transactionSession.endSession()
 	}

@@ -1,7 +1,7 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import Cart from '../models/Cart'
 
-export const addToCart = async (req: Request, res: Response) => {
+export const addToCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 	const { userId, productId, quantity } = req.body
 
 	try {
@@ -38,13 +38,14 @@ export const addToCart = async (req: Request, res: Response) => {
 	}
 }
 
-export const getCart = async (req: Request, res: Response) => {
+export const getCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 	const { userId } = req.params
 
 	try {
 		const cart = await Cart.findOne({ userId })
 		if (!cart) {
-			return res.status(404).json({ message: 'Cart not found' })
+			res.status(404).json({ message: 'Cart not found' })
+			return
 		}
 		const products = await cart.populate({
 			path: 'products.product',
@@ -60,18 +61,24 @@ export const getCart = async (req: Request, res: Response) => {
 	}
 }
 
-export const removeProductFromCart = async (req: Request, res: Response) => {
+export const removeProductFromCart = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	const { userId, productId } = req.query
 
 	if (!userId || !productId) {
-		return res.status(400).json({ message: 'User ID or product ID are missing' })
+		res.status(400).json({ message: 'User ID or product ID are missing' })
+		return
 	}
 	try {
 		// const cart = await Cart.findOne({ userId })
 		let cart = await Cart.findOne({ userId }).populate('products.product', '_id')
 
 		if (!cart) {
-			return res.status(404).json({ message: 'Cart not found' })
+			res.status(404).json({ message: 'Cart not found' })
+			return
 		}
 
 		const updatedProducts = cart.products.filter(
@@ -86,16 +93,18 @@ export const removeProductFromCart = async (req: Request, res: Response) => {
 	}
 }
 
-export const clearCart = async (req: Request, res: Response) => {
+export const clearCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 	const userId = req.query.userId
 	if (!userId) {
-		return res.status(400).json({ message: 'User ID is required' })
+		res.status(400).json({ message: 'User ID is required' })
+		return
 	}
 	try {
 		const cart = await Cart.findOneAndUpdate({ userId }, { products: [] }, { new: true })
 
 		if (!cart) {
-			return res.status(404).json({ message: 'Cart not found' })
+			res.status(404).json({ message: 'Cart not found' })
+			return
 		}
 
 		res.status(200).json({ message: 'Cart cleared successfully' })

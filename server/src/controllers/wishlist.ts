@@ -1,17 +1,23 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import Wishlist from '../models/Wishlist'
 
-export const createOrUpdateWishlist = async (req: Request, res: Response) => {
+export const createOrUpdateWishlist = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	const userId = req.user?.id
 
 	if (!userId) {
-		return res.status(401).json({ message: 'Unauthorized' })
+		res.status(401).json({ message: 'Unauthorized' })
+		return
 	}
 
 	const { productId } = req.body
 	//productId type string
 	if (!productId) {
-		return res.status(400).json({ message: 'Product ID is required' })
+		res.status(400).json({ message: 'Product ID is required' })
+		return
 	}
 
 	try {
@@ -28,20 +34,23 @@ export const createOrUpdateWishlist = async (req: Request, res: Response) => {
 			upsert: true,
 		})
 		// Respond with the updated or newly created wishlist
-		return res.status(200).json(updatedWishlist)
+		res.status(200).json(updatedWishlist)
 	} catch (error) {
-		return res
-			.status(500)
-			.json({ message: 'Error creating or updating wishlist', error: error })
+		res.status(500).json({ message: 'Error creating or updating wishlist', error: error })
 	}
 }
 
-export const getWishlist = async (req: Request, res: Response) => {
+export const getWishlist = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	try {
 		const userId = req.user?.id
 
 		if (!userId) {
-			return res.status(401).json({ message: 'Unauthorized' })
+			res.status(401).json({ message: 'Unauthorized' })
+			return
 		}
 
 		const wishlistWithProducts = await Wishlist.findOne({ user: userId }).populate({
@@ -53,26 +62,33 @@ export const getWishlist = async (req: Request, res: Response) => {
 		})
 
 		if (!wishlistWithProducts) {
-			return res.status(404).json({ message: 'Wishlist not found' })
+			res.status(404).json({ message: 'Wishlist not found' })
+			return
 		}
 
-		return res.status(200).json(wishlistWithProducts)
+		res.status(200).json(wishlistWithProducts)
 	} catch (error) {
 		res.status(500).json({ message: 'Error fetching wishlist', error })
 	}
 }
 
-export const deleteWishlist = async (req: Request, res: Response) => {
+export const deleteWishlist = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	const userId = req.user?.id
 
 	if (!userId) {
-		return res.status(401).json({ message: 'Unauthorized' })
+		res.status(401).json({ message: 'Unauthorized' })
+		return
 	}
 
 	const { productId } = req.params
 
 	if (!productId) {
-		return res.status(400).json({ message: 'Product ID is required' })
+		res.status(400).json({ message: 'Product ID is required' })
+		return
 	}
 
 	try {
@@ -84,7 +100,8 @@ export const deleteWishlist = async (req: Request, res: Response) => {
 
 		// Check if the operation was successful
 		if (result.modifiedCount === 0) {
-			return res.status(404).json({ message: 'Product not found in wishlist' })
+			res.status(404).json({ message: 'Product not found in wishlist' })
+			return
 		}
 
 		res.status(200).json({ message: 'Product removed from wishlist successfully' })

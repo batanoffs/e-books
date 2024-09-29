@@ -1,7 +1,7 @@
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import Order from '../models/Order'
 
-export const createOrder = async (req: Request, res: Response) => {
+export const createOrder = async (req: Request, res: Response, next: NextFunction) => {
 	const { userId, items, total, status } = req.body
 	try {
 		const newOrder = new Order({ userId, items, total, status })
@@ -12,7 +12,7 @@ export const createOrder = async (req: Request, res: Response) => {
 	}
 }
 
-export const getOrders = async (req: Request, res: Response) => {
+export const getOrders = async (req: Request, res: Response, next: NextFunction) => {
 	console.log('user id:', req.user?.id)
 
 	try {
@@ -27,16 +27,22 @@ export const getOrders = async (req: Request, res: Response) => {
 	}
 }
 
-export const getOrderById = async (req: Request, res: Response) => {
+export const getOrderById = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	const { id } = req.params
 	const token = req.headers['authorization']?.split(' ')[1]
 	if (!token) {
-		return res.status(401).json({ message: 'Unauthorized' })
+		res.status(401).json({ message: 'Unauthorized' })
+		return
 	}
 	try {
 		const order = await Order.findById(id)
 		if (!order) {
-			return res.status(404).json({ message: 'Order not found' })
+			res.status(404).json({ message: 'Order not found' })
+			return
 		}
 		res.status(200).json(order)
 	} catch (error) {
@@ -44,7 +50,11 @@ export const getOrderById = async (req: Request, res: Response) => {
 	}
 }
 
-export const updateOrder = async (req: Request, res: Response) => {
+export const updateOrder = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	const { id } = req.params
 	const { userId, items, total, status } = req.body
 	try {
@@ -54,7 +64,8 @@ export const updateOrder = async (req: Request, res: Response) => {
 			{ new: true }
 		)
 		if (!order) {
-			return res.status(404).json({ message: 'Order not found' })
+			res.status(404).json({ message: 'Order not found' })
+			return
 		}
 		res.status(200).json(order)
 	} catch (error) {
@@ -62,12 +73,17 @@ export const updateOrder = async (req: Request, res: Response) => {
 	}
 }
 
-export const deleteOrder = async (req: Request, res: Response) => {
+export const deleteOrder = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	const { id } = req.params
 	try {
 		const order = await Order.findByIdAndDelete(id)
 		if (!order) {
-			return res.status(404).json({ message: 'Order not found' })
+			res.status(404).json({ message: 'Order not found' })
+			return
 		}
 		res.status(200).json({ message: 'Order deleted successfully' })
 	} catch (error) {

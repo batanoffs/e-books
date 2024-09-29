@@ -1,12 +1,19 @@
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import Book from '../models/Book'
 import { validationResult } from 'express-validator'
 
 // Create a book with image handling
-export const createBook = async (req: Request, res: Response) => {
+export const createBook = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	const errors = validationResult(req)
 
-	if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() })
+	if (!errors.isEmpty()) {
+		res.status(400).json({ errors: errors.array() })
+		return
+	}
 
 	const newBook = new Book({
 		title: req.body.title,
@@ -34,7 +41,7 @@ export const createBook = async (req: Request, res: Response) => {
 	}
 }
 
-export const getBooks = async (req: Request, res: Response) => {
+export const getBooks = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const books = await Book.find().lean()
 		res.status(200).json(books)
@@ -43,12 +50,17 @@ export const getBooks = async (req: Request, res: Response) => {
 	}
 }
 
-export const getBookById = async (req: Request, res: Response) => {
+export const getBookById = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	const { id } = req.params
 	try {
 		const book = await Book.findById(id).lean()
 		if (!book) {
-			return res.status(404).json({ message: 'Book not found' })
+			res.status(404).json({ message: 'Book not found' })
+			return
 		}
 		res.status(200).json(book)
 	} catch (error) {
@@ -57,12 +69,17 @@ export const getBookById = async (req: Request, res: Response) => {
 }
 
 // Update a book by ID
-export const updateBook = async (req: Request, res: Response) => {
+export const updateBook = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	const { id } = req.params
 	console.log('categories', req.body.categories)
 
 	if (!id) {
-		return res.status(400).json({ message: 'Book ID is required' })
+		res.status(400).json({ message: 'Book ID is required' })
+		return
 	}
 
 	const newBook = new Book({
@@ -85,7 +102,8 @@ export const updateBook = async (req: Request, res: Response) => {
 		const updatedBook = await Book.findByIdAndUpdate(id, { $set: newBook }, { new: true })
 
 		if (!updatedBook) {
-			return res.status(404).json({ message: 'Book not found' })
+			res.status(404).json({ message: 'Book not found' })
+			return
 		}
 
 		res.status(200).json(updatedBook)
@@ -94,12 +112,17 @@ export const updateBook = async (req: Request, res: Response) => {
 	}
 }
 
-export const deleteBook = async (req: Request, res: Response) => {
+export const deleteBook = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<void> => {
 	const { id } = req.params
 	try {
 		const deletedBook = await Book.findByIdAndDelete(id)
 		if (!deletedBook) {
-			return res.status(404).json({ message: 'Book not found' })
+			res.status(404).json({ message: 'Book not found' })
+			return
 		}
 		res.status(200).json({ message: 'Book deleted successfully' })
 	} catch (error) {
