@@ -1,7 +1,7 @@
 import { DetailsLayoutProps } from '../../../interfaces/layout.interface'
 import styles from './details.module.scss'
 
-const DetailsLayout = ({ children, header, aside, ...props }: DetailsLayoutProps) => {
+const DetailsLayout = ({ children, header, aside }: DetailsLayoutProps) => {
 	return (
 		<main className='main-wrapper'>
 			<header>{header}</header>
