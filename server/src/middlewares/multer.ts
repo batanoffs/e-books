@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-nocheck
 
 import multer, { StorageEngine } from 'multer';
 import { Request } from 'express';
