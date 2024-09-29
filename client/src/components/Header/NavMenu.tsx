@@ -5,8 +5,7 @@ import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import MenuIcon from '@mui/icons-material/Menu'
-
-const pages = ['Книги', 'Учебници', 'Канцелария']
+import { navPages } from '../../utils/constants/pages'
 
 const NavigationMenu = ({
 	anchorElNav,
@@ -36,7 +35,7 @@ const NavigationMenu = ({
 					open={Boolean(anchorElNav)}
 					onClose={handleCloseNavMenu}
 				>
-					{pages.map((page) => (
+					{navPages.map((page) => (
 						<MenuItem key={page} onClick={() => navigationHandler(page)}>
 							<Typography textAlign='center'>{page}</Typography>
 						</MenuItem>
@@ -44,7 +43,7 @@ const NavigationMenu = ({
 				</Menu>
 			</Box>
 			<Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1 }}>
-				{pages.map((page) => (
+				{navPages.map((page) => (
 					<Button
 						key={page}
 						onClick={() => navigationHandler(page)}
