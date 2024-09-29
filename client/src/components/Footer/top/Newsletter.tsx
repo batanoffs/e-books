@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import axios from 'axios'
 
-import PrivacyRulesModal from '../../../pages/Register/PrivacyRulesModal'
+import PrivacyRulesModal from '../../../pages/register/PrivacyRulesModal'
 import useAlertStore from '../../../store/alert'
 import { usePrivacyModal } from '../../../store/helperModal'
 
