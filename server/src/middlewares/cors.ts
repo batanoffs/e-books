@@ -3,7 +3,13 @@ import { XTotalCount } from '../constants/serverSetup'
 
 function cors() {
 	return function (req: Request, res: Response, next: NextFunction) {
-		res.setHeader('Access-Control-Allow-Origin', process.env.ALLOWED_ADDRESS!)
+		const allowedOrigins = process.env.ALLOWED_ADDRESSES!.split(',')
+		const origin = req.header('Origin') ?? '';
+		if (allowedOrigins.includes(origin?.trim())) {
+			res.setHeader('Access-Control-Allow-Origin', origin)
+		  } else {
+			res.setHeader('Access-Control-Allow-Origin', '')
+		  }
 		res.setHeader('Access-Control-Expose-Headers', 'X-Total-Count')
 		res.setHeader('Access-Control-Allow-Credentials', 'true')
 		res.setHeader('X-Total-Count', XTotalCount)
