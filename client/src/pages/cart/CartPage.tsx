@@ -15,13 +15,14 @@ const CartPage = () => {
 
 	const fetchUserCart = useCallback(async () => {
 		try {
+			showSpinner()
 			const userId = await authService.getUserId()
 			const response = await axios.get(API.CART + userId)
 			setCart(response.data)
 		} catch (error) {
 			console.error(error)
 		} finally {
-			toggleLoading()
+			hideSpinner()
 		}
 	}, [])
 
