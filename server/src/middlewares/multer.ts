@@ -1,3 +1,5 @@
+// @ts-ignore
+
 import multer, { StorageEngine } from 'multer';
 import { Request } from 'express';
 

@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Router } from 'express'
 import { body } from 'express-validator'
 
