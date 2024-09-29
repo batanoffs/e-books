@@ -1,16 +1,16 @@
+// src/store/useSpinnerStore.ts
 import { create } from 'zustand'
 
-type SpinnerState = {
+interface SpinnerState {
 	isLoading: boolean
+	showSpinner: () => void
+	hideSpinner: () => void
 }
 
-type SpinnerAction = {
-	toggleLoading: () => void
-}
-
-const useSpinner = create<SpinnerState & SpinnerAction>((set) => ({
+const useSpinner = create<SpinnerState>((set) => ({
 	isLoading: false,
-	toggleLoading: () => set((state) => ({ isLoading: !state.isLoading })),
+	showSpinner: () => set({ isLoading: true }),
+	hideSpinner: () => set({ isLoading: false }),
 }))
 
 export default useSpinner
