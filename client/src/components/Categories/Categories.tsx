@@ -13,16 +13,17 @@ import styles from './categories.module.scss'
 const CategoryList = () => {
 	const setCategories = useCategoryStore((state) => state.setCategories)
 	const categoriesMap = useCategoryStore((state) => state.categoriesMap)
-	const toggleLoading = useSpinner((state) => state.toggleLoading)
+	const { hideSpinner, showSpinner } = useSpinner()
 
 	const fetchBookCategoriesCallback = useCallback(async () => {
 		try {
+			showSpinner() // Start loading
 			const response = await axios.get(API.CATEGORIES)
 			setCategories(response.data)
 		} catch (error) {
 			console.error(error)
 		} finally {
-			toggleLoading() // Stop loading
+			hideSpinner() // Stop loading
 		}
 	}, [])
 
