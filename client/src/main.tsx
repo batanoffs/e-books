@@ -7,7 +7,6 @@ import { disableReactDevTools } from '@fvilers/disable-react-devtools'
 
 import App from './App'
 import './styles/index.scss'
-import GlobalAlert from './components/utils/GlobalAlert'
 
 if (import.meta.env.PROD === true) disableReactDevTools()
 
@@ -19,7 +18,6 @@ root.render(
 		<ThemeProvider theme={themeOptions}>
 			<Router>
 				<App />
-				{/* <GlobalAlert /> */}
 			</Router>
 		</ThemeProvider>
 	</React.StrictMode>
