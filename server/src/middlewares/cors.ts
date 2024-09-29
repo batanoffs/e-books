@@ -1,29 +1,44 @@
+import cors from 'cors'
 import { Request, Response, NextFunction } from 'express'
 import { XTotalCount } from '../constants/serverSetup'
 
-function cors() {
-	return function (req: Request, res: Response, next: NextFunction) {
-		const allowedOrigins = process.env.ALLOWED_ADDRESS!.split(',')
-		const origin = req.header('Origin') ?? ''
+// Custom CORS configuration function
+function corsConfig() {
+	// Core CORS middleware configuration
+	const corsOptions = {
+		origin: function (
+			origin: string | undefined,
+			callback: (err: Error | null, allow?: boolean) => void
+		) {
+			const allowedOrigins = process.env.ALLOWED_ADDRESS!.split(',')
+			if (!origin || allowedOrigins.includes(origin.trim())) {
+				callback(null, true) // Allow the origin
+			} else {
+				callback(new Error('Not allowed by CORS')) // Block the origin
+			}
+		},
+		credentials: true, // Allow cookies and credentials
+		methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // Allowed methods
+		allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+		exposedHeaders: ['X-Total-Count'], // Expose custom headers
+	}
 
-		if (allowedOrigins.includes(origin?.trim())) {
-			res.setHeader('Access-Control-Allow-Origin', origin) // Set the origin dynamically
-			res.setHeader('Access-Control-Allow-Credentials', 'true') // Enable cookies and credentials
-		} else {
-			res.setHeader('Access-Control-Allow-Origin', '') // Block the origin if not allowed
-		}
+	// CORS middleware
+	const corsMiddleware = cors(corsOptions)
 
-		res.setHeader('Access-Control-Expose-Headers', 'X-Total-Count')
+	// Custom middleware for handling headers
+	const customMiddleware = function (req: Request, res: Response, next: NextFunction): void {
 		res.setHeader('X-Total-Count', XTotalCount)
 
 		if (req.method === 'OPTIONS') {
-			res.setHeader('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET')
-			res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-			return res.sendStatus(204) // End OPTIONS pre-flight requests
+			res.sendStatus(204) // End pre-flight request handling
+			return // Exit the middleware early
 		}
 
-		next()
+		next() // Proceed to the next middleware or route handler
 	}
+
+	return { corsMiddleware, customMiddleware }
 }
 
-export { cors }
+export { corsConfig }
