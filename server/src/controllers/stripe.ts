@@ -14,7 +14,16 @@ const Stripe = require('stripe')
 const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY)
 
 export const checkoutSession = async (req: Request, res: Response) => {
-	const { products, userId } = req.body
+	const { products } = req.body
+
+	const user = req.user
+
+	console.log('User:', user)
+
+	if (!user) return res.status(401).json({ message: 'Not authorized' })
+
+	const { id: userId, email } = user
+
 	const validationErrors = validationResult(req)
 	const newSession = await mongoose.startSession()
 
@@ -28,9 +37,9 @@ export const checkoutSession = async (req: Request, res: Response) => {
 			return res.status(400).json({ errors: validationErrors.array() })
 		}
 
-		if (!products && !userId) {
+		if (!products && !userId && !email) {
 			await newSession.abortTransaction()
-			return res.status(404).json({ message: 'No products or user id found!' })
+			return res.status(404).json({ message: 'No products or user found!' })
 		}
 
 		const orderedProducts = await Promise.all(
@@ -89,7 +98,7 @@ export const checkoutSession = async (req: Request, res: Response) => {
 
 		const session = await stripe.checkout.sessions.create({
 			client_reference_id: userId,
-			customer_email: 'mixrays@mailfence.com', //TODO save userdata state and provide email here
+			customer_email: email, //TODO save userdata state and provide email here
 			line_items: orderedProducts,
 			mode: 'payment',
 			success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
@@ -199,11 +208,13 @@ export const getPaymentSessionAndCreateOrder = async (req: Request, res: Respons
 			return res.status(404).json({ message: 'Missing session id' })
 		}
 
-		const existingOrder = await Order.findOne({ sessionId: session_id }).populate('products.productId');
+		const existingOrder = await Order.findOne({ sessionId: session_id }).populate(
+			'products.productId'
+		)
 		if (existingOrder) {
 			// If order exists, return it without creating a new one
-			await transactionSession.commitTransaction();
-			return res.status(200).json(existingOrder);  // Send the existing order
+			await transactionSession.commitTransaction()
+			return res.status(200).json(existingOrder) // Send the existing order
 		}
 		const stripeSessionResponse = await stripe.checkout.sessions.retrieve(session_id, {
 			expand: ['line_items'], //'payment_intent.payment_method'
@@ -239,10 +250,12 @@ export const getPaymentSessionAndCreateOrder = async (req: Request, res: Respons
 		const populatedOrder = await order.populate('products.productId')
 
 		const cart = await Cart.findOneAndUpdate({ userId }, { products: [] }, { new: true })
-		
+
 		if (!cart) {
 			await transactionSession.abortTransaction()
-			return res.status(404).json({ message: 'Cart not found for user with id ' + userId + '!' })
+			return res
+				.status(404)
+				.json({ message: 'Cart not found for user with id ' + userId + '!' })
 		}
 
 		await transactionSession.commitTransaction()
