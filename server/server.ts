@@ -1,3 +1,5 @@
+// @ts-ignore
+
 const express = require('express')
 require('dotenv').config()
 import { configDatabase } from './src/config/database'
