@@ -32,6 +32,11 @@ const LoginModal = () => {
 			showAlert('Невалиден имейл или парола', 'error')
 		}
 	}
+	const handleRegisterRedirect = (e) => {
+		e.preventDefault()
+		navigate('/register')
+		toggleOpen()
+	}
 
 	return (
 		<Modal
@@ -74,10 +79,15 @@ const LoginModal = () => {
 					>
 						Вход
 					</Button>
-					<Link href='/register' underline='hover' variant='inherit'>
+					<Link
+						onClick={handleRegisterRedirect}
+						underline='hover'
+						style={{ cursor: 'pointer' }}
+						variant='inherit'
+					>
 						Нямаш акаунт? Регистрирай се.
 					</Link>
-					<Link href='/zabravena-parola' underline='hover'>
+					<Link href='#' underline='hover'>
 						Забравена парола?
 					</Link>
 				</form>
