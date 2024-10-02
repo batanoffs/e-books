@@ -25,7 +25,7 @@ const useCartStore = create<CartState>((set) => ({
 		set({ cart: items })
 	},
 	addToCart: (item) => {
-		//This weird set of the object is because temporary testing Stripe API
+		//This weird set of the objects is because temporary testing Stripe API
 		//TODO update for better performance the models or implement improvements
 		set((state) => {
 			const existingProduct = state.cart.find(
