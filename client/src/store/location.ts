@@ -3,8 +3,8 @@
 import { create } from 'zustand';
 
 type LocationState = {
-    location: string | null;
-    updateLocation: (newLocation: Location) => void;
+    location: string | null; //Location
+    updateLocation: (newLocation: string) => void; //Location
 };
 
 export const useLocationStore = create<LocationState>((set) => ({

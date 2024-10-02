@@ -24,7 +24,9 @@ const LoginModal = () => {
 	const handleLogin = async (e: React.FormEvent) => {
 		e.preventDefault()
 		try {
-			const { redirectUrl, message } = await authService.login(email, password)
+			const response = await authService.login(email, password)
+			if(!response) throw new Error('Response data is empty')
+			const { redirectUrl, message } = response
 			toggleOpen()
 			navigate(redirectUrl)
 			showAlert(message, 'success')
@@ -32,7 +34,7 @@ const LoginModal = () => {
 			showAlert('Невалиден имейл или парола', 'error')
 		}
 	}
-	const handleRegisterRedirect = (e) => {
+	const handleRegisterRedirect = (e: React.FormEvent) => {
 		e.preventDefault()
 		navigate('/register')
 		toggleOpen()
