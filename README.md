@@ -50,19 +50,19 @@ During development, I've learned a lot about:
 
 ## 🔬 Technologies used
 
-| Department          | Technologies                                                                  |
-| ------------------- | ----------------------------------------------------------------------------- |
-| Frontend            | `React`, `TypeScript`                                                         |
-| Server              | `Node`, `Express`, `Cors`, `Cookie-parser`, `Express-Mongoose-RA-JSON-Server` |
-| UI                  | `Material UI`, `SASS`, `Slick-Carousel`, `React-Slick`, `FilePond`            |
-| Forms               | `React Hook Form`                                                             |
-| State management    | `Zustand`                                                                     |
-| Admin panel manager | `React Admin`                                                                 |
-| Database            | `MongoDB`, `Mongoose`                                                         |
-| Encryption          | `Bcrypt`                                                                      |
-| Authentication      | `JsonWebToken`                                                                |
-| Handling requests   | `Axios`                                                                       |
-| Tools               | `Git`, `Vite`, `ESLint`, `Prettier`, `Yarn`, `Nodemon`                        |
+| Department          | Technologies                                                                                         |
+| ------------------- | ---------------------------------------------------------------------------------------------------- |
+| Frontend            | `React`, `TypeScript`                                                                                |
+| Server              | `Node`, `Express`, `Cors`, `Cookie-parser`, `Multer`,`Express-Mongoose-RA-JSON-Server`               |
+| UI                  | `Material UI`, `SASS`, `Slick-Carousel`, `React-Slick`,                                              |
+| Forms               | `React Hook Form`                                                                                    |
+| State management    | `Zustand`                                                                                            |
+| Admin panel manager | `React Admin`                                                                                        |
+| Database            | `MongoDB`, `Mongoose`                                                                                |
+| Encryption          | `bcryptjs`                                                                                           |
+| Authentication      | `JsonWebToken`                                                                                       |
+| Handling requests   | `Axios`                                                                                              |
+| Tools               | `Git`, `Vite`, `ESLint`, `Prettier`, `Yarn`, `Nodemon`,`disable-react-devtools`,`@hookform/devtools` |
 
 ## 🎬 Features
 
