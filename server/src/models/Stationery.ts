@@ -8,7 +8,6 @@ const StationerySchema: Schema = new Schema({
 		trim: true,
 		minlength: 3,
 	},
-
 	price: {
 		type: Number,
 		required: [true, 'Price is required'],
@@ -16,6 +15,13 @@ const StationerySchema: Schema = new Schema({
 	},
 	description: {
 		type: String,
+		required: [true, 'Description is required'],
+		trim: true,
+		default: 'липсва описание',
+	},
+	productType: {
+		type: String,
+		default: 'Stationery',
 		required: true,
 	},
 	picture: {
@@ -29,6 +35,11 @@ const StationerySchema: Schema = new Schema({
 			required: true,
 		},
 	],
+	dimensions: {
+		type: String,
+		trim: true,
+		default: 'липсва информация',
+	},
 	stock: {
 		type: Number,
 		required: true,

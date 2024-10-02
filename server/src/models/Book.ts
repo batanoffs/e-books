@@ -59,6 +59,11 @@ const BookSchema: Schema = new Schema({
 	publishDate: {
 		type: Date,
 	},
+	productType: {
+		type: String,
+		default: 'Book',
+		required: true,
+	},
 	pageCount: {
 		type: Number,
 		min: 1,
@@ -80,14 +85,14 @@ const BookSchema: Schema = new Schema({
 	},
 })
 
-BookSchema.set('toJSON', {
-	virtuals: true,
-	transform: function (doc, ret) {
-		// Optionally remove sensitive fields
-		delete ret.coverImage
-		return ret
-	},
-})
+// BookSchema.set('toJSON', {
+// 	virtuals: true,
+// 	transform: function (doc, ret) {
+// 		// Optionally remove sensitive fields
+// 		delete ret.coverImage
+// 		return ret
+// 	},
+// })
 
 const Book = model<IBookSchema>('Book', BookSchema)
 

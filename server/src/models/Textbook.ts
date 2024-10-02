@@ -1,4 +1,4 @@
-import { model, Schema, Types } from 'mongoose'
+import { model, Schema } from 'mongoose'
 import { IBookSchema } from '../interfaces/book.interface'
 
 const TextbookSchema: Schema = new Schema({
@@ -8,22 +8,37 @@ const TextbookSchema: Schema = new Schema({
 		trim: true,
 		minlength: 3,
 	},
-
 	author: {
 		type: String,
 		required: [true, 'Author is required'],
 		trim: true,
 	},
-
 	price: {
 		type: Number,
 		required: [true, 'Price is required'],
 		min: [0, 'Price must be greater than or equal to 0'],
 	},
-	description: { type: String, required: true },
-	coverImage: { type: Buffer, required: true }, //TODO update logic for multiple images
-	coverImageType: { type: String, required: true }, //TODO update logic for multiple images
-	stock: { type: Number, required: true },
+	description: {
+		type: String,
+		required: [true, 'Description is required'],
+		trim: true,
+		default: 'липсва описание',
+	},
+	picture: {
+		type: String,
+		required: true,
+	},
+	coverPageType: {
+		type: String,
+		trim: true,
+		enum: ['мека', 'твърда'],
+		default: 'мека',
+	},
+	stock: {
+		type: Number,
+		required: [true, 'Stock is required'],
+		min: [0, 'Stock must be greater than or equal to 0'],
+	},
 	categories: [
 		{
 			type: Schema.Types.ObjectId,
@@ -31,30 +46,45 @@ const TextbookSchema: Schema = new Schema({
 			required: true,
 		},
 	],
-
-	publisher: { type: String, trim: true },
-	language: { type: String, trim: true },
-	publishDate: { type: Date },
-	pageCount: { type: Number, min: 1 },
-	translator: { type: String, trim: true },
-	dimensions: { type: String, trim: true },
-	coverPageType: { type: String, trim: true },
-	createdAt: { type: Date, default: Date.now, required: true },
+	publisher: {
+		type: String,
+		required: [true, 'Publisher is required'],
+		trim: true,
+	},
+	language: {
+		type: String,
+		trim: true,
+		default: 'Български',
+	},
+	publishDate: {
+		type: Date,
+	},
+	productType: {
+		type: String,
+		default: 'Textbook',
+		required: true,
+	},
+	pageCount: {
+		type: Number,
+		min: 1,
+	},
+	translator: {
+		type: String,
+		trim: true,
+		default: 'N/A',
+	},
+	dimensions: {
+		type: String,
+		trim: true,
+		default: 'липсва информация',
+	},
+	createdAt: {
+		type: Date,
+		default: Date.now,
+		required: true,
+	},
 })
 
-// TextbookSchema.path('categories').validate(async function (value: Types.ObjectId[]) {
-//     const categories = await Categories.find({ _id: { $in: value }, categoryType: 'textbook' });
-
-//     return categories.length === value.length;
-//   }, 'One or more categories are invalid or not of type textbook.');
-
-TextbookSchema.virtual('coverImagePath').get(function () {
-	if (this.coverImage != null && this.coverImageType != null) {
-		return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString(
-			'base64'
-		)}`
-	}
-})
 const Textbook = model<IBookSchema>('Textbook', TextbookSchema)
 
 export default Textbook

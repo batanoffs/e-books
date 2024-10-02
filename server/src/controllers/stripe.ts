@@ -107,7 +107,7 @@ export const checkoutSession = async (
 
 		const session = await stripe.checkout.sessions.create({
 			client_reference_id: userId,
-			customer_email: email, //TODO save userdata state and provide email here
+			customer_email: email,
 			line_items: orderedProducts,
 			mode: 'payment',
 			success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
