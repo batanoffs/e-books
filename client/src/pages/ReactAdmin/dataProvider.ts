@@ -1,5 +1,5 @@
 import { stringify } from 'query-string'
-import { fetchUtils, DataProvider } from 'ra-core'
+import { fetchUtils, DataProvider, DeleteManyParams, DeleteManyResult } from 'ra-core'
 import { getToken } from '../../utils/helpers/auth'
 
 type Identifier = string | number
@@ -152,9 +152,9 @@ export default (apiUrl: string): DataProvider => ({
 		return { data: json }
 	},
 
-	deleteMany: async (resource: string, params: { ids: Identifier[] }) => {
+	deleteMany: async (resource: string, params: DeleteManyParams): Promise<DeleteManyResult> => {
 		const query = {
-			filter: JSON.stringify({ id: params.ids }),
+			filter: JSON.stringify({ ids: params.ids }),
 		}
 		const url = apiUrl + resource + `/?` + stringify(query)
 		const { json } = await httpClient(url, {
