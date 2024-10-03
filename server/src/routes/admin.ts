@@ -38,6 +38,7 @@ router.use('/categories/stationery', raExpressMongoose(StationeryCategories, {
 
 router.use('/stationery', raExpressMongoose(Stationery, {
 		q: [
+			'_id',
 			'title',
 			'price',
 			'description',
@@ -53,6 +54,7 @@ router.use('/stationery', raExpressMongoose(Stationery, {
 
 router.use('/books', raExpressMongoose(Book, {
 		q: [
+			'_id',
 			'title',
 			'author',
 			'price',
@@ -74,6 +76,7 @@ router.use('/books', raExpressMongoose(Book, {
 
 router.use('/textbooks', raExpressMongoose(Textbook, {
 		q: [
+			'_id',
 			'title',
 			'author',
 			'price',
