@@ -71,12 +71,12 @@ const BookSchema: Schema = new Schema({
 	translator: {
 		type: String,
 		trim: true,
-		default: 'няма',
+		default: 'N/A',
 	},
 	dimensions: {
 		type: String,
 		trim: true,
-		default: 'липсва информация',
+		default: 'N/A',
 	},
 	createdAt: {
 		type: Date,
