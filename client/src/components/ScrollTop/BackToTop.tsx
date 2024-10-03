@@ -4,9 +4,21 @@ import Fab from '@mui/material/Fab'
 import Fade from '@mui/material/Fade'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 interface BackToTopProps {
 	children: React.ReactElement
+}
+
+export const ScrollToTopAction = () => {
+	const { pathname } = useLocation()
+
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [pathname])
+
+	return null
 }
 
 const BackToTop = ({ children }: BackToTopProps) => {
@@ -37,7 +49,7 @@ const BackToTop = ({ children }: BackToTopProps) => {
 	)
 }
 
-const ScrollTop = () => (
+export const ScrollTop = () => (
 	<>
 		<Toolbar id='back-to-top-anchor' sx={{ height: '10px' }} />
 		<BackToTop>
@@ -47,5 +59,3 @@ const ScrollTop = () => (
 		</BackToTop>
 	</>
 )
-
-export default ScrollTop
