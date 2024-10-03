@@ -31,8 +31,6 @@ export const createBook = async (
 		picture: req.body.picture,
 	})
 
-	console.log(newBook)
-
 	try {
 		await newBook.save()
 		res.status(201).json(newBook)
@@ -75,7 +73,6 @@ export const updateBook = async (
 	next: NextFunction
 ): Promise<void> => {
 	const { id } = req.params
-	console.log('categories', req.body.categories)
 
 	if (!id) {
 		res.status(400).json({ message: 'Book ID is required' })

@@ -13,13 +13,10 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
 }
 
 export const getOrders = async (req: Request, res: Response, next: NextFunction) => {
-	console.log('user id:', req.user?.id)
-
 	try {
 		const orders = await Order.find({ userId: req.user?.id })
 			.populate('products.productId')
 			.lean()
-		console.log('found orders', orders)
 
 		res.status(200).json(orders)
 	} catch (error) {

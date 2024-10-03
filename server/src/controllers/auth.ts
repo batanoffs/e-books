@@ -6,7 +6,6 @@ import { loginUser, registerUser } from '../services/user'
 
 const register = async (req: Request, res: Response) => {
 	const { email, password, repass, role } = req.body
-	console.log('Request body', req.body)
 	try {
 		const validation = validationResult(req)
 
@@ -31,12 +30,8 @@ const register = async (req: Request, res: Response) => {
 			return res.status(400).json({ error: 'Invalid role' })
 		}
 
-		console.log('userRoleCheck', userRoleCheck)
-
 		const user = await registerUser(email, password, userRoleCheck)
-
 		const token = createToken(user)
-		console.log('token', token)
 
 		res.cookie('token', token, {
 			httpOnly: true,
@@ -92,7 +87,7 @@ const logout = (req: Request, res: Response) => {
 		path: '/', // restrict cookie to specific path
 	})
 
-	res.status(200).json({ message: 'Усшено излязохте от профила си', redirectUrl })
+	res.status(200).json({ message: 'Успешно излязохте от профила си', redirectUrl })
 }
 
 export { register, login, logout }

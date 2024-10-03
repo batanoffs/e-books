@@ -29,7 +29,6 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
 				})
 			}
 		}
-		console.log('cart:', cart)
 
 		await cart.save()
 		res.status(200).json(cart)

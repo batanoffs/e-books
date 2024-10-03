@@ -19,10 +19,7 @@ export const checkoutSession = async (
 	next: NextFunction
 ): Promise<void> => {
 	const { products } = req.body
-
 	const user = req.user
-
-	console.log('User:', user)
 
 	if (!user) {
 		res.status(401).json({ message: 'Not authorized' })
@@ -30,11 +27,10 @@ export const checkoutSession = async (
 	}
 
 	const { id: userId, email } = user
-
 	const validationErrors = validationResult(req)
 	const newSession = await mongoose.startSession()
 
-	console.log('Passing those products to save in Stripe DB:', products)
+	// console.log('Passing those products to save in Stripe DB:', products)
 
 	try {
 		await newSession.startTransaction()
@@ -65,7 +61,7 @@ export const checkoutSession = async (
 				const searchResponse = await stripe.products.search({
 					query: `name:"${productDB?.title}"`,
 				})
-				console.log('checkStripeDB:', searchResponse)
+				// console.log('checkStripeDB:', searchResponse)
 
 				if (searchResponse.data.length === 0) {
 					const productObjStripe = {
@@ -88,8 +84,8 @@ export const checkoutSession = async (
 					}
 
 					const createStripeProduct = await stripe.products.create(productObjStripe)
-					console.log(`New Stripe Product created with id: ${product.id}`)
-					console.log(`New Stripe Product data: ${createStripeProduct}`)
+					// console.log(`New Stripe Product created with id: ${product.id}`)
+					// console.log(`New Stripe Product data: ${createStripeProduct}`)
 					return {
 						price: createStripeProduct.default_price,
 						quantity: product.quantity,

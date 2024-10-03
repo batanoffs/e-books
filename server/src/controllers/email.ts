@@ -12,7 +12,7 @@ export const AddSubscriberToNewsLetter = async (req: Request, res: Response) => 
 	const { newsLetterEmail } = req.body
 
 	try {
-		const myNewsLetterGroupId = '133087498496640175'
+		const myNewsLetterGroupId = '133087498496640175' // test
 		const params = {
 			email: newsLetterEmail,
 			groups: [myNewsLetterGroupId],
