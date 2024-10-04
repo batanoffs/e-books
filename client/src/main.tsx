@@ -2,7 +2,7 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'
-import { ScrollToTopAction } from './components/ScrollTop/BackToTop'
+import { ScrollToTopAction } from './components/ScrollTop/BackToTopButton'
 import GlobalSpinner from './components/utils/Spinner'
 
 import App from './App'
