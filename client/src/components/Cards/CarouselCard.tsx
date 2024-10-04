@@ -14,13 +14,13 @@ interface CarouselCard {
 }
 
 export const CarouselCard = ({ product, styles }: CarouselCard) => {
-	const { picture, title, author, price, description, _id } = product
+	const { picture, title, author, productType, price, description, _id } = product
 	const formatCurrency = formatCurrencyToBGN(price)
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
 	const addToCart = useCartStore((state) => state.addToCart)
 	const navigate = useNavigate()
-	
+
 	const onGoToDetails = () => {
 		navigate(`/catalog/books/all/${_id}`)
 	}
@@ -34,10 +34,11 @@ export const CarouselCard = ({ product, styles }: CarouselCard) => {
 
 		const currentItem = {
 			product: {
-				_id: _id,
-				picture: picture,
-				title: title,
-				price: price,
+				_id,
+				picture,
+				title,
+				price,
+				productType,
 			},
 			quantity: 1,
 		}

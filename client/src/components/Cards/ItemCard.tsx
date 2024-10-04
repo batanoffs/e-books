@@ -20,7 +20,7 @@ const ItemCard = ({ product }: { product: Product }) => {
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
 	const navigate = useNavigate()
 
-	const { _id, title, author, price, picture } = product
+	const { _id, title, author, productType, price, picture } = product
 
 	const formattedPrice = formatCurrencyToBGN(price)
 
@@ -32,10 +32,11 @@ const ItemCard = ({ product }: { product: Product }) => {
 		}
 		const currentItem = {
 			product: {
-				id: _id,
-				picture: picture,
-				title: title,
-				price: price,
+				_id,
+				picture,
+				title,
+				price,
+				productType,
 			},
 			quantity: 1,
 		}

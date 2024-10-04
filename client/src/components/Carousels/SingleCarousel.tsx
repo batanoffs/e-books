@@ -1,4 +1,4 @@
-import Slider from 'react-slick'
+import Slider, { Settings } from 'react-slick'
 
 import { CarouselCard } from '../Cards/CarouselCard'
 import { Product, Products } from '../../interfaces/product.interface'
@@ -16,11 +16,11 @@ const SamplePrevArrow = (props) => {
 }
 
 const SingleCarousel = ({ products }: Products) => {
-	const settings = {
+	const settings: Settings = {
 		infinite: true,
 		autoplay: true,
 		speed: 1000,
-		lazyLoad: true,
+		lazyLoad: 'ondemand',
 		autoplaySpeed: 10000,
 		arrows: true,
 		centerPadding: '100px',
@@ -29,31 +29,10 @@ const SingleCarousel = ({ products }: Products) => {
 		nextArrow: <SampleNextArrow />,
 		prevArrow: <SamplePrevArrow />,
 		cssEase: 'linear',
-
-		responsive: [
-			{
-				breakpoint: 1024,
-				settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1,
-				},
-			},
-			{
-				breakpoint: 600,
-				settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1,
-				},
-			},
-			{
-				breakpoint: 480,
-				settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1,
-				},
-			},
-		],
+		slidesToShow: 1,
+		slidesToScroll: 1,
 	}
+
 	return (
 		<Slider className={styles.carousel} {...settings}>
 			{products.map((product: Product) => (
