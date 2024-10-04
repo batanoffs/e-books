@@ -21,7 +21,7 @@ export const ScrollToTopAction = () => {
 	return null
 }
 
-const BackToTop = ({ children }: BackToTopProps) => {
+const BackToTopButton = ({ children }: BackToTopProps) => {
 	const scrollTrigger = useScrollTrigger({
 		disableHysteresis: true,
 		threshold: 100,
@@ -49,13 +49,13 @@ const BackToTop = ({ children }: BackToTopProps) => {
 	)
 }
 
-export const ScrollTop = () => (
+export const ScrollTopButton = () => (
 	<>
 		<Toolbar id='back-to-top-anchor' sx={{ height: '10px' }} />
-		<BackToTop>
+		<BackToTopButton>
 			<Fab size='large' aria-label='scroll back to top'>
 				<KeyboardArrowUpIcon sx={{ height: '40px', width: '40px' }} />
 			</Fab>
-		</BackToTop>
+		</BackToTopButton>
 	</>
 )
