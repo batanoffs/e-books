@@ -24,15 +24,15 @@ const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handl
 	return (
 		<Box sx={{ flexGrow: 0, mr: 2, gap: 1 }}>
 			{authGuards.isAuth() ? (
-				<>
+				<Box sx={{ display: 'flex', gap: 1 }}>
+					<CartButton />
+
 					<Tooltip title='Open settings'>
 						<IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mr: 2 }}>
 							<Avatar alt='User Avatar' src='/static/images/avatar/2.jpg' />
 						</IconButton>
 					</Tooltip>
-
-					<CartButton />
-				</>
+				</Box>
 			) : (
 				<Box sx={{ display: 'flex', gap: 1 }}>
 					<Button variant='contained' color='secondary' onClick={toggleOpen}>

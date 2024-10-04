@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import MenuIcon from '@mui/icons-material/Menu'
 import { navPages } from '../../utils/constants/pages'
+import { makeStyles } from '@mui/material'
 
 const NavigationMenu = ({
 	anchorElNav,
@@ -42,13 +43,17 @@ const NavigationMenu = ({
 					))}
 				</Menu>
 			</Box>
-			<Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1 }}>
+			<Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, gap: 1 }}>
 				{navPages.map((page) => (
 					<Button
 						key={page}
 						onClick={() => navigationHandler(page)}
-						variant='text'
 						color='inherit'
+						sx={{
+							fontWeight: 500,
+							fontSize: '0.9em',
+							'&:hover': { textDecoration: 'none', color: 'secondary.main', backgroundColor: 'transparent' },
+						}}
 					>
 						{page}
 					</Button>

@@ -13,6 +13,8 @@ import Logo from '../Logo/Logo'
 import SearchBar from './SearchBar'
 import NavigationMenu from './NavMenu'
 import UserMenu from './UserMenu'
+import { LocaleSwitcher } from './LocaleSwitcher'
+import { Box } from '@mui/material'
 
 const Header = () => {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
@@ -81,21 +83,26 @@ const Header = () => {
 	return (
 		<>
 			<AppBar position='static'>
-				<Container maxWidth='lg'>
-					<Toolbar variant='dense' sx={{ height: 80 }} disableGutters>
+				<Container maxWidth='xl'>
+					<Toolbar variant='dense' sx={{ height: 80, justifyContent: 'space-between' }}>
 						<Logo />
+						<Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
+							<SearchBar />
+							<LocaleSwitcher />
+							<UserMenu
+								anchorElUser={anchorElUser}
+								handleOpenUserMenu={handleOpenUserMenu}
+								handleCloseUserMenu={handleCloseUserMenu}
+								handleLogout={handleLogout}
+							/>
+						</Box>
+					</Toolbar>
+					<Toolbar variant='dense' sx={{ justifyContent: 'center' }}>
 						<NavigationMenu
 							anchorElNav={anchorElNav}
 							handleOpenNavMenu={handleOpenNavMenu}
 							handleCloseNavMenu={handleCloseNavMenu}
 							navigationHandler={navigationHandler}
-						/>
-						<SearchBar />
-						<UserMenu
-							anchorElUser={anchorElUser}
-							handleOpenUserMenu={handleOpenUserMenu}
-							handleCloseUserMenu={handleCloseUserMenu}
-							handleLogout={handleLogout}
 						/>
 					</Toolbar>
 				</Container>
