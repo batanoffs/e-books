@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 
 import LoginModal from './pages/login/LoginModal'
 import Register from './pages/register/RegisterPage'
@@ -14,16 +14,36 @@ import ContactsPage from './pages/contacts/ContactsPage'
 import AboutPage from './pages/about/AboutPage'
 import PopularPage from './pages/popular/PopularPage'
 import CatalogPage from './pages/catalogue/CatalogPage'
-import { ScrollTop } from './components/ScrollTop/BackToTop'
+import { ScrollTopButton } from './components/ScrollTop/BackToTop'
 import WishlistPage from './pages/ProfileSettings/WishlistPage'
 import PaymentSuccessful from './pages/checkout/PaymentSuccessful'
 import ProfilePage from './pages/ProfileSettings/ProfilePage'
 import { HomePage } from './pages/home/HomePage'
-import GlobalSpinner from './components/utils/Spinner'
+import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles'
+
+import * as locales from '@mui/material/locale/'
+import themeOptions from './utils/helpers/theme'
+import { useLocaleThemeStore } from './components/Header/siteTheme'
+
+type SupportedLocales = keyof typeof locales
 
 const App = () => {
 	const [isAdmin, setIsAdmin] = useState(false)
+	const [theme, setTheme] = useState(themeOptions)
+	const { locale } = useLocaleThemeStore()
 	let location = useLocation()
+	// const getTheme = useTheme()
+
+	// console.log('getTheme', getTheme)
+	// console.log('locale', locale)
+	// console.log('theme', theme)
+
+	const themeWithLocale = useMemo(() => createTheme(theme, locales[locale]), [locale, theme])
+
+	// Use useEffect to update the theme when locale changes
+	// useEffect(() => {
+	// 	setTheme(themeWithLocale) // Update the theme in Zustand store
+	// }, [themeWithLocale]) // Update theme only when locale or siteTheme changes
 
 	useEffect(() => {
 		let isAdminLocation = location.pathname?.toLowerCase().includes('admin')
@@ -31,11 +51,10 @@ const App = () => {
 	}, [location])
 
 	return (
-		<>
+		<ThemeProvider theme={themeWithLocale}>
 			{!isAdmin && <Header />}
-			{!isAdmin && <ScrollTop />}
+			{!isAdmin && <ScrollTopButton />}
 			<LoginModal />
-			<GlobalSpinner />
 			<Routes>
 				<Route path='/' element={<HomePage />} />
 				<Route path='/catalog/*' element={<CatalogPage />} />
@@ -54,7 +73,7 @@ const App = () => {
 			</Routes>
 
 			{!isAdmin && <Footer />}
-		</>
+		</ThemeProvider>
 	)
 }
 
