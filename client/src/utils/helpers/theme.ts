@@ -3,43 +3,80 @@
 import { createTheme } from '@mui/material/styles'
 
 const themeOptions = createTheme({
-	palette: {
-		mode: 'light', // Add support for dark mode switching
-		primary: {
-			main: '#228be6', // Primary color
-			light: '#4aa8f2', // Light variant for primary
-			dark: '#176ab3', // Dark variant for primary
-			contrastText: '#ffffff', // Contrast text for primary
+	colorSchemes: {
+		light: {
+			palette: {
+				primary: {
+					main: '#228be6', // Primary color
+					light: '#4aa8f2', // Light variant for primary
+					contrastText: '#ffffff', // Contrast text for primary
+				},
+				secondary: {
+					main: '#6f42c1',
+					light: '#9b6ee5',
+					dark: '#4b2990',
+					contrastText: '#f4f6f8',
+				},
+				text: {
+					primary: '#071108', // Primary text color
+					secondary: '#bfb1c1', // Secondary text color
+					disabled: '#5c5959', // Disabled text color
+				},
+				background: {
+					default: '#fff', // Slightly off-white background for better readability
+					paper: '#f4f6f8',
+				},
+				error: {
+					main: '#d32f2f', // Error color
+				},
+				warning: {
+					main: '#ed6c02', // Warning color
+				},
+				info: {
+					main: '#0288d1', // Info color
+				},
+				success: {
+					main: '#2e7d32', // Success color
+				},
+				divider: '#bfb1c1', // Divider color for UI elements
+			},
 		},
-		secondary: {
-			main: '#6f42c1',
-			light: '#9b6ee5',
-			dark: '#4b2990',
-			contrastText: '#f4f6f8',
+		dark: {
+			palette: {
+				primary: {
+					main: '#228be6', // Primary color
+					dark: '#176ab3', // Dark variant for primary
+					contrastText: '#ffffff', // Contrast text for primary
+				},
+				secondary: {
+					main: '#6f42c1',
+					dark: '#4b2990',
+					contrastText: '#f4f6f8',
+				},
+				text: {
+					primary: '#071108', // Primary text color
+					secondary: '#bfb1c1', // Secondary text color
+					disabled: '#5c5959', // Disabled text color
+				},
+				background: {
+					default: '#5c5959', // Slightly off-white background for better readability
+					paper: '#bfb1c1',
+				},
+				error: {
+					main: '#d32f2f', // Error color
+				},
+				warning: {
+					main: '#ed6c02', // Warning color
+				},
+				info: {
+					main: '#0288d1', // Info color
+				},
+				success: {
+					main: '#2e7d32', // Success color
+				},
+				divider: '#071108', // Divider color for UI elements
+			},
 		},
-		text: {
-			primary: '#071108', // Primary text color
-			secondary: '#bfb1c1', // Secondary text color
-			disabled: '#5c5959', // Disabled text color
-			
-		},
-		background: {
-			default: '#fff', // Slightly off-white background for better readability
-			paper: '#f4f6f8',
-		},
-		error: {
-			main: '#d32f2f', // Error color
-		},
-		warning: {
-			main: '#ed6c02', // Warning color
-		},
-		info: {
-			main: '#0288d1', // Info color
-		},
-		success: {
-			main: '#2e7d32', // Success color
-		},
-		divider: '#bfb1c1', // Divider color for UI elements
 	},
 	typography: {
 		fontFamily: 'Montserrat Alternates, sans-serif',
@@ -222,15 +259,3 @@ export const theme = {
 }
 
 export default themeOptions
-
-// import { defaultTheme } from 'react-admin';
-
-// Function to create light and dark mode themes
-// export const myTheme = {
-//     typography: {
-//         fontFamily: ['Montserrat Alternates', 'Arial', 'sans-serif'].join(','),
-//     },
-//     components: {
-//
-//     },
-// };
