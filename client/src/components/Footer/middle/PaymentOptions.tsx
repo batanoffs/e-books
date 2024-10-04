@@ -41,11 +41,11 @@ const PaymentOptions = ({ styles }: { styles: { [key: string]: string } }) => (
 		</div>
 		<div className={styles.pageFooterMidBlockItem}>
 			<ul className={`${styles.pageFooterIcons} ${styles.pageFooterIconsPayments}`}>
-				<PaymentIcon styles={styles} imgUrl='/visa.png' alt='Visa' />
-				<PaymentIcon styles={styles} imgUrl='/mastercard.png' alt='Mastercard' />
-				<PaymentIcon styles={styles} imgUrl='/easypaysmall.png' alt='Easypay' />
-				<PaymentIcon styles={styles} imgUrl='/epay.png' alt='Epay.bg' />
-				<PaymentIcon styles={styles} imgUrl='/paypal.png' alt='Paypal' />
+				{/* <PaymentIcon styles={styles} imgUrl='/visa.png' alt='Visa' />
+				<PaymentIcon styles={styles} imgUrl='/mastercard.png' alt='Mastercard' /> */}
+				<PaymentIcon styles={styles} imgUrl='/stripe.png' alt='Stripe' />
+				{/* <PaymentIcon styles={styles} imgUrl='/epay.png' alt='Epay.bg' />
+				<PaymentIcon styles={styles} imgUrl='/paypal.png' alt='Paypal' /> */}
 			</ul>
 		</div>
 	</div>

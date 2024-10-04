@@ -1,8 +1,6 @@
 .container {
 	display: flex;
 	justify-content: center;
-	max-width: 1140px;
-	margin: 0 auto;
 	gap: max(5em);
 	align-items: center;
 
@@ -62,16 +60,6 @@
 				border-radius: 0.4em;
 				cursor: pointer;
 			}
-
-			.spinner {
-				display: inline-block;
-				width: 14px;
-				height: 14px;
-				border: 2px solid #fff;
-				border-top-color: transparent;
-				border-radius: 50%;
-				animation: rotate 0.5s linear infinite;
-			}
 		}
 
 		.newsletterFormBlock {
@@ -124,32 +112,6 @@
 			font-size: 14px;
 			line-height: 1.5;
 			color: #fff;
-		}
-	}
-
-	@keyframes rotate {
-		0% {
-			transform: rotate(0deg);
-		}
-
-		100% {
-			transform: rotate(360deg);
-		}
-	}
-
-	@keyframes ripple {
-		0% {
-			transform: scale(0);
-			opacity: 1;
-		}
-
-		50% {
-			opacity: 1;
-		}
-
-		100% {
-			transform: scale(2);
-			opacity: 0;
 		}
 	}
 }
