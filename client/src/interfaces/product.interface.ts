@@ -1,4 +1,4 @@
-export interface Book {
+export interface BookTextBook {
 	_id: string
 	title: string
 	author: string
@@ -15,25 +15,7 @@ export interface Book {
 	translator?: string
 	dimensions?: string
 	createdAt: Date
-}
-
-export interface Textbook {
-	_id: string
-	title: string
-	author: string
-	price: number
-	description: string
-	picture: string
-	coverPageType: string
-	stock: number
-	categories: string[]
-	publisher?: string
-	language?: string
-	publishDate?: Date
-	pageCount?: number
-	translator?: string
-	dimensions?: string
-	createdAt: Date
+	productType: string
 }
 
 export interface Stationery {
@@ -45,10 +27,11 @@ export interface Stationery {
 	categories: string[]
 	stock: number
 	createdAt: Date
+	productType: string
 }
 
 export type Products = {
-	products: Book[] | Textbook[] | Stationery[]
+	products: BookTextBook[] | Stationery[]
 }
 
-export type Product = Book | Textbook | Stationery
+export type Product = BookTextBook | Stationery
