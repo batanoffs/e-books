@@ -23,14 +23,14 @@ import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles'
 
 import * as locales from '@mui/material/locale/'
 import themeOptions from './utils/helpers/theme'
-import { useLocaleThemeStore } from './components/Header/siteTheme'
+import { useLocalizationStore } from './store/localization'
 
 type SupportedLocales = keyof typeof locales
 
 const App = () => {
 	const [isAdmin, setIsAdmin] = useState(false)
 	const [theme, setTheme] = useState(themeOptions)
-	const { locale } = useLocaleThemeStore()
+	const { locale } = useLocalizationStore()
 	let location = useLocation()
 	// const getTheme = useTheme()
 

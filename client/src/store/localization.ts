@@ -7,7 +7,7 @@ export interface SiteThemeState {
 	setLocale: (newLocale: SupportedLocales) => void
 }
 
-export const useLocaleThemeStore = create<SiteThemeState>((set) => {
+export const useLocalizationStore = create<SiteThemeState>((set) => {
 	return {
 		locale: 'enUS',
 		setLocale: (newLocale) => set({ locale: newLocale }),
