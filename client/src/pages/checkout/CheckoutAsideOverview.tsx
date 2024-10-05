@@ -1,16 +1,8 @@
-import Button from '@mui/material/Button'
-import Paper from '@mui/material/Paper'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
+import { Button, Paper, Typography, Box } from '@mui/material'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import { useEffect, useState } from 'react'
 import useCartStore from '../../store/cart'
+import { ProductsTable } from '../../components/Tables/ProductsTable'
 
 export const CheckoutOverview = ({ handleBackToCart }) => {
 	const cart = useCartStore((state) => state.cart)
@@ -32,41 +24,7 @@ export const CheckoutOverview = ({ handleBackToCart }) => {
 			<Typography variant='h5' align='center'>
 				Обобщение на поръчката
 			</Typography>
-			<TableContainer sx={{ marginTop: '1rem' }}>
-				<Table>
-					<TableHead>
-						<TableRow>
-							<TableCell>Продукти</TableCell>
-							<TableCell>Име</TableCell>
-							<TableCell>Цена</TableCell>
-							<TableCell>Брой</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{cart.map((item) => (
-							<TableRow key={item.product._id}>
-								<TableCell>
-									<img style={{ width: '50px' }} src={item.product.picture} />
-								</TableCell>
-								<TableCell
-									sx={{
-										maxWidth: '200px',
-										minWidth: '150px',
-										overflowWrap: 'break-word',
-										wordWrap: 'break-word',
-										wordBreak: 'break-word',
-										lineHeight: '1.2',
-									}}
-								>
-									{item.product.title}
-								</TableCell>
-								<TableCell>{formatCurrencyToBGN(item.product.price)}</TableCell>
-								<TableCell>{item.quantity}</TableCell>
-							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</TableContainer>
+			<ProductsTable products={cart} />
 
 			<Typography align='center' variant='h6' sx={{ marginTop: '1em' }}>
 				Обща стойност: {formatCurrencyToBGN(totalSum)}
