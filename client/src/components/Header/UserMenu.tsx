@@ -1,45 +1,46 @@
-import { Link } from 'react-router-dom'
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import Typography from '@mui/material/Typography'
-import Tooltip from '@mui/material/Tooltip'
-import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
+import { Link, useNavigate } from 'react-router-dom'
+import { Box, IconButton, Menu, MenuItem, Typography, Tooltip, Avatar } from '@mui/material'
+import { menuItems } from '../../utils/constants/pages'
+import { FormEvent, MouseEvent, useState } from 'react'
 
-import { useLoginModal } from '../../store/helperModal'
-import CartButton from './CartButton'
-import authGuards from '../../middlewares/guards'
+import axios from 'axios'
+import API from '../../utils/constants/api'
+import useAlertStore from '../../store/alert'
 
-const menuItems = [
-	{ name: 'Начало', path: '/' },
-	{ name: 'Профил', path: '/profile/settings' },
-	{ name: 'Харесани', path: '/profile/wishlist' },
-	{ name: 'Поръчки', path: '/profile/orders' },
-]
+export const UserMenu = () => {
+	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
+	const showAlert = useAlertStore((state) => state.showAlert)
 
-const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handleLogout }) => {
-	const toggleOpen = useLoginModal((state) => state.toggleOpen)
+	const navigate = useNavigate()
+
+	const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
+		setAnchorElUser(event.currentTarget)
+	}
+	const handleCloseUserMenu = () => {
+		setAnchorElUser(null)
+	}
+
+	const handleLogout = async (e: FormEvent) => {
+		e.preventDefault()
+		handleCloseUserMenu()
+
+		try {
+			const response = await axios.get(API.LOGOUT)
+			const { redirectUrl } = response.data
+			document.cookie = 'token=; expires=; path=/;'
+			navigate(redirectUrl)
+		} catch (error) {
+			showAlert('Възникна грешка!', 'error')
+		}
+	}
+
 	return (
-		<Box sx={{ flexGrow: 0, mr: 2, gap: 1 }}>
-			{authGuards.isAuth() ? (
-				<Box sx={{ display: 'flex', gap: 1 }}>
-					<CartButton />
-
-					<Tooltip title='Open settings'>
-						<IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mr: 2 }}>
-							<Avatar alt='User Avatar' src='/static/images/avatar/2.jpg' />
-						</IconButton>
-					</Tooltip>
-				</Box>
-			) : (
-				<Box sx={{ display: 'flex', gap: 1 }}>
-					<Button variant='contained' color='secondary' onClick={toggleOpen}>
-						Вход
-					</Button>
-				</Box>
-			)}
+		<Box>
+			<Tooltip title='Open settings'>
+				<IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mr: 1 }}>
+					<Avatar alt='User Avatar' />
+				</IconButton>
+			</Tooltip>
 
 			<Menu
 				sx={{ mt: '45px' }}
@@ -63,5 +64,3 @@ const UserMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu, handl
 		</Box>
 	)
 }
-
-export default UserMenu

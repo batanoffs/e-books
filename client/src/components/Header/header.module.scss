@@ -1,53 +1,73 @@
+.headerToolbar {
+	margin-right: 0;
+	margin-left: 0;
+	height: 60px;
+	justify-content: space-between;
+}
+
+.headerBox {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.headerToolbarMenu {
+	justify-content: center;
+	background-color: #f5f5f5;
+}
+
 .Search {
-    position: relative;
-    border-radius: var(--shape-border-radius);
-    background-color: rgba(var(--palette-common-white-rgb), 0.15);
+	position: relative;
+	border-radius: var(--shape-border-radius);
+	background-color: rgba(var(--palette-common-white-rgb), 0.15);
 }
 
 .Search:hover {
-    background-color: rgba(var(--palette-common-white-rgb), 0.25);
+	background-color: rgba(var(--palette-common-white-rgb), 0.25);
 }
 
 .Search {
-    margin-left: 0;
-    margin-right: 20px;
-    width: 100%;
+	margin-left: 0;
+	margin-right: 20px;
+	width: 100%;
 }
 
 @media (min-width: 600px) {
-    .Search {
-        margin-left: var(--spacing-1);
-        width: auto;
-    }
+	.Search {
+		margin-left: var(--spacing-1);
+		width: auto;
+	}
 }
 
 .SearchIconWrapper {
-    padding: var(--spacing-0) var(--spacing-2);
-    height: 100%;
-    position: absolute;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	padding: var(--spacing-0) var(--spacing-2);
+	height: 100%;
+	position: absolute;
+	pointer-events: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .StyledInputBase {
-    color: inherit;
-    width: 100%;
+	color: inherit;
+	width: 100%;
 }
 
 .StyledInputBase .MuiInputBase-input {
-    padding: var(--spacing-1) var(--spacing-1) var(--spacing-1) 0;
-    padding-left: calc(1em + var(--spacing-4));
-    transition: width var(--transitions-duration-standard) var(--transitions-easing-standard);
+	padding: var(--spacing-1) var(--spacing-1) var(--spacing-1) 0;
+	padding-left: calc(1em + var(--spacing-4));
+	transition: width var(--transitions-duration-standard)
+		var(--transitions-easing-standard);
 }
 
 @media (min-width: 600px) {
-    .StyledInputBase .MuiInputBase-input {
-        width: 12ch;
-    }
+	.StyledInputBase .MuiInputBase-input {
+		width: 12ch;
+	}
 
-    .StyledInputBase .MuiInputBase-input:focus {
-        width: 20ch;
-    }
+	.StyledInputBase .MuiInputBase-input:focus {
+		width: 20ch;
+	}
 }
