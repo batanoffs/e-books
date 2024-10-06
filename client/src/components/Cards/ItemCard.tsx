@@ -14,7 +14,7 @@ import { Product } from '../../interfaces/product.interface'
 
 import styles from './itemcard.module.scss'
 
-const ItemCard = ({ product }: { product: Product }) => {
+export const ItemCard = ({ product }: { product: Product }) => {
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const addToCart = useCartStore((state) => state.addToCart)
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
@@ -96,5 +96,3 @@ const ItemCard = ({ product }: { product: Product }) => {
 		</div>
 	)
 }
-
-export default ItemCard
