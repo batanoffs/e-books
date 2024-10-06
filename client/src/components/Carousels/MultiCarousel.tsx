@@ -9,7 +9,7 @@ interface MultiCarouselInterface {
 	sx?: React.CSSProperties
 }
 
-const MultiCarousel = ({ products, Component, sx = {} }: MultiCarouselInterface) => {
+export const MultiCarousel = ({ products, Component, sx = {} }: MultiCarouselInterface) => {
 	const settings = {
 		className: 'centerPadding',
 		swipeToSlide: true,
@@ -32,5 +32,3 @@ const MultiCarousel = ({ products, Component, sx = {} }: MultiCarouselInterface)
 		</Slider>
 	)
 }
-
-export default MultiCarousel

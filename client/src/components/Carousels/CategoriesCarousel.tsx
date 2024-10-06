@@ -9,7 +9,11 @@ interface CategoriesCarouselInterface {
 	sx?: React.CSSProperties
 }
 
-const CategoriesCarousel = ({ categories, Component, sx = {} }: CategoriesCarouselInterface) => {
+export const CategoriesCarousel = ({
+	categories,
+	Component,
+	sx = {},
+}: CategoriesCarouselInterface) => {
 	const settings = {
 		className: 'centerPadding',
 		swipeToSlide: true,
@@ -32,5 +36,3 @@ const CategoriesCarousel = ({ categories, Component, sx = {} }: CategoriesCarous
 		</Slider>
 	)
 }
-
-export default CategoriesCarousel

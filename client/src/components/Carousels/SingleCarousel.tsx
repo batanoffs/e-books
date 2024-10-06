@@ -15,7 +15,7 @@ const SamplePrevArrow = (props) => {
 	return <div className={styles.prevArrow} onClick={onClick} />
 }
 
-const SingleCarousel = ({ products }: Products) => {
+export const SingleCarousel = ({ products }: Products) => {
 	const settings: Settings = {
 		infinite: true,
 		autoplay: true,
@@ -41,5 +41,3 @@ const SingleCarousel = ({ products }: Products) => {
 		</Slider>
 	)
 }
-
-export default SingleCarousel
