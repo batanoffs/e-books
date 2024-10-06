@@ -2,7 +2,7 @@ import React from 'react'
 import useSpinner from '../../store/spinner'
 import styles from './spinner.module.scss'
 
-const GlobalSpinner: React.FC = () => {
+export const GlobalSpinner: React.FC = () => {
 	const isLoading = useSpinner((state) => state.isLoading)
 
 	if (!isLoading) return null
@@ -15,5 +15,3 @@ const GlobalSpinner: React.FC = () => {
 		</div>
 	)
 }
-
-export default GlobalSpinner
