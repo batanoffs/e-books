@@ -9,7 +9,7 @@ type Category = {
 	stationery: string[]
 }
 
-const CategoriesList = () => {
+export const CategoriesList = () => {
 	const [categories, setCategories] = useState<Category[]>()
 	const dataProvider = useDataProvider()
 
@@ -37,4 +37,3 @@ const CategoriesList = () => {
 		</ul>
 	)
 }
-export default CategoriesList
