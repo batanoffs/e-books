@@ -1,20 +1,21 @@
+@use '../../styles/base/colors' as colors;
+
 .headerToolbar {
-	margin-right: 0;
-	margin-left: 0;
 	height: 60px;
 	justify-content: space-between;
 }
 
 .headerBox {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    gap: 1rem;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	gap: 1rem;
 }
 
 .headerToolbarMenu {
 	justify-content: center;
-	background-color: #f5f5f5;
+	background-color: colors.$blue;
+	border-top: 1px solid colors.$p-color;
 }
 
 .Search {

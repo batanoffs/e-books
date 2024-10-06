@@ -3,14 +3,14 @@ import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 import MenuIcon from '@mui/icons-material/Menu'
 import { navPages } from '../../utils/constants/pages'
 import useFiltersStore from '../../store/filters'
 import { MouseEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { List, ListItemButton } from '@mui/material'
 
-const NavigationMenu = () => {
+export const NavMenu = () => {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
 	const setNavCategory = useFiltersStore((state) => state.setNavCategory)
 	const navigate = useNavigate()
@@ -23,31 +23,9 @@ const NavigationMenu = () => {
 		setAnchorElNav(null)
 	}
 
-	const navigationHandler = (page: string) => {
-		switch (page) {
-			case 'Книги':
-				setNavCategory('all')
-				navigate('/catalog/books/all')
-				break
-			case 'Учебници':
-				setNavCategory('all')
-				navigate('/catalog/textbooks/all')
-				break
-			case 'Канцелария':
-				setNavCategory('all')
-				navigate('/catalog/stationery/all')
-				break
-			case 'Най-продавани':
-				navigate('/catalog/popular')
-				break
-			case 'Контакти':
-				navigate('/contacts')
-				break
-
-			default:
-				navigate('/')
-				break
-		}
+	const navigationHandler = (page: { title: string; href: string }) => {
+		setNavCategory('')
+		navigate(page.href)
 	}
 
 	return (
@@ -73,21 +51,32 @@ const NavigationMenu = () => {
 					onClose={handleCloseNavMenu}
 				>
 					{navPages.map((page) => (
-						<MenuItem key={page} onClick={() => navigationHandler(page)}>
-							<Typography textAlign='center'>{page}</Typography>
+						<MenuItem key={page.title} onClick={() => navigationHandler(page)}>
+							<Typography textAlign='center'>{page.title}</Typography>
 						</MenuItem>
 					))}
 				</Menu>
 			</Box>
-			<Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, gap: 1 }}>
+			<List
+				sx={{
+					display: { xs: 'none', md: 'flex' },
+					'& > :last-child': {
+						textAlign: 'right',
+						flex: 1.5,
+					},
+					flexGrow: 1,
+					paddingTop: 0,
+					paddingBottom: 0,
+				}}
+			>
 				{navPages.map((page) => (
-					<Button
-						key={page}
+					<ListItemButton
+						key={page.title}
 						onClick={() => navigationHandler(page)}
-						color='inherit'
 						sx={{
-							fontWeight: 500,
-							fontSize: '0.9em',
+							color: 'white',
+							fontWeight: 600,
+							fontSize: '1em',
 							'&:hover': {
 								textDecoration: 'none',
 								color: 'secondary.main',
@@ -95,12 +84,10 @@ const NavigationMenu = () => {
 							},
 						}}
 					>
-						{page}
-					</Button>
+						{page.title}
+					</ListItemButton>
 				))}
-			</Box>
+			</List>
 		</>
 	)
 }
-
-export default NavigationMenu

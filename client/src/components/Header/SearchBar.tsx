@@ -8,7 +8,7 @@ const Search = styled('div')(searchStyles)
 const SearchIconWrapper = styled('div')(searchIconWrapperStyles)
 const StyledInputBase = styled(InputBase)(inputBaseStyles)
 
-const SearchBar = () => {
+export const SearchBar = () => {
 	const [searchQuery, setSearchQuery] = useState('')
 
 	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -33,10 +33,8 @@ const SearchBar = () => {
 				placeholder='Търсене...'
 				inputProps={{ 'aria-label': 'search' }}
 				onChange={handleSearchInputChange}
-				onKeyPress={handleKeyPress}
+				onKeyDown={handleKeyPress}
 			/>
 		</Search>
 	)
 }
-
-export default SearchBar

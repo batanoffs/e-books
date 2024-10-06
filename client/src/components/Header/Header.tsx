@@ -1,17 +1,19 @@
 import { Box, AppBar, Container, Toolbar } from '@mui/material'
+import { NavMenu, SearchBar, LocaleSwitcher, AppBarItems } from './index'
 
 import Logo from '../Logo/Logo'
-import SearchBar from './SearchBar'
-import NavigationMenu from './NavMenu'
-import { LocaleSwitcher } from './LocaleSwitcher'
-import AppBarItems from './AppBarItems'
 import styles from './header.module.scss'
 
-const Header = () => {
+export const Header = () => {
 	return (
-		<AppBar position='static'>
+		<AppBar position='static' sx={{ mb: '1em' }}>
 			<Container maxWidth='xl'>
-				<Toolbar className={styles.headerToolbar} variant='dense'>
+				<Toolbar
+					id='back-to-top-anchor'
+					sx={{ pl: 5 }}
+					className={styles.headerToolbar}
+					variant='dense'
+				>
 					<Logo />
 					<SearchBar />
 					<Box className={styles.headerBox}>
@@ -19,12 +21,14 @@ const Header = () => {
 						<LocaleSwitcher />
 					</Box>
 				</Toolbar>
-				<Toolbar variant='dense' className={styles.headerToolbarMenu}>
-					<NavigationMenu />
+				<Toolbar
+					variant='dense'
+					sx={{ minHeight: '40px' }}
+					className={styles.headerToolbarMenu}
+				>
+					<NavMenu />
 				</Toolbar>
 			</Container>
 		</AppBar>
 	)
 }
-
-export default Header
