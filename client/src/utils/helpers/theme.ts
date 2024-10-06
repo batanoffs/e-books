@@ -141,7 +141,7 @@ const themeOptions = createTheme({
 		},
 	},
 	shape: {
-		borderRadius: 12, // Retain rounded corners
+		borderRadius: 6, // Retain rounded corners
 	},
 	components: {
 		MuiTextField: {
@@ -180,13 +180,47 @@ const themeOptions = createTheme({
 				color: 'inherit',
 			},
 		},
+		MuiContainer: {
+			variants: [
+				{
+					props: { maxWidth: 'xl' },
+					style: {
+						padding: 0,
+						margin: 0,
+						maxWidth: '100%',
+						width: '100%',
+					},
+				},
+			],
+			styleOverrides: {
+				root: {
+					'@media (min-width: 600px)': {
+						paddingLeft: 0,
+						paddingRight: 0,
+					},
+					'@media (min-width: 1536px)': {
+						maxWidth: '100%',
+					},
+				},
+			},
+		},
+		MuiToolbar: {
+			styleOverrides: {
+				root: {
+					'@media (min-width: 600px)': {
+						paddingLeft: 'min(10em, 10vw)',
+						paddingRight: 'min(10em, 10vw)',
+					},
+				},
+			},
+		},
 		MuiButton: {
 			defaultProps: {
 				disableElevation: true, // Removes the shadow for buttons
 			},
 			styleOverrides: {
 				root: {
-					borderRadius: 20, // Slightly more rounded buttons
+					borderRadius: 8, // Slightly more rounded buttons
 					height: 36,
 				},
 				containedPrimary: {
@@ -207,7 +241,7 @@ const themeOptions = createTheme({
 		MuiInputBase: {
 			styleOverrides: {
 				root: {
-					borderRadius: 8,
+					borderRadius: 6,
 				},
 			},
 		},
