@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { OrderTabs } from './OrdersTabs'
 import { OrderItems } from './OrdersItem'
 
-const OrdersPage = () => {
+export const OrdersPage = () => {
 	const [orders, setOrders] = useState<Order[]>([])
 	const [filteredOrders, setFilteredOrders] = useState<Order[]>([])
 	const [status, setStatus] = useState<string>('all')
@@ -52,5 +52,3 @@ const OrdersPage = () => {
 		</Box>
 	)
 }
-
-export default OrdersPage

@@ -1,0 +1,7 @@
+export * from './OrdersItem'
+export * from './OrdersNav'
+export * from './OrdersPage'
+export * from './OrdersTabs'
+export * from './ProfilePage'
+export * from './Settings'
+export * from './WishlistPage'

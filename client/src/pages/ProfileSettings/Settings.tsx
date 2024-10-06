@@ -13,7 +13,7 @@ interface FormInputs {
 	newPassword: string
 }
 
-const Settings = () => {
+export const Settings = () => {
 	const {
 		register,
 		handleSubmit,
@@ -110,5 +110,3 @@ const Settings = () => {
 		</Box>
 	)
 }
-
-export default Settings

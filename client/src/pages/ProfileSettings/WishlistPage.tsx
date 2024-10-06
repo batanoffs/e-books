@@ -19,7 +19,7 @@ import cartService from '../../services/cartService'
 import useCartStore from '../../store/cart'
 import wishlistService from '../../services/wishlistService'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
-import { ListIsEmpty } from '../../components/ListIsEmpty'
+import { ListIsEmpty } from '../../components/utils/ListIsEmpty'
 
 export const WishlistPage = () => {
 	const [isRemoving, setIsRemoving] = useState(false)

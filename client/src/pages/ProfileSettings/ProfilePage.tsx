@@ -1,9 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
-import ProfileLayout from '../../components/Layout/profile/ProfileLayout'
-import { OrdersNav } from './OrdersNav'
-import OrdersPage from './OrdersPage'
-import { WishlistPage } from './WishlistPage'
-import Settings from './Settings'
+import { ProfileLayout } from '../../components/index'
+import { Settings, WishlistPage, OrdersPage, OrdersNav } from './index'
 
 export const ProfilePage = () => {
 	return (
