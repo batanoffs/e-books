@@ -16,7 +16,7 @@ import {
  * @param {Omit<CreateProps, 'resource'>} props - The props for the Create component.
  * @returns {React.ReactElement} The rendered Create component.
  */
-const OrdersCreate: React.FC<Omit<CreateProps, 'resource'>> = (
+export const OrdersCreate: React.FC<Omit<CreateProps, 'resource'>> = (
     props: Omit<CreateProps, 'resource'>
 ): React.ReactElement => (
     <Create {...props} title={'Добавяне на нова поръчка (за тестови цели)'}>
@@ -67,5 +67,3 @@ const OrdersCreate: React.FC<Omit<CreateProps, 'resource'>> = (
         </SimpleForm>
     </Create>
 );
-
-export default OrdersCreate;
