@@ -10,7 +10,6 @@ const GlobalSpinner: React.FC = () => {
 	return (
 		<div className={styles.spinnerOverlay}>
 			<div className={styles.loading}>
-				<h1>Зареждане на садържание...</h1>
 				<div className={styles.spinner} />
 			</div>
 		</div>
