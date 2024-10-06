@@ -1,6 +1,6 @@
 import { FooterBot, FooterMidSection as FooterMid, FooterTop, Newsletter } from './index'
 
-const Footer = () => {
+export const Footer = () => {
 	return (
 		<footer>
 			{!window.location.pathname.includes('/register') &&
@@ -13,5 +13,3 @@ const Footer = () => {
 		</footer>
 	)
 }
-
-export default Footer

@@ -1,4 +1,4 @@
-import Logo from '../../Logo/Logo'
+import Logo from '../../utils/Logo'
 import styles from './footer-top.module.scss'
 
 export const FooterTop = () => {
