@@ -2,16 +2,13 @@ import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-import LayoutHeader from '../../components/Layout/catalog/LayoutHeader'
-import DetailsLayout from '../../components/Layout/detail/DetailsLayout'
-import Spinner from '../../components/utils/Spinner'
-import ImageViewer from './ImageViewer'
 import ProductDetails from './ProductDetails'
 import API from '../../utils/constants/api'
 import { Product } from '../../interfaces/product.interface'
 import useSpinner from '../../store/spinner'
+import { LayoutHeader, DetailsLayout, GlobalSpinner, ImageViewer } from '../../components/index'
 
-const DetailsPage = ({ type, path }: { type: string | undefined; path: string }) => {
+export const DetailsPage = ({ type, path }: { type: string | undefined; path: string }) => {
 	const [product, setProduct] = useState<Product | null>(null)
 	const { hideSpinner, showSpinner } = useSpinner()
 	const productID = useParams().id
@@ -35,7 +32,7 @@ const DetailsPage = ({ type, path }: { type: string | undefined; path: string })
 		fetchProductCallback()
 	}, [fetchProductCallback])
 
-	if (!product) return <Spinner />
+	if (!product) return <GlobalSpinner />
 
 	return (
 		<DetailsLayout
@@ -54,5 +51,3 @@ const DetailsPage = ({ type, path }: { type: string | undefined; path: string })
 		</DetailsLayout>
 	)
 }
-
-export default DetailsPage
