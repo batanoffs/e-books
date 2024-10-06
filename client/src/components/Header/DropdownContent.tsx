@@ -1,6 +1,7 @@
 import { Paper, Popper, Typography, ListItem, Button } from '@mui/material'
 import { ProductsTable } from '../Tables/ProductsTable'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
+import { ListIsEmpty } from '../ListIsEmpty'
 
 type DropdownContentProps = {
 	open: boolean
@@ -45,11 +46,7 @@ export const DropdownContent = ({
 				<Typography variant='body2' sx={{ fontWeight: 'bold', textAlign: 'center' }}>
 					Количка
 				</Typography>
-				{cartItems.length > 0 ? (
-					<ProductsTable products={cartItems} />
-				) : (
-					<ListItem>Вашата количка е празна</ListItem>
-				)}
+				{cartItems.length > 0 ? <ProductsTable products={cartItems} /> : <ListIsEmpty />}
 				<Typography variant='h5' sx={{ textAlign: 'center', my: 2 }}>
 					Обща стойност: {formatCurrency}
 				</Typography>
