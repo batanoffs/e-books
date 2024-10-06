@@ -1,10 +1,11 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { useEffect, useState, useMemo } from 'react'
+import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles'
+import * as locales from '@mui/material/locale/'
 
-import { Header } from './components/Header/Header'
-import Footer from './components/Footer/Footer'
-import NotFoundPage from './components/utils/404'
-import { ScrollTopButton } from './components/ScrollTop/BackToTopButton'
+import { useLocalizationStore } from './store/localization'
+import themeOptions from './utils/helpers/theme'
+import { Header, Footer, PageNotFound, ScrollTopButton } from './components/index'
 import {
 	HomePage,
 	ContactsPage,
@@ -20,11 +21,6 @@ import {
 	PopularPage,
 	AboutPage,
 } from './pages/index'
-import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles'
-
-import * as locales from '@mui/material/locale/'
-import themeOptions from './utils/helpers/theme'
-import { useLocalizationStore } from './store/localization'
 
 type SupportedLocales = keyof typeof locales
 
@@ -33,13 +29,11 @@ const App = () => {
 	const [theme, setTheme] = useState(themeOptions)
 	const { locale } = useLocalizationStore()
 	let location = useLocation()
-	// const getTheme = useTheme()
 
-	// console.log('getTheme', getTheme)
-	// console.log('locale', locale)
-	// console.log('theme', theme)
+	console.log('theme', theme)
+	console.log('theme', theme.palette.mode)
 
-	const themeWithLocale = useMemo(() => createTheme(theme, locales[locale]), [locale, theme])
+	// const themeWithLocale = useMemo(() => createTheme(theme, locales[locale]), [locale, theme])
 
 	// Use useEffect to update the theme when locale changes
 	// useEffect(() => {
@@ -52,7 +46,7 @@ const App = () => {
 	}, [location])
 
 	return (
-		<ThemeProvider theme={themeWithLocale}>
+		<ThemeProvider theme={theme}>
 			{!isAdmin && <Header />}
 			{!isAdmin && <ScrollTopButton />}
 			<LoginModal />
@@ -68,7 +62,7 @@ const App = () => {
 				<Route path='/about' element={<AboutPage />} />
 				<Route path='/faq' element={<FaqPage />} />
 				<Route path='/register' element={<Register />} />
-				<Route path='*' element={<NotFoundPage />} />
+				<Route path='*' element={<PageNotFound />} />
 				<Route path='/profile/*' element={<ProfilePage />} />
 			</Routes>
 

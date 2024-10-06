@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import styles from './categories.module.scss'
 
-const CategoryItem = ({ category }: Category) => {
+export const CategoryItem = ({ category }: Category) => {
 	const navigate = useNavigate()
 
 	return (
@@ -21,5 +21,3 @@ const CategoryItem = ({ category }: Category) => {
 		</div>
 	)
 }
-
-export default CategoryItem

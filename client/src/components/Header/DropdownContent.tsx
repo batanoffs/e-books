@@ -1,7 +1,7 @@
 import { Paper, Popper, Typography, ListItem, Button } from '@mui/material'
 import { ProductsTable } from '../Tables/ProductsTable'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
-import { ListIsEmpty } from '../ListIsEmpty'
+import { ListIsEmpty } from '../utils/ListIsEmpty'
 
 type DropdownContentProps = {
 	open: boolean

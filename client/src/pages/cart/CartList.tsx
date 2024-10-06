@@ -11,7 +11,7 @@ import useConfirm from '../../hooks/useConfirm'
 import cartService from '../../services/cartService'
 import authService from '../../services/authService'
 import useAlertStore from '../../store/alert'
-import { ListIsEmpty } from '../../components/ListIsEmpty'
+import { ListIsEmpty } from '../../components/utils/ListIsEmpty'
 
 const CartList = () => {
 	const [isUpdateButtonDisabled, setIsUpdateButtonDisabled] = useState(true)

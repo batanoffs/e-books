@@ -1,7 +1,7 @@
 import { promoServices } from '../../utils/constants/promoServices'
 import styles from './showcase.module.scss' // Import the SCSS module
 
-const ShowcaseList = () => {
+export const ShowcaseList = () => {
 	return (
 		<div className={styles.featureContainer}>
 			{promoServices.map(({ icon, text }, index) => (
@@ -13,5 +13,3 @@ const ShowcaseList = () => {
 		</div>
 	)
 }
-
-export default ShowcaseList

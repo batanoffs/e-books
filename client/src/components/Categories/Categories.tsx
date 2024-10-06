@@ -2,15 +2,15 @@ import { useCallback, useEffect } from 'react'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
 
-import CategoriesCarousel from '../Carousels/CategoriesCarousel'
+import { CategoriesCarousel } from '../Carousels/CategoriesCarousel'
 import useSpinner from '../../store/spinner'
 import useCategoryStore from '../../store/categories'
-import CategoryItem from './categoryItem'
+import { CategoryItem } from './categoryItem'
 import API from '../../utils/constants/api'
 
 import styles from './categories.module.scss'
 
-const CategoryList = () => {
+export const CategoryList = () => {
 	const setCategories = useCategoryStore((state) => state.setCategories)
 	const categoriesMap = useCategoryStore((state) => state.categoriesMap)
 	const { hideSpinner, showSpinner } = useSpinner()
@@ -58,5 +58,3 @@ const CategoryList = () => {
 		</div>
 	)
 }
-
-export default CategoryList

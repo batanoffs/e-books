@@ -2,12 +2,14 @@ import { useCallback, useEffect, useState } from 'react'
 import { Route, Routes, useParams } from 'react-router-dom'
 import axios from 'axios'
 
-import CatalogLayout from '../../components/Layout/catalog/CatalogLayout'
-import LayoutHeader from '../../components/Layout/catalog/LayoutHeader'
-import LayoutAside from '../../components/Layout/catalog/LayoutAside'
-import CatalogItems from '../../components/Layout/catalog/CatalogItems'
-import ItemCard from '../../components/Cards/ItemCard'
-import DetailsPage from '../details/DetailsPage'
+import {
+	CatalogLayout,
+	LayoutHeader,
+	LayoutAside,
+	CatalogItems,
+	ItemCard,
+} from '../../components/index'
+import { DetailsPage } from '../index'
 import useCategoryStore from '../../store/categories'
 import useSpinner from '../../store/spinner'
 import API from '../../utils/constants/api'

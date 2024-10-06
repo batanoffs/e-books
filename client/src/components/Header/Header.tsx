@@ -1,7 +1,7 @@
 import { Box, AppBar, Container, Toolbar } from '@mui/material'
 import { NavMenu, SearchBar, LocaleSwitcher, AppBarItems } from './index'
 
-import Logo from '../Logo/Logo'
+import Logo from '../utils/Logo'
 import styles from './header.module.scss'
 
 export const Header = () => {

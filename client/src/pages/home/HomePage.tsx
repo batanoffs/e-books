@@ -1,12 +1,15 @@
 import { useEffect, useState, useCallback } from 'react'
 import axios from 'axios'
 
-import MainLayout from '../../components/Layout/main/MainLayout'
-import MultiCarousel from '../../components/Carousels/MultiCarousel'
-import SingleCarousel from '../../components/Carousels/SingleCarousel'
-import CategoryList from '../../components/Categories/Categories'
-import ShowcaseList from '../../components/ShowCase/ShowCase'
-import ItemCard from '../../components/Cards/ItemCard'
+import {
+	MainLayout,
+	MultiCarousel,
+	SingleCarousel,
+	CategoryList,
+	ShowcaseList,
+	ItemCard,
+} from '../../components/index'
+
 import API from '../../utils/constants/api'
 import useSpinner from '../../store/spinner'
 
