@@ -2,10 +2,10 @@ import { Route, Routes } from 'react-router-dom'
 import ProfileLayout from '../../components/Layout/profile/ProfileLayout'
 import { OrdersNav } from './OrdersNav'
 import OrdersPage from './OrdersPage'
-import WishlistPage from './WishlistPage'
+import { WishlistPage } from './WishlistPage'
 import Settings from './Settings'
 
-const ProfilePage = () => {
+export const ProfilePage = () => {
 	return (
 		<ProfileLayout aside={<OrdersNav />}>
 			<Routes>
@@ -16,5 +16,3 @@ const ProfilePage = () => {
 		</ProfileLayout>
 	)
 }
-
-export default ProfilePage

@@ -4,7 +4,7 @@ import API from '../../utils/constants/api'
 import { Product } from '../../interfaces/product.interface'
 import { Box, Grid, Typography, List, ListItem, ListItemText, Divider } from '@mui/material'
 
-const PaymentSuccessful = () => {
+export const PaymentSuccessful = () => {
 	const [orderData, setOrderData] = useState<any | null>(null)
 
 	const fetchOrder = useCallback(async (sessionId: string | null) => {
@@ -127,5 +127,3 @@ const PaymentSuccessful = () => {
 		</Box>
 	)
 }
-
-export default PaymentSuccessful

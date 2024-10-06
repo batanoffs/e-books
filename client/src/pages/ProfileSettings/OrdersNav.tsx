@@ -5,15 +5,10 @@ import Typography from '@mui/material/Typography'
 import { Link } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import authService from '../../services/authService'
+import { profileMenuItems } from '../../utils/constants'
 
 export const OrdersNav = () => {
 	const navigate = useNavigate()
-
-	const menuItems = [
-		{ name: 'Профил', path: 'settings' },
-		{ name: 'Харесани', path: 'wishlist' },
-		{ name: 'Поръчки', path: 'orders' },
-	]
 
 	const navigationHandler = (path: string) => {
 		navigate(path)
@@ -36,10 +31,10 @@ export const OrdersNav = () => {
 				Акаунт
 			</Typography>
 			<List>
-				{menuItems.map((item) => (
-					<ListItem key={item.name}>
-						<Link component='button' onClick={() => navigationHandler(item.path)}>
-							{item.name}
+				{profileMenuItems.map((item) => (
+					<ListItem key={item.title}>
+						<Link component='button' onClick={() => navigationHandler(item.href)}>
+							{item.title}
 						</Link>
 					</ListItem>
 				))}

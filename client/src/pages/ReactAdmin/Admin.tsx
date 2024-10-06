@@ -30,7 +30,7 @@ import { theme } from '../../utils/helpers/theme'
 
 const dataProvider = restProvider(API.ADMIN)
 
-const AdminPage = () => (
+export const AdminPage = () => (
 	<Admin
 		basename='/admin'
 		dataProvider={dataProvider}
@@ -97,5 +97,3 @@ const AdminPage = () => (
 		/>
 	</Admin>
 )
-
-export default AdminPage

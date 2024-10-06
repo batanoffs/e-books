@@ -32,7 +32,7 @@ import useCartStore from '../../store/cart'
 // 	}
 // }
 
-const CheckoutPage = () => {
+export const CheckoutPage = () => {
 	const cart = useCartStore((state) => state.cart)
 
 	const { control, handleSubmit, formState, reset, register } = useForm({
@@ -100,5 +100,3 @@ const CheckoutPage = () => {
 		</CheckoutLayout>
 	)
 }
-
-export default CheckoutPage

@@ -50,7 +50,7 @@ export const OrderItems = ({ order, navigate }) => {
 						onClick={() => navigate(`/buy-again/${order.products[0].productId._id}`)}
 						sx={{ marginTop: 1 }}
 					>
-						Добави в количката
+						Поръчай отново
 					</Button>
 					<Button
 						variant='outlined'
@@ -58,7 +58,7 @@ export const OrderItems = ({ order, navigate }) => {
 						onClick={() => alert('Премахване на поръчка...')}
 						sx={{ marginTop: 1, marginLeft: 1 }}
 					>
-						Премахни
+						Архивирай
 					</Button>
 				</Box>
 			</Paper>

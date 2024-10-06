@@ -20,7 +20,7 @@ type Inputs = {
 	newsletter: boolean
 }
 
-const Register = () => {
+export const Register = () => {
 	const {
 		register,
 		handleSubmit,
@@ -169,5 +169,3 @@ const Register = () => {
 		</div>
 	)
 }
-
-export default Register

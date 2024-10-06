@@ -13,7 +13,7 @@ import useSpinner from '../../store/spinner'
 import API from '../../utils/constants/api'
 import { getNavigationParams } from '../../utils/helpers/getNavigationParams'
 
-const CatalogPage = () => {
+export const CatalogPage = () => {
 	const [products, setProducts] = useState([])
 	const { hideSpinner, showSpinner } = useSpinner()
 	const categoriesMap = useCategoryStore((state) => state.categoriesMap)
@@ -73,5 +73,3 @@ const CatalogPage = () => {
 		</Routes>
 	)
 }
-
-export default CatalogPage

@@ -1,24 +1,26 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { useEffect, useState, useMemo } from 'react'
 
-import LoginModal from './pages/login/LoginModal'
-import Register from './pages/register/RegisterPage'
-import AdminPage from './pages/ReactAdmin/Admin'
-import Header from './components/Header/Header'
+import { Header } from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import NotFoundPage from './components/utils/404'
-import CartPage from './pages/cart/CartPage'
-import CheckoutPage from './pages/checkout/CheckoutPage'
-import FaqPage from './pages/faq/FaqPage'
-import ContactsPage from './pages/contacts/ContactsPage'
-import AboutPage from './pages/about/AboutPage'
-import PopularPage from './pages/popular/PopularPage'
-import CatalogPage from './pages/catalogue/CatalogPage'
 import { ScrollTopButton } from './components/ScrollTop/BackToTopButton'
-import WishlistPage from './pages/ProfileSettings/WishlistPage'
-import PaymentSuccessful from './pages/checkout/PaymentSuccessful'
-import ProfilePage from './pages/ProfileSettings/ProfilePage'
-import { HomePage } from './pages/home/HomePage'
+import {
+	HomePage,
+	ContactsPage,
+	FaqPage,
+	LoginModal,
+	CartPage,
+	Register,
+	AdminPage,
+	CheckoutPage,
+	ProfilePage,
+	PaymentSuccessful,
+	WishlistPage,
+	CatalogPage,
+	PopularPage,
+	AboutPage,
+} from './pages/index'
 import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles'
 
 import * as locales from '@mui/material/locale/'

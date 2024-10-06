@@ -9,7 +9,7 @@ import CartInfo from './CartInfo'
 import authService from '../../services/authService'
 import useSpinner from '../../store/spinner'
 
-const CartPage = () => {
+export const CartPage = () => {
 	const { hideSpinner, showSpinner } = useSpinner()
 	const setCart = useCartStore((state) => state.setCart)
 
@@ -36,5 +36,3 @@ const CartPage = () => {
 		</CartLayout>
 	)
 }
-
-export default CartPage

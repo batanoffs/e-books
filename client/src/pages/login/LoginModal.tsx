@@ -13,7 +13,7 @@ import useAlertStore from '../../store/alert'
 
 import styles from './login-page.module.scss'
 
-const LoginModal = () => {
+export const LoginModal = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const open = useLoginModal((state) => state.open)
@@ -25,7 +25,7 @@ const LoginModal = () => {
 		e.preventDefault()
 		try {
 			const response = await authService.login(email, password)
-			if(!response) throw new Error('Response data is empty')
+			if (!response) throw new Error('Response data is empty')
 			const { redirectUrl, message } = response
 			toggleOpen()
 			navigate(redirectUrl)
@@ -97,5 +97,3 @@ const LoginModal = () => {
 		</Modal>
 	)
 }
-
-export default LoginModal

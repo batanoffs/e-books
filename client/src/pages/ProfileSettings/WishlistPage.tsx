@@ -21,7 +21,7 @@ import wishlistService from '../../services/wishlistService'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import { ListIsEmpty } from '../../components/ListIsEmpty'
 
-const WishlistPage = () => {
+export const WishlistPage = () => {
 	const [isRemoving, setIsRemoving] = useState(false)
 	const [loading, setLoading] = useState(true)
 	const wishlist = useWishlistStore((state) => state.wishlist)
@@ -175,5 +175,3 @@ const WishlistPage = () => {
 		</Box>
 	)
 }
-
-export default WishlistPage
