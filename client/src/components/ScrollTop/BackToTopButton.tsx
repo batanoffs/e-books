@@ -1,8 +1,4 @@
-import Toolbar from '@mui/material/Toolbar'
-import Box from '@mui/material/Box'
-import Fab from '@mui/material/Fab'
-import Fade from '@mui/material/Fade'
-import useScrollTrigger from '@mui/material/useScrollTrigger'
+import { useScrollTrigger, Fade, Fab, Box } from '@mui/material'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
@@ -27,11 +23,9 @@ const BackToTopButton = ({ children }: BackToTopProps) => {
 		threshold: 100,
 	})
 
-	const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-		const anchor = (event.target as HTMLDivElement).ownerDocument?.querySelector(
-			'#back-to-top-anchor'
-		)
-		anchor?.scrollIntoView({
+	const handleClick = () => {
+		const secondAnchor = document.querySelector('#back-to-top-anchor')
+		secondAnchor?.scrollIntoView({
 			block: 'center',
 		})
 	}
@@ -50,12 +44,9 @@ const BackToTopButton = ({ children }: BackToTopProps) => {
 }
 
 export const ScrollTopButton = () => (
-	<>
-		<Toolbar id='back-to-top-anchor' sx={{ height: '10px' }} />
-		<BackToTopButton>
-			<Fab size='large' aria-label='scroll back to top'>
-				<KeyboardArrowUpIcon sx={{ height: '40px', width: '40px' }} />
-			</Fab>
-		</BackToTopButton>
-	</>
+	<BackToTopButton>
+		<Fab size='large' aria-label='scroll back to top'>
+			<KeyboardArrowUpIcon sx={{ height: '40px', width: '40px' }} />
+		</Fab>
+	</BackToTopButton>
 )
