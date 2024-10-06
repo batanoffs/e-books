@@ -10,7 +10,7 @@ import {
 import { useState } from 'react'
 import { Button } from '@mui/material'
 
-const UserEdit = (props) => {
+export const UserEdit = (props) => {
 	const [emailEnabled, setEmailEnabled] = useState(false)
 	const [roleEnable, setRoleEnable] = useState(false)
 
@@ -64,5 +64,3 @@ const UserEdit = (props) => {
 		</Edit>
 	)
 }
-
-export default UserEdit

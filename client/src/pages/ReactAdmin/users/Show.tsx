@@ -1,7 +1,7 @@
 import React from 'react'
 import { Show, SimpleShowLayout, TextField, DateField } from 'react-admin'
 
-const UserShow: React.FC = (props) => (
+export const UserShow: React.FC = (props) => (
 	<Show {...props}>
 		<SimpleShowLayout>
 			<TextField label='Потребителско ID (Идентификатор)' source='id' />
@@ -14,5 +14,3 @@ const UserShow: React.FC = (props) => (
 		</SimpleShowLayout>
 	</Show>
 )
-
-export default UserShow
