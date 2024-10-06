@@ -5,13 +5,13 @@ export const navPages = [
 	{ title: 'Канцелария', href: '/catalog/stationery/' },
 	{ title: 'Най-продавани', href: '/catalog/popular' },
 	{ title: 'Промотирани', href: '/catalog/promo' },
-	{ title: 'Контакти', href: '/contact' },
+	{ title: 'Контакти', href: '/contacts' },
 ]
 
 export const profileMenuItems = [
-	{ title: 'Профил', href: 'settings' },
-	{ title: 'Харесани', href: 'wishlist' },
-	{ title: 'Поръчки', href: 'orders' },
+	{ title: 'Профил', href: '/profile/settings' },
+	{ title: 'Харесани', href: '/profile/wishlist' },
+	{ title: 'Поръчки', href: '/profile/orders' },
 ]
 
 export const menuItems = [
@@ -37,11 +37,7 @@ export const footerCompanyLinks = [
 	{ title: 'Политика за поверителност', href: '/politics' },
 	{ title: 'Кариери', href: '/career' },
 	{ title: 'Връщане и замяна на стока', href: '/refund' },
-	{
-		title: 'Настройки за поверителност',
-		href: '/privacy-settings',
-		extraProps: { 'data-amcookie-js': 'footer-link' },
-	},
+	{ title: 'Настройки за поверителност', href: '/privacy-settings'},
 	{ title: 'Реклама в книги бг', href: '/advertising' },
 	{ title: 'Онлайн решаване на спорове', href: '/support' },
 	{ title: 'Свържи се с нас', href: '/contact' },
