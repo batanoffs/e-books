@@ -1,31 +1,15 @@
 import { Admin, Resource } from 'react-admin'
 import restProvider from './dataProvider'
 import authProvider from './authProvider'
-import BookList from './books/List'
-import BookEdit from './books/Edit'
-import BookShow from './books/Show'
-import BookCreate from './books/Create'
-import UserList from './users/List'
-import UserEdit from './users/Edit'
-import UserShow from './users/Show'
-import UserCreate from './users/Create'
-import OrdersList from './orders/List'
-import OrdersEdit from './orders/Edit'
-import OrdersShow from './orders/Show'
-import OrdersCreate from './orders/Create'
-import TextbookList from './textbooks/List'
-import TextbookEdit from './textbooks/Edit'
-import TextbookShow from './textbooks/Show'
-import TextbookCreate from './textbooks/Create'
-import StationeryList from './stationery/List'
-import StationeryEdit from './stationery/Edit'
-import StationeryShow from './stationery/Show'
-import StationeryCreate from './stationery/Create'
-import FeaturedList from './featured/List'
-import FeaturedEdit from './featured/Edit'
-import FeaturedShow from './featured/Show'
-import FeaturedCreate from './featured/Create'
+
 import API from '../../utils/constants/api'
+import { OrdersList, OrdersEdit, OrdersShow, OrdersCreate } from './orders/index'
+import { FeaturedList, FeaturedEdit, FeaturedShow, FeaturedCreate } from './featured/index'
+import { BookList, BookEdit, BookShow, BookCreate } from './books/index'
+import { TextbookList, TextbookEdit, TextbookShow, TextbookCreate } from './textbooks/index'
+import { StationeryList, StationeryEdit, StationeryShow, StationeryCreate } from './stationery/index'
+import { UserList, UserEdit, UserShow, UserCreate } from './users/index'
+// import { CategoriesList, CategoriesEdit, CategoriesShow, CategoriesCreate } from './categories/index'
 import { theme } from '../../utils/helpers/theme'
 
 const dataProvider = restProvider(API.ADMIN)
@@ -53,14 +37,6 @@ export const AdminPage = () => (
 			create={FeaturedCreate}
 			options={{ label: 'Промотирани' }}
 		/>
-		{/* <Resource
-			name='categories'
-			list={CategoriesList}
-			edit={CategoriesEdit}
-			show={CategoriesShow}
-			create={CategoriesCreate}
-			options={{ label: 'Категорий' }}
-		/> */}
 		<Resource
 			name='books'
 			list={BookList}
@@ -95,5 +71,13 @@ export const AdminPage = () => (
 			create={UserCreate}
 			options={{ label: 'Потребители' }}
 		/>
+		{/* <Resource
+			name='categories'
+			list={CategoriesList}
+			edit={CategoriesEdit}
+			show={CategoriesShow}
+			create={CategoriesCreate}
+			options={{ label: 'Категорий' }}
+		/> */}
 	</Admin>
 )
