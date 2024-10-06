@@ -16,7 +16,6 @@ import {
 	CheckoutPage,
 	ProfilePage,
 	PaymentSuccessful,
-	WishlistPage,
 	CatalogPage,
 	PopularPage,
 	AboutPage,
@@ -71,7 +70,6 @@ const App = () => {
 				<Route path='/register' element={<Register />} />
 				<Route path='*' element={<NotFoundPage />} />
 				<Route path='/profile/*' element={<ProfilePage />} />
-				<Route path='/wishlist' element={<WishlistPage />} />
 			</Routes>
 
 			{!isAdmin && <Footer />}
