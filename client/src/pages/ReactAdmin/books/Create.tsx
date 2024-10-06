@@ -20,7 +20,7 @@ import Box from '@mui/material/Box'
 import CreateCategory from './CreateCategory'
 import { imageService } from '../../../services/imageService'
 
-const BookCreate = (props) => {
+export const BookCreate = (props) => {
 	const notify = useNotify()
 	const redirect = useRedirect()
 	const dataProvider = useDataProvider()
@@ -164,5 +164,3 @@ const BookCreate = (props) => {
 		</Create>
 	)
 }
-
-export default BookCreate

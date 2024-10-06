@@ -30,7 +30,7 @@ import { imageService } from '../../../services/imageService'
  * @param {EditProps} props - The React Admin Edit component props.
  */
 
-const BookEdit = (props: EditProps) => {
+export const BookEdit = (props: EditProps) => {
 	const dataProvider = useDataProvider()
 	const id = useGetRecordId()
 	const notify = useNotify()
@@ -177,5 +177,3 @@ const BookEdit = (props: EditProps) => {
 		</Edit>
 	)
 }
-
-export default BookEdit

@@ -19,7 +19,7 @@ const BookFilter = (props: any) => (
 	</Filter>
 )
 
-const BookList = (props: any) => {
+export const BookList = (props: any) => {
 	const title = useFieldValue({ source: 'title' })
 	console.log('title:', title)
 	return (
@@ -122,5 +122,3 @@ const BookList = (props: any) => {
 		</List>
 	)
 }
-
-export default BookList

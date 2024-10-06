@@ -14,7 +14,7 @@ import CustomCoverImage from './CustomCoverImage'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-const BookShow = (props: ShowProps) => {
+export const BookShow = (props: ShowProps) => {
 	return (
 		<Show {...props}>
 			<Typography
@@ -131,5 +131,3 @@ const BookShow = (props: ShowProps) => {
 		</Show>
 	)
 }
-
-export default BookShow
