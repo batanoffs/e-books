@@ -1,82 +1,38 @@
-// #228be6, #6028c8, #071108, #bfb1c1, #faf3dd
+import { PaletteMode } from '@mui/material'
 
-import { createTheme } from '@mui/material/styles'
-
-const themeOptions = createTheme({
-	colorSchemes: {
-		light: {
-			palette: {
-				primary: {
-					main: '#228be6', // Primary color
-					light: '#4aa8f2', // Light variant for primary
-					contrastText: '#ffffff', // Contrast text for primary
-				},
-				secondary: {
-					main: '#6f42c1',
-					light: '#9b6ee5',
-					dark: '#4b2990',
-					contrastText: '#f4f6f8',
-				},
-				text: {
-					primary: '#071108', // Primary text color
-					secondary: '#bfb1c1', // Secondary text color
-					disabled: '#5c5959', // Disabled text color
-				},
-				background: {
-					default: '#fff', // Slightly off-white background for better readability
-					paper: '#f4f6f8',
-				},
-				error: {
-					main: '#d32f2f', // Error color
-				},
-				warning: {
-					main: '#ed6c02', // Warning color
-				},
-				info: {
-					main: '#0288d1', // Info color
-				},
-				success: {
-					main: '#2e7d32', // Success color
-				},
-				divider: '#bfb1c1', // Divider color for UI elements
-			},
+export const themeOptions = (mode: PaletteMode) => ({
+	palette: {
+		mode,
+		primary: {
+			main: mode === 'light' ? '#228be6' : '#176ab3',
+			contrastText: '#fff',
 		},
-		dark: {
-			palette: {
-				primary: {
-					main: '#228be6', // Primary color
-					dark: '#176ab3', // Dark variant for primary
-					contrastText: '#ffffff', // Contrast text for primary
-				},
-				secondary: {
-					main: '#6f42c1',
-					dark: '#4b2990',
-					contrastText: '#f4f6f8',
-				},
-				text: {
-					primary: '#071108', // Primary text color
-					secondary: '#bfb1c1', // Secondary text color
-					disabled: '#5c5959', // Disabled text color
-				},
-				background: {
-					default: '#5c5959', // Slightly off-white background for better readability
-					paper: '#bfb1c1',
-				},
-				error: {
-					main: '#d32f2f', // Error color
-				},
-				warning: {
-					main: '#ed6c02', // Warning color
-				},
-				info: {
-					main: '#0288d1', // Info color
-				},
-				success: {
-					main: '#2e7d32', // Success color
-				},
-				divider: '#071108', // Divider color for UI elements
-			},
+		secondary: {
+			main: mode === 'light' ? '#aa49e7' : '#4b2990',
+			contrastText: '#fff',
 		},
+		background: {
+			default: mode === 'light' ? '#fff' : '#1a2027',
+			paper: mode === 'light' ? '#f4f6f8' : '#2d3748',
+		},
+		text: {
+			primary: mode === 'light' ? '#071108' : '#fff',
+			secondary: mode === 'light' ? '#bfb1c1' : '#fff',
+			disabled: mode === 'light' ? '#5c5959' : '#fff',
+		},
+		error: {
+			main: '#d32f2f',
+		},
+		warning: {
+			main: '#ed6c02',
+		},
+		info: {
+			main: '#0288d1',
+		},
+		success: {
+			main: '#2e7d32',
+		},
+		divider: '#bfb1c1',
 	},
 	typography: {
 		fontFamily: 'Montserrat Alternates, sans-serif',
@@ -140,8 +96,14 @@ const themeOptions = createTheme({
 			fontSize: 16,
 		},
 	},
-	shape: {
-		borderRadius: 6, // Retain rounded corners
+	breakpoints: {
+		values: {
+			xs: 0,
+			sm: 600,
+			md: 900,
+			lg: 1200,
+			xl: 1536,
+		},
 	},
 	components: {
 		MuiTextField: {
@@ -177,18 +139,16 @@ const themeOptions = createTheme({
 				},
 			},
 			defaultProps: {
-				color: 'inherit',
+				color: 'inherit' as const,
 			},
 		},
 		MuiContainer: {
 			variants: [
 				{
-					props: { maxWidth: 'xl' },
+					props: { maxWidth: false }, // Set to false to disable maxWidth
 					style: {
 						padding: 0,
 						margin: 0,
-						maxWidth: '100%',
-						width: '100%',
 					},
 				},
 			],
@@ -199,7 +159,7 @@ const themeOptions = createTheme({
 						paddingRight: 0,
 					},
 					'@media (min-width: 1536px)': {
-						maxWidth: '100%',
+						maxWidth: '100%', // Use a valid value
 					},
 				},
 			},
@@ -255,7 +215,7 @@ const themeOptions = createTheme({
 		},
 		MuiLink: {
 			defaultProps: {
-				underline: 'hover', // Links only underlined on hover
+				underline: 'hover', // or 'hover', 'always', etc.
 			},
 		},
 		MuiAccordion: {
@@ -274,22 +234,7 @@ const themeOptions = createTheme({
 			},
 		},
 	},
-	breakpoints: {
-		values: {
-			xs: 0,
-			sm: 600,
-			md: 900,
-			lg: 1200,
-			xl: 1536,
-		},
+	shape: {
+		borderRadius: 6, // Retain rounded corners
 	},
 })
-
-const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
-
-export const theme = {
-	themeOptions,
-	isDarkMode,
-}
-
-export default themeOptions

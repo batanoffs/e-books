@@ -10,7 +10,7 @@ import { TextbookList, TextbookEdit, TextbookShow, TextbookCreate } from './text
 import { StationeryList, StationeryEdit, StationeryShow, StationeryCreate } from './stationery/index'
 import { UserList, UserEdit, UserShow, UserCreate } from './users/index'
 // import { CategoriesList, CategoriesEdit, CategoriesShow, CategoriesCreate } from './categories/index'
-import { theme } from '../../utils/helpers/theme'
+import { themeOptions } from '../../utils/helpers/theme'
 
 const dataProvider = restProvider(API.ADMIN)
 
@@ -19,7 +19,7 @@ export const AdminPage = () => (
 		basename='/admin'
 		dataProvider={dataProvider}
 		authProvider={authProvider}
-		theme={theme.themeOptions}
+		theme={themeOptions}
 	>
 		<Resource
 			name='orders'

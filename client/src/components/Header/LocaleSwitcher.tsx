@@ -1,9 +1,9 @@
 import { Button } from '@mui/material'
-import { useLocalizationStore } from '../../store/localization'
+import { useThemeSettings } from '../../store/themeSettings'
 import { countryFlags } from '../utils/countryFlags'
 
 export const LocaleSwitcher = () => {
-	const { locale, setLocale } = useLocalizationStore()
+	const { locale, setLocale } = useThemeSettings()
 	return (
 		<Button
 			variant='outlined'

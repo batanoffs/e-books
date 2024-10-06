@@ -1,4 +1,4 @@
-import { Paper, Popper, Typography, ListItem, Button } from '@mui/material'
+import { Paper, Popper, Typography, Button } from '@mui/material'
 import { ProductsTable } from '../Tables/ProductsTable'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import { ListIsEmpty } from '../utils/ListIsEmpty'
