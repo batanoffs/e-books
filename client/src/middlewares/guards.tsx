@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom'
 
 import { checkIfUserIsAdmin, getToken } from '../utils/helpers/auth'
-import AdminPage from '../pages/ReactAdmin/Admin'
+import { AdminPage } from '../pages/ReactAdmin/Admin'
 
 const AdminGuard = () => {
 	const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, '$1')

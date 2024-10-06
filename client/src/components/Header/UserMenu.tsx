@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { Box, IconButton, Menu, MenuItem, Typography, Tooltip, Avatar } from '@mui/material'
-import { menuItems } from '../../utils/constants/pages'
+import { profileMenuItems } from '../../utils/constants/pages'
 import { FormEvent, MouseEvent, useState } from 'react'
 
 import axios from 'axios'
@@ -52,9 +52,9 @@ export const UserMenu = () => {
 				open={Boolean(anchorElUser)}
 				onClose={handleCloseUserMenu}
 			>
-				{menuItems.map((setting) => (
-					<MenuItem key={setting.name} component={Link} to={setting.path}>
-						<Typography textAlign='center'>{setting.name}</Typography>
+				{profileMenuItems.map((item) => (
+					<MenuItem key={item.title} component={Link} to={item.href}>
+						<Typography textAlign='center'>{item.title}</Typography>
 					</MenuItem>
 				))}
 				<MenuItem key='logout' onClick={handleLogout}>
