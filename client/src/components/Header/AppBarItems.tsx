@@ -3,7 +3,7 @@ import { UserMenu } from './UserMenu'
 import { useLoginModal } from '../../store/helperModal'
 import { Button } from '@mui/material'
 import authGuards from '../../middlewares/guards'
-import { CartDropdown } from './CartButton'
+import { CartDropdownButton } from './CartDropdownButton'
 
 const LoginBtn = () => {
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
@@ -19,17 +19,15 @@ const LoginBtn = () => {
 	)
 }
 
-const AppBarItems = () => {
+export const AppBarItems = () => {
 	const isUserAuthenticated = authGuards.isAuth()
 
 	return isUserAuthenticated ? (
 		<>
 			<UserMenu />
-			<CartDropdown />
+			<CartDropdownButton />
 		</>
 	) : (
 		<LoginBtn />
 	)
 }
-
-export default AppBarItems
