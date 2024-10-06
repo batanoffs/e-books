@@ -1,7 +1,7 @@
 import { ProfileLayoutProps } from '../../../interfaces/layout.interface'
 import styles from '../catalog/dashboard.module.scss'
 
-const ProfileLayout = ({ children, aside }: ProfileLayoutProps) => {
+export const ProfileLayout = ({ children, aside }: ProfileLayoutProps) => {
 	return (
 		<main className='main-wrapper'>
 			<div className={styles.dashboardContainer}>
@@ -11,5 +11,3 @@ const ProfileLayout = ({ children, aside }: ProfileLayoutProps) => {
 		</main>
 	)
 }
-
-export default ProfileLayout
