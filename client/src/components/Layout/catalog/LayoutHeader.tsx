@@ -8,7 +8,13 @@ type LayoutHeaderProps = {
 	resultCount?: number
 }
 
-const LayoutHeader = ({ title, path, navCategory, hasSorting, resultCount }: LayoutHeaderProps) => {
+export const LayoutHeader = ({
+	title,
+	path,
+	navCategory,
+	hasSorting,
+	resultCount,
+}: LayoutHeaderProps) => {
 	return (
 		<div className={styles.container}>
 			{/* TODO extract this client navigation for future use */}
@@ -43,5 +49,3 @@ const LayoutHeader = ({ title, path, navCategory, hasSorting, resultCount }: Lay
 		</div>
 	)
 }
-
-export default LayoutHeader

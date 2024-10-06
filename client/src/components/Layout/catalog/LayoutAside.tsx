@@ -8,7 +8,7 @@ type Categories = {
 	categories: string[]
 }
 
-const LayoutAside = ({ categories }: Categories) => {
+export const LayoutAside = ({ categories }: Categories) => {
 	const navigate = useNavigate()
 	const setNavCategory = useFiltersStore((state) => state.setNavCategory)
 	if (!categories) {
@@ -105,5 +105,3 @@ const LayoutAside = ({ categories }: Categories) => {
 		</nav>
 	)
 }
-
-export default LayoutAside

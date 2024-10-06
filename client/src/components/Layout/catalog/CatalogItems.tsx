@@ -6,7 +6,7 @@ interface CatalogItemsInterface {
 	sx?: React.CSSProperties
 }
 
-const CatalogItems = ({ products, Component, sx }: CatalogItemsInterface) => (
+export const CatalogItems = ({ products, Component, sx }: CatalogItemsInterface) => (
 	<div style={sx}>
 		{products.length > 0 ? (
 			products.map((product) => <Component key={product._id} product={product} />)
@@ -15,5 +15,3 @@ const CatalogItems = ({ products, Component, sx }: CatalogItemsInterface) => (
 		)}
 	</div>
 )
-
-export default CatalogItems

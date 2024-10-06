@@ -7,7 +7,7 @@ type MainLayoutProps = {
 }
 
 //TODO improve dynamic pipelines for sidebar filters and header
-const CatalogLayout = ({ children, header, aside }: MainLayoutProps) => {
+export const CatalogLayout = ({ children, header, aside }: MainLayoutProps) => {
 	return (
 		<main className='main-wrapper'>
 			<header>{header}</header>
@@ -18,5 +18,3 @@ const CatalogLayout = ({ children, header, aside }: MainLayoutProps) => {
 		</main>
 	)
 }
-
-export default CatalogLayout
