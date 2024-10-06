@@ -1,7 +1,7 @@
 import Logo from '../../Logo/Logo'
 import styles from './footer-top.module.scss'
 
-export default function FooterTop() {
+export const FooterTop = () => {
 	return (
 		<div className={styles.pageFooterTop}>
 			<div className={styles.wrapper} />

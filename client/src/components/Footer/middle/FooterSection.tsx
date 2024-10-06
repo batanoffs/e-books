@@ -1,5 +1,12 @@
-const FooterSection = ({ title, toggleId, items, children, styles }) => {
-	const redirectHandler = (e) => {
+type FooterSectionProps = {
+	title: string
+	items: { href: string; title: string; extraProps?: any }[]
+	children: React.ReactNode
+	styles: any
+}
+
+export const FooterSection = ({ title, items, children, styles }: FooterSectionProps) => {
+	const redirectHandler = (e: MouseEvent) => {
 		e.preventDefault()
 	}
 
@@ -7,12 +14,6 @@ const FooterSection = ({ title, toggleId, items, children, styles }) => {
 		<div className={styles.pageFooterMidItemSmall}>
 			<div className={styles.pageFooterTitle}>{title}</div>
 			<div className={styles.pageFooterListCont}>
-				{/* <input
-                className={styles.pageFooterToggleControl}
-                type="checkbox"
-                name={toggleId}
-                id={toggleId}
-            /> */}
 				<div data-content-type='row' data-appearance='contained' data-element='main'>
 					<div
 						data-enable-parallax='0'
@@ -51,17 +52,8 @@ const FooterSection = ({ title, toggleId, items, children, styles }) => {
 						</div>
 					</div>
 				</div>
-				{/* <label htmlFor={toggleId} className={styles.pageFooterToggle}>
-                <span className={styles.pageFooterToggleLabelDown}>Виж повече</span>
-                <span className={styles.pageFooterToggleLabelUp}>Виж по - малко</span>
-                <svg className={styles.icon}>
-                    <use xlinkHref="" />
-                </svg>
-            </label> */}
 			</div>
 			{children}
 		</div>
 	)
 }
-
-export default FooterSection

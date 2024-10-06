@@ -13,8 +13,12 @@ type Input = {
 	privacyPolicy: boolean
 }
 
-export default function Newsletter() {
-	const { handleSubmit, register, formState: { errors }} = useForm<Input>()
+export const Newsletter = () => {
+	const {
+		handleSubmit,
+		register,
+		formState: { errors },
+	} = useForm<Input>()
 	const toggleOpenPrivacy = usePrivacyModal((state) => state.toggleOpen)
 	const showAlert = useAlertStore((state) => state.showAlert)
 

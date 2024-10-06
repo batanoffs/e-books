@@ -1,6 +1,6 @@
 import styles from './footer-bottom.module.scss'
 
-export default function FooterBot() {
+export const FooterBot = () => {
 	return (
 		<div className={styles.pageFooterBot}>
 			<div className={styles.wrapper}>
