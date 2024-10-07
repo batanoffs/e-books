@@ -32,22 +32,12 @@ export const CarouselCard = ({ product, styles }: CarouselCard) => {
 			return showAlert('Моля, влезте в акаунта си, за да продължите', 'info')
 		}
 
-		const currentItem = {
-			product: {
-				_id,
-				picture,
-				title,
-				price,
-				productType,
-			},
-			quantity: 1,
-		}
-		addToCart(currentItem)
-		await cartService.addOne(_id)
-
+		addToCart(product, 1)
+		await cartService.addOne(_id, productType)
 		navigate(`/cart`)
 		showAlert(`${title} е добавен в количката`, 'success')
 	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.textContainer}>

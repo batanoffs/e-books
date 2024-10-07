@@ -33,19 +33,11 @@ const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetail
 				toggleOpen()
 				return showAlert('Моля, влезте в акаунта си, за да продължите', 'error')
 			}
-			const currentItem = {
-				product: {
-					_id: product._id,
-					picture: product.picture,
-					title: product.title,
-					price: product.price,
-				},
-				quantity: quantity,
-			}
+
 			const quantityInputElement = event.target?.parentElement.querySelector('input')
 			const quantityValue = Number(quantityInputElement.value)
-			await cartService.addMany(product._id, quantityValue)
-			addToCart(currentItem)
+			await cartService.addMany(product._id, product.productType, quantityValue)
+			addToCart(product, quantity)
 			showAlert('Успешно добавен продукт', 'success')
 		} catch (error) {
 			showAlert(`Грешка при добавяне в количката`, 'error')
