@@ -2,29 +2,44 @@ import { NextFunction, Request, Response } from 'express'
 import Cart from '../models/Cart'
 
 export const addToCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-	const { userId, productId, quantity } = req.body
+	const { productId, productType, quantity } = req.body
 
 	try {
-		let cart = await Cart.findOne({ userId }).populate('products.product')
+		if (!req.user) {
+			res.status(401).json({ message: 'Not Authenticated!' })
+			return
+		}
+
+		if (!productId || !productType || !quantity) {
+			res.status(400).json({ message: 'Missing required fields' })
+			return
+		}
+
+		const { id } = req.user
+
+		let cart = await Cart.findOne({ userId: id }).populate('products.product')
+
 		if (!cart) {
 			cart = new Cart({
-				userId,
+				userId: id,
 				products: [
 					{
 						product: productId,
+						productType,
 						quantity,
 					},
 				],
 			})
 		} else {
 			const existingProduct = cart.products.find(
-				product => product.product.id.toString() === productId.toString()
+				product => product.product._id.toString() === productId.toString()
 			)
 			if (existingProduct) {
 				existingProduct.quantity += quantity
 			} else {
 				cart.products.push({
 					product: productId,
+					productType,
 					quantity,
 				})
 			}
@@ -38,17 +53,22 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
 }
 
 export const getCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-	const { userId } = req.params
+	if (!req.user) {
+		res.status(401).json({ message: 'Not Authenticated!' })
+		return
+	}
+
+	const { id } = req.user
 
 	try {
-		const cart = await Cart.findOne({ userId })
+		const cart = await Cart.findOne({ userId: id })
 		if (!cart) {
 			res.status(404).json({ message: 'Cart not found' })
 			return
 		}
 		const products = await cart.populate({
 			path: 'products.product',
-			select: 'title price picture',
+			select: 'id title price picture productType',
 			options: {
 				lean: true,
 			},
@@ -65,15 +85,20 @@ export const removeProductFromCart = async (
 	res: Response,
 	next: NextFunction
 ): Promise<void> => {
-	const { userId, productId } = req.query
-
-	if (!userId || !productId) {
-		res.status(400).json({ message: 'User ID or product ID are missing' })
-		return
-	}
+	const { productId } = req.query
 	try {
+		if (!req.user) {
+			res.status(401).json({ message: 'Not Authenticated!' })
+			return
+		}
+
+		const { id } = req.user
+		if (!productId) {
+			res.status(400).json({ message: 'Product ID is missing' })
+			return
+		}
 		// const cart = await Cart.findOne({ userId })
-		let cart = await Cart.findOne({ userId }).populate('products.product', '_id')
+		let cart = await Cart.findOne({ userId: id }).populate('products.product', '_id')
 
 		if (!cart) {
 			res.status(404).json({ message: 'Cart not found' })
@@ -93,13 +118,14 @@ export const removeProductFromCart = async (
 }
 
 export const clearCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-	const userId = req.query.userId
-	if (!userId) {
-		res.status(400).json({ message: 'User ID is required' })
-		return
-	}
 	try {
-		const cart = await Cart.findOneAndUpdate({ userId }, { products: [] }, { new: true })
+		if (!req.user) {
+			res.status(401).json({ message: 'Not Authenticated!' })
+			return
+		}
+
+		const { id } = req.user
+		const cart = await Cart.findOneAndUpdate({ userId: id }, { products: [] }, { new: true })
 
 		if (!cart) {
 			res.status(404).json({ message: 'Cart not found' })

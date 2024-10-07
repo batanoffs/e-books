@@ -30,18 +30,8 @@ export const ItemCard = ({ product }: { product: Product }) => {
 			toggleOpen()
 			return showAlert('Моля, влезте в акаунта си, за да продължите', 'info')
 		}
-		const currentItem = {
-			product: {
-				_id,
-				picture,
-				title,
-				price,
-				productType,
-			},
-			quantity: 1,
-		}
-		addToCart(currentItem)
-		await cartService.addOne(_id)
+		addToCart(product, 1)
+		await cartService.addOne(_id, productType)
 		showAlert('Успешно добавен продукт', 'success')
 	}
 
@@ -52,16 +42,13 @@ export const ItemCard = ({ product }: { product: Product }) => {
 			return showAlert('Моля, влезте в акаунта си, за да продължите', 'info')
 		}
 		if (!_id) {
-			console.log('productId not found')
 			return showAlert('Възникна грешка - продуктът не е намерен', 'error')
 		}
 
 		const response = await axios.post(
 			API.WISHLIST,
 			{ productId: _id },
-			{
-				withCredentials: true,
-			}
+			{ withCredentials: true }
 		)
 
 		if (response.status === 200) {
@@ -70,7 +57,7 @@ export const ItemCard = ({ product }: { product: Product }) => {
 	}
 
 	const goToDetailsHandler = () => {
-		navigate(`/catalog/books/all/${_id}`)
+		navigate(`/catalog/${productType.toLowerCase()}/${_id}`)
 	}
 
 	return (

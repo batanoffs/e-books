@@ -9,7 +9,6 @@ import CartItem from './CartItem'
 import useCartStore from '../../store/cart'
 import useConfirm from '../../hooks/useConfirm'
 import cartService from '../../services/cartService'
-import authService from '../../services/authService'
 import useAlertStore from '../../store/alert'
 import { ListIsEmpty } from '../../components/utils/ListIsEmpty'
 
@@ -25,13 +24,12 @@ const CartList = () => {
 
 	const clearCartHandler = async () => {
 		try {
-			const userId = await authService.getUserId()
 			const result = await confirm(
 				'ВНИМАНИЕ! Изчистване на всички продукти от количката!',
 				'Сигурни ли сте, че искате да изтриете всички продукти от количката?'
 			)
 			if (result) {
-				await cartService.removeAll(userId)
+				await cartService.removeAll()
 				clearCart()
 				showAlert(`Количката е изчитена успешно`, 'success')
 			}
@@ -63,6 +61,8 @@ const CartList = () => {
 	const onChangeQuantityHandler = () => {
 		setIsUpdateButtonDisabled(false)
 	}
+	console.log('cart:', cart);
+	
 	return (
 		<Paper
 			sx={{

@@ -4,7 +4,7 @@ import { addToCart, getCart, removeProductFromCart, clearCart } from '../control
 const router = Router()
 
 router.post('/', addToCart)
-router.get('/:userId', getCart)
+router.get('/', getCart)
 router.delete('/:productId', removeProductFromCart)
 router.delete('/', clearCart)
 

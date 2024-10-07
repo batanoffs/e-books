@@ -6,7 +6,6 @@ import CartLayout from '../../components/Layout/cart/CartLayout'
 import CartList from './CartList'
 import useCartStore from '../../store/cart'
 import CartInfo from './CartInfo'
-import authService from '../../services/authService'
 import useSpinner from '../../store/spinner'
 
 export const CartPage = () => {
@@ -16,8 +15,7 @@ export const CartPage = () => {
 	const fetchUserCart = useCallback(async () => {
 		try {
 			showSpinner()
-			const userId = await authService.getUserId()
-			const response = await axios.get(API.CART + userId)
+			const response = await axios.get(API.CART, { withCredentials: true })
 			setCart(response.data)
 		} catch (error) {
 			console.error(error)

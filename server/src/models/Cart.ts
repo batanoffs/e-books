@@ -5,7 +5,12 @@ const CartProductSchema: Schema = new Schema(
 	{
 		product: {
 			type: Schema.Types.ObjectId,
-			ref: 'Book', //TODO find a way to ref other products as well
+			refPath: 'productType', 
+			required: true,
+		},
+		productType: {
+			type: String,
+			enum: ['Book', 'Textbook', 'Stationery'], 
 			required: true,
 		},
 		quantity: {

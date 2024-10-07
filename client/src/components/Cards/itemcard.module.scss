@@ -17,22 +17,23 @@
 
 	.bookImageContainer {
 		position: relative;
-		flex: 1 1 max(230px);
-		padding: 1em;
-
+		flex: 1 1 max(200px);
+		// padding: 1em;
 		// width: 100%;
 		overflow: hidden;
 
 		img {
-			width: auto;
+			width: 100%;
 			height: 100%;
-			border-radius: 0.5em;
-			z-index: 1;
-			box-shadow: 7px 7px 10px 0px rgba(0, 0, 0, 0.7);
-			transition: 0.3s;
+			max-width: 180px;
+			max-height: 250px;
 			object-fit: cover;
+			border-radius: 0.4em;
+			z-index: 2;
+			box-shadow: 3px 2px 2px 0px rgba(0, 0, 0, 0.3);
+			transition: 0.3s;
 			display: block;
-			margin: 0 auto;
+			// margin: auto;
 			cursor: pointer;
 		}
 
@@ -56,7 +57,7 @@
 		button {
 			display: inline-flex;
 			align-items: center;
-			padding: 0.5em;
+			// padding: 0.5em;
 			border-radius: 100%;
 			z-index: 2;
 			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
@@ -76,7 +77,7 @@
 	}
 
 	.bookInfo {
-		margin-top: 0.5em;
+		// margin-top: 0.5em;
 		padding: 0;
 		display: flex;
 		flex-direction: column;
@@ -85,6 +86,7 @@
 
 		h6 {
 			margin: 0;
+			margin-top: 0.5em;
 			font-size: small;
 			text-align: center;
 			font-weight: 800;
@@ -96,6 +98,8 @@
 		p {
 			margin: 0;
 			font-size: small;
+			overflow: hidden;
+			height: 1.6em;
 		}
 
 		p:last-of-type {
@@ -106,24 +110,24 @@
 
 @media (min-width: 600px) {
 	.container {
-		width: max(240px); /* Set width for medium screens */
+		width: max(200px);
 	}
 }
 
 @media (min-width: 768px) {
 	.container {
-		width: max(200px); /* Set width for large screens */
+		width: max(160px);
 	}
 }
 
 @media (min-width: 992px) {
 	.container {
-		width: max(200px); /* Set width for extra large screens */
+		width: max(150px);
 	}
 }
 
 @media (min-width: 1200px) {
 	.container {
-		width: max(170px); /* Set width for extra extra large screens */
+		width: max(140px);
 	}
 }

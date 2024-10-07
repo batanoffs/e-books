@@ -1,19 +1,14 @@
 import API from '../utils/constants/api'
 import axios from 'axios'
 import { getToken } from '../utils/helpers/auth'
-import authService from './authService'
 
 const getCart = async (): Promise<any> => {
 	try {
 		const token = getToken()
 		if (!token) {
-			throw new Error('Missing token')
+			throw new Error('Client Not authorized!')
 		}
-		const { data } = await axios.get(API.CART, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		})
+		const { data } = await axios.get(API.CART, { withCredentials: true })
 		if (!data) {
 			throw new Error('Missing data')
 		}
@@ -24,77 +19,60 @@ const getCart = async (): Promise<any> => {
 	}
 }
 
-const addMany = async (productId: string, quantity: number) => {
+const addMany = async (productId: string, productType: string, quantity: number) => {
 	try {
+		const token = getToken()
+		if (!token) {
+			throw new Error('Client Not authorized!')
+		}
 		if (!productId) {
 			throw new Error('Missing product ID')
 		}
-		const userId = await authService.getUserId()
-		if (!userId) {
-			throw new Error('Missing userId')
-		}
-		const token = getToken()
-		if (!token) {
-			throw new Error('Missing token')
-		}
+
 		const data = {
-			userId,
 			productId,
+			productType,
 			quantity,
 		}
-		await axios.post(API.CART, data, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		})
+		await axios.post(API.CART, data, { withCredentials: true })
 	} catch (error) {
 		console.error(error)
 		throw error
 	}
 }
 
-const addOne = async (productId: string) => {
+const addOne = async (productId: string, productType: string) => {
 	try {
+		const token = getToken()
+		if (!token) {
+			throw new Error('Client Not authorized!')
+		}
 		if (!productId) {
 			throw new Error('Missing product id')
 		}
-		const userId = await authService.getUserId()
-		if (!userId) {
-			throw new Error('Missing user id')
-		}
-		const token = getToken()
-		if (!token) {
-			throw new Error('Missing token')
-		}
+
 		const data = {
-			userId,
 			productId,
+			productType,
 			quantity: 1,
 		}
 
-		await axios.post(API.CART, data, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		})
+		await axios.post(API.CART, data, { withCredentials: true })
 	} catch (error) {
 		console.error(error)
 		throw error
 	}
 }
 
-const removeOne = async (productId: string, userId: string) => {
+const removeOne = async (productId: string) => {
 	try {
 		const token = getToken()
 		if (!token) {
 			throw new Error('Missing token')
 		}
 		const { data } = await axios.delete(API.CART + productId, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
+			withCredentials: true,
 			params: {
-				userId,
 				productId,
 			},
 		})
@@ -108,20 +86,13 @@ const removeOne = async (productId: string, userId: string) => {
 	}
 }
 
-const removeAll = async (userId: string) => {
+const removeAll = async () => {
 	try {
 		const token = getToken()
 		if (!token) {
 			throw new Error('Missing token')
 		}
-		const { data } = await axios.delete(API.CART, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-			params: {
-				userId,
-			},
-		})
+		const { data } = await axios.delete(API.CART, { withCredentials: true })
 		if (!data) {
 			throw new Error('Missing data')
 		}
