@@ -16,7 +16,9 @@ import API from '../../utils/constants/api'
 import { getNavigationParams } from '../../utils/helpers/getNavigationParams'
 
 export const CatalogPage = () => {
-	const [products, setProducts] = useState([])
+	const [books, setBooks] = useState([])
+	const [textbooks, setTextBooks] = useState([])
+	const [stationery, setStationery] = useState([])
 	const { hideSpinner, showSpinner } = useSpinner()
 	const categoriesMap = useCategoryStore((state) => state.categoriesMap)
 	const params = useParams()
@@ -25,8 +27,12 @@ export const CatalogPage = () => {
 	const fetchBooksCallback = useCallback(async () => {
 		try {
 			showSpinner()
-			const response = await axios.get(API.BOOKS)
-			setProducts(response.data)
+			const responseBooks = await axios.get(API.BOOKS)
+			const responseTextBooks = await axios.get(API.TEXTBOOKS)
+			// const responseStationery = await axios.get(API.STATIONERY)
+			setBooks(responseBooks.data)
+			setTextBooks(responseTextBooks.data)
+			// setStationery(responseStationery.data)
 		} catch (error) {
 			console.error(error)
 		} finally {
@@ -38,17 +44,25 @@ export const CatalogPage = () => {
 		fetchBooksCallback()
 	}, [fetchBooksCallback])
 
+	const products =
+		navParams.productType === 'books'
+			? books
+			: navParams.productType === 'textbooks'
+			? textbooks
+			: stationery
+	
 	const Layout = (
 		<CatalogLayout
 			header={
 				<LayoutHeader
-					navCategory={navParams.navCategory}
+					productCategory={navParams.productCategory}
 					path={navParams.navString}
 					hasSorting={true}
-					resultCount={products.length}
+					resultCount={books.length}
 					title=''
 				/>
 			}
+			//todo fix categories={categoriesMap.books}
 			aside={<LayoutAside categories={categoriesMap.books} />}
 		>
 			<CatalogItems
@@ -58,19 +72,21 @@ export const CatalogPage = () => {
 					display: 'flex',
 					flexWrap: 'wrap',
 					justifyContent: 'flex-start',
-					gap: '0.5em',
+					gap: '1.5em',
 				}}
 			/>
 			{/* TODO add children for maybe promotions discounts etc*/}
 		</CatalogLayout>
 	)
-
+	//todo add ${navParams.navCategory} in urls when implemented
 	return (
 		<Routes>
-			<Route path={`/${navParams.type}/${navParams.navCategory}`} element={Layout} />
+			<Route path={`/${navParams.productType}/`} element={Layout} />
 			<Route
-				path={`/${navParams.type}/${navParams.navCategory}/:id`}
-				element={<DetailsPage path={navParams.navString} type={navParams.type} />}
+				path={`/${navParams.productType}/:id`}
+				element={
+					<DetailsPage path={navParams.navString} productType={navParams.productType} />
+				}
 			/>
 		</Routes>
 	)

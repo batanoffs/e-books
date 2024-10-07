@@ -5,7 +5,15 @@ import useFiltersStore from '../../../store/filters'
 import styles from './navigation.module.scss'
 
 type Categories = {
-	categories: string[]
+	categories: [
+		{
+			_id: string
+			categoryType: 'books' | 'textbooks' | 'stationery'
+			updatedAt: string
+			createdAt: string
+			name: string
+		}
+	]
 }
 
 export const LayoutAside = ({ categories }: Categories) => {
@@ -15,15 +23,7 @@ export const LayoutAside = ({ categories }: Categories) => {
 		return null
 	}
 
-	const categoryTranslation: Record<string, string> = {
-		All: 'всички',
-		Fiction: 'художествена литература',
-		'Non-fiction': 'наука',
-		'Self-Help': 'самопомощ',
-		Business: 'бизнес',
-		Spirituality: 'духовност',
-		Poetry: 'поезия',
-	}
+	console.log(categories)
 
 	const handleCategoryChange = (category: string) => {
 		const currentCategory = category.toLowerCase()
@@ -36,9 +36,9 @@ export const LayoutAside = ({ categories }: Categories) => {
 			<h6>Категории</h6>
 			<div className={styles.line}></div>
 			<ul>
-				{categories.map((category, index) => (
-					<li key={index} onClick={() => handleCategoryChange(category)}>
-						{categoryTranslation[category]}
+				{categories.map((category) => (
+					<li key={category._id} onClick={() => handleCategoryChange(category.name)}>
+						{category.name}
 					</li>
 				))}
 			</ul>

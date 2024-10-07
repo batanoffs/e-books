@@ -8,13 +8,23 @@ import { Product } from '../../interfaces/product.interface'
 import useSpinner from '../../store/spinner'
 import { LayoutHeader, DetailsLayout, GlobalSpinner, ImageViewer } from '../../components/index'
 
-export const DetailsPage = ({ type, path }: { type: string | undefined; path: string }) => {
+export const DetailsPage = ({
+	productType,
+	path,
+}: {
+	productType: string | undefined
+	path: string
+}) => {
 	const [product, setProduct] = useState<Product | null>(null)
 	const { hideSpinner, showSpinner } = useSpinner()
 	const productID = useParams().id
 
 	const detailsApi =
-		type === 'books' ? API.BOOKS : type === 'textbooks' ? API.TEXTBOOKS : API.STATIONERY
+		productType === 'book'
+			? API.BOOKS
+			: productType === 'textbook'
+			? API.TEXTBOOKS
+			: API.STATIONERY
 
 	const fetchProductCallback = useCallback(async () => {
 		try {

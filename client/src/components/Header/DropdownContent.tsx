@@ -16,7 +16,7 @@ export const DropdownContent = ({
 	handleNavigateToCart,
 }: DropdownContentProps) => {
 	const totalCost = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
-	const formatCurrency = formatCurrencyToBGN(totalCost)
+	const totalCostBGN = formatCurrencyToBGN(totalCost)
 
 	return (
 		<Popper
@@ -48,7 +48,7 @@ export const DropdownContent = ({
 				</Typography>
 				{cartItems.length > 0 ? <ProductsTable products={cartItems} /> : <ListIsEmpty />}
 				<Typography variant='h5' sx={{ textAlign: 'center', my: 2 }}>
-					Обща стойност: {formatCurrency}
+					Обща стойност: {totalCostBGN}
 				</Typography>
 				<Button variant='contained' sx={{ width: '100%' }} onClick={handleNavigateToCart}>
 					Към количката

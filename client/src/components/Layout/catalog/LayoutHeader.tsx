@@ -3,7 +3,7 @@ import styles from './header.module.scss'
 type LayoutHeaderProps = {
 	title: string
 	path: string
-	navCategory?: string
+	productCategory?: string
 	hasSorting?: boolean
 	resultCount?: number
 }
@@ -11,7 +11,7 @@ type LayoutHeaderProps = {
 export const LayoutHeader = ({
 	title,
 	path,
-	navCategory,
+	productCategory,
 	hasSorting,
 	resultCount,
 }: LayoutHeaderProps) => {
@@ -23,7 +23,9 @@ export const LayoutHeader = ({
 					{path} / <span>{title}</span>
 				</p>
 			</div>
-			<div className={styles.categoryTitle}>{navCategory && <h1>{navCategory}</h1>}</div>
+			<div className={styles.categoryTitle}>
+				{productCategory && <h1>{productCategory}</h1>}
+			</div>
 
 			{hasSorting && (
 				<div className={styles.sorting}>
