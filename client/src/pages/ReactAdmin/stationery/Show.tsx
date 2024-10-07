@@ -1,16 +1,103 @@
-import { Show, SimpleShowLayout, TextField, NumberField } from 'react-admin'
+import {
+	Show,
+	ShowProps,
+	Labeled,
+	TextField,
+	NumberField,
+	ReferenceManyField,
+	ChipField,
+	SingleFieldList,
+} from 'react-admin'
+import CustomCoverImage from '../books/CustomCoverImage'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 
-export const StationeryShow = (props) => (
-	<Show {...props}>
-		<SimpleShowLayout>
-			<TextField source='id' label='ИД' />
-			<TextField source='title' label='Заглавие' />
-			<TextField source='author' label='Автор' />
-			<NumberField source='price' label='Цена' />
-			<TextField source='description' label='Описание' />
-			<TextField source='imageUrl' label='Изображение' />
-			<NumberField source='stock' label='Наличност' />
-			<TextField source='category' label='Категория' />
-		</SimpleShowLayout>
-	</Show>
-)
+export const StationeryShow = (props: ShowProps) => {
+	return (
+		<Show {...props}>
+			<Typography
+				sx={{
+					marginTop: 2,
+					textAlign: 'center',
+					fontSize: { xs: 'h6.fontSize', sm: 'h5.fontSize' },
+				}}
+			>
+				Преглед на артикул {props.resource?.title && `"${props.resource?.title}"`}
+			</Typography>
+
+			<div
+				style={{
+					margin: '10px',
+					height: 1,
+					width: '100%',
+					backgroundColor: 'gray',
+				}}
+			/>
+			<Box
+				display={{ xs: 'block', sm: 'flex' }}
+				columnGap={8}
+				sx={{ width: '100%', padding: 4 }}
+			>
+				<Box display={'block'} sx={{ flex: 0, flexBasis: '20%' }}>
+					<Labeled color='#6028c8'>
+						<CustomCoverImage imgWidth='200px' />
+					</Labeled>
+				</Box>
+				<Box sx={{ width: '100%', flex: 1 }}>
+					<Box
+						sx={{
+							width: '100%',
+							display: 'grid',
+							gridTemplateColumns: 'repeat(2, 1fr)',
+							gap: 2,
+						}}
+					>
+						<Labeled color='#6028c8'>
+							<TextField source='id' label='ID' />
+						</Labeled>
+
+						<Labeled color='#6028c8'>
+							<TextField source='title' label='Заглавие' />
+						</Labeled>
+
+						<Labeled color='#6028c8'>
+							<NumberField source='price' label='Цена' />
+						</Labeled>
+
+						<Labeled color='#6028c8'>
+							<NumberField source='stock' label='Брой на склад' />
+						</Labeled>
+						<Labeled color='#6028c8'>
+							<ReferenceManyField
+								label='Категории'
+								reference='categories/stationery' // Reference to the categories collection
+								source='categories' // Path to the array of category IDs
+								target='id'
+							>
+								<SingleFieldList>
+									<ChipField source='name' />
+								</SingleFieldList>
+							</ReferenceManyField>
+						</Labeled>
+
+						<Labeled color='#6028c8'>
+							<TextField source='dimensions' label='Размери' />
+						</Labeled>
+					</Box>
+					<Box
+						sx={{
+							width: '100%',
+							display: 'grid',
+							gridTemplateColumns: 'repeat(1, 1fr)',
+							gap: 2,
+						}}
+					>
+						<Labeled color='#6028c8'>
+							<TextField source='description' label='Описание' />
+						</Labeled>
+					</Box>
+				</Box>
+			</Box>
+		</Show>
+	)
+}

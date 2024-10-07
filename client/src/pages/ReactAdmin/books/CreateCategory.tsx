@@ -41,8 +41,8 @@ const CreateCategory = ({ categoryType }: CategoryTypeInterface) => {
 					/>
 				</DialogContent>
 				<DialogActions>
-					<Button type='submit'>Save</Button>
-					<Button onClick={onCancel}>Cancel</Button>
+					<Button type='submit'>Запази</Button>
+					<Button onClick={onCancel}>Откажи</Button>
 				</DialogActions>
 			</form>
 		</Dialog>

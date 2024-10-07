@@ -1,4 +1,4 @@
-import Typography from '@mui/material/Typography'
+import { Box } from '@mui/material'
 import { useFieldValue } from 'react-admin'
 
 type Props = {
@@ -11,7 +11,7 @@ const CustomCoverImage = ({ sx = {}, imgWidth = '100px', imageTitle = false }: P
 	const coverUrl = useFieldValue({ source: 'picture' })
 
 	return (
-		<Typography component='div' sx={{ ...sx }}>
+		<Box component='div' sx={{ ...sx }}>
 			<li style={{ listStyle: 'none' }}>
 				<img
 					alt='Липсва Корица'
@@ -21,7 +21,7 @@ const CustomCoverImage = ({ sx = {}, imgWidth = '100px', imageTitle = false }: P
 					style={{ overflow: 'hidden', aspectRatio: '2/3', width: imgWidth }}
 				/>
 			</li>
-		</Typography>
+		</Box>
 	)
 }
 
