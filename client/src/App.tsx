@@ -3,7 +3,6 @@ import { useEffect, useState, useMemo } from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 
-import * as locales from '@mui/material/locale/'
 import { useThemeSettings } from './store/themeSettings'
 import { themeOptions } from './utils/helpers/theme'
 import { Header, Footer, PageNotFound, ScrollTopButton } from './components/index'
@@ -23,18 +22,14 @@ import {
 	AboutPage,
 } from './pages/index'
 
-type SupportedLocales = keyof typeof locales
-
 const App = () => {
 	const [isAdmin, setIsAdmin] = useState(false)
-	const { locale, darkMode, toggleDarkMode } = useThemeSettings()
+	const { darkMode, toggleDarkMode } = useThemeSettings()
 	let location = useLocation()
+
 	useMemo(() => () => toggleDarkMode(), [])
 
 	const mode = themeOptions(darkMode)
-	console.log(mode)
-	const newTheme = createTheme(mode)
-
 	const myTheme = useMemo(() => createTheme(mode), [mode])
 
 	useEffect(() => {
@@ -43,7 +38,7 @@ const App = () => {
 	}, [location])
 
 	return (
-		<ThemeProvider theme={newTheme}>
+		<ThemeProvider theme={myTheme}>
 			{!isAdmin && <Header />}
 			{!isAdmin && <ScrollTopButton />}
 			<LoginModal />
