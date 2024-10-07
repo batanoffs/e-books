@@ -38,14 +38,15 @@ router.use('/categories/stationery', raExpressMongoose(StationeryCategories, {
 
 router.use('/stationery', raExpressMongoose(Stationery, {
 		q: [
-			'_id',
+			'id',
 			'title',
 			'price',
 			'description',
-			'coverImage',
-			'coverImageType',
-			'stock',
+			'productType',
+			'picture',
 			'categories',
+			'dimensions',
+			'stock',
 			'createdAt',
 		],
 		useLean: true,

@@ -1,19 +1,22 @@
 import { Params } from 'react-router-dom'
 
 export const getNavigationParams = (params: Readonly<Params<string>>) => {
-	const [type, navCategory] = Object.values(params)[0]?.split('/') ?? []
-
-	const headerText = {
+	const [productType, productCategory] = Object.values(params)[0]?.split('/') ?? []
+	const headerText =
+		{
 			books: 'книги',
 			textbooks: 'учебници',
 			stationery: 'канцелария',
-		}[type] ?? type
+		}[productType] ?? productType
 
-	const navString = `книжарница / ${headerText} / ${navCategory}`
-
+	const shortNav = `книжарница / ${headerText}`
+	const longNav = `книжарница / ${headerText} / ${productCategory}`
+	const navString = productCategory ? longNav : shortNav
+	
 	return {
 		navString,
-		navCategory,
-		type,
+		productCategory,
+		headerText,
+		productType,
 	}
 }

@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-export type SupportedLocales = 'enUS' | 'bgBG'
+export type SupportedLocales = 'bgBG' | 'enUS'
 export type PaletteMode = 'light' | 'dark'
 
 export interface SiteThemeState {
@@ -15,9 +15,9 @@ export const useThemeSettings = create<SiteThemeState>((set) => {
 		locale: 'enUS',
 		setLocale: (newLocale) => set({ locale: newLocale }),
 		darkMode: 'light',
-		toggleDarkMode: () => set((state) => ({
-			darkMode: state.darkMode === 'light' ? 'dark' : 'light',
-		})),
+		toggleDarkMode: () =>
+			set((state) => ({
+				darkMode: state.darkMode === 'light' ? 'dark' : 'light',
+			})),
 	}
 })
-
