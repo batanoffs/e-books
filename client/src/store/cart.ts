@@ -1,5 +1,18 @@
 import { create } from 'zustand'
 
+interface inputCart {
+	productRef: {
+		_id: string
+		picture: string
+		title: string
+		price: number
+		productType: string
+		any: any
+	}
+	productType: string
+	quantity: number
+}
+
 interface CartItem {
 	product: {
 		_id: string
@@ -8,12 +21,13 @@ interface CartItem {
 		price: number
 		productType: string
 	}
+	productType: string
 	quantity: number
 }
 
 interface CartState {
 	cart: CartItem[]
-	setCart: (items: CartItem[]) => void
+	setCart: (items: inputCart[]) => void
 	updateQuantity: (id: string, quantity: number) => void
 	addToCart: (product: any, quantity: number) => void
 	removeFromCart: (productId: string) => void
@@ -23,12 +37,10 @@ interface CartState {
 const useCartStore = create<CartState>((set) => ({
 	cart: [],
 	setCart: (items) => {
-		set({ cart: items })
+		set({ cart: items.map((item) => ({ ...item, product: item.productRef })) })
 	},
-	//TODO pass product and quantity and then remodel the object
-	addToCart: (product, quantity) => { //item
+	addToCart: (product, quantity) => {
 		//This weird set of the objects is because temporary testing Stripe API
-		//TODO update for better performance the models or implement improvements
 		set((state) => {
 			const existingProduct = state.cart.find(
 				(currentProduct) => currentProduct.product._id === product._id
@@ -45,7 +57,10 @@ const useCartStore = create<CartState>((set) => ({
 					}),
 				}
 			} else {
-				return { ...state, cart: [...state.cart, { ...product, quantity }] }
+				return {
+					...state,
+					cart: [...state.cart, { product, quantity, productType: product.productType }],
+				}
 			}
 		})
 	},
