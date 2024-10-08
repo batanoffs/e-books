@@ -48,13 +48,18 @@ export const CarouselCard = ({ product, styles }: CarouselCard) => {
 				<div className={styles.buttonsContainer}>
 					<Button
 						variant='contained'
-						color='secondary'
+						color='primary'
 						className={styles.button}
 						onClick={onAddToCart}
 					>
 						Купи
 					</Button>
-					<Button variant='contained' className={styles.button} onClick={onGoToDetails}>
+					<Button
+						variant='contained'
+						className={styles.button}
+						color='secondary'
+						onClick={onGoToDetails}
+					>
 						Виж детайли
 					</Button>
 				</div>

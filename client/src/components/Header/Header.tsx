@@ -1,11 +1,13 @@
 import { Box, AppBar, Container, Toolbar, IconButton } from '@mui/material'
-import { NavMenu, SearchBar, LocaleSwitcher, AppBarItems } from './index'
+import { useTheme } from '@mui/material/styles'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
-import Logo from '../utils/Logo'
-import styles from './header.module.scss'
-import { useTheme } from '@mui/material/styles'
+
+import { NavMenu, SearchBar, LocaleSwitcher, AppBarItems } from './index'
 import { useThemeSettings } from '../../store/themeSettings'
+import Logo from '../utils/Logo'
+
+import styles from './header.module.scss'
 
 export const Header = () => {
 	const theme = useTheme()
@@ -16,15 +18,14 @@ export const Header = () => {
 			<Container maxWidth='xl'>
 				<Toolbar
 					id='back-to-top-anchor'
-					sx={{ pl: 5 }}
+					sx={{ pl: 5, color: 'text.primary', bgcolor: 'background.paper' }}
 					className={styles.headerToolbar}
 					variant='dense'
 				>
 					<Logo />
 					<SearchBar />
 					<Box className={styles.headerBox}>
-						<h6> {theme.palette.mode}</h6>
-						<IconButton sx={{ ml: 1 }} onClick={toggleDarkMode} color='inherit'>
+						<IconButton sx={{ ml: 1 }} onClick={toggleDarkMode} color='primary'>
 							{theme.palette.mode === 'dark' ? (
 								<Brightness4Icon />
 							) : (
@@ -37,7 +38,12 @@ export const Header = () => {
 				</Toolbar>
 				<Toolbar
 					variant='dense'
-					sx={{ minHeight: '40px' }}
+					sx={{
+						minHeight: '40px',
+						bgcolor: 'secondary.main',
+						color: 'text.primary',
+						border: `1px solid ${theme.palette.divider}`,
+					}}
 					className={styles.headerToolbarMenu}
 				>
 					<NavMenu />

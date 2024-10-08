@@ -11,7 +11,7 @@ const LoginBtn = () => {
 		<Button
 			sx={{ borderRadius: '0.5em' }}
 			variant='contained'
-			color='secondary'
+			color='primary'
 			onClick={toggleOpen}
 		>
 			Вход

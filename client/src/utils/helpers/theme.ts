@@ -1,23 +1,24 @@
 import { PaletteMode } from '@mui/material'
 
+// #413c58, #a3c4bc, #bfd7b5, #e7efc5, #f2dda4
 export const themeOptions = (mode: PaletteMode) => ({
 	palette: {
 		mode,
 		primary: {
-			main: mode === 'light' ? '#228be6' : '#176ab3',
+			main: mode === 'light' ? '#413c58' : '#a3c4bc',
 			contrastText: '#fff',
 		},
 		secondary: {
-			main: mode === 'light' ? '#aa49e7' : '#4b2990',
+			main: mode === 'light' ? '#bfd7b5' : '#596354',
 			contrastText: '#fff',
 		},
 		background: {
-			default: mode === 'light' ? '#fff' : '#1a2027',
-			paper: mode === 'light' ? '#f4f6f8' : '#2d3748',
+			default: mode === 'light' ? '##fff' : '#1a2027',
+			paper: mode === 'light' ? '#fff' : '#2d3748',
 		},
 		text: {
-			primary: mode === 'light' ? '#071108' : '#fff',
-			secondary: mode === 'light' ? '#bfb1c1' : '#fff',
+			primary: mode === 'light' ? '#1d3557ff' : '#fff',
+			secondary: mode === 'light' ? '#fff' : '#1d3557ff',
 			disabled: mode === 'light' ? '#5c5959' : '#fff',
 		},
 		error: {
@@ -32,7 +33,7 @@ export const themeOptions = (mode: PaletteMode) => ({
 		success: {
 			main: '#2e7d32',
 		},
-		divider: '#bfb1c1',
+		divider: mode === 'light' ? '#071108' : '#bfb1c1',
 	},
 	typography: {
 		fontFamily: 'Montserrat Alternates, sans-serif',
@@ -89,7 +90,7 @@ export const themeOptions = (mode: PaletteMode) => ({
 			fontSize: '0.75rem',
 			fontWeight: 400,
 			lineHeight: 1.66,
-			color: '#6028c8',
+			color: 'primary.main',
 		},
 		allVariants: {
 			textTransform: 'none',
@@ -109,6 +110,7 @@ export const themeOptions = (mode: PaletteMode) => ({
 		MuiTextField: {
 			defaultProps: {
 				variant: 'standard' as const,
+				colors: 'primary' as const,
 			},
 		},
 		MuiFormControl: {
@@ -134,8 +136,8 @@ export const themeOptions = (mode: PaletteMode) => ({
 		MuiAppBar: {
 			styleOverrides: {
 				colorInherit: {
-					backgroundColor: '#ffffff',
-					color: '#333333',
+					backgroundColor: 'background.default',
+					color: 'text.primary',
 				},
 			},
 			defaultProps: {
@@ -162,6 +164,9 @@ export const themeOptions = (mode: PaletteMode) => ({
 						maxWidth: '100%', // Use a valid value
 					},
 				},
+				defaultProps: {
+					colors: 'primary' as const,
+				},
 			},
 		},
 		MuiToolbar: {
@@ -184,10 +189,10 @@ export const themeOptions = (mode: PaletteMode) => ({
 					height: 36,
 				},
 				containedPrimary: {
-					color: '#ffffff',
+					color: 'primary.main',
 				},
 				containedSecondary: {
-					color: '#ffffff',
+					color: 'secondary.main',
 				},
 			},
 		},

@@ -74,12 +74,11 @@ export const NavMenu = () => {
 						key={page.title}
 						onClick={() => navigationHandler(page)}
 						sx={{
-							color: 'white',
 							fontWeight: 600,
 							fontSize: '1em',
 							'&:hover': {
 								textDecoration: 'none',
-								color: 'secondary.main',
+								color: 'text.secondary',
 								backgroundColor: 'transparent',
 							},
 						}}
