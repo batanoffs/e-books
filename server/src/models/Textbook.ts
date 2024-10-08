@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose'
-import { IBookSchema } from '../interfaces/book.interface'
+import { ITextbookSchema } from '../interfaces/textbook.interface'
 
 const TextbookSchema: Schema = new Schema({
 	title: {
@@ -85,6 +85,6 @@ const TextbookSchema: Schema = new Schema({
 	},
 })
 
-const Textbook = model<IBookSchema>('Textbook', TextbookSchema)
+const Textbook = model<ITextbookSchema>('Textbook', TextbookSchema)
 
 export default Textbook

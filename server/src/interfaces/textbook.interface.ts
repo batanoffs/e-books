@@ -1,20 +1,20 @@
 import { Types } from 'mongoose'
 
-export interface ITextbookSchema {
+export interface ITextbookSchema extends Document {
 	title: string
 	author: string
 	price: number
 	description: string
-	coverImage: Buffer
-	coverImageType: String
+	picture: string
+	coverPageType: string
 	stock: number
-	categories: Types.ObjectId[]
+	categories: Types.ObjectId[] // References only book category IDs
 	publisher?: string
 	language?: string
 	publishDate?: Date
+	productType: 'Textbook'
 	pageCount?: number
 	translator?: string
 	dimensions?: string
-	coverPageType?: string
 	createdAt: Date
 }
