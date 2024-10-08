@@ -12,7 +12,7 @@ export interface IBookSchema extends Document {
 	publisher?: string
 	language?: string
 	publishDate?: Date
-	productType: string
+	productType: 'Book'
 	pageCount?: number
 	translator?: string
 	dimensions?: string
