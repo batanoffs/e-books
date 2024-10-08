@@ -61,6 +61,7 @@ export const CheckoutPage = () => {
 			return {
 				id: item.product._id,
 				quantity: item.quantity,
+				productType: item.productType,
 			}
 		})
 
