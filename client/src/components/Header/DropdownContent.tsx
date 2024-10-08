@@ -15,7 +15,9 @@ export const DropdownContent = ({
 	cartItems,
 	handleNavigateToCart,
 }: DropdownContentProps) => {
-	const totalCost = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
+	const totalCost = Array.isArray(cartItems)
+		? cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
+		: 0
 	const totalCostBGN = formatCurrencyToBGN(totalCost)
 
 	return (
