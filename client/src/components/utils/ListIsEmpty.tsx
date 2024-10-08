@@ -24,7 +24,7 @@ export const ListIsEmpty = () => {
 			<Typography variant='subtitle1'>Добави продукт и той ще се появи тук</Typography>
 			<Button
 				variant='contained'
-				onClick={() => navigate(`/catalog/books/all`)}
+				onClick={() => navigate(`/catalog/books`)}
 				color='primary'
 				sx={{ mt: 4 }}
 			>
