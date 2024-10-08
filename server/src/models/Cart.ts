@@ -1,26 +1,6 @@
 import { model, Schema } from 'mongoose'
 import { IShoppingCart } from '../interfaces/cart.interface'
 
-const CartProductSchema: Schema = new Schema(
-	{
-		product: {
-			type: Schema.Types.ObjectId,
-			refPath: 'productType', 
-			required: true,
-		},
-		productType: {
-			type: String,
-			enum: ['Book', 'Textbook', 'Stationery'], 
-			required: true,
-		},
-		quantity: {
-			type: Number,
-			required: true,
-		},
-	},
-	{ _id: false }
-)
-
 const ShoppingCartSchema: Schema = new Schema(
 	{
 		userId: {
@@ -28,7 +8,25 @@ const ShoppingCartSchema: Schema = new Schema(
 			ref: 'User',
 			required: true,
 		},
-		products: [CartProductSchema],
+		products: [
+			{
+				productRef: {
+					type: Schema.Types.ObjectId,
+					refPath: 'products.productType',
+					required: true,
+				},
+				productType: {
+					type: String,
+					enum: ['Book', 'Textbook', 'Stationery'],
+					required: true,
+				},
+				quantity: {
+					type: Number,
+					required: true,
+				},
+				_id: false,
+			},
+		],
 		active: {
 			type: Boolean,
 			default: true,
