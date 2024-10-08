@@ -24,17 +24,16 @@ export const CatalogPage = () => {
 	const params = useParams()
 	const navParams = getNavigationParams(params)
 
-
 	//TODO create single request in the backend for all products
 	const fetchBooksCallback = useCallback(async () => {
 		try {
 			showSpinner()
 			const responseBooks = await axios.get(API.BOOKS)
 			const responseTextBooks = await axios.get(API.TEXTBOOKS)
-			// const responseStationery = await axios.get(API.STATIONERY)
+			const responseStationery = await axios.get(API.STATIONERY)
 			setBooks(responseBooks.data)
 			setTextBooks(responseTextBooks.data)
-			// setStationery(responseStationery.data)
+			setStationery(responseStationery.data)
 		} catch (error) {
 			console.error(error)
 		} finally {
@@ -52,7 +51,7 @@ export const CatalogPage = () => {
 			: navParams.productType === 'textbooks'
 			? textbooks
 			: stationery
-	
+
 	const Layout = (
 		<CatalogLayout
 			header={
