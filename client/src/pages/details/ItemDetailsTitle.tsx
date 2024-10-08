@@ -14,6 +14,7 @@ import useAlertStore from '../../store/alert'
 import useCartStore from '../../store/cart'
 import cartService from '../../services/cartService'
 import wishlistService from '../../services/wishlistService'
+import { useTheme } from '@mui/material'
 
 interface ItemDetailsTitleProps extends ProductDetailsProps {
 	setQuantity: (quantity: number) => void
@@ -27,7 +28,7 @@ const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetail
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const addToCart = useCartStore((state) => state.addToCart)
-
+	const theme = useTheme()
 	const handleAddToCart = async (event: React.MouseEvent) => {
 		try {
 			if (!authGuards.isAuth()) {
@@ -57,7 +58,7 @@ const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetail
 	return (
 		<div className={styles.detailsContainer}>
 			<div className={styles.titleSection}>
-				<h3>{product.title}</h3>
+				<h3 style={{ color: theme.palette.primary.main }}>{product.title}</h3>
 				{authGuards.isAuth() && (
 					<Tooltip title='Добави в любими'>
 						<IconButton
@@ -80,14 +81,27 @@ const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetail
 				{/* <div className={styles.deliveryPrice}>Доставка: {deliveryPrice}</div> */}
 				<Box
 					component={'p'}
-					sx={{ color: `${product.stock > 0 ? 'green' : 'red'}`, fontWeight: 'bold' }}
+					sx={{ color: `${product.stock > 0 ? 'green' : 'red'}`, fontWeight: 'bolt' }}
 				>
 					{product.stock > 0 ? 'В наличност' : 'Изчерпани количества'}
+					<span
+						style={{
+							marginLeft: '4em',
+							fontWeight: 'normal',
+							color: theme.palette.text.primary,
+						}}
+					>
+						Остават още:
+						<span style={{ marginLeft: '0.5em', fontWeight: 'bold' }}>
+							{product.stock}
+						</span>{' '}
+						бр.
+					</span>
 				</Box>
 			</div>
 			<div className={styles.actions}>
 				<div className={styles.cartContainer}>
-					<Button onClick={handleAddToCart} color='secondary' variant='contained'>
+					<Button onClick={handleAddToCart} color='primary' variant='contained'>
 						<ShoppingCartIcon /> Добави в количка
 					</Button>
 
