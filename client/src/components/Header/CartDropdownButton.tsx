@@ -11,7 +11,7 @@ export const CartDropdownButton = () => {
 	const cartItems = useCartStore.getState().cart
 	const open = Boolean(anchorEl)
 	const navigate = useNavigate()
-
+	
 	const handleNavigateToCart = () => {
 		setAnchorEl(null)
 		navigate('/cart')

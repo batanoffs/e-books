@@ -14,12 +14,9 @@ const CreateCategory = ({ categoryType }: CategoryTypeInterface) => {
 
 	const handleSubmit = async () => {
 		try {
-			const response = await dataProvider.create(`categories/${categoryType}`, {
+			await dataProvider.create(`categories/${categoryType}`, {
 				data: { name: value },
 			})
-
-			console.log(response.data)
-			// categories.push(response.data)
 			onCreate(value)
 			setValue('')
 			notify('Усшено добавихте нова категория', { type: 'success' })

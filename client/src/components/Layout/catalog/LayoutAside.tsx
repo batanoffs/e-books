@@ -23,8 +23,6 @@ export const LayoutAside = ({ categories }: Categories) => {
 		return null
 	}
 
-	console.log(categories)
-
 	const handleCategoryChange = (category: string) => {
 		const currentCategory = category.toLowerCase()
 		setNavCategory(currentCategory)

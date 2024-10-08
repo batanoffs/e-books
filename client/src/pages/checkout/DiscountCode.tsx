@@ -16,7 +16,6 @@ export const DiscountCode = ({ control, errors, reset }) => {
 	const [expanded, setExpanded] = useState<Boolean>(false)
 
 	const onSubmit = (data) => {
-		console.log(data)
 		reset()
 	}
 

@@ -30,11 +30,7 @@ try {
 //     try {
 //         const result = await registerUser('admin@email.com', 'password', 'admin');
 //         // const result = await login("daniel@gmail.com", "123456");
-
-//         console.log(result);
-
 //         const token = createToken(result);
-//         console.log(token);
 //     } catch (error: any) {
 //         console.error(`Caught Error: ${error.message}`);
 //     }

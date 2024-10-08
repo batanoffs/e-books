@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
 
 import { useLoginModal } from '../../store/helperModal'
 import authService from '../../services/authService'
@@ -47,8 +48,8 @@ export const LoginModal = () => {
 			aria-labelledby='simple-modal-title'
 			aria-describedby='simple-modal-description'
 		>
-			<div className={styles.paper}>
-				<Typography variant='subtitle2' id='modal-title'>
+			<Paper className={styles.paper}>
+				<Typography variant='subtitle2' color='text.primary' id='modal-title'>
 					Вход
 				</Typography>
 				<form className={styles.form} onSubmit={handleLogin}>
@@ -93,7 +94,7 @@ export const LoginModal = () => {
 						Забравена парола?
 					</Link>
 				</form>
-			</div>
+			</Paper>
 		</Modal>
 	)
 }

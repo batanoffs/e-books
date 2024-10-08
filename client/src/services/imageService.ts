@@ -1,8 +1,10 @@
 import axios from 'axios'
 import API from '../utils/constants/api'
+import { useNotify } from 'react-admin'
 
 const uploadImage = async (file: File) => {
 	const formData = new FormData()
+	const notify = useNotify()
 	formData.append('picture', file)
 
 	try {
@@ -12,12 +14,11 @@ const uploadImage = async (file: File) => {
 			},
 		})
 
-		console.log('File uploaded successfully', response.data)
-
+		notify('Успешно качихте или променихте изображението', { type: 'success' })
 		const { secure_url } = response.data.data
 		return secure_url
 	} catch (error) {
-		console.error('Error uploading the file', error)
+		notify(`Грешка при качване на изображението ${error}`, { type: 'error' })
 	}
 }
 

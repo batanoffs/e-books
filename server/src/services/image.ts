@@ -20,29 +20,6 @@ export const uploadImage = async (req: MulterRequest) => {
 	})
 }
 
-// Upload an image
-// const upload = async (file: any, productName: string, imagePath: any, folder: string) => {
-// 	// Use the uploaded file's name as the asset's public ID and
-// 	// allow overwriting the asset with new versions
-// 	const options = {
-// 		use_filename: true,
-// 		unique_filename: false,
-// 		overwrite: true,
-// 		upload_preset: 'unsigned_upload',
-// 		public_id: `${productName}cover`,
-// 		folder: folder,
-// 		allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp'],
-// 	}
-
-// 	try {
-// 		const result = await cloudinary.uploader.upload(imagePath, options)
-// 		console.log(result)
-// 		return result
-// 	} catch (error) {
-// 		console.error(error)
-// 	}
-// }
-
 // Gets details of an uploaded image
 const getAssetInfo = async (publicId: string) => {
 	// Return colors in the response
@@ -53,7 +30,6 @@ const getAssetInfo = async (publicId: string) => {
 	try {
 		// Get details about the asset
 		const result = await cloudinary.api.resource(publicId, options)
-		console.log(result)
 		return result.colors
 	} catch (error) {
 		console.error(error)

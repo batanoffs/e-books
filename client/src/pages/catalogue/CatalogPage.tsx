@@ -24,6 +24,8 @@ export const CatalogPage = () => {
 	const params = useParams()
 	const navParams = getNavigationParams(params)
 
+
+	//TODO create single request in the backend for all products
 	const fetchBooksCallback = useCallback(async () => {
 		try {
 			showSpinner()

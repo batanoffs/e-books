@@ -7,7 +7,6 @@ import useConfirm from '../../hooks/useConfirm'
 import useCartStore from '../../store/cart'
 import useAlertStore from '../../store/alert'
 import cartService from '../../services/cartService'
-import authService from '../../services/authService'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import QuantityInput from '../../components/QuantityInput/QuantityInput'
 
@@ -28,14 +27,13 @@ const CartItem = ({ product, onChangeQuantity, quantity }: CartProductProps) => 
 
 	const handleRemoveProduct = async () => {
 		try {
-			const userId = await authService.getUserId()
 			const alert = await confirm(
 				'Изтриване',
 				'Сигурни ли сте, че искате да изтриете този продукт?'
 			)
 
 			if (alert) {
-				await cartService.removeOne(product._id, userId)
+				await cartService.removeOne(product._id)
 				removeFromCart(product._id)
 				showAlert('Успешно изтрит продукт', 'success')
 			}

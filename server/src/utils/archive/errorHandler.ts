@@ -4,7 +4,6 @@
 // 	const SchemaErrors = { fName: '', username: '', email: '', password: '', image: '' }
 // 	//passwordError
 // 	if (error.password) {
-// 		console.log(error)
 // 		SchemaErrors.password = error.password
 // 		return res.status(500).json(SchemaErrors)
 // 	}
@@ -23,7 +22,6 @@
 
 // 	//Duplicate Errors
 // 	if (error.code === 11000) {
-// 		console.log(error)
 // 		SchemaErrors[Object.keys(error.keyPattern)[0]] = `This is a duplicate ${
 // 			Object.keys(error.keyPattern)[0]
 // 		}. please enter a new one`

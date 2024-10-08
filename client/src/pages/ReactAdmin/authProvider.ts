@@ -7,7 +7,6 @@ export const authProvider: AuthProvider = {
 
         try {
             const redirectUrl = await authService.login(email, password);
-            console.log('redirectUrl', redirectUrl);
             if (!redirectUrl) {
                 return Promise.reject(
                     new HttpError('Неоторизиран потребител', 401, {

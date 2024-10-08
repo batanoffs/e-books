@@ -21,7 +21,6 @@ async function registerUser(
 		})
 
 		const savedUser = await newUser.save()
-		console.log('User successfully created:', savedUser)
 		return savedUser
 	} catch (error: any) {
 		console.error('Failed to register user:', error)

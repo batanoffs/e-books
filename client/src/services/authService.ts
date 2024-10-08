@@ -53,7 +53,6 @@ const login = async (email: string, password: string) => {
 
 		if (currentToken !== token) {
 			document.cookie = `token=${token};`
-			console.log('Token updated successfully.')
 		} else {
 			console.warn('Token is already up to date. Skipping...')
 		}

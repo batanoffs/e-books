@@ -3,9 +3,11 @@ import axios from 'axios'
 import API from '../../utils/constants/api'
 import { Product } from '../../interfaces/product.interface'
 import { Box, Grid, Typography, List, ListItem, ListItemText, Divider } from '@mui/material'
+import useAlertStore from '../../store/alert'
 
 export const PaymentSuccessful = () => {
 	const [orderData, setOrderData] = useState<any | null>(null)
+	const showAlert = useAlertStore((state) => state.showAlert)
 
 	const fetchOrder = useCallback(async (sessionId: string | null) => {
 		if (!sessionId) return
@@ -19,7 +21,10 @@ export const PaymentSuccessful = () => {
 
 			setOrderData(response.data)
 		} catch (error) {
-			console.log(error)
+			showAlert(
+				`Възникна грешка при извличането на поръчката, моля презаредете страницата`,
+				'error'
+			)
 		}
 	}, [])
 

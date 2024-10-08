@@ -40,18 +40,13 @@ const CartList = () => {
 
 	//TODO finish logic for update cart
 	const updateCartHandler = async (e) => {
-		console.log('event:', e.target)
 		// const inputs = e.target.parentElement.parentElement.querySelectorAll('input')
 		// const values = []
 		// inputs.forEach((input) => values.push(input.value))
-		// console.log('inputs:', inputs)
-		// console.log('values:', values)
-
 		// const promises = cart.map((item) =>
 		// 	updateQuantity(item.product._id, values[cart.indexOf(item)])
 		// )
 		// const response = await Promise.all(promises)
-
 		// if (response) setIsUpdateButtonDisabled(true)
 		// if (response) {
 		// 	//TODO updated backend quantity of the current items in the cart
@@ -61,8 +56,7 @@ const CartList = () => {
 	const onChangeQuantityHandler = () => {
 		setIsUpdateButtonDisabled(false)
 	}
-	console.log('cart:', cart);
-	
+
 	return (
 		<Paper
 			sx={{
@@ -72,8 +66,8 @@ const CartList = () => {
 			}}
 		>
 			{dialog}
-			{cart.length === 0 && <ListIsEmpty />}
-			{cart.length > 0 && (
+			{cart?.length === 0 && <ListIsEmpty />}
+			{cart?.length > 0 && (
 				<Grid container spacing={0}>
 					{cart.map((item) => (
 						<Grid item xs={12} key={item.product._id}>

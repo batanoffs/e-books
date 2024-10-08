@@ -22,6 +22,7 @@ interface ItemDetailsTitleProps extends ProductDetailsProps {
 	product: Product
 }
 
+//TODO fix for all products props
 const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetailsTitleProps) => {
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
 	const showAlert = useAlertStore((state) => state.showAlert)

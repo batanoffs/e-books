@@ -21,11 +21,6 @@ const httpClient = async (
 
 export default (apiUrl: string): DataProvider => ({
 	create: async (resource: string, params: { data: any }) => {
-		console.log('DataProvider create params: ', params.data)
-		console.log('apiUrl:', apiUrl)
-		console.log('create url: ', apiUrl + resource)
-		console.log('resource: ', resource)
-
 		const { json } = await httpClient(apiUrl + resource, {
 			method: 'POST',
 			body: JSON.stringify(params.data),
@@ -61,8 +56,6 @@ export default (apiUrl: string): DataProvider => ({
 					'If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?'
 			)
 		}
-
-		console.log('getList json: ', json)
 
 		return {
 			data: json,

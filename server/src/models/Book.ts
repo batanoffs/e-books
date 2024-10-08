@@ -85,15 +85,6 @@ const BookSchema: Schema = new Schema({
 	},
 })
 
-// BookSchema.set('toJSON', {
-// 	virtuals: true,
-// 	transform: function (doc, ret) {
-// 		// Optionally remove sensitive fields
-// 		delete ret.coverImage
-// 		return ret
-// 	},
-// })
-
 const Book = model<IBookSchema>('Book', BookSchema)
 
 export default Book

@@ -21,7 +21,6 @@ const BookFilter = (props: any) => (
 
 export const TextbookList = (props: any) => {
 	const title = useFieldValue({ source: 'title' })
-	console.log('title:', title)
 	return (
 		<List {...props} title='Книги' filters={<BookFilter />}>
 			<Datagrid rowClick='edit' style={{ overflow: 'auto' }}>

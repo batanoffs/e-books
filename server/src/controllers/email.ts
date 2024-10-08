@@ -22,8 +22,6 @@ export const AddSubscriberToNewsLetter = async (req: Request, res: Response) => 
 		}
 
 		const response = await mailerlite.subscribers.createOrUpdate(params)
-
-		console.log('response', response.data)
 		if (response.status !== 200) {
 			res.status(response.status).send(response.statusText)
 		}

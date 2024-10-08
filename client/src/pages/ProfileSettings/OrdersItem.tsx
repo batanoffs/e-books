@@ -1,6 +1,8 @@
 import { Grid, Paper, Box, Typography, CardMedia, Button } from '@mui/material'
 
 export const OrderItems = ({ order, navigate }) => {
+	console.log(order);
+	
 	return (
 		<Grid item xs={12} key={order._id}>
 			<Paper
