@@ -3,11 +3,17 @@ import { validationResult } from 'express-validator'
 import Book from '../models/Book'
 import Order from '../models/Order'
 import Cart from '../models/Cart'
-import mongoose from 'mongoose'
+import mongoose, { Model } from 'mongoose'
+import Stationery from '../models/Stationery'
+import Textbook from '../models/Textbook'
+import { IBookSchema } from '../interfaces/book.interface'
+import { ITextbookSchema } from '../interfaces/textbook.interface'
+import { IStationerySchema } from '../interfaces/stationery.interface'
 
 export interface Product {
 	id: string
 	quantity: number
+	productType: 'Book' | 'Textbook' | 'Stationery'
 }
 
 const Stripe = require('stripe')
@@ -30,8 +36,6 @@ export const checkoutSession = async (
 	const validationErrors = validationResult(req)
 	const newSession = await mongoose.startSession()
 
-	// console.log('Passing those products to save in Stripe DB:', products)
-
 	try {
 		await newSession.startTransaction()
 
@@ -49,7 +53,19 @@ export const checkoutSession = async (
 
 		const orderedProducts = await Promise.all(
 			products.map(async (product: Product) => {
-				const productDB = await Book.findById(product.id).lean().exec()
+				const model =
+					product.productType === 'Book'
+						? Book
+						: product.productType === 'Textbook'
+						? Textbook
+						: Stationery
+
+				const productDB = await (
+					model as Model<IBookSchema | ITextbookSchema | IStationerySchema>
+				)
+					.findById(product.id)
+					.lean()
+					.exec()
 
 				if (!productDB) {
 					await newSession.abortTransaction()
@@ -61,7 +77,6 @@ export const checkoutSession = async (
 				const searchResponse = await stripe.products.search({
 					query: `name:"${productDB?.title}"`,
 				})
-				// console.log('checkStripeDB:', searchResponse)
 
 				if (searchResponse.data.length === 0) {
 					const productObjStripe = {
@@ -75,17 +90,15 @@ export const checkoutSession = async (
 							unit_amount: productDB.price * 100,
 						},
 						metadata: {
-							author: productDB.author,
-							cover_page: productDB.coverPageType,
-							publisher: productDB.publisher,
-							page_count: productDB.pageCount,
-							dimensions: productDB.dimensions,
+							// author?: productDB.author,
+							// publisher?: productDB.publisher,
+							// page_count?: productDB.pageCount,
+							// dimensions?: productDB.dimensions,
+							productType: product.productType,
 						},
 					}
 
 					const createStripeProduct = await stripe.products.create(productObjStripe)
-					// console.log(`New Stripe Product created with id: ${product.id}`)
-					// console.log(`New Stripe Product data: ${createStripeProduct}`)
 					return {
 						price: createStripeProduct.default_price,
 						quantity: product.quantity,
@@ -232,6 +245,8 @@ export const getPaymentSessionAndCreateOrder = async (
 			expand: ['line_items'], //'payment_intent.payment_method'
 		})
 
+		console.log('session response', stripeSessionResponse.line_items.data)
+
 		if (stripeSessionResponse.status !== 'complete') {
 			await transactionSession.abortTransaction()
 			res.status(404).json({
@@ -241,13 +256,50 @@ export const getPaymentSessionAndCreateOrder = async (
 		}
 
 		const userId = stripeSessionResponse.client_reference_id
-		const boughtProducts = stripeSessionResponse.line_items.data.map((item: any) => {
-			return {
-				productId: item.price.product,
-				productType: 'Book', //TODO update for diff product types
-				quantity: item.quantity,
-			}
-		})
+
+		const getProductTypeFromId = async (id: string) => {
+			const book = await Book.findById(id)
+			if (book) return 'Book'
+
+			const textbook = await Textbook.findById(id)
+			if (textbook) return 'Textbook'
+
+			const stationery = await Stationery.findById(id)
+			if (stationery) return 'Stationery'
+
+			await transactionSession.abortTransaction()
+			res.status(404).json({ message: 'Products not found' })
+			return
+		}
+		// const boughtProducts = stripeSessionResponse.line_items.data.map(
+		// 	async (item: { price: { product: string }; quantity: number }) => {
+		// 		const productId = item.price.product
+		// 		const productType = await getProductTypeFromId(productId)
+
+		// 		return {
+		// 			productType,
+		// 			productId,
+		// 			quantity: item.quantity,
+		// 		}
+		// 	}
+		// )
+
+		const boughtProducts = await Promise.all(
+			stripeSessionResponse.line_items.data.map(
+				async (item: { price: { product: string }; quantity: number }) => {
+					const productId = item.price.product
+					const productType = await getProductTypeFromId(productId)
+
+					return {
+						productType,
+						productId,
+						quantity: item.quantity,
+					}
+				}
+			)
+		)
+
+		console.log('Products bought with added type:', boughtProducts)
 
 		const newOrder = new Order({
 			userId,
@@ -259,6 +311,7 @@ export const getPaymentSessionAndCreateOrder = async (
 			customer_details: stripeSessionResponse.customer_details,
 			sessionId: session_id,
 		})
+
 		const order = await newOrder.save()
 		const populatedOrder = await order.populate('products.productId')
 
