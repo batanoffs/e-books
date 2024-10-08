@@ -9,12 +9,14 @@ import { OrderItems } from './OrdersItem'
 export const OrdersPage = () => {
 	const [orders, setOrders] = useState<Order[]>([])
 	const [filteredOrders, setFilteredOrders] = useState<Order[]>([])
-	const [status, setStatus] = useState<string>('all')
+	const [shippingStatus, setShippingStatus] = useState<string>('pending') //['pending', 'shipped', 'delivered']
 	const navigate = useNavigate()
 
 	const fetchUserOrders = useCallback(async () => {
 		const response = await orderService.getUserOrders()
-		setOrders(response.data)
+		console.log('fetching orders', response.data)
+		const sortedOrdersByDate = response.data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+		setOrders(sortedOrdersByDate)
 	}, [])
 
 	useEffect(() => {
@@ -22,16 +24,20 @@ export const OrdersPage = () => {
 	}, [fetchUserOrders])
 
 	const handleStatusChange = (event: React.SyntheticEvent, newValue: string) => {
-		setStatus(newValue)
+		setShippingStatus(newValue)
 	}
 
 	useEffect(() => {
-		if (status === 'all') {
-			setFilteredOrders(orders)
+		if (shippingStatus === 'pending') {
+			setFilteredOrders(orders.filter((order) => order.shippingStatus === 'pending'))
+		} else if (shippingStatus === 'shipped') {
+			setFilteredOrders(orders.filter((order) => order.shippingStatus === 'shipped'))
+		} else if (shippingStatus === 'delivered') {
+			setFilteredOrders(orders.filter((order) => order.shippingStatus === 'delivered'))
 		} else {
-			setFilteredOrders(orders.filter((order) => order.shippingStatus === status))
+			setFilteredOrders(orders)
 		}
-	}, [orders, status])
+	}, [orders, shippingStatus])
 
 	const handleViewOrder = (orderId: string) => {
 		navigate(`/orders/${orderId}`)
@@ -42,7 +48,7 @@ export const OrdersPage = () => {
 				Поръчки
 			</Typography>
 
-			<OrderTabs status={status} handleStatusChange={handleStatusChange} />
+			<OrderTabs status={shippingStatus} handleStatusChange={handleStatusChange} />
 
 			<Grid container spacing={2}>
 				{filteredOrders.map((order: Order) => (

@@ -11,10 +11,9 @@ export const OrderTabs = ({ status, handleStatusChange }) => (
 			variant='scrollable'
 		>
 			<Tab label='Виж всички' value='all' />
-			<Tab label='За изплащане' value='to_pay' />
-			<Tab label='За изпращане' value='to_ship' />
+			<Tab label='За изпращане' value='pending' />
 			<Tab label='Изпратено' value='shipped' />
-			<Tab label='Обработено' value='processed' />
+			<Tab label='Обработено' value='delivered' />
 		</Tabs>
 	</Box>
 )

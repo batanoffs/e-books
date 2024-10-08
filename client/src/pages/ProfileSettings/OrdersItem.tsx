@@ -1,8 +1,6 @@
 import { Grid, Paper, Box, Typography, CardMedia, Button } from '@mui/material'
 
 export const OrderItems = ({ order, navigate }) => {
-	console.log(order);
-	
 	return (
 		<Grid item xs={12} key={order._id}>
 			<Paper
@@ -16,26 +14,33 @@ export const OrderItems = ({ order, navigate }) => {
 			>
 				{/* Product Details */}
 				<Box sx={{ display: 'flex', alignItems: 'center' }}>
-					<CardMedia
-						component='img'
-						image={order.products[0].productId.picture}
-						alt={order.products[0].productId.title}
-						sx={{
-							width: 120,
-							height: 120,
-							marginRight: 2,
-							objectFit: 'cover',
-						}}
-					/>
-					<Box>
-						<Typography variant='h6'>{order.products[0].productId.title}</Typography>
-						<Typography variant='body2' color='textSecondary'>
-							{order.products[0].quantity} x {order.products[0].productId.price} лв.
-						</Typography>
-						<Typography variant='body1' color='textPrimary'>
-							Общо: {order.total} лв.
-						</Typography>
-					</Box>
+					{order?.products?.map((product) => {
+						return (
+							<>
+								<CardMedia
+									component='img'
+									image={product?.productId?.picture || ''}
+									alt={product?.productId?.title || ''}
+									sx={{
+										width: 120,
+										height: 120,
+										marginRight: 2,
+										objectFit: 'cover',
+									}}
+								/>
+
+								<Box>
+									<Typography variant='h6'>{product?.productId?.title}</Typography>
+									<Typography variant='body2' color='textSecondary'>
+										{product?.quantity} x {product?.productId?.price} лв.
+									</Typography>
+									<Typography variant='body1' color='textPrimary'>
+										Общо: {order?.total} лв.
+									</Typography>
+								</Box>
+							</>
+						)
+					})}
 				</Box>
 
 				{/* Order Actions */}
