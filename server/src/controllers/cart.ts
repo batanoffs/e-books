@@ -16,15 +16,17 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
 		}
 
 		const { id } = req.user
-
-		let cart = await Cart.findOne({ userId: id }).populate('products.product')
+		let cart = await Cart.findOne({ userId: id }).populate({
+			path: 'products',
+			populate: { path: 'productRef' },
+		})
 
 		if (!cart) {
 			cart = new Cart({
 				userId: id,
 				products: [
 					{
-						product: productId,
+						productRef: productId,
 						productType,
 						quantity,
 					},
@@ -32,13 +34,13 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
 			})
 		} else {
 			const existingProduct = cart.products.find(
-				product => product.product._id.toString() === productId.toString()
+				product => product.productRef._id.toString() === productId.toString()
 			)
 			if (existingProduct) {
 				existingProduct.quantity += quantity
 			} else {
 				cart.products.push({
-					product: productId,
+					productRef: productId,
 					productType,
 					quantity,
 				})
@@ -62,19 +64,19 @@ export const getCart = async (req: Request, res: Response, next: NextFunction): 
 
 	try {
 		const cart = await Cart.findOne({ userId: id })
+			.populate({
+				path: 'products',
+				populate: { path: 'productRef' },
+			})
+			.lean()
+
 		if (!cart) {
-			res.status(404).json({ message: 'Cart not found' })
+			res.status(204).json({ message: 'Cart not found' })
 			return
 		}
-		const products = await cart.populate({
-			path: 'products.product',
-			select: 'id title price picture productType',
-			options: {
-				lean: true,
-			},
-		})
 
-		res.status(200).json(products.products) // Returns only the products
+		//TODO check products.products
+		res.status(200).json(cart.products)
 	} catch (error) {
 		res.status(500).json({ message: 'Error fetching cart', error })
 	}
@@ -98,15 +100,15 @@ export const removeProductFromCart = async (
 			return
 		}
 		// const cart = await Cart.findOne({ userId })
-		let cart = await Cart.findOne({ userId: id }).populate('products.product', '_id')
+		let cart = await Cart.findOne({ userId: id })
 
 		if (!cart) {
 			res.status(404).json({ message: 'Cart not found' })
 			return
 		}
-
+		//TODO check productRef type and if its goes to string
 		const updatedProducts = cart.products.filter(
-			product => product.product._id.toString() !== productId.toString()
+			product => product.productRef.toString() !== productId.toString()
 		)
 		cart.products = updatedProducts
 
