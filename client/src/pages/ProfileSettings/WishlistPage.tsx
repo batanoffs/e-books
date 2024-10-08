@@ -32,7 +32,7 @@ export const WishlistPage = () => {
 	const fetchWishlist = useCallback(async () => {
 		try {
 			const response = await wishlistService.getAll()
-			const products = response.productRefs.map((product) => ({
+			const products = response.productRefs.map((product: any) => ({
 				_id: product._id,
 				picture: product.picture,
 				title: product.title,
@@ -55,12 +55,8 @@ export const WishlistPage = () => {
 		const product = wishlist.find((product) => product._id === productId)
 
 		if (product) {
-			await cartService.addOne(product._id)
-			const data = {
-				product,
-				quantity: 1,
-			}
-			addToCart(data)
+			await cartService.addOne(product._id, product.productType)
+			addToCart(product, 1)
 			showAlert('Успешно добавен продукт', 'success')
 		} else {
 			showAlert('Продуктът не е намерен', 'error')
@@ -71,7 +67,7 @@ export const WishlistPage = () => {
 		setIsRemoving(true)
 		try {
 			await wishlistService.removeOne(productId)
-			const updatedWishlist = wishlist.filter((item) => item._id !== productId)
+			const updatedWishlist = wishlist.filter((current) => current._id !== productId)
 			setWishlist(updatedWishlist)
 		} catch (error) {
 			showAlert('Възникна грешка', 'error')
