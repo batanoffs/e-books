@@ -14,11 +14,11 @@ export const themeOptions = (mode: PaletteMode) => ({
 		},
 		background: {
 			default: mode === 'light' ? '##fff' : '#1a2027',
-			paper: mode === 'light' ? '#fff' : '#2d3748',
+			paper: mode === 'light' ? '#f9f9f9' : '#2d3748',
 		},
 		text: {
 			primary: mode === 'light' ? '#1d3557ff' : '#fff',
-			secondary: mode === 'light' ? '#fff' : '#1d3557ff',
+			secondary: mode === 'light' ? '#413c58' : '#fff',
 			disabled: mode === 'light' ? '#5c5959' : '#fff',
 		},
 		error: {

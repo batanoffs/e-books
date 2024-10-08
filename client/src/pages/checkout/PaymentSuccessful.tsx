@@ -2,8 +2,9 @@ import { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import API from '../../utils/constants/api'
 import { Product } from '../../interfaces/product.interface'
-import { Box, Grid, Typography, List, ListItem, ListItemText, Divider } from '@mui/material'
+import { Box, Grid, Typography, List, ListItem, ListItemText, Divider, Paper } from '@mui/material'
 import useAlertStore from '../../store/alert'
+import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 
 export const PaymentSuccessful = () => {
 	const [orderData, setOrderData] = useState<any | null>(null)
@@ -39,6 +40,8 @@ export const PaymentSuccessful = () => {
 
 	const nameData = orderData?.shipping_details?.name || null
 	const name = nameData ? nameData[0]?.toUpperCase() + nameData.slice(1) : null
+	const totalCost = formatCurrencyToBGN(orderData?.total)
+
 	return (
 		<Box
 			id='success'
@@ -47,31 +50,46 @@ export const PaymentSuccessful = () => {
 				flexDirection: 'column',
 				alignItems: 'center',
 				justifyContent: 'center',
-				padding: '1rem',
+				margin: '0 auto',
+				padding: '2rem',
+				width: '60%',
 			}}
 		>
 			{orderData ? (
-				<>
-					<Typography variant='h3' gutterBottom align='center'>
-						{name ? `, ${name}` : ''}, Благодарим ви за Вашата поръчка!
+				<Paper
+					sx={{
+						padding: '1rem',
+						backgroundColor: 'background.paper',
+					}}
+				>
+					<Typography variant='h3' color={'primary.main'} gutterBottom align='center'>
+						{name ? `${name},` : ''} Благодарим за Вашата поръчка!
 					</Typography>
 					<List>
-						<ListItem>
-							<ListItemText primary='Номер на поръчката:' secondary={orderData._id} />
-						</ListItem>
-						<ListItem>
+						<Box
+							sx={{
+								m: '0 auto',
+								width: '30%',
+								display: 'flex',
+								flexDirection: 'column',
+								alignItems: 'flex-start',
+							}}
+						>
+							<ListItemText
+								secondaryTypographyProps={{ fontSize: '1rem' }}
+								primary='Номер на поръчката:'
+								secondary={orderData._id}
+							/>
 							<ListItemText
 								primary='Дата на поръчката:'
 								secondary={new Date(orderData.createdAt).toLocaleString()}
+								secondaryTypographyProps={{ fontSize: '1rem' }}
 							/>
-						</ListItem>
-						<ListItem>
 							<ListItemText
 								primary='Статус на поръчката:'
 								secondary={orderData.shippingStatus}
+								secondaryTypographyProps={{ fontSize: '1rem' }}
 							/>
-						</ListItem>
-						<ListItem>
 							<ListItemText
 								primary='Адрес:'
 								secondary={
@@ -79,22 +97,42 @@ export const PaymentSuccessful = () => {
 									', ' +
 									orderData.shipping_details.address.country +
 									', ' +
-									orderData.shipping_details.address.postalCode
+									orderData.shipping_details.address.postalCode?.toString()
 								}
+								secondaryTypographyProps={{ fontSize: '1rem' }}
 							/>
-						</ListItem>
+							<ListItemText
+								primary='Доставчик:'
+								secondary={
+									orderData.shipping_details.address.city +
+									', ' +
+									orderData.shipping_details.address.country +
+									', ' +
+									orderData.shipping_details.address.postalCode?.toString()
+								}
+								secondaryTypographyProps={{ fontSize: '1rem' }}
+							/>
+							<ListItemText
+								primary='Дължима сума:'
+								secondary={totalCost}
+								secondaryTypographyProps={{ fontSize: '1.2rem' }}
+							/>
+						</Box>
 						<Divider />
 						<ListItem>
 							<ListItemText primary='Продукти:' />
 						</ListItem>
 						{orderData?.products?.map((product: Product) => (
-							<ListItem key={product.productId._id}>
-								<Grid container spacing={1}>
+							<ListItem
+								key={product.productId._id}
+								sx={{ display: 'inline-flex', flexWrap: 'wrap', padding: '0.5rem' }}
+							>
+								<Grid container spacing={1} width={300}>
 									<Grid item xs={12} sm={4}>
 										<img
 											src={product.productId.picture}
 											alt={product.productId.title}
-											style={{ width: '50px', height: 'auto' }}
+											style={{ width: '80px', height: 'auto' }}
 										/>
 									</Grid>
 									<Grid item xs={12} sm={8}>
@@ -112,14 +150,14 @@ export const PaymentSuccessful = () => {
 							</ListItem>
 						))}
 					</List>
-					<Typography width='50%' variant='body1' gutterBottom align='center'>
+					<Typography width='100%' variant='body1' gutterBottom align='center'>
 						Ние ценим вашите покупки! Потвърждаващ имейл ще ви бъде изпратен на{' '}
 						<b>{orderData.customer_details.email}</b>. Ако имате въпроси, моля, свържете
-						се на имейл .<a href='mailto:orders@example.com'>orders@example.com</a>.
+						се на имейл: <a href='mailto:orders@example.com'>orders@example.com</a>.
 					</Typography>
-				</>
+				</Paper>
 			) : (
-				<>
+				<Paper>
 					<Typography variant='h3' gutterBottom align='center'>
 						Възникна грешка, моля опитайте отново!
 					</Typography>
@@ -127,7 +165,7 @@ export const PaymentSuccessful = () => {
 					<Typography variant='body1' gutterBottom align='center'>
 						Липсва информация за вашата поръчка.
 					</Typography>
-				</>
+				</Paper>
 			)}
 		</Box>
 	)
