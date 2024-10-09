@@ -29,12 +29,13 @@ export const SingleCarousel = ({ products }: Products) => {
 		nextArrow: <SampleNextArrow />,
 		prevArrow: <SamplePrevArrow />,
 		cssEase: 'linear',
+		useCSS: true,
 		slidesToShow: 1,
 		slidesToScroll: 1,
 	}
 
 	return (
-		<Slider className={styles.carousel} {...settings}>
+		<Slider className={styles.carousel} centerMode {...settings}>
 			{products.map((product: Product) => (
 				<CarouselCard key={product._id} product={product} styles={styles} />
 			))}
