@@ -1,26 +1,33 @@
 import { PaletteMode } from '@mui/material'
 
 // #413c58, #a3c4bc, #bfd7b5, #e7efc5, #f2dda4
+// #241623, #d0cd94, #3c787e, #c7ef00, #d56f3e
+// #1a1723, #9b8a6e, #2a455e, #8dc400, #b33f2c
+
 export const themeOptions = (mode: PaletteMode) => ({
 	palette: {
 		mode,
 		primary: {
-			main: mode === 'light' ? '#413c58' : '#a3c4bc',
+			main: mode === 'light' ? '#3c787e' : '#8dc400',
 			contrastText: '#fff',
 		},
 		secondary: {
-			main: mode === 'light' ? '#bfd7b5' : '#596354',
+			main: mode === 'light' ? '#d0cd94' : '#3c787e',
 			contrastText: '#fff',
 		},
 		background: {
-			default: mode === 'light' ? '##fff' : '#1a2027',
-			paper: mode === 'light' ? '#f9f9f9' : '#2d3748',
+			default: mode === 'light' ? '#fff' : '#241623',
+			paper: mode === 'light' ? '#f9f9f9' : '#241623',
+			carousel: mode === 'light' ? '#fff' : '#241623',
+			navbar: mode === 'light' ? '#a3c4bc' : '#2a455e',
 		},
 		text: {
-			primary: mode === 'light' ? '#1d3557ff' : '#fff',
-			secondary: mode === 'light' ? '#413c58' : '#fff',
-			disabled: mode === 'light' ? '#5c5959' : '#fff',
+			primary: mode === 'light' ? '#241623' : '#c7ccdb',
+			navBar: mode === 'light' ? '#fff' : '#c7ccdb',
+			secondary: mode === 'light' ? '#3c787e' : '#8dc400',
+			disabled: mode === 'light' ? '#5c5959' : '#c7ccdb',
 		},
+		divider: mode === 'light' ? '#071108' : '#5c5959',
 		error: {
 			main: '#d32f2f',
 		},
@@ -33,7 +40,6 @@ export const themeOptions = (mode: PaletteMode) => ({
 		success: {
 			main: '#2e7d32',
 		},
-		divider: mode === 'light' ? '#071108' : '#bfb1c1',
 	},
 	typography: {
 		fontFamily: 'Montserrat Alternates, sans-serif',
@@ -234,7 +240,7 @@ export const themeOptions = (mode: PaletteMode) => ({
 		MuiFormLabel: {
 			styleOverrides: {
 				root: {
-					color: '#6028c8',
+					color: 'text.primary', // Change label color to match the background.main',
 				},
 			},
 		},
