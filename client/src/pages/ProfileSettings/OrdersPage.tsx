@@ -14,7 +14,6 @@ export const OrdersPage = () => {
 
 	const fetchUserOrders = useCallback(async () => {
 		const response = await orderService.getUserOrders()
-		console.log('fetching orders', response.data)
 		const sortedOrdersByDate = response.data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 		setOrders(sortedOrdersByDate)
 	}, [])
