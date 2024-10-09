@@ -2,6 +2,7 @@ import Tooltip from '@mui/material/Tooltip'
 import IconButton from '@mui/material/IconButton'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 
@@ -15,6 +16,7 @@ import useCartStore from '../../store/cart'
 import cartService from '../../services/cartService'
 import wishlistService from '../../services/wishlistService'
 import { useTheme } from '@mui/material'
+import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 
 interface ItemDetailsTitleProps extends ProductDetailsProps {
 	setQuantity: (quantity: number) => void
@@ -29,6 +31,8 @@ const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetail
 	const showAlert = useAlertStore((state) => state.showAlert)
 	const addToCart = useCartStore((state) => state.addToCart)
 	const theme = useTheme()
+
+	const productPrice = formatCurrencyToBGN(product.price)
 	const handleAddToCart = async (event: React.MouseEvent) => {
 		try {
 			if (!authGuards.isAuth()) {
@@ -58,7 +62,9 @@ const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetail
 	return (
 		<div className={styles.detailsContainer}>
 			<div className={styles.titleSection}>
-				<h3 style={{ color: theme.palette.primary.main }}>{product.title}</h3>
+				<Typography variant='h3' color='primary'>
+					{product.title}
+				</Typography>
 				{authGuards.isAuth() && (
 					<Tooltip title='Добави в любими'>
 						<IconButton
@@ -77,8 +83,7 @@ const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetail
 			</div>
 			<div className={styles.availability}>{product.availability}</div>
 			<div className={styles.priceSection}>
-				<div className={styles.price}>{product.price} лв.</div>
-				{/* <div className={styles.deliveryPrice}>Доставка: {deliveryPrice}</div> */}
+				<div className={styles.price}>{productPrice}</div>
 				<Box
 					component={'p'}
 					sx={{ color: `${product.stock > 0 ? 'green' : 'red'}`, fontWeight: 'bolt' }}

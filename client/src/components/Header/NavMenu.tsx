@@ -12,7 +12,7 @@ import { List, ListItemButton } from '@mui/material'
 
 export const NavMenu = () => {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
-	const setNavCategory = useFiltersStore((state) => state.setNavCategory)
+	const setNavCategory = useFiltersStore((state) => state.setProductCategory)
 	const navigate = useNavigate()
 
 	const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
@@ -24,7 +24,7 @@ export const NavMenu = () => {
 	}
 
 	const navigationHandler = (page: { title: string; href: string }) => {
-		setNavCategory('')
+		setNavCategory('всички')
 		navigate(page.href)
 	}
 
@@ -73,11 +73,13 @@ export const NavMenu = () => {
 					<ListItemButton
 						key={page.title}
 						onClick={() => navigationHandler(page)}
+						color='text.navBar'
 						sx={{
-							fontWeight: 600,
+							fontWeight: 500,
 							fontSize: '1em',
+
 							'&:hover': {
-								textDecoration: 'none',
+								transition: '0.3s',
 								color: 'text.secondary',
 								backgroundColor: 'transparent',
 							},

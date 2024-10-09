@@ -1,13 +1,14 @@
 import { Category } from '../../interfaces/categories.interface'
 import { useNavigate } from 'react-router-dom'
-
 import styles from './categories.module.scss'
+import useFiltersStore from '../../store/filters'
 
 export const CategoryItem = ({ category }: Category) => {
 	const navigate = useNavigate()
-
+	const setProductCategory = useFiltersStore((state) => state.setProductCategory)
 	const handleCategoryClick = () => {
-		navigate(`/catalog/${category.categoryType}/${category.name}`)
+		setProductCategory(category.name)
+		navigate(`/catalog/${category.categoryType}/`)
 	}
 
 	return (

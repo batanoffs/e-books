@@ -1,32 +1,21 @@
-import { useNavigate } from 'react-router-dom'
-
 import useFiltersStore from '../../../store/filters'
+import { CategoryItem } from '../../../interfaces/categories.interface'
 
 import styles from './navigation.module.scss'
 
 type Categories = {
-	categories: [
-		{
-			_id: string
-			categoryType: 'books' | 'textbooks' | 'stationery'
-			updatedAt: string
-			createdAt: string
-			name: string
-		}
-	]
+	categories: CategoryItem[]
 }
 
 export const LayoutAside = ({ categories }: Categories) => {
-	const navigate = useNavigate()
-	const setNavCategory = useFiltersStore((state) => state.setNavCategory)
+	const setProductCategory = useFiltersStore((state) => state.setProductCategory)
 	if (!categories) {
 		return null
 	}
 
 	const handleCategoryChange = (category: string) => {
 		const currentCategory = category.toLowerCase()
-		setNavCategory(currentCategory)
-		navigate(`/catalog/books/${category.toLowerCase()}`)
+		setProductCategory(currentCategory)
 	}
 
 	return (

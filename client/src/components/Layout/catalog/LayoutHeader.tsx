@@ -1,31 +1,62 @@
+import { Box, Typography, Breadcrumbs, Link } from '@mui/material'
+
+import { useNavigate } from 'react-router-dom'
+import useFiltersStore from '../../../store/filters'
+
 import styles from './header.module.scss'
 
 type LayoutHeaderProps = {
 	title: string
-	path: string
-	productCategory?: string
+	productType: string | null
+	productTypeBG: string | null
+	productCategory?: string | null
 	hasSorting?: boolean
 	resultCount?: number
 }
 
 export const LayoutHeader = ({
 	title,
-	path,
-	productCategory,
+	productType,
+	productTypeBG,
 	hasSorting,
 	resultCount,
 }: LayoutHeaderProps) => {
+	const navigate = useNavigate()
+	const { productCategory, setProductCategory } = useFiltersStore()
+
+	const handleNavigateCategory = () => {
+		navigate(`/catalog/${productType}`)
+	}
 	return (
-		<div className={styles.container}>
-			{/* TODO extract this client navigation for future use */}
-			<div className={styles.navigation}>
-				<p>
-					{path} / <span>{title}</span>
-				</p>
-			</div>
-			<div className={styles.categoryTitle}>
-				{productCategory && <h1>{productCategory}</h1>}
-			</div>
+		<Box className={styles.container}>
+			<Breadcrumbs
+				separator='/'
+				color='text.primary'
+				sx={{ cursor: 'pointer' }}
+				className={styles.navigation}
+			>
+				<Link underline='hover' color='inherit' onClick={() => navigate('/')}>
+					книжарница
+				</Link>
+				<Link
+					underline='hover'
+					color='inherit'
+					onClick={() => navigate(`/catalog/${productType}`)}
+				>
+					{productTypeBG}
+				</Link>
+				{productCategory && (
+					<Link underline='hover' color='inherit' onClick={handleNavigateCategory}>
+						{productCategory}
+					</Link>
+				)}
+				{title && <Typography color='text.primary'>{title}</Typography>}
+			</Breadcrumbs>
+			{!title && (
+				<Typography variant='h4' textAlign={'center'} color={'text.secondary'}>
+					{productCategory}
+				</Typography>
+			)}
 
 			{hasSorting && (
 				<div className={styles.sorting}>
@@ -48,6 +79,6 @@ export const LayoutHeader = ({
 					</div>
 				</div>
 			)}
-		</div>
+		</Box>
 	)
 }

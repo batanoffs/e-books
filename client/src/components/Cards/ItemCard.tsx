@@ -56,13 +56,27 @@ export const ItemCard = ({ product }: { product: Product }) => {
 		}
 	}
 
-	const goToDetailsHandler = () => {
-		navigate(`/catalog/${productType.toLowerCase()}/${_id}`)
+	const goToDetailsHandler = (e) => {
+		const target = e.target.closest('[data-type]')
+		const getType = target.dataset.type
+		let type
+
+		if (getType !== 'Stationery') {
+			type = productType.toLowerCase() + 's'
+		} else {
+			type = getType.toLowerCase()
+		}
+
+		navigate(`/catalog/${type}/${_id}`)
 	}
 
 	return (
 		<div key={_id} className={styles.container} data-id={_id}>
-			<div className={styles.bookImageContainer} onClick={goToDetailsHandler}>
+			<div
+				className={styles.bookImageContainer}
+				data-type={productType}
+				onClick={goToDetailsHandler}
+			>
 				{authGuards.isAuth() && (
 					<div className={styles.buttonContainer}>
 						<button onClick={addToWishlistHandler}>
