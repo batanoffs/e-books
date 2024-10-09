@@ -74,11 +74,14 @@ export const checkoutSession = async (
 						.json({ message: 'No product found with id ' + product.id + '!' })
 				}
 
+				// TODO find other way bulletproof
 				const searchResponse = await stripe.products.search({
 					query: `name:"${productDB?.title}"`,
 				})
 
 				if (searchResponse.data.length === 0) {
+					const price = Math.round(productDB.price * 100)
+
 					const productObjStripe = {
 						name: productDB.title,
 						active: true,
@@ -87,7 +90,7 @@ export const checkoutSession = async (
 						images: [productDB.picture],
 						default_price_data: {
 							currency: 'bgn',
-							unit_amount: productDB.price * 100,
+							unit_amount: price,
 						},
 						metadata: {
 							// author?: productDB.author,
@@ -120,7 +123,7 @@ export const checkoutSession = async (
 			line_items: orderedProducts,
 			mode: 'payment',
 			success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-			cancel_url: `${process.env.CLIENT_URL}/checkout`,
+			cancel_url: `${process.env.CLIENT_URL}/checkout?cancelled=true`,
 			payment_method_types: ['card'],
 			locale: 'bg',
 			custom_text: {
