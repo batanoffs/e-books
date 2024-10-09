@@ -248,8 +248,6 @@ export const getPaymentSessionAndCreateOrder = async (
 			expand: ['line_items'], //'payment_intent.payment_method'
 		})
 
-		console.log('session response', stripeSessionResponse.line_items.data)
-
 		if (stripeSessionResponse.status !== 'complete') {
 			await transactionSession.abortTransaction()
 			res.status(404).json({
@@ -301,8 +299,6 @@ export const getPaymentSessionAndCreateOrder = async (
 				}
 			)
 		)
-
-		console.log('Products bought with added type:', boughtProducts)
 
 		const newOrder = new Order({
 			userId,
