@@ -13,85 +13,74 @@ import { DetailsPage } from '../index'
 import useCategoryStore from '../../store/categories'
 import useSpinner from '../../store/spinner'
 import API from '../../utils/constants/api'
-import { getNavigationParams } from '../../utils/helpers/getNavigationParams'
+import { getProductCategoryBG } from '../../utils/helpers/getNavigationParams'
 
 export const CatalogPage = () => {
-	const [books, setBooks] = useState([])
-	const [textbooks, setTextBooks] = useState([])
-	const [stationery, setStationery] = useState([])
+	const [products, setProducts] = useState([])
+	const { categoriesMap } = useCategoryStore()
 	const { hideSpinner, showSpinner } = useSpinner()
-	const categoriesMap = useCategoryStore((state) => state.categoriesMap)
 	const params = useParams()
-	const navParams = getNavigationParams(params)
+	const { productTypeBG, productType } = getProductCategoryBG(params)
 
-	//TODO create single request in the backend for all products
 	const fetchBooksCallback = useCallback(async () => {
 		try {
+			const detailsApi =
+				productType === 'books'
+					? API.BOOKS
+					: productType === 'textbooks'
+					? API.TEXTBOOKS
+					: API.STATIONERY
 			showSpinner()
-			const responseBooks = await axios.get(API.BOOKS)
-			const responseTextBooks = await axios.get(API.TEXTBOOKS)
-			const responseStationery = await axios.get(API.STATIONERY)
-			setBooks(responseBooks.data)
-			setTextBooks(responseTextBooks.data)
-			setStationery(responseStationery.data)
+			const response = await axios.get(detailsApi)
+			setProducts(response.data)
 		} catch (error) {
 			console.error(error)
 		} finally {
 			hideSpinner()
 		}
-	}, [])
+	}, [productType])
 
 	useEffect(() => {
 		fetchBooksCallback()
 	}, [fetchBooksCallback])
 
-	const products =
-		navParams.productType === 'books'
-			? books
-			: navParams.productType === 'textbooks'
-			? textbooks
-			: stationery
+	const categories = categoriesMap[productType as keyof typeof categoriesMap] ?? []
 
-	const Layout = (
-		<CatalogLayout
-			header={
-				<LayoutHeader
-					productCategory={navParams.productCategory}
-					path={navParams.navString}
-					hasSorting={true}
-					resultCount={books.length}
-					title=''
+	const Layout = () => {
+		return (
+			<CatalogLayout
+				header={
+					<LayoutHeader
+						productType={productType}
+						productTypeBG={productTypeBG}
+						hasSorting={true}
+						resultCount={products.length}
+						title=''
+					/>
+				}
+				aside={<LayoutAside categories={categories} />}
+			>
+				<CatalogItems
+					products={products}
+					Component={ItemCard}
+					sx={{
+						display: 'flex',
+						flexWrap: 'wrap',
+						justifyContent: 'flex-start',
+						gap: '1.5em',
+					}}
 				/>
-			}
-			//TODO fix categories={categoriesMap.books} to handle dynamic categories based on product type
-			aside={<LayoutAside categories={categoriesMap.books} />}
-		>
-			<CatalogItems
-				products={products}
-				Component={ItemCard}
-				sx={{
-					display: 'flex',
-					flexWrap: 'wrap',
-					justifyContent: 'flex-start',
-					gap: '1.5em',
-				}}
-			/>
-			{/* TODO add children for maybe promotions discounts etc*/}
-		</CatalogLayout>
-	)
-	//todo add ${navParams.navCategory} in urls when implemented
+			</CatalogLayout>
+		)
+	}
+
 	return (
 		<Routes>
 			<Route
-				path={`/${navParams.productType}/${navParams.productCategory}`}
-				element={Layout}
+				path={`/${productType.toLowerCase()}/:id`}
+				element={<DetailsPage productTypeBG={productTypeBG} productType={productType} />}
 			/>
-			<Route
-				path={`/${navParams.productType}/:id`}
-				element={
-					<DetailsPage path={navParams.navString} productType={navParams.productType} />
-				}
-			/>
+			<Route path={`/${productType.toLowerCase()}`} element={<Layout />} />
 		</Routes>
 	)
 }
