@@ -30,12 +30,11 @@ export const OrderItems = ({ order, navigate }) => {
 								/>
 
 								<Box>
-									<Typography variant='h6'>{product?.productId?.title}</Typography>
+									<Typography variant='h6'>
+										{product?.productId?.title}
+									</Typography>
 									<Typography variant='body2' color='textSecondary'>
 										{product?.quantity} x {product?.productId?.price} лв.
-									</Typography>
-									<Typography variant='body1' color='textPrimary'>
-										Общо: {order?.total} лв.
 									</Typography>
 								</Box>
 							</>
@@ -50,6 +49,9 @@ export const OrderItems = ({ order, navigate }) => {
 					</Typography>
 					<Typography variant='body2' color='textSecondary'>
 						Номер на поръчката: {order._id}
+					</Typography>
+					<Typography variant='body1' color='textPrimary'>
+						Общо: {order?.total.toFixed(2)} лв.
 					</Typography>
 					<Button
 						variant='contained'
