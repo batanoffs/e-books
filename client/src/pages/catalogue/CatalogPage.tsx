@@ -63,7 +63,7 @@ export const CatalogPage = () => {
 					title=''
 				/>
 			}
-			//todo fix categories={categoriesMap.books}
+			//TODO fix categories={categoriesMap.books} to handle dynamic categories based on product type
 			aside={<LayoutAside categories={categoriesMap.books} />}
 		>
 			<CatalogItems
@@ -82,7 +82,10 @@ export const CatalogPage = () => {
 	//todo add ${navParams.navCategory} in urls when implemented
 	return (
 		<Routes>
-			<Route path={`/${navParams.productType}/`} element={Layout} />
+			<Route
+				path={`/${navParams.productType}/${navParams.productCategory}`}
+				element={Layout}
+			/>
 			<Route
 				path={`/${navParams.productType}/:id`}
 				element={

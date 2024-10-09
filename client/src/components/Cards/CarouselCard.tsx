@@ -22,7 +22,7 @@ export const CarouselCard = ({ product, styles }: CarouselCard) => {
 	const navigate = useNavigate()
 
 	const onGoToDetails = () => {
-		navigate(`/catalog/books/all/${_id}`)
+		navigate(`/catalog/book/${_id}`)
 	}
 
 	const onAddToCart = async () => {
