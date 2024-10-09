@@ -35,10 +35,6 @@ export const HomePage = () => {
 
 	const content = [
 		{
-			id: 'featured',
-			element: <SingleCarousel products={products} />,
-		},
-		{
 			id: 'showcase',
 			element: <ShowcaseList />,
 		},
@@ -52,5 +48,10 @@ export const HomePage = () => {
 		},
 	]
 
-	return <MainLayout children={content} />
+	return (
+		<>
+			<SingleCarousel products={products} />
+			<MainLayout children={content} />
+		</>
+	)
 }
