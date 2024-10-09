@@ -7,6 +7,7 @@ import authGuards from '../../middlewares/guards'
 import useCartStore from '../../store/cart'
 import cartService from '../../services/cartService'
 import { Product } from '../../interfaces/product.interface'
+import { Box, useTheme, Typography} from '@mui/material'
 
 interface CarouselCard {
 	product: Product
@@ -20,9 +21,19 @@ export const CarouselCard = ({ product, styles }: CarouselCard) => {
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
 	const addToCart = useCartStore((state) => state.addToCart)
 	const navigate = useNavigate()
+	const theme = useTheme()
 
-	const onGoToDetails = () => {
-		navigate(`/catalog/book/${_id}`)
+	const onGoToDetails = (e) => {
+		const target = e.target.closest('[data-type]')
+		const getType = target.dataset.type
+		let type
+		if (getType !== 'Stationery') {
+			type = productType.toLowerCase() + 's'
+		} else {
+			type = getType.toLowerCase()
+		}
+
+		navigate(`/catalog/${type}/${_id}`)
 	}
 
 	const onAddToCart = async () => {
@@ -39,12 +50,15 @@ export const CarouselCard = ({ product, styles }: CarouselCard) => {
 	}
 
 	return (
-		<div className={styles.container}>
+		<Box
+			className={styles.container}
+			sx={{ backgroundColor: theme.palette.background.carousel }}
+		>
 			<div className={styles.textContainer}>
-				<h1>{title}</h1>
-				<p>{author}</p>
-				<p>{formatCurrency}</p>
-				<span className={styles.description}>{description}</span>
+				<Typography color={'text.secondary'}variant='h1'>{title}</Typography>
+				<Typography color={'text.primary'}variant='h5'>{author}</Typography>
+				<Typography color={'text.primary'}variant='h5'>{formatCurrency}</Typography>
+				<Typography color={'text.disabled'}variant='body1' className={styles.description}>{description}</Typography>
 				<div className={styles.buttonsContainer}>
 					<Button
 						variant='contained'
@@ -57,6 +71,7 @@ export const CarouselCard = ({ product, styles }: CarouselCard) => {
 					<Button
 						variant='contained'
 						className={styles.button}
+						data-type={productType}
 						color='secondary'
 						onClick={onGoToDetails}
 					>
@@ -67,6 +82,6 @@ export const CarouselCard = ({ product, styles }: CarouselCard) => {
 			<div>
 				<img className={styles.image} src={picture} alt={title} />
 			</div>
-		</div>
+		</Box>
 	)
 }
