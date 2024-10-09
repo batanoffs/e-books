@@ -85,12 +85,14 @@ export const LoginModal = () => {
 					<Link
 						onClick={handleRegisterRedirect}
 						underline='hover'
+						color={'text.primary'}
 						style={{ cursor: 'pointer' }}
 						variant='inherit'
 					>
 						Нямаш акаунт? Регистрирай се.
 					</Link>
-					<Link href='#' underline='hover'>
+
+					<Link href='#' color={'text.primary'} underline='hover'>
 						Забравена парола?
 					</Link>
 				</form>

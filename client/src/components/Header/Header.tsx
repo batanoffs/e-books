@@ -40,9 +40,10 @@ export const Header = () => {
 					variant='dense'
 					sx={{
 						minHeight: '40px',
-						bgcolor: 'secondary.main',
+						bgcolor: 'background.navbar',
+						zIndex: 100,
 						color: 'text.primary',
-						border: `1px solid ${theme.palette.divider}`,
+						boxShadow: '0px 10px 20px rgba(0,0,0,0.7)',
 					}}
 					className={styles.headerToolbarMenu}
 				>
