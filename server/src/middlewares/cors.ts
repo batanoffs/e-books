@@ -19,7 +19,7 @@ function corsConfig() {
 		},
 		credentials: true, // Allow cookies and credentials
 		methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // Allowed methods
-		allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+		allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Credentials'], // Allowed headers
 		exposedHeaders: ['X-Total-Count'], // Expose custom headers
 	}
 
