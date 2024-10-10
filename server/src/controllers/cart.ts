@@ -6,7 +6,8 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
 
 	try {
 		const id = req.user?.id
-
+		console.log('user id from addToCart handler: ', id);
+		
 		if (!id) {
 			res.status(401).json({ message: 'Not Authenticated!' })
 			return

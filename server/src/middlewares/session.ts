@@ -14,18 +14,30 @@ declare global {
 
 function session(): (req: Request, res: Response, next: NextFunction) => void {
 	return function (req: Request, res: Response, next: NextFunction) {
+		console.log('Cookies: ', req.cookies)
+		console.log('Signed Cookies: ', req.signedCookies)
+		
 		const token = req.cookies?.token
 
 		if (token) {
 			try {
 				const sessionData = verifyToken(token)
+
+				console.info('Session data for the user:', sessionData)
+
 				req.user = {
 					email: sessionData.email,
 					id: sessionData._id,
 				}
 				res.locals.hasUser = true
-			} catch (err) {
-				res.clearCookie('token')
+			} catch (error: unknown) {
+				if (error instanceof Error) {
+					console.error('Error during session verification:', error.message)
+					res.clearCookie('token')
+				} else {
+					console.error('Unknown error during session verification:', error)
+					res.clearCookie('token')
+				}
 			}
 		}
 
