@@ -4,7 +4,6 @@ import { XTotalCount } from '../constants/serverSetup'
 
 // Custom CORS configuration function
 function corsConfig() {
-	// Core CORS middleware configuration
 	const corsOptions = {
 		origin: function (
 			origin: string | undefined,
@@ -12,15 +11,16 @@ function corsConfig() {
 		) {
 			const allowedOrigins = process.env.ALLOWED_ADDRESS!.split(',')
 			if (!origin || allowedOrigins.includes(origin.trim())) {
-				callback(null, true) // Allow the origin
+				callback(null, true)
 			} else {
-				callback(new Error('Not allowed by CORS')) // Block the origin
+				callback(new Error('Not allowed by CORS'))
 			}
 		},
-		credentials: true, // Allow cookies and credentials
-		methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // Allowed methods
-		allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Credentials'], // Allowed headers
-		exposedHeaders: ['X-Total-Count'], // Expose custom headers
+		credentials: true,
+		methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+		allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Credentials'],
+		exposedHeaders: ['X-Total-Count'],
+		optionsSuccessStatus: 200 // For legacy browser support
 	}
 
 	// CORS middleware
@@ -31,11 +31,11 @@ function corsConfig() {
 		res.setHeader('X-Total-Count', XTotalCount)
 
 		if (req.method === 'OPTIONS') {
-			res.sendStatus(204) // End pre-flight request handling
-			return // Exit the middleware early
+			res.sendStatus(204)
+			return
 		}
 
-		next() // Proceed to the next middleware or route handler
+		next()
 	}
 
 	return { corsMiddleware, customMiddleware }
