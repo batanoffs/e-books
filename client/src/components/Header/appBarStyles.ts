@@ -1,4 +1,4 @@
-import { useTheme } from '@mui/material/styles'
+import { useTheme } from '@mui/material'
 import { alpha } from '@mui/material/styles'
 
 export const searchStyles = () => {

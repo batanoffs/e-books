@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
+import { useTheme } from '@mui/material'
 
 const Logo = () => {
 	const navigate = useNavigate()
+	const theme = useTheme()
 	//TODO updated logo in future text is not consistent
 	return (
 		<Box
@@ -22,7 +24,7 @@ const Logo = () => {
 						fontWeight={'900'}
 						style={{ whiteSpace: 'pre' }}
 						letterSpacing={1}
-						fill='#228be6'
+						fill={`${theme.palette.primary.main}`}
 						textAnchor='start'
 						direction='ltr'
 						dominantBaseline='alphabetic'

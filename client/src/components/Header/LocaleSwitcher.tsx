@@ -7,8 +7,15 @@ export const LocaleSwitcher = () => {
 	return (
 		<Button
 			variant='outlined'
-			color='inherit'
-			sx={{ m: 0, p: 0, minWidth: '80px', border: '1px solid darkgray', borderRadius: 1.5 }}
+			color='primary'
+			sx={{
+				m: 0,
+				p: 0,
+				minWidth: '80px',
+				border: '1px solid',
+				borderColor: 'primary.main',
+				borderRadius: 1.5,
+			}}
 			onClick={() => setLocale(locale === 'enUS' ? 'bgBG' : 'enUS')}
 			startIcon={locale === 'enUS' ? countryFlags.bgBG : countryFlags.enUS}
 		>

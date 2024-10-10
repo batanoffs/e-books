@@ -25,11 +25,12 @@ export const SearchBar = () => {
 	}
 
 	return (
-		<Search>
+		<Search color='primary'>
 			<SearchIconWrapper>
 				<SearchIcon />
 			</SearchIconWrapper>
 			<StyledInputBase
+				color='primary'
 				placeholder='Търсене...'
 				inputProps={{ 'aria-label': 'search' }}
 				onChange={handleSearchInputChange}

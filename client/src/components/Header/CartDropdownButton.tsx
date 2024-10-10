@@ -11,7 +11,7 @@ export const CartDropdownButton = () => {
 	const cartItems = useCartStore.getState().cart
 	const open = Boolean(anchorEl)
 	const navigate = useNavigate()
-	
+
 	const handleNavigateToCart = () => {
 		setAnchorEl(null)
 		navigate('/cart')
@@ -28,19 +28,19 @@ export const CartDropdownButton = () => {
 	return (
 		<Badge badgeContent={cartItems.length} color='secondary'>
 			<IconButton
-				color='primary'
 				size={'large'}
 				sx={{
-					'&:hover': { bgcolor: '#eee' },
 					m: 0,
 					py: 0.7,
 					minWidth: '60px',
-					border: '1px solid darkgray',
+					border: '1px solid',
+					borderColor: 'primary.main',
 					borderRadius: 1.5,
+					
 				}}
 				onClick={handleClick}
 			>
-				<ShoppingCartIcon sx={{ color: 'darkgray' }} />
+				<ShoppingCartIcon color='primary' sx={{ borderColor: 'primary.main' }} />
 			</IconButton>
 
 			<DropdownContent

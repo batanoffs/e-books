@@ -10,7 +10,6 @@ import useAlertStore from '../../store/alert'
 export const UserMenu = () => {
 	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
 	const showAlert = useAlertStore((state) => state.showAlert)
-
 	const navigate = useNavigate()
 
 	const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
@@ -38,7 +37,10 @@ export const UserMenu = () => {
 		<Box>
 			<Tooltip title='Open settings'>
 				<IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mr: 1 }}>
-					<Avatar alt='User Avatar' />
+					<Avatar
+						sx={{ width: 32, height: 32, backgroundColor: 'primary.main' }}
+						alt='User Avatar'
+					/>
 				</IconButton>
 			</Tooltip>
 
@@ -54,11 +56,11 @@ export const UserMenu = () => {
 			>
 				{profileMenuItems.map((item) => (
 					<MenuItem key={item.title} component={Link} to={item.href}>
-						<Typography textAlign='center'>{item.title}</Typography>
+						<Typography color='text.secondary' textAlign='center'>{item.title}</Typography>
 					</MenuItem>
 				))}
 				<MenuItem key='logout' onClick={handleLogout}>
-					<Typography textAlign='center'>Изход</Typography>
+					<Typography color='text.secondary' textAlign='center'>Изход</Typography>
 				</MenuItem>
 			</Menu>
 		</Box>
