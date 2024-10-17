@@ -40,11 +40,17 @@ export const BookEdit = (props: EditProps) => {
 		const { picture, ...restValues } = values
 
 		try {
-			const uploadResponse = await imageService.uploadImage(values.picture.rawFile)
+			console.log('picture data', picture)
+			let uploadResponse
+			if (picture.rawFile) {
+				uploadResponse = await imageService.uploadImage(picture.rawFile)
+			}
 			const data = {
 				picture: uploadResponse,
 				...restValues,
 			}
+			console.log('uploadResponse', uploadResponse)
+			console.log('data', data)
 
 			await dataProvider.update('books', { id, data })
 			notify('Успешно обновена книга', { type: 'success' })
