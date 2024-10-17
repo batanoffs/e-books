@@ -4,23 +4,24 @@ import { XTotalCount } from '../constants/serverSetup'
 
 // Custom CORS configuration function
 function corsConfig() {
+	const getOrigin = (
+		requestOrigin: string | undefined,
+		callback: (err: Error | null, origin?: string | boolean) => void
+	) => {
+		const allowedOrigins = process.env.ALLOWED_ADDRESS!.split(',')
+		if (!requestOrigin || allowedOrigins.includes(requestOrigin.trim())) {
+			callback(null, requestOrigin)
+		} else {
+			callback(new Error('Not allowed by CORS'))
+		}
+	}
 	const corsOptions = {
-		origin: function (
-			origin: string | undefined,
-			callback: (err: Error | null, allow?: boolean) => void
-		) {
-			const allowedOrigins = process.env.ALLOWED_ADDRESS!.split(',')
-			if (!origin || allowedOrigins.includes(origin.trim())) {
-				callback(null, true)
-			} else {
-				callback(new Error('Not allowed by CORS'))
-			}
-		},
+		origin: getOrigin,
 		credentials: true,
 		methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
 		allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Credentials'],
 		exposedHeaders: ['X-Total-Count'],
-		optionsSuccessStatus: 200 // For legacy browser support
+		optionsSuccessStatus: 200, // For legacy browser support
 	}
 
 	// CORS middleware
