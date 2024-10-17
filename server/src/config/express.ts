@@ -15,7 +15,6 @@ function configExpress(app: Express): void {
 	const { corsMiddleware, customMiddleware } = corsConfig()
 	app.disable('x-powered-by')
 	app.disable('x-render-origin-server')
-	// Apply them one after another
 	app.use(corsMiddleware) // Apply CORS middleware
 	app.use(customMiddleware) // Apply custom header middleware
 	app.use(session())
