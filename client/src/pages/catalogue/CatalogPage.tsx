@@ -14,6 +14,7 @@ import useCategoryStore from '../../store/categories'
 import useSpinner from '../../store/spinner'
 import API from '../../utils/constants/api'
 import { getProductCategoryBG } from '../../utils/helpers/getNavigationParams'
+import { Helmet } from 'react-helmet-async'
 
 export const CatalogPage = () => {
 	const [products, setProducts] = useState([])
@@ -75,12 +76,24 @@ export const CatalogPage = () => {
 	}
 
 	return (
-		<Routes>
-			<Route
-				path={`/${productType.toLowerCase()}/:id`}
-				element={<DetailsPage productTypeBG={productTypeBG} productType={productType} />}
-			/>
-			<Route path={`/${productType.toLowerCase()}`} element={<Layout />} />
-		</Routes>
+		<>
+			<Helmet>
+				<title>Каталог</title>
+				<meta
+					name='description'
+					content='Пазарувай от нашия каталог най-новите книги, учебници и канцеларски материали.'
+				/>
+				<link rel='canonical' href='/catalog/' />
+			</Helmet>
+			<Routes>
+				<Route
+					path={`/${productType.toLowerCase()}/:id`}
+					element={
+						<DetailsPage productTypeBG={productTypeBG} productType={productType} />
+					}
+				/>
+				<Route path={`/${productType.toLowerCase()}`} element={<Layout />} />
+			</Routes>
+		</>
 	)
 }
