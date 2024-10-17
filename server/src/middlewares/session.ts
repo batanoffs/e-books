@@ -14,9 +14,6 @@ declare global {
 
 function session(): (req: Request, res: Response, next: NextFunction) => void {
 	return function (req: Request, res: Response, next: NextFunction) {
-		console.log('Cookies: ', req.cookies)
-		console.log('Signed Cookies: ', req.signedCookies)
-		
 		const token = req.cookies?.token
 
 		if (token) {
