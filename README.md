@@ -13,57 +13,52 @@ The goal of this full stack project is to design and implement a fully functiona
 - ***The website is not responsive.** Recommended screen resolution 1920:1080 with aspect ratio of 16:9*
 - ***The server needs to be awaken before use! Takes at least one minute***
 
-During development, I've learned a lot about:
+During development, I've learned about:
 - fully utilizing the features that the React Admin framework provides to build the admin panel
-- integrate the Stripe Payments
-- configure database in MongoDB and store images to a cloud provider - Cloudinary
+- integrate the Stripe Payments API into the project
+- configure database in MongoDB and store images to the Cloudinary cloud provider
 - build a functional backend API and provide data to the client
 - store tokens with cookies
 - implementing guards to prevent unauthorized access
 - manage client state with Zustand
 - implement ACID transactions with Mongoose and MongoDB for seamless data management in the DB
-- configuring CORS for local development
+- configuring CORS
 - encryption methods (salting) and many more.
 
 
-<details close>
-  <summary>
-    <h2> 📝 Table of Contents</h2>
-  </summary>
+## Table of Content
+- [🔬 Technologies used](#-technologies-used)
+- [🎬 Features](#-features)
+- [🔧 Installation](#-installation)
+- [💫 UX UI](#-ux-ui)
+- [📁 Project content](#-project-content)
+- [📁 Folder Structure](folder_structure.md)
+- [🎨 Design and Architecture](#-design-and-architecture)
+  - [⚙️ **Front-end architecture**](#️-front-end-architecture)
+  - [⚙️ **Back-end architecture**](#️-back-end-architecture)
+- [🚀 FUTURE Development:](#-future-development)
+- [📐Fixes and updates:](#fixes-and-updates)
 
-- [E-commerce Bookstore "Knigi.bg"](#e-commerce-bookstore-knigibg)
-  - [🔬 Technologies used](#-technologies-used)
-  - [🎬 Features](#-features)
-  - [🔧 Installation](#-installation)
-  - [💫 UX UI](#-ux-ui)
-  - [📁 Project content](#-project-content)
-  - [📁 Folder Structure](folder_structure.md)
-  - [🎨 Design and Architecture](#-design-and-architecture)
-    - [⚙️ **Front-end architecture**](#️-front-end-architecture)
-    - [⚙️ **Back-end architecture**](#️-back-end-architecture)
-  - [🚀 FUTURE Development:](#-future-development)
-  - [📐Fixes and updates:](#fixes-and-updates)
 
-</details>
 
 
 
 
 ## 🔬 Technologies used
 
-| Department          | Technologies                                                                                         |
-| ------------------- | ---------------------------------------------------------------------------------------------------- |
-| Frontend            | `React`, `TypeScript`                                                                                |
-| Server              | `Node`, `Express`, `Cors`, `Cookie-parser`, `Multer`,`Express-Mongoose-RA-JSON-Server`               |
-| UI                  | `Material UI`, `SASS`, `Slick-Carousel`, `React-Slick`,                                              |
-| Forms               | `React Hook Form`                                                                                    |
-| State management    | `Zustand`                                                                                            |
-| Admin panel manager | `React Admin`                                                                                        |
-| Database            | `MongoDB`, `Mongoose`                                                                                |
-| Encryption          | `bcryptjs`                                                                                           |
-| Authentication      | `JsonWebToken`                                                                                       |
-| Handling requests   | `Axios`                                                                                              |
-| Tools               | `Git`, `Vite`, `ESLint`, `Prettier`, `Yarn`, `Nodemon`,`disable-react-devtools`,`@hookform/devtools` |
+| Category            | Technologies                                                                                        |
+| ------------------- | --------------------------------------------------------------------------------------------------- |
+| Frontend            | `React`, `TypeScript`                                                                               |
+| Server              | `Node`, `Express`, `Cors`, `Cookie-parser`, `Multer`,`Express-Mongoose-RA-JSON-Server`              |
+| UI                  | `Material UI`, `SASS`, `Slick-Carousel`, `React-Slick`,                                             |
+| Forms               | `React Hook Form`                                                                                   |
+| State management    | `Zustand`                                                                                           |
+| Admin panel manager | `React Admin`                                                                                       |
+| Database            | `MongoDB`, `Mongoose`                                                                               |
+| Encryption          | `bcryptjs`                                                                                          |
+| Authentication      | `JsonWebToken`                                                                                      |
+| API Request         | `Axios`                                                                                             |
+| Tools               | `Git`, `Vite`, `ESLint`, `Prettier`, `Yarn`, `Nodemon`,`disable-react-devtools`,`hookform devtools` |
 
 ## 🎬 Features
 
@@ -123,23 +118,18 @@ Follow the instructions below:
 
 ## 📁 Project content
 
--   ### Login Register
-
--   ### About
-
--   ### Catalog
-
--   ### Product details
-
--   ### Cart
-
--   ### Wishlist
-
--   ### Checkout
-
--   ### Profile menu
-
--   ### Admin panel
+-   Home page
+-   Login Register
+-   Catalog
+-   Product details
+-   Cart details
+-   Wishlist
+-   Checkout
+-   Stipe payment page
+-   Order preview
+-   Profile menu
+-   Orders history
+-   Admin panel
 
 ## 🎨 Design and Architecture
 
@@ -149,25 +139,25 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 
 -   #### 💾 Context Providers with `Zustand` Store
 
-    -   **Alert Store** - a helper store that provides state if the alert is open or not and what is the alert message.
+    -   **Alert Store** - *a helper store that provides state if the alert is open or not and what is the alert message.*
 
-    -   **Cart Store** - stores and provides data for the cart of the authenticated user.
+    -   **Cart Store** - *stores and provides data for the cart of the authenticated user.*
 
-    -   **Categories Store** - stores and provides data for categories in the catalog.
+    -   **Categories Store** - *stores and provides data for categories in the catalog.*
 
-    -   **Filter Store** - provides and stores data for the filter section in the catalog page (not yet implemented)
+    -   **Filter Store** - *provides and stores data for the filter section in the catalog page (not yet implemented)*
 
-    -   **Modal Store** - a helper store that provides state if the modal is open or not
+    -   **Modal Store** - *a helper store that provides state if the modal is open or not*
 
-    -   **Location Store** - a helper store that provides state for `window.location.pathname` used for better UX and site navigation
+    -   **Location Store** - *a helper store that provides state for `window.location.pathname` used for better UX and site navigation*
 
-    -   **User Data Store** - holds information about the currently authenticated user. It provides getters and setters for the user's data, including the user's username, whether the user is logged in, and whether the user is an admin.
+    -   **User Data Store** - *holds information about the currently authenticated user. It provides getters and setters for the user's data, including the user's username, whether the user is logged in, and whether the user is an admin.*
 
-    -   **Wishlist Store** - stores and provides data for the wishlist of the authenticated user.
+    -   **Wishlist Store** - *stores and provides data for the wishlist of the authenticated user.*
 
 -   #### 🎣 Custom Hooks
 
-    -   **useConfirm()** is a hook that opens modal to ask the user for confirmation of his action.
+    -   **useConfirm()** - *is a hook that opens modal to ask the user for confirmation of his action.*
 
 -   #### 🛫 Routers
 
@@ -177,20 +167,20 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 
     -   Constants
 
-        -   **api.ts** - stores base URL and endpoints to be used in all services
-        -   **location.ts** - stores array of regions and countries to be used in the location dropdown
+        -   **api.ts** - *stores base URL and endpoints to be used in all services*
+        -   **location.ts** - *stores array of regions and countries to be used in the location dropdown*
 
     -   Helpers
 
-        -   **getToken()** - gets user token
-        -   **getUserRole()** - gets user role
-        -   **getUserId()** - gets user id
-        -   **checkIfUserIsAdmin()** - checks if user is admin
-        -   **isAuth()** - checks if user is authenticated
-        -   **isGuest()** - checks if user is not authenticated
-        -   **themeOptions** - provides theme options for the MUI theme
-        -   **formatDate(date)** - formats the date
-        -   **currencyFormatterToBGN(value)** - formats the value to BGN currency
+        -   **getToken()** - *gets user token*
+        -   **getUserRole()** - *gets user role*
+        -   **getUserId()** - *gets user id*
+        -   **checkIfUserIsAdmin()** - *checks if user is admin*
+        -   **isAuth()** - *checks if user is authenticated*
+        -   **isGuest()** - *checks if user is not authenticated*
+        -   **themeOptions** -* provides theme options for the MUI* theme
+        -   **formatDate(date)** - *formats the date*
+        -   **currencyFormatterToBGN(value)** - *formats the value to BGN currency*
 
 -   #### 🙋‍♀️ Services
 
@@ -202,9 +192,9 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 
 -   #### 🛠 Express config
 
-    -   **express.ts** contains express middleware
-    -   **database.ts** contains mongoose middleware
-    -   **routes.ts** contains express routes
+    -   **express.ts** - contains express middleware
+    -   **database.ts** - contains mongoose middleware
+    -   **routes.ts** - contains express routes
 
 -   #### 📮 Models
 
@@ -223,7 +213,7 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 
 -   #### 🛫 Routes 
 
-    | Route Type | Route Name           | Description                                                                                                                                                                                                                                                            |
+    | Name       | Route url            | Description                                                                                                                                                                                                                                                            |
     | ---------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
     | Main       | `/api/**`            | Main router that combines all routes under `/api`                                                                                                                                                                                                                      |
     | Admin      | `/api/admin/**`      | Admin router combining all routes for management of products, categories, users, orders, featured etc. `/users` \| `/categories/books` \| `/categories/textbooks` \| `/categories/stationery` \| `/stationery` \| `/books` \| `/textbooks` \| `/featured` \| `/orders` |
@@ -240,40 +230,40 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
 
 -   #### 📡 Controllers
 
-    -   **auth** for authenticating the users. Contains logic for `login`, `register` and `logout`
-    -   **book** for handling products of type books. Contains logic for delete, update, create, get all or get one book
-    -   **cart** for handling cart data. Contains logic for `addToCart`, `getCart`, `removeProductFromCart`, `clearCart`
-    -   **categories** for handling categories data, contains logic for `addCategory` and `getAll` categories of every type.
-    -   **featured** for handling featured data, contains logic `getFeaturedProducts`, `markAsFeatured`, `removeFromFeatured`
-    -   **images** for handling image uploads to Cloudinary. Contains logic `uploadCoverImage`
-    -   **order** for handling order data, contains logic `createOrder`, `getOrderById`, `getOrders`, `updateOrderStatus`, `deleteOrder`
-    -   **stationery** for handling stationery data, contains logic `createStationery`, `getStationeries`, `updateStationery`, `deleteStationery`
-    -   **textbook** for handling textbook data, contains logic `createTextbook`, `getTextbooks`, `updateTextbook`, `deleteTextbook`
-    -   **stripe** for handling payment data, contains logic `checkoutSession`
-    -   **user** for handling user data, contains logic `getUsers`, `getUserByIdFromToken`, `getUserById`, `updateUser`, `deleteUser`
-    -   **wishlist**(todo) for handling wishlist data, contains logic `createWishlist`, `getWishlist`, `updateWishlist`, `deleteWishlist`
+    -   **auth** - *authenticating the users. Contains logic for `login`, `register` and `logout`*
+    -   **book** - *handling products of type books. Contains logic for delete, update, create, get all or get one book*
+    -   **cart** - *handling cart data. Contains logic for `addToCart`, `getCart`, `removeProductFromCart`, `clearCart`*
+    -   **categories** - *handling categories data, contains logic for `addCategory` and `getAll` categories of every type.*
+    -   **featured** - *handling featured data, contains logic `getFeaturedProducts`, `markAsFeatured`, `removeFromFeatured`*
+    -   **images** - *handling image uploads to Cloudinary. Contains logic `uploadCoverImage`*
+    -   **order** - *handling order data, contains logic `createOrder`, `getOrderById`, `getOrders`, `updateOrderStatus`, `deleteOrder`*
+    -   **stationery** - *handling stationery data, contains logic `createStationery`, `getStationeries`, `updateStationery`, `deleteStationery`*
+    -   **textbook** - *handling textbook data, contains logic `createTextbook`, `getTextbooks`, `updateTextbook`, `deleteTextbook`*
+    -   **stripe** - *handling payment data, contains logic `checkoutSession`*
+    -   **user** - *handling user data, contains logic `getUsers`, `getUserByIdFromToken`, `getUserById`, `updateUser`, `deleteUser`*
+    -   **wishlist(todo)** - *handling wishlist data, contains logic `createWishlist`, `getWishlist`, `updateWishlist`, `deleteWishlist`*
 
 -   #### 🙋‍♀️ Services
 
-    -   **user** for Authentication (register, login, logout)
-    -   **jwt** for creating and verifying tokens
-    -   **image** for uploading image to `Cloudinary`
+    -   **user** - *Authentication (register, login, logout)*
+    -   **jwt** - *creating and verifying tokens*
+    -   **image** - *uploading image to `Cloudinary`*
 
 -   #### ⌨️ Middlewares
 
-    -   **cors** for cors setup for the express server
-    -   **filters** to be updated (todo), contains logic for catalog filters and sorting
-    -   **guards** isUser, isAdmin, isGuest - checks if user is authenticated and roles
-    -   **multer** for file upload
-    -   **session** validates the session. If token is present, sets the user in the request object
-    -   **validateRequest** validates the requests
+    -   **cors** - *cors setup for the express server*
+    -   **filters** - *to be updated (todo), contains logic for catalog filters and sorting*
+    -   **guards** - *isUser, isAdmin, isGuest - checks if user is authenticated and roles*
+    -   **multer** - *for file upload*
+    -   **session** - *validates the session. If token is present, sets the user in the request object*
+    -   **validateRequest** - *validates the requests*
 
 -   #### 🧮 Utils
 
-    -   **getCategoryModel(categoryType)**: This function returns the category model based on the category type.
-    -   **cloudinaryConfig()**: This function returns the configuration for `Cloudinary`.
-    -   **errorHandler(error, res)**: This function handles errors in the server.
-    -   **parseError(error)**: This function takes in an `error` object and returns a new error object with a consistent structure. It is designed to handle different types of errors that can occur in an application.
+    -   **getCategoryModel(categoryType)** - *returns the category model based on the category type.*
+    -   **cloudinaryConfig()** - *returns the configuration for `Cloudinary`.*
+    -   **errorHandler(error, res)** - *handles errors in the server.*
+    -   **parseError(error)** - *takes in an `error` object and returns a new error object with a consistent structure. It is designed to handle different types of errors that can occur in an application.*
 
 ## 🚀 FUTURE Development:
 
