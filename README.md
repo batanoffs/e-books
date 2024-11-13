@@ -27,17 +27,17 @@ During development, I've learned about:
 
 
 ## Table of Content
-- [🔬 Technologies used](#-technologies-used)
-- [🎬 Features](#-features)
-- [🔧 Installation](#-installation)
-- [💫 UX UI](#-ux-ui)
-- [📁 Project content](#-project-content)
-- [📁 Folder Structure](folder_structure.md)
-- [🎨 Design and Architecture](#-design-and-architecture)
-  - [⚙️ **Front-end architecture**](#️-front-end-architecture)
-  - [⚙️ **Back-end architecture**](#️-back-end-architecture)
-- [🚀 FUTURE Development:](#-future-development)
-- [📐Fixes and updates:](#fixes-and-updates)
+- [🔬 Technologies used](#🔬-technologies-used)
+- [🎬 Features](#🎬-features)
+- [🔧 Installation](#🔧-installation)
+- [💫 UX UI](#💫-ux-ui)
+- [📁 Project content](#📁-project-content)
+- [📁 Folder Structure](#📁-folder_structure.md)
+- [🎨 Design and Architecture](#🎨-design-and-architecture)
+  - [⚙️ Frontend architecture](#⚙️-frontend-architecture)
+  - [⚙️ Backend architecture](#️⚙️-backend-architecture)
+- [🚀 FUTURE Development:](#🚀-future-development)
+- [📐Fixes and updates:](#📐-fixes-and-updates)
 
 
 
@@ -135,7 +135,7 @@ Follow the instructions below:
 
 Server built on `express` and `mongodb` with `mongoose`. Client built with `vite`, `react`, `typescript` and `sass`.
 
-### ⚙️ **Front-end architecture**
+### ⚙️ **Frontend architecture**
 
 -   #### 💾 Context Providers with `Zustand` Store
 
@@ -188,7 +188,7 @@ Server built on `express` and `mongodb` with `mongoose`. Client built with `vite
     -   **cartService** for handling cart data
     -   **productService** for handling products data (todo)
 
-### ⚙️ **Back-end architecture**
+### ⚙️ **Backend architecture**
 
 -   #### 🛠 Express config
 
