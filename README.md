@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/Licence-MIT-teal)](https://opensource.org/licenses/MIT)
 [![styled with: Prettier](https://img.shields.io/badge/styled_with-prettier-purple)](https://github.com/prettier/prettier)
 
-The goal of this full stack project is to design and implement a fully functional online e-commerce website connected to payment API Stripe, delivery service APIs - Econd and Speed, cloud storage database Cloudinary and provide a seamless user experience.
+The goal of this full stack project is to design and implement a fully functional online e-commerce website connected to payment API Stripe, delivery service APIs - Econt and Speed, cloud storage database Cloudinary and provide a seamless user experience.
 
 **Live link**
 - Hosted: https://knigi-bg.onrender.com/
