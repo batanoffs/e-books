@@ -6,13 +6,12 @@
 #### The goal of this full stack project is to design and implement a fully functional online e-commerce website connected to payment API Stripe, cloud storage database Cloudinary and provide a seamless user experience.
 
 ### Important Notes
+- #### Hosted at https://knigi-bg.onrender.com/
 - #### The website is not responsive. Recommended screen resolution 1920:1080 with aspect ratio of 16:9
-- #### The server needs to be AWAKEN before use! Takes at least one minute
+- #### The server needs to be AWAKEN before use! Takes at least one minute 
 
-### Live links
-- #### Hosted: https://knigi-bg.onrender.com/
-- #### Demo: https://www.youtube.com/watch?v=0UT5XTyFcRU
-
+### Project Demo
+https://www.youtube.com/watch?v=0UT5XTyFcRU
 
 
 ## Table of Content
