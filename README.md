@@ -3,27 +3,16 @@
 [![License: MIT](https://img.shields.io/badge/Licence-MIT-teal)](https://opensource.org/licenses/MIT)
 [![styled with: Prettier](https://img.shields.io/badge/styled_with-prettier-purple)](https://github.com/prettier/prettier)
 
-The goal of this full stack project is to design and implement a fully functional online e-commerce website connected to payment API Stripe, delivery service APIs - Econt and Speed, cloud storage database Cloudinary and provide a seamless user experience.
+#### The goal of this full stack project is to design and implement a fully functional online e-commerce website connected to payment API Stripe, cloud storage database Cloudinary and provide a seamless user experience.
 
-**Live link**
-- Hosted: https://knigi-bg.onrender.com/
-- Demo Video: https://www.youtube.com/watch?v=0UT5XTyFcRU
+### Important Notes
+- #### The website is not responsive. Recommended screen resolution 1920:1080 with aspect ratio of 16:9
+- #### The server needs to be AWAKEN before use! Takes at least one minute
 
-**Importand Notes:**
-- ***The website is not responsive.** Recommended screen resolution 1920:1080 with aspect ratio of 16:9*
-- ***The server needs to be awaken before use! Takes at least one minute***
+### Live links
+- #### Hosted: https://knigi-bg.onrender.com/
+- #### Demo: https://www.youtube.com/watch?v=0UT5XTyFcRU
 
-During development, I've learned about:
-- fully utilizing the features that the React Admin framework provides to build the admin panel
-- integrate the Stripe Payments API into the project
-- configure database in MongoDB and store images to the Cloudinary cloud provider
-- build a functional backend API and provide data to the client
-- store tokens with cookies
-- implementing guards to prevent unauthorized access
-- manage client state with Zustand
-- implement ACID transactions with Mongoose and MongoDB for seamless data management in the DB
-- configuring CORS
-- encryption methods (salting) and many more.
 
 
 ## Table of Content
@@ -38,11 +27,6 @@ During development, I've learned about:
   - [⚙️ Backend architecture](#️⚙️-backend-architecture)
 - [🚀 FUTURE Development:](#🚀-future-development)
 - [📐Fixes and updates:](#📐-fixes-and-updates)
-
-
-
-
-
 
 ## 🔬 Technologies used
 
