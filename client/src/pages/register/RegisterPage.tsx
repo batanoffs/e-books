@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined'
-import axios from 'axios'
 
 import { useTermsModal, usePrivacyModal } from '../../store/helperModal'
 import useAlertStore from '../../store/alert'
@@ -156,8 +155,8 @@ export const Register = () => {
 					<div className={styles.field}>
 						<label htmlFor='newsletter'>
 							<input type='checkbox' id='newsletter' {...register('newsletter')} />
-							Желая да получавам на e-mail електронен бюлетин от ORANGE CENTER,
-							включващ новини, промоции и друга актуална информация
+							Желая да получавам по имейл електронен бюлетин от 'Книги.бг' включващ
+							новини, промоции и друга актуална информация за продуктите на магазина
 						</label>
 					</div>
 				</div>
