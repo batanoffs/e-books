@@ -1,11 +1,11 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { useEffect, useState, useMemo } from 'react'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { ThemeProvider, ThemeWithProps, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 
 import { useThemeSettings } from './store/themeSettings'
 import { themeOptions } from './utils/helpers/theme'
-import { Header, Footer, PageNotFound, ScrollTopButton } from './components/index'
+import { Header, Footer, PageNotFound, ScrollTopButton } from './components'
 import {
 	HomePage,
 	ContactsPage,
@@ -20,7 +20,7 @@ import {
 	CatalogPage,
 	PopularPage,
 	AboutPage,
-} from './pages/index'
+} from './pages'
 
 const App = () => {
 	const [isAdmin, setIsAdmin] = useState(false)
@@ -29,7 +29,7 @@ const App = () => {
 
 	useMemo(() => () => toggleDarkMode(), [])
 
-	const mode = themeOptions(darkMode)
+	const mode = themeOptions(darkMode) as ThemeWithProps
 	const myTheme = useMemo(() => createTheme(mode), [mode])
 
 	useEffect(() => {
