@@ -12,12 +12,18 @@ export const GlobalSpinner: React.FC = () => {
 			<div className={styles.loading}>
 				<h1>Loading...</h1>
 				<div className={styles.spinner} />
-				<div>
-					<b>Important note:</b>
-					<p>
-						The application uses a FREE tier hosting plan. Initial server startup may
-						take up to 30 seconds.
-					</p>
+				<div className={styles.info}>
+					<b>Important note</b>
+					<p>Initial server startup may take up to 40 sec</p>
+					<a
+						href='https://www.youtube.com/watch?v=0UT5XTyFcRU'
+						target='_blank'
+						rel='noreferrer'
+						title='Project Demo'
+						className={styles.demoLink}
+					>
+						📺 Check out the project demo on YouTube
+					</a>
 				</div>
 			</div>
 		</div>
