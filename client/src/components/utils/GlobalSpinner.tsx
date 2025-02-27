@@ -20,7 +20,6 @@ export const GlobalSpinner: React.FC = () => {
 						target='_blank'
 						rel='noreferrer'
 						title='Project Demo'
-						className={styles.demoLink}
 					>
 						📺 Check out the project demo on YouTube
 					</a>

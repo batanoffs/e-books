@@ -1,3 +1,7 @@
+@use "sass:color";
+
+$color: #4a90e2;
+
 .spinnerOverlay {
 	position: fixed;
 	display: flex;
@@ -27,7 +31,7 @@
 		transition: all 0.2s ease;
 
 		&:hover {
-			color: darken(#4a90e2, 15%);
+			@debug color.scale($color, $lightness: -25.5%);
 			transform: translateY(-1px);
 		}
 	}
