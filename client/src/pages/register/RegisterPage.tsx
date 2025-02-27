@@ -3,10 +3,10 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined'
 
 import { useTermsModal, usePrivacyModal } from '../../store/helperModal'
-import useAlertStore from '../../store/alert'
 import PrivacyRulesModal from './PrivacyRulesModal'
 import GeneralRulesModal from './GeneralRulesModal'
 import authService from '../../services/authService'
+import { useAlert } from '../../hooks/useAlert'
 
 import styles from './register.module.scss'
 
@@ -28,7 +28,7 @@ export const Register = () => {
 	} = useForm<Inputs>()
 	const toggleOpenTerms = useTermsModal((state) => state.toggleOpen)
 	const toggleOpenPrivacy = usePrivacyModal((state) => state.toggleOpen)
-	const showAlert = useAlertStore((state) => state.showAlert)
+	const { showAlert } = useAlert()
 
 	const navigate = useNavigate()
 

@@ -14,19 +14,19 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import Paper from '@mui/material/Paper'
 
 import useWishlistStore from '../../store/wishlist'
-import useAlertStore from '../../store/alert'
 import cartService from '../../services/cartService'
 import useCartStore from '../../store/cart'
 import wishlistService from '../../services/wishlistService'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import { ListIsEmpty } from '../../components/utils/ListIsEmpty'
+import { useAlert } from '../../hooks/useAlert'
 
 export const WishlistPage = () => {
 	const [isRemoving, setIsRemoving] = useState(false)
 	const [loading, setLoading] = useState(true)
 	const wishlist = useWishlistStore((state) => state.wishlist)
 	const setWishlist = useWishlistStore((state) => state.setWishlist)
-	const showAlert = useAlertStore((state) => state.showAlert)
+	const { showAlert } = useAlert()
 	const addToCart = useCartStore((state) => state.addToCart)
 
 	const fetchWishlist = useCallback(async () => {

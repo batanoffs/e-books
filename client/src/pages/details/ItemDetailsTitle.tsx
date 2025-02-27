@@ -11,12 +11,12 @@ import ProductDetailsProps from '../../interfaces/ProductDetailsProps.interface'
 import QuantityInput from '../../components/QuantityInput/QuantityInput'
 import { Product } from '../../interfaces/product.interface'
 import { useLoginModal } from '../../store/helperModal'
-import useAlertStore from '../../store/alert'
 import useCartStore from '../../store/cart'
 import cartService from '../../services/cartService'
 import wishlistService from '../../services/wishlistService'
 import { useTheme } from '@mui/material'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
+import { useAlert } from '../../hooks/useAlert'
 
 interface ItemDetailsTitleProps extends ProductDetailsProps {
 	setQuantity: (quantity: number) => void
@@ -28,7 +28,7 @@ interface ItemDetailsTitleProps extends ProductDetailsProps {
 //TODO fix for all products props
 const ItemDetailsTitle = ({ setQuantity, quantity, styles, product }: ItemDetailsTitleProps) => {
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
-	const showAlert = useAlertStore((state) => state.showAlert)
+	const { showAlert } = useAlert()
 	const addToCart = useCartStore((state) => state.addToCart)
 	const theme = useTheme()
 

@@ -5,10 +5,10 @@ import DeleteIcon from '@mui/icons-material/Delete'
 
 import useConfirm from '../../hooks/useConfirm'
 import useCartStore from '../../store/cart'
-import useAlertStore from '../../store/alert'
 import cartService from '../../services/cartService'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import QuantityInput from '../../components/QuantityInput/QuantityInput'
+import { useAlert } from '../../hooks/useAlert'
 
 interface CartProductProps {
 	product: {
@@ -21,7 +21,7 @@ interface CartProductProps {
 	quantity: number
 }
 const CartItem = ({ product, onChangeQuantity, quantity }: CartProductProps) => {
-	const showAlert = useAlertStore((state) => state.showAlert)
+	const { showAlert } = useAlert()
 	const removeFromCart = useCartStore((state) => state.removeFromCart)
 	const { dialog, confirm } = useConfirm()
 

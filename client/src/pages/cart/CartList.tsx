@@ -9,14 +9,14 @@ import CartItem from './CartItem'
 import useCartStore from '../../store/cart'
 import useConfirm from '../../hooks/useConfirm'
 import cartService from '../../services/cartService'
-import useAlertStore from '../../store/alert'
 import { ListIsEmpty } from '../../components/utils/ListIsEmpty'
+import { useAlert } from '../../hooks/useAlert'
 
 const CartList = () => {
 	const [isUpdateButtonDisabled, setIsUpdateButtonDisabled] = useState(true)
 	// const updateQuantity = useCartStore((state) => state.updateQuantity)
 	const clearCart = useCartStore((state) => state.clearCart)
-	const showAlert = useAlertStore((state) => state.showAlert)
+	const { showAlert } = useAlert()
 	const cart = useCartStore((state) => state.cart)
 	const { dialog, confirm } = useConfirm()
 

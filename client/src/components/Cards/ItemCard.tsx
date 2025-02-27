@@ -5,17 +5,18 @@ import ShoppingCart from '@mui/icons-material/ShoppingCart'
 
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
 import useCartStore from '../../store/cart'
-import useAlertStore from '../../store/alert'
 import { useLoginModal } from '../../store/helperModal'
 import authGuards from '../../middlewares/guards'
 import cartService from '../../services/cartService'
 import API from '../../utils/constants/api'
 import { Product } from '../../interfaces/product.interface'
+import { useAlert } from '../../hooks/useAlert'
 
 import styles from './itemcard.module.scss'
+import { MouseEvent } from 'react'
 
 export const ItemCard = ({ product }: { product: Product }) => {
-	const showAlert = useAlertStore((state) => state.showAlert)
+	const { showAlert } = useAlert()
 	const addToCart = useCartStore((state) => state.addToCart)
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
 	const navigate = useNavigate()
@@ -56,9 +57,9 @@ export const ItemCard = ({ product }: { product: Product }) => {
 		}
 	}
 
-	const goToDetailsHandler = (e) => {
-		const target = e.target.closest('[data-type]')
-		const getType = target.dataset.type
+	const goToDetailsHandler = (e: MouseEvent) => {
+		const target = (e.target as HTMLElement).closest('[data-type]') as HTMLElement
+		const getType = target?.dataset.type
 		let type
 
 		if (getType !== 'Stationery') {

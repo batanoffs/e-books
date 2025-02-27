@@ -2,11 +2,11 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import axios from 'axios'
 
 import PrivacyRulesModal from '../../../pages/register/PrivacyRulesModal'
-import useAlertStore from '../../../store/alert'
 import { usePrivacyModal } from '../../../store/helperModal'
+import { useAlert } from '../../../hooks/useAlert'
+import API from '../../../utils/constants/api'
 
 import styles from './newsletter.module.scss'
-import API from '../../../utils/constants/api'
 
 type Input = {
 	newsLetterEmail: string
@@ -20,7 +20,7 @@ export const Newsletter = () => {
 		formState: { errors },
 	} = useForm<Input>()
 	const toggleOpenPrivacy = usePrivacyModal((state) => state.toggleOpen)
-	const showAlert = useAlertStore((state) => state.showAlert)
+	const { showAlert } = useAlert()
 
 	const onSubmit: SubmitHandler<Input> = async (data) => {
 		const { newsLetterEmail, privacyPolicy } = data

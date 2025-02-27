@@ -1,14 +1,15 @@
+import { Box, Grid, Typography, List, ListItem, ListItemText, Divider, Paper } from '@mui/material'
 import { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
+
 import API from '../../utils/constants/api'
 import { Product } from '../../interfaces/product.interface'
-import { Box, Grid, Typography, List, ListItem, ListItemText, Divider, Paper } from '@mui/material'
-import useAlertStore from '../../store/alert'
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
+import { useAlert } from '../../hooks/useAlert'
 
 export const PaymentSuccessful = () => {
 	const [orderData, setOrderData] = useState<any | null>(null)
-	const showAlert = useAlertStore((state) => state.showAlert)
+	const { showAlert } = useAlert()
 
 	const fetchOrder = useCallback(async (sessionId: string | null) => {
 		if (!sessionId) return

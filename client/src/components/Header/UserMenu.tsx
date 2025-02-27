@@ -1,15 +1,15 @@
+import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import { Box, IconButton, Menu, MenuItem, Typography, Tooltip, Avatar } from '@mui/material'
+
 import { profileMenuItems } from '../../utils/constants/pages'
 import { FormEvent, MouseEvent, useState } from 'react'
-
-import axios from 'axios'
+import { useAlert } from '../../hooks/useAlert'
 import API from '../../utils/constants/api'
-import useAlertStore from '../../store/alert'
 
 export const UserMenu = () => {
 	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
-	const showAlert = useAlertStore((state) => state.showAlert)
+	const { showAlert } = useAlert()
 	const navigate = useNavigate()
 
 	const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {

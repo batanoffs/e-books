@@ -1,12 +1,13 @@
+import { useState } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
+
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
-import { useState } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
 import { TextField, Button } from '@mui/material'
-import useAlertStore from '../../store/alert'
+import { useAlert } from '../../hooks/useAlert'
 
 interface FormInputs {
 	password: string
@@ -21,7 +22,7 @@ export const Settings = () => {
 		formState: { errors },
 	} = useForm<FormInputs>()
 	const [profilePicture, setProfilePicture] = useState<File | null>(null)
-	const showAlert = useAlertStore((state) => state.showAlert)
+	const { showAlert } = useAlert()
 
 	const handleProfilePictureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files && event.target.files[0]

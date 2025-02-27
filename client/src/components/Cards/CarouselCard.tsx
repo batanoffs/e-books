@@ -1,13 +1,13 @@
-import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
+import { Box, useTheme, Typography, Button } from '@mui/material'
+
 import formatCurrencyToBGN from '../../utils/helpers/formatCurrency'
-import useAlertStore from '../../store/alert'
 import { useLoginModal } from '../../store/helperModal'
 import authGuards from '../../middlewares/guards'
 import useCartStore from '../../store/cart'
 import cartService from '../../services/cartService'
 import { Product } from '../../interfaces/product.interface'
-import { Box, useTheme, Typography} from '@mui/material'
+import { useAlert } from '../../hooks/useAlert'
 
 interface CarouselCard {
 	product: Product
@@ -17,16 +17,22 @@ interface CarouselCard {
 export const CarouselCard = ({ product, styles }: CarouselCard) => {
 	const { picture, title, author, productType, price, description, _id } = product
 	const formatCurrency = formatCurrencyToBGN(price)
-	const showAlert = useAlertStore((state) => state.showAlert)
+	const { showAlert } = useAlert()
 	const toggleOpen = useLoginModal((state) => state.toggleOpen)
 	const addToCart = useCartStore((state) => state.addToCart)
 	const navigate = useNavigate()
 	const theme = useTheme()
 
-	const onGoToDetails = (e) => {
-		const target = e.target.closest('[data-type]')
+	interface ProductType {
+		dataset: {
+			type: string;
+		};
+	}
+
+	const onGoToDetails = (e: React.MouseEvent<HTMLElement>) => {
+		const target = (e.target as HTMLElement).closest('[data-type]') as HTMLElement & ProductType
 		const getType = target.dataset.type
-		let type
+		let type: string
 		if (getType !== 'Stationery') {
 			type = productType.toLowerCase() + 's'
 		} else {
