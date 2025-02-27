@@ -4,7 +4,7 @@
     "author": "batanoffs",
     "version": "1.0.1",
     "type": "module",
-    "main": "src/index.tsx",
+    "main": "src/main.tsx",
     "scripts": {
         "dev": "vite",
         "deploy": "npm install --frozen-lockfile && npm build",
