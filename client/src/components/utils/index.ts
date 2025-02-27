@@ -1,5 +1,4 @@
 export * from './PageNotFound'
-export * from './GlobalAlert'
 export * from './GlobalSpinner'
 export * from './countryFlags'
 export * from './BackToTopButton'
