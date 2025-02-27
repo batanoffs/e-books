@@ -14,7 +14,7 @@ export const GlobalSpinner: React.FC = () => {
 				<div className={styles.spinner} />
 				<div className={styles.info}>
 					<b>Important note</b>
-					<p>Initial server startup may take up to 40 sec</p>
+					<p>Initial server startup may take up to 50 sec or more</p>
 					<a
 						href='https://www.youtube.com/watch?v=0UT5XTyFcRU'
 						target='_blank'
