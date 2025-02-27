@@ -91,7 +91,6 @@ export const CheckoutPage = () => {
 		<CheckoutLayout
 			aside={<CheckoutOverview handleBackToCart={handleBackToCart} />}
 			onSubmitForm={handleSubmit(handlePlaceOrder)}
-			control={control}
 		>
 			{/* <DeliveryForm errors={errors} control={control} register={register} />
 			<AddressForm errors={errors} control={control} register={register} /> */}
