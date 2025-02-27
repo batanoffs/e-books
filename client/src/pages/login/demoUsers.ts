@@ -5,7 +5,7 @@ const PESHO = {
 
 const IVO = {
 	EMAIL: 'ivo@abv.bg',
-	PASS: 'qweasd',
+	PASS: 'qweasd123',
 }
 
 const DEMO_USERS = {
