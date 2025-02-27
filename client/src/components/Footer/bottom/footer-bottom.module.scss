@@ -1,4 +1,9 @@
 .pageFooterBot {
+    display: flex; // Use flexbox for layout
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+
     background-color: #f9f9f9; // Light background color for the footer
     padding: 0 0; // Padding for top and bottom
     font-family: inherit; // Use a clean sans-serif font
@@ -7,27 +12,14 @@
     border-top: 1px solid #e1e1e1; // Border on top
 }
 
-.wrapper {
-    margin: 0 auto; // Center the wrapper
-}
-
-.pageFooterBotBlock {
-    
-    display: flex; // Use flexbox for layout
-    flex-direction: column;
-    justify-content: space-between; // Space between items
-    align-items: center; // Center items vertically
-    flex-wrap: wrap; // Wrap items if needed
-}
-
 .pageFooterBotItem {
-    flex: 1; // Allow items to grow equally
     margin: 10px 0; // Margin for top and bottom
-    text-align: left; // Align text to the left
 }
 
-.pageFooterBotItemLarge {
-    flex: 2; // Make the large item take more space
+// Specific styles for image link
+.pageFooterBotItem a img {
+    margin-left: 5px; // Margin on the left
+    vertical-align: middle; // Align image vertically
 }
 
 .copyright {
@@ -55,8 +47,4 @@ a {
     border: 0; // No border
 }
 
-// Specific styles for image link
-.pageFooterBotItem a img {
-    margin-left: 5px; // Margin on the left
-    vertical-align: middle; // Align image vertically
-}
+
