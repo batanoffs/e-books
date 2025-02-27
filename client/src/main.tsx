@@ -6,6 +6,7 @@ import { ScrollToTopAction, GlobalSpinner } from './components/index'
 import { HelmetProvider } from 'react-helmet-async'
 
 import App from './App'
+
 import './styles/index.scss'
 
 if (import.meta.env.PROD === true) disableReactDevTools()
